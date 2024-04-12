@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "SmartFilter"
 include(":app")
-include(":smartfilterlib")
+include(":ss-smart-filter")
