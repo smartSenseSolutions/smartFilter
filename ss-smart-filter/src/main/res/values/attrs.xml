@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SSRadioGroup">
+
+      <attr name="scrollOrientation" format="enum">
+        <enum name="vertical" value="0" />
+        <enum name="horizontal" value="1" />
+      </attr>
+        <attr name="item" format="reference" />
+        <attr name="type" format="integer" />
+        <attr name="orientation" format="integer" />
+        <attr name="selectedTextColor" format="reference" />
+        <attr name="textSelector" format="reference" />
+        <attr name="bgSelector" format="color" />
+        <attr name="backgroundColor" format="color" />
+        <attr name="roundCorner" format="dimension" />
+        <attr name="sideMargins" format="dimension" />
+        <attr name="itemPadding" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="itemFontFamily" format="reference" />
+        <attr name="textSize" format="dimension" />
+        <attr name="iconSize" format="dimension" />
+        <attr name="iconTint" format="color"/>
+        <attr name="iconTintActive" format="color"/>
+        <attr name="activeItem" format="integer" />
+
+      <attr name="radioButtonText" format="string"/>
+      <attr name="radioButtonBackground" format="reference"/>
+      <attr name="radioButtonTextSelector" format="reference"/>
+      <attr name="radioButtonTextSize" format="dimension"/>
+      <attr name="radioButtonTextColor" format="color"/>
+      <attr name="radioButtonTextSelectorColor" format="color"/>
+      <attr name="radioButtonMarginStart" format="dimension"/>
+      <attr name="radioButtonMarginTop" format="dimension"/>
+      <attr name="radioButtonMarginEnd" format="dimension"/>
+      <attr name="radioButtonMarginBottom" format="dimension"/>
+      <attr name="radioButtonPaddingStart" format="dimension"/>
+      <attr name="radioButtonPaddingTop" format="dimension"/>
+      <attr name="radioButtonPaddingEnd" format="dimension"/>
+      <attr name="radioButtonPaddingBottom" format="dimension"/>
+      <attr name="radioButtonOptions" format="string"/>
+
+    </declare-styleable>
+
+  <declare-styleable name="PresetValueButton">
+    <attr name="presetButtonValueText" format="string"/>
+    <attr name="presetButtonUnitText" format="string"/>
+    <attr name="presetButtonValueTextColor" format="color"/>
+    <attr name="presetButtonPressedTextColor" format="color"/>
+    <attr name="presetButtonUnitTextColor" format="color"/>
+  </declare-styleable>
+  <declare-styleable name="PresetRadioGroup">
+    <attr name="presetRadioCheckedId" format="reference"/>
+  </declare-styleable>
+  <declare-styleable name="MultiLineRadioGroup">
+    <attr name="spanCount" format="integer"/>
+    <attr name="spacing" format="integer"/>
+    <attr name="includeEdge" format="boolean"/>
+    <attr name="addList" format="reference"/>
+  </declare-styleable>
+</resources>

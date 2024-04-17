@@ -1,6 +1,11 @@
 package com.ss.smartfilterlib
 
-class SmartFilter {
-
-
+enum class Orientation {
+    HORIZONTAL,
+    VERTICAL,
 }
+enum class SelectionMode {
+    SINGLE,
+    MULTI,
+}
+

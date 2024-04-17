@@ -1,47 +1,30 @@
 package com.ss.smartfilter
 
 import android.os.Bundle
+import android.widget.RadioButton
+import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.ss.smartfilter.ui.theme.SmartFilterTheme
 
+import com.ss.smartfilter.databinding.ActivityMainBinding
+
+//https://stackoverflow.com/questions/44798354/android-nestedscrollview-how-to-make-it-horizontal
 class MainActivity : ComponentActivity() {
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            SmartFilterTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-                    Greeting("Android")
-                }
-            }
-        }
+        val optionsArray = resources.getStringArray(com.ss.smartfilterlib.R.array.ss_array)
+        binding.horizentalRadioGroup.addRadioButtons(optionsArray)
+
+
+
     }
+
+
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SmartFilterTheme {
-        Greeting("Android")
-    }
-}
+
+
