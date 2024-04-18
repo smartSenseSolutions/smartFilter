@@ -26,9 +26,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(
         return false
     }
 
-    /**
-     * External implementation interface monitoring click position
-     */
+
     private var spanCount: Int = 3
     private var spacing: Int = 4
     private var includeEdge: Boolean = false
@@ -71,9 +69,6 @@ class MultiLineRadioGroup @JvmOverloads constructor(
         }
     }
 
-    /**
-     * External setting data in
-     */
 
     private fun setSpanCount(spanCount: Int){
         if (spanCount < 2){

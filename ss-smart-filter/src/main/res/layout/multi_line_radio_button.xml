@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textAlignment="center"
-    android:background="@drawable/btn_radio_info_selector"
-    android:button="@drawable/btn_radio_info_selector"
-    android:textColor="@color/color_text_radio_button"
+    android:background="@drawable/ss_radio_group_multiline_selector"
+    android:button="@drawable/ss_radio_group_multiline_selector"
+    android:textColor="@color/ss_rg_rb_text_selector"
     android:textSize="16sp" />

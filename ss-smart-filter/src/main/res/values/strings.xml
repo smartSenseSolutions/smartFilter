@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string-array name="ss_array">
         <item>KitKat</item>
         <item>Lollipop</item>
@@ -12,9 +11,7 @@
         <item>Red Velvet Cake</item>
         <item>Snow Cone</item>
         <item>Tiramisu</item>
-        <item>Upside Down Cake[25]</item>
-        <item>Vanilla Ice Cream[26]</item>
+        <item>Upside Down Cake</item>
+        <item>Vanilla Ice Cream</item>
     </string-array>
-
-
 </resources>

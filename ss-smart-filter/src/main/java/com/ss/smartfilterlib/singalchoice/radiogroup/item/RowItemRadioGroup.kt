@@ -48,9 +48,9 @@ class RowItemRadioGroup : LinearLayout {
 
     private fun parseAttributes(attrs: AttributeSet?) {
         val a = getContext().obtainStyledAttributes(attrs,
-            R.styleable.PresetRadioGroup, 0, 0)
+            R.styleable.SSRadioGroupRowItemRadioGroup, 0, 0)
         try {
-            mCheckedId = a.getResourceId(R.styleable.PresetRadioGroup_presetRadioCheckedId, View.NO_ID)
+            mCheckedId = a.getResourceId(R.styleable.SSRadioGroupRowItemRadioGroup_presetRadioCheckedId, View.NO_ID)
         } finally {
             a.recycle()
         }

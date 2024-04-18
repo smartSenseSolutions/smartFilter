@@ -2,9 +2,11 @@ package com.ss.smartfilterlib.singalchoice.radiogroup
 
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.RadioButton
@@ -18,60 +20,80 @@ import com.ss.smartfilterlib.SelectionMode
  * created by Mala Ruparel ON 17/04/24
  */
 class CombineRadioGroup @JvmOverloads constructor(
-    context: Context,
+    mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : LinearLayout(mContext, attrs, defStyleAttr) {
+    private var radioGroup: RadioGroup
+    private var backgroundDrawable: Drawable? = null
     private var orientation: Int = ORIENTATION_VERTICAL
-    var radioGroup: RadioGroup
-    private var backgroundSelector: Int = android.R.drawable.btn_default
-    private var textSelector: Int = android.R.drawable.btn_radio
-    private var selectionMode: SelectionMode = SelectionMode.SINGLE
-    var optionsArray: Int = 0
+    private var textSize: Int = -1
+    private var textColor: Int = Color.BLACK
+    private var textSelectorColor: ColorStateList? = null
+
+    private var marginStart: Int = 0
+    private var marginTop: Int = 0
+    private var marginEnd: Int = 0
+    private var marginBottom: Int = 0
+    private var paddingStart: Int = 0
+    private var paddingTop: Int = 0
+    private var paddingEnd: Int = 0
+    private var paddingBottom: Int = 0
+    private var optionsArray: Int = 0
+
+    private var onCheckedChangeListener: OnCheckedChangeCallback? = null
+
+
     init {
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SSRadioGroup)
-            orientation = typedArray.getInt(R.styleable.SSRadioGroup_scrollOrientation, ORIENTATION_HORIZONTAL)
+            orientation = typedArray.getInt(
+                R.styleable.SSRadioGroup_radioButtonOrientation,
+                ORIENTATION_VERTICAL
+            )
 
-          /*  val textColor = typedArray.getColor(R.styleable.SSRadioGroup_textColor, 0)
-            val backgroundColor = typedArray.getColor(R.styleable.SSRadioGroup_backgroundColor, 0)
-            val textSelector = typedArray.getResourceId(R.styleable.SSRadioGroup_textSelector, 0)
-            val backgroundSelector = typedArray.getResourceId(R.styleable.SSRadioGroup_bgSelector, 0)*/
+            textSize =
+                typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonTextSize, -1)
+            textColor =
+                typedArray.getColor(R.styleable.SSRadioGroup_radioButtonTextColor, Color.BLACK)
+            textSelectorColor =
+                typedArray.getColorStateList(R.styleable.SSRadioGroup_radioButtonTextSelectorColor)
+            backgroundDrawable =
+                typedArray.getDrawable(R.styleable.SSRadioGroup_radioButtonBackground)
+            marginStart =
+                typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonMarginStart, 0)
+            marginTop =
+                typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonMarginTop, 0)
+            marginEnd =
+                typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonMarginEnd, 0)
+            marginBottom = typedArray.getDimensionPixelSize(
+                R.styleable.SSRadioGroup_radioButtonMarginBottom,
+                0
+            )
 
+            paddingStart = typedArray.getDimensionPixelSize(
+                R.styleable.SSRadioGroup_radioButtonPaddingStart,
+                0
+            )
+            paddingTop =
+                typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingTop, 0)
+            paddingEnd =
+                typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingEnd, 0)
+            paddingBottom = typedArray.getDimensionPixelSize(
+                R.styleable.SSRadioGroup_radioButtonPaddingBottom,
+                0
+            )
 
-            val buttonText = typedArray.getString(R.styleable.SSRadioGroup_radioButtonText)
-
-            val backgroundDrawable =  typedArray.getDrawable(R.styleable.SSRadioGroup_radioButtonBackground)
-            val textSelectorDrawable =  typedArray.getDrawable(R.styleable.SSRadioGroup_radioButtonTextSelector)
-            val textSize =  typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonTextSize, -1)
-            val textColor =  typedArray.getColor(R.styleable.SSRadioGroup_radioButtonTextColor, Color.BLACK)
-            val textSelectorColor = typedArray.getColor(R.styleable.SSRadioGroup_radioButtonTextSelectorColor, Color.BLACK)
-
-            val marginStart =  typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonMarginStart, 0)
-            val marginTop =  typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonMarginTop, 0)
-            val marginEnd =  typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonMarginEnd, 0)
-            val marginBottom =  typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonMarginBottom, 0)
-
-            val paddingStart =  typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingStart, 0)
-            val paddingTop =  typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingTop, 0)
-            val paddingEnd =   typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingEnd, 0)
-            val paddingBottom = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingBottom, 0)
-
-            optionsArray = typedArray.getResourceId(R.styleable.SSRadioGroup_radioButtonOptions,0)
+            optionsArray = typedArray.getResourceId(R.styleable.SSRadioGroup_radioGrouplistitem, 0)
             typedArray.recycle()
 
         }
 
-
-
         val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-
-       // setBackgroundColor(backgroundColor)
 
         if (orientation == ORIENTATION_VERTICAL) {
             val scrollView = ScrollView(context)
             scrollView.layoutParams = layoutParams
-
             radioGroup = RadioGroup(context)
             radioGroup.orientation = RadioGroup.VERTICAL
             scrollView.addView(radioGroup)
@@ -87,43 +109,99 @@ class CombineRadioGroup @JvmOverloads constructor(
         }
         if (optionsArray != 0) {
             var options = getResources().getStringArray(optionsArray);
-            addRadioButtons(options)
-
+            addRadioButtonsFromArray(
+                options,
+                backgroundDrawable,
+                textSize,
+                textColor,
+                textSelectorColor,
+                marginStart,
+                marginTop,
+                marginEnd,
+                marginBottom,
+                paddingStart,
+                paddingTop,
+                paddingEnd,
+                paddingBottom
+            )
         }
 
     }
 
-
-    fun addRadioButtons(options: Array<String>) {
-        options.forEach {
-            val radioButton = RadioButton(context)
-            radioButton.text = it
-            radioGroup.addView(radioButton)
+    fun addRadioButtonsFromArray(
+        options: Array<String>,
+        backgroundDrawable: Drawable?,
+        textSize: Int,
+        textColor: Int,
+        textSelectorColor: ColorStateList?,
+        marginStart: Int,
+        marginTop: Int,
+        marginEnd: Int,
+        marginBottom: Int,
+        paddingStart: Int,
+        paddingTop: Int,
+        paddingEnd: Int,
+        paddingBottom: Int
+    ) {
+        options.forEach { text ->
+            addRadioButton(
+                text, backgroundDrawable, textSize, textColor,
+                textSelectorColor, marginStart, marginTop, marginEnd, marginBottom,
+                paddingStart, paddingTop, paddingEnd, paddingBottom
+            )
         }
     }
+
+
+    /*  fun addRadioButtons(options: Array<String>) {
+          options.forEach {
+              val radioButton = RadioButton(context)
+              radioButton.text = it
+              radioGroup.addView(radioButton)
+          }
+      }*/
+
     fun addRadioButton(
-        text: String?, backgroundDrawable: Drawable?, textSelectorDrawable: Drawable?,
-        textSize: Int, textColor: Int, textSelectorColor: Int,
+        text: String?, backgroundDrawable: Drawable?,
+        textSize: Int, textColor: Int, textSelectorColor: ColorStateList?,
         marginStart: Int, marginTop: Int, marginEnd: Int, marginBottom: Int,
         paddingStart: Int, paddingTop: Int, paddingEnd: Int, paddingBottom: Int
     ) {
         val radioButton = RadioButton(context)
         radioButton.text = text
-        radioButton.background = backgroundDrawable
-        radioButton.buttonDrawable = null // remove default radio button icon
+        radioButton.buttonDrawable = backgroundDrawable
         radioButton.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
         radioButton.textSize = textSize.toFloat()
-        radioButton.setTextColor(textColor)
+        radioButton.setTextColor(textSelectorColor)
+        //radioButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+        radioButton.setCompoundDrawablePadding(4);
 
-        radioButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-        radioButton.highlightColor = textSelectorColor
-        radioGroup.addView(radioButton)
-       /* val params = radioButton.layoutParams as LayoutParams
+        val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         params.setMargins(marginStart, marginTop, marginEnd, marginBottom)
-        radioButton.setLayoutParams(params)*/
+        radioButton.layoutParams = params
+        radioGroup.addView(radioButton)
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val radioButton = group.findViewById<RadioButton>(checkedId)
+            radioButton?.let {
+                onCheckedChangeListener?.onCheckedChanged(it)
+                Log.d("RadioButton", "${it.text} is checked")
+            }
+        }
+
+
     }
+
+
     companion object {
         const val ORIENTATION_VERTICAL = 0
         const val ORIENTATION_HORIZONTAL = 1
+    }
+
+    fun setOnCheckedChangeListener(onCheckedChangeListener: OnCheckedChangeCallback) {
+        this.onCheckedChangeListener = onCheckedChangeListener
+    }
+
+    fun interface OnCheckedChangeCallback {
+        fun onCheckedChanged(radioButton: RadioButton)
     }
 }

@@ -6,20 +6,24 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 
 import com.ss.smartfilter.databinding.ActivityMainBinding
+import com.ss.smartfilterlib.singalchoice.radiogroup.CombineRadioGroup
 
-//https://stackoverflow.com/questions/44798354/android-nestedscrollview-how-to-make-it-horizontal
-class MainActivity : ComponentActivity() {
-    lateinit var binding: ActivityMainBinding
+
+class MainActivity : ComponentActivity() , CombineRadioGroup.OnCheckedChangeCallback {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val optionsArray = resources.getStringArray(com.ss.smartfilterlib.R.array.ss_array)
-        binding.horizentalRadioGroup.addRadioButtons(optionsArray)
+        binding.RgHorizental.setOnCheckedChangeListener(this)
+        binding.RgHorizental.setOnCheckedChangeListener(this)
+       // val listData = resources.getStringArray(com.ss.smartfilterlib.R.array.ss_array)
 
+    }
 
-
+    override fun onCheckedChanged(radioButton: RadioButton) {
+        Toast.makeText(this, radioButton.text, Toast.LENGTH_SHORT).show()
     }
 
 

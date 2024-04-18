@@ -1,58 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        style="@style/SectionSeparator"
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/SS_RG_RB_Title_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/regular_radio_group_label" />
+        android:text="@string/radio_group_verticle" />
 
 
     <com.ss.smartfilterlib.singalchoice.radiogroup.CombineRadioGroup
-        android:id="@+id/horizentalRadioGroup"
+        android:id="@+id/RgVerticle"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        app:radioButtonBackground="@drawable/ss_rg_rb_radio_button_bg_selector"
+        app:radioButtonOrientation="0"
+        app:radioButtonTextSelectorColor="@color/ss_rg_rb_text_color_selector"
+        app:radioButtonTextSize="8sp"
+        app:radioButtonMarginBottom="4dp"
+        app:radioGrouplistitem="@array/ss_array" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/SS_RG_RB_Title_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/radio_group_horizental" />
 
-        />
-
-
-    <TextView
-        style="@style/SectionSeparator"
+    <com.ss.smartfilterlib.singalchoice.radiogroup.CombineRadioGroup
+        android:id="@+id/RgHorizental"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/subtitle_radio_group_label" />
+        android:layout_margin="10dp"
+        app:radioButtonBackground="@drawable/ss_rg_rb_radio_button_bg_selector"
+        app:radioButtonOrientation="1"
+        app:radioButtonTextSelectorColor="@color/ss_rg_rb_text_color_selector"
+        app:radioButtonTextSize="8sp"
+        app:radioButtonPaddingEnd="10dp"
+        app:radioGrouplistitem="@array/ss_array" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/SS_RG_RB_Title_Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/radio_group_MultiLine" />
 
     <com.ss.smartfilterlib.singalchoice.radiogroup.MultiLineRadioGroup
-        android:id="@+id/my_radio_group"
+        android:id="@+id/RGMultiline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_marginTop="16dp"
         android:overScrollMode="never"
         android:scrollbars="none"
-        app:addList="@array/ss_array"
-       />
-    <TextView
-        style="@style/SectionSeparator"
+        app:addList="@array/ss_array" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/SS_RG_RB_Title_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/assets_radio_group_label" />
-
-
-    <TextView
-        style="@style/SectionSeparator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="-=Radio group mixed=-" />
+        android:text="@string/radio_group_Item" />
 
     <include
         android:id="@+id/incSingleSelRadioGroup"
         layout="@layout/include_single_sel_radio_group" />
-
 
 </LinearLayout>
 

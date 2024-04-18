@@ -15,12 +15,7 @@ import com.ss.smartfilterlib.R
 /**
  * created by Mala Ruparel ON 17/04/24
  */
-class RowItemRadioButton @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr, defStyleRes), RadioCheckable {
+class RowItemRadioButton @JvmOverloads constructor(context: Context,attrs: AttributeSet? = null,defStyleAttr: Int = 0,defStyleRes: Int = 0) : RelativeLayout(context, attrs, defStyleAttr, defStyleRes), RadioCheckable {
 
 
     private lateinit var mtvTitle: AppCompatTextView
@@ -48,20 +43,20 @@ class RowItemRadioButton @JvmOverloads constructor(
 
 
     private fun parseAttributes(attrs: AttributeSet?) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.PresetValueButton, 0, 0)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SSRadioGroupRowItemButton, 0, 0)
         val resources: Resources = context.resources
         try {
-            mTitleValue = typedArray.getString(R.styleable.PresetValueButton_presetButtonValueText)
-            mDescriptionValue = typedArray.getString(R.styleable.PresetValueButton_presetButtonUnitText)
+            mTitleValue = typedArray.getString(R.styleable.SSRadioGroupRowItemButton_presetButtonValueText)
+            mDescriptionValue = typedArray.getString(R.styleable.SSRadioGroupRowItemButton_presetButtonUnitText)
             mTitleTextColor = typedArray.getColor(
-                R.styleable.PresetValueButton_presetButtonValueTextColor, resources.getColor(
+                R.styleable.SSRadioGroupRowItemButton_presetButtonValueTextColor, resources.getColor(
                     R.color.black
                 )
             )
             mPressedTextColor =
-                typedArray.getColor(R.styleable.PresetValueButton_presetButtonPressedTextColor, Color.BLACK)
+                typedArray.getColor(R.styleable.SSRadioGroupRowItemButton_presetButtonPressedTextColor, Color.BLACK)
             mDesciptionTextColor = typedArray.getColor(
-                R.styleable.PresetValueButton_presetButtonUnitTextColor, resources.getColor(
+                R.styleable.SSRadioGroupRowItemButton_presetButtonUnitTextColor, resources.getColor(
                     R.color.purple_200
                 )
             )

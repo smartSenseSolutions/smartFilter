@@ -2,15 +2,17 @@
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:background="@color/white">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.ss.smartfilterlib.singalchoice.radiogroup.item.RowItemRadioGroup
-            android:id="@+id/preset_time_radio_group"
+            android:id="@+id/RGRowItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -19,47 +21,73 @@
             app:presetRadioCheckedId="@+id/preset_time_value_button_60">
 
             <com.ss.smartfilterlib.singalchoice.radiogroup.item.RowItemRadioButton
-                android:id="@+id/preset_time_value_button_30"
-                style="@style/PresetLayoutButton"
+                android:id="@+id/RBfirst"
+                style="@style/SS_RG_RB_Item_Style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:padding="8dp"
                 android:elevation="1dp"
-                android:layout_marginEnd="8dp"
+                android:padding="8dp"
                 app:presetButtonUnitText="Desription"
                 app:presetButtonValueText="Title" />
 
             <com.ss.smartfilterlib.singalchoice.radiogroup.item.RowItemRadioButton
                 android:id="@+id/preset_time_value_button_90"
-                style="@style/PresetLayoutButton"
+                style="@style/SS_RG_RB_Item_Style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:padding="8dp"
-                android:layout_marginEnd="8dp"
                 app:presetButtonUnitText="Desription"
                 app:presetButtonValueText="Title" />
 
             <com.ss.smartfilterlib.singalchoice.radiogroup.item.RowItemRadioButton
-                android:id="@+id/preset_time_value_button_60"
-                style="@style/PresetLayoutButton"
+                android:id="@+id/RBSecond"
+                style="@style/SS_RG_RB_Item_Style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:padding="8dp"
+                app:presetButtonUnitText="Desription"
+                app:presetButtonValueText="Title" />
+
+            <com.ss.smartfilterlib.singalchoice.radiogroup.item.RowItemRadioButton
+                android:id="@+id/RBThrid"
+                style="@style/SS_RG_RB_Item_Style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                app:presetButtonUnitText="Desription"
+                app:presetButtonValueText="Title" />
+
+            <com.ss.smartfilterlib.singalchoice.radiogroup.item.RowItemRadioButton
+                android:id="@+id/RBForth"
+                style="@style/SS_RG_RB_Item_Style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                app:presetButtonUnitText="Desription"
+                app:presetButtonValueText="Title" />
+
+            <com.ss.smartfilterlib.singalchoice.radiogroup.item.RowItemRadioButton
+                android:id="@+id/RBFifth"
+                style="@style/SS_RG_RB_Item_Style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:padding="8dp"
                 app:presetButtonUnitText="Desription"
                 app:presetButtonValueText="Title" />
         </com.ss.smartfilterlib.singalchoice.radiogroup.item.RowItemRadioGroup>
 
-      <!--  <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/edit_text_set_duration"
 
-            android:layout_below="@+id/preset_time_radio_group"
-            android:hint="title_settings_set_duration"
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:text="30" />-->
     </LinearLayout>
 </HorizontalScrollView>
