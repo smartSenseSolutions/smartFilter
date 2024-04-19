@@ -20,6 +20,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : RecyclerView(context, attrs, defStyle) {
+
     private var mList: MutableList<CharSequence> = ArrayList()
     private var mAdapter: MultiLineRadioButtonAdapter? = null
     override fun canScrollVertically(direction: Int): Boolean {
