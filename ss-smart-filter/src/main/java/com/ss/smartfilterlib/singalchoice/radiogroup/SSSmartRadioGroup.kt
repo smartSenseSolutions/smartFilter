@@ -18,11 +18,7 @@ import com.ss.smartfilterlib.R
 /**
  * created by Mala Ruparel ON 17/04/24
  */
-class SSSmartRadioGroup @JvmOverloads constructor(
-    mContext: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : LinearLayout(mContext, attrs, defStyleAttr) {
+class SSSmartRadioGroup @JvmOverloads constructor(mContext: Context,attrs: AttributeSet? = null,defStyleAttr: Int = 0) : LinearLayout(mContext, attrs, defStyleAttr) {
 
     private lateinit var radioGroup: RadioGroup
     private var backgroundDrawable: Drawable? = null
