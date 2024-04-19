@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,36 +14,25 @@ import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.MultiLineRadioButtonBinding
 import kotlin.collections.ArrayList
 
-class MultiLineRadioGroup @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyle: Int = 0
-) : RecyclerView(context, attrs, defStyle) {
+class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
 
-    private var mList: MutableList<CharSequence> = ArrayList()
+    private var mList: MutableList<String> = ArrayList()
     private var mAdapter: MultiLineRadioButtonAdapter? = null
-    override fun canScrollVertically(direction: Int): Boolean {
-        return false
-    }
-
-
     private var spanCount: Int = 3
     private var spacing: Int = 4
     private var includeEdge: Boolean = false
     var setOnChoseListener: OnChoseListener? = null
 
-    private fun initView(attrs: AttributeSet?) {
-        Log.d("tag", "initView")
-        if (attrs != null){
-            initAttrs(attrs)
-        }
-        setupView()
+    init {
+        initAttrs(attrs)
     }
+
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setupView() {
         layoutManager = GridLayoutManager(context, spanCount)
         addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+
         adapter = MultiLineRadioButtonAdapter(context).also { this.mAdapter = it }
         mAdapter!!.onChoseListener = OnChoseListener {position, text ->
             mAdapter!!.currentSelected = position
@@ -55,7 +43,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(
         }
     }
 
-    private fun initAttrs(attrs: AttributeSet) {
+    private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(
             attrs, R.styleable.MultiLineRadioGroup, 0, 0
         )
@@ -64,12 +52,16 @@ class MultiLineRadioGroup @JvmOverloads constructor(
             setSpacing(typedArray.getInt(R.styleable.MultiLineRadioGroup_spacing, spacing))
             setIncludeEdge(typedArray.getBoolean(R.styleable.MultiLineRadioGroup_includeEdge, includeEdge))
             val buttonText = typedArray.getTextArray(R.styleable.MultiLineRadioGroup_addList)
-            setData(buttonText.asList() as MutableList<CharSequence>)
+            setData(buttonText.asList() as MutableList<String>)
         } finally {
             typedArray.recycle()
         }
+        setupView()
     }
 
+    private fun setData(list: MutableList<String>) {
+        mAdapter?.setData(list)
+    }
 
     private fun setSpanCount(spanCount: Int){
         if (spanCount < 2){
@@ -89,10 +81,6 @@ class MultiLineRadioGroup @JvmOverloads constructor(
         setupView()
     }
 
-    private fun setData(list: MutableList<CharSequence>) {
-        Log.d("tag", "setData")
-        mAdapter!!.setData(list)
-    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun setChecked(position: Int){
@@ -142,7 +130,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(
             return mList.size
         }
 
-        fun setData(newList: MutableList<CharSequence>){
+        fun setData(newList: MutableList<String>){
             val diffUtil = MultiLineDiffUtil(mList, newList)
             val diffResult = DiffUtil.calculateDiff(diffUtil)
             mList = newList
@@ -150,11 +138,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(
         }
     }
 
-    internal inner class GridSpacingItemDecoration(
-        private val spanCount: Int,
-        private val spacing: Int,
-        private val includeEdge: Boolean
-    ) : ItemDecoration() {
+    inner class GridSpacingItemDecoration(private val spanCount: Int,private val spacing: Int,private val includeEdge: Boolean) : ItemDecoration() {
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
             val position = parent.getChildAdapterPosition(view)
             val column = position % spanCount
@@ -196,19 +180,17 @@ class MultiLineRadioGroup @JvmOverloads constructor(
         }
     }
 
-    class OnChoseListener(
-        private val callbackChoseListener: (position: Int, text: String) -> Unit
-    ) : CallbackChoseListener {
+    class OnChoseListener(private val callbackChoseListener: (position: Int, text: String) -> Unit) : CallbackChoseListener {
         override fun onChose(position: Int, text: String) {
             callbackChoseListener(position, text)
         }
     }
 
-    interface CallbackChoseListener {
+   fun interface CallbackChoseListener {
         fun onChose(position: Int, text: String)
     }
 
-    init {
-        initView(attrs)
+    override fun canScrollVertically(direction: Int): Boolean {
+        return false
     }
 }

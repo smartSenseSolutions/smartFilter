@@ -56,7 +56,7 @@
         android:layout_marginTop="16dp"
         android:overScrollMode="never"
         android:scrollbars="none"
-        app:spanCount="4"
+        app:spanCount="3"
         app:addList="@array/ss_array" />
 
     <androidx.appcompat.widget.AppCompatTextView

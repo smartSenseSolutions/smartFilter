@@ -34,16 +34,16 @@ class SSSmartRadioGroup @JvmOverloads constructor(mContext: Context,attrs: Attri
     private var paddingTop: Int = 0
     private var paddingEnd: Int = 0
     private var paddingBottom: Int = 0
-    private var DataArray: Int = 0
+    private var buttonText: Int = 0
 
     private var onCheckedChangeListener: OnCheckedChangeCallback? = null
 
 
     init {
-        initAttributes(attrs)
+        initAttrs(attrs)
     }
 
-    private fun initAttributes(attrs: AttributeSet?) {
+    private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SSRadioGroup, 0, 0)
         try {
             orientation = typedArray.getInt(R.styleable.SSRadioGroup_radioButtonOrientation,ORIENTATION_VERTICAL)
@@ -62,7 +62,7 @@ class SSSmartRadioGroup @JvmOverloads constructor(mContext: Context,attrs: Attri
             paddingEnd = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingEnd, 0)
             paddingBottom = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingBottom,0)
 
-            DataArray = typedArray.getResourceId(R.styleable.SSRadioGroup_radioGrouplistitem, 0)
+            buttonText = typedArray.getResourceId(R.styleable.SSRadioGroup_radioGrouplistitem, 0)
         } finally {
             typedArray.recycle()
         }
@@ -92,8 +92,8 @@ class SSSmartRadioGroup @JvmOverloads constructor(mContext: Context,attrs: Attri
     }
 
     private fun setData() {
-        if (DataArray != 0) {
-            var options = resources.getStringArray(DataArray);
+        if (buttonText != 0) {
+            var options = resources.getStringArray(buttonText);
             options.forEach { text ->
                 addRadioButton(
                     text, backgroundDrawable, textSize, textColor,
@@ -106,23 +106,26 @@ class SSSmartRadioGroup @JvmOverloads constructor(mContext: Context,attrs: Attri
 
 
     fun addRadioButton(
-        text: String?, backgroundDrawable: Drawable?,
+        buttenText: String?, backgroundDrawable: Drawable?,
         textSize: Int, textColor: Int, textSelectorColor: ColorStateList?,
         marginStart: Int, marginTop: Int, marginEnd: Int, marginBottom: Int,
         paddingStart: Int, paddingTop: Int, paddingEnd: Int, paddingBottom: Int
     ) {
-        val radioButton = RadioButton(context)
-        radioButton.text = text
-        radioButton.buttonDrawable = backgroundDrawable
-        radioButton.setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
-        radioButton.textSize = textSize.toFloat()
-        radioButton.setTextColor(textSelectorColor)
-        //radioButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-        radioButton.setCompoundDrawablePadding(4);
 
+        val radioButton = RadioButton(context)
         val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         params.setMargins(marginStart, marginTop, marginEnd, marginBottom)
-        radioButton.layoutParams = params
+        radioButton.apply {
+            text = buttenText
+            buttonDrawable = backgroundDrawable
+            setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
+            this.textSize = textSize.toFloat()
+            setTextColor(textSelectorColor)
+            //setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+            setCompoundDrawablePadding(4)
+            layoutParams = params
+        }
+
         radioGroup.addView(radioButton)
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             val radioButton = group.findViewById<RadioButton>(checkedId)
@@ -131,6 +134,7 @@ class SSSmartRadioGroup @JvmOverloads constructor(mContext: Context,attrs: Attri
                 Log.d("RadioButton", "${it.text} is checked")
             }
         }
+
 
 
     }
