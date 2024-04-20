@@ -14,9 +14,9 @@ import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.MultiLineRadioButtonBinding
 import kotlin.collections.ArrayList
 
-class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
+class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
 
-    private var mList: MutableList<String> = ArrayList()
+    private var mList: ArrayList<RadioGroupData> = ArrayList()
     private var mAdapter: MultiLineRadioButtonAdapter? = null
     private var spanCount: Int = 3
     private var spacing: Int = 4
@@ -25,6 +25,7 @@ class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: Att
 
     init {
         initAttrs(attrs)
+        setupView()
     }
 
 
@@ -52,17 +53,21 @@ class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: Att
             setSpacing(typedArray.getInt(R.styleable.MultiLineRadioGroup_spacing, spacing))
             setIncludeEdge(typedArray.getBoolean(R.styleable.MultiLineRadioGroup_includeEdge, includeEdge))
             val buttonText = typedArray.getTextArray(R.styleable.MultiLineRadioGroup_addList)
-            setData(buttonText.asList() as MutableList<String>)
+            //setData(buttonText.asList() as MutableList<String>)
         } finally {
             typedArray.recycle()
         }
-        setupView()
+
     }
 
-    private fun setData(list: MutableList<String>) {
+    fun setData(list: ArrayList<RadioGroupData>) {
         mAdapter?.setData(list)
     }
-
+    fun setUsers(radioGroupData: ArrayList<RadioGroupData>) {
+        this.mList = radioGroupData
+        mAdapter?.setData(mList)
+        setupView()
+    }
     private fun setSpanCount(spanCount: Int){
         if (spanCount < 2){
             throw IllegalArgumentException("spanCount minimum is 2, current: $spanCount")
@@ -84,8 +89,11 @@ class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: Att
 
     @SuppressLint("NotifyDataSetChanged")
     fun setChecked(position: Int){
-        mAdapter!!.currentSelected = position
-        mAdapter!!.notifyDataSetChanged()
+        mAdapter.let {
+            mAdapter?.currentSelected = position
+            mAdapter?.notifyDataSetChanged()
+
+        }
     }
 
     internal inner class MultiLineRadioButtonAdapter(private val context: Context) :
@@ -96,12 +104,12 @@ class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: Att
         internal inner class GridRadioHolder(itemView: MultiLineRadioButtonBinding) : ViewHolder(itemView.root) {
             private val binding = itemView
 
-            fun setData(s: String, selected: Boolean, function: (Int) -> Unit, position: Int) {
-                binding.multiLineRadioGroupDefaultRadioButton.text = s
+            fun setData(radioGroupData: RadioGroupData, selected: Boolean, function: (Int) -> Unit, position: Int) {
+                binding.multiLineRadioGroupDefaultRadioButton.text = radioGroupData.name
                 binding.multiLineRadioGroupDefaultRadioButton.isChecked = selected
                 binding.multiLineRadioGroupDefaultRadioButton.setOnClickListener {
                     onChoseListener!!.onChose(
-                        position, s
+                        position, radioGroupData
                     )
                     function(position)
                 }
@@ -122,7 +130,7 @@ class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: Att
                 }
             }
             (holder as GridRadioHolder).setData(
-                mList[position].toString(), position == currentSelected, function, position
+                mList[position], position == currentSelected, function, position
             )
         }
 
@@ -130,7 +138,7 @@ class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: Att
             return mList.size
         }
 
-        fun setData(newList: MutableList<String>){
+        fun setData(newList: ArrayList<RadioGroupData>){
             val diffUtil = MultiLineDiffUtil(mList, newList)
             val diffResult = DiffUtil.calculateDiff(diffUtil)
             mList = newList
@@ -160,8 +168,8 @@ class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: Att
     }
 
     internal inner class MultiLineDiffUtil(
-        private val oldList: List<CharSequence>,
-        private val newList: List<CharSequence>
+        private val oldList: ArrayList<RadioGroupData>,
+        private val newList: ArrayList<RadioGroupData>
     ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
             return oldList.size
@@ -180,14 +188,14 @@ class MultiLineRadioGroup @JvmOverloads constructor( context: Context,attrs: Att
         }
     }
 
-    class OnChoseListener(private val callbackChoseListener: (position: Int, text: String) -> Unit) : CallbackChoseListener {
-        override fun onChose(position: Int, text: String) {
-            callbackChoseListener(position, text)
+    class OnChoseListener(private val callbackChoseListener: (position: Int, text: RadioGroupData) -> Unit) : CallbackChoseListener {
+        override fun onChose(position: Int, data: RadioGroupData) {
+            callbackChoseListener(position, data)
         }
     }
 
    fun interface CallbackChoseListener {
-        fun onChose(position: Int, text: String)
+        fun onChose(position: Int, text: RadioGroupData)
     }
 
     override fun canScrollVertically(direction: Int): Boolean {

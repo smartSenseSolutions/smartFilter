@@ -12,31 +12,30 @@
         android:text="@string/radio_group_verticle" />
 
 
-    <com.ss.smartfilterlib.singalchoice.radiogroup.SSSmartRadioGroup
+    <com.ss.smartfilterlib.singalchoice.radiogroup.SingleLineRadioGroup
         android:id="@+id/RgVerticle"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_margin="10dp"
+        android:padding="10dp"
         app:radioButtonBackground="@drawable/ss_rg_rb_radio_button_bg_selector"
-        app:radioButtonOrientation="0"
+        app:radioButtonOrientation="1"
         app:radioButtonTextSelectorColor="@color/ss_rg_rb_text_color_selector"
         app:radioButtonTextSize="8sp"
         app:radioButtonMarginBottom="4dp"
-        app:radioGrouplistitem="@array/ss_array" />
-
-    <androidx.appcompat.widget.AppCompatTextView
+       />
+    <!--app:radioGrouplistitem="@array/ss_array"-->
+   <androidx.appcompat.widget.AppCompatTextView
         style="@style/SS_RG_RB_Title_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/radio_group_horizental" />
 
-    <com.ss.smartfilterlib.singalchoice.radiogroup.SSSmartRadioGroup
+    <com.ss.smartfilterlib.singalchoice.radiogroup.SingleLineRadioGroup
         android:id="@+id/RgHorizental"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:radioButtonBackground="@drawable/ss_rg_rb_radio_button_bg_selector"
-        app:radioButtonOrientation="1"
+        android:padding="10dp"
+        app:radioButtonOrientation="0"
         app:radioButtonTextSelectorColor="@color/ss_rg_rb_text_color_selector"
         app:radioButtonTextSize="8sp"
         app:radioButtonPaddingEnd="10dp"
@@ -65,9 +64,16 @@
         android:layout_height="wrap_content"
         android:text="@string/radio_group_Item" />
 
-    <include
+    <com.ss.smartfilterlib.singalchoice.radiogroup.RowItemRadioGroup
+        android:id="@+id/RGRowItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:row_text_size="10sp"
+        app:row_text_color="@color/black"
+        app:row_orientation="1" />
+  <!--  <include
         android:id="@+id/incSingleSelRadioGroup"
-        layout="@layout/include_single_sel_radio_group" />
+        layout="@layout/include_single_sel_radio_group" />-->
 
 </LinearLayout>
 

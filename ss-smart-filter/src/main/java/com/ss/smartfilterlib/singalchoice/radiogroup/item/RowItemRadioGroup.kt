@@ -78,13 +78,6 @@ class RowItemRadioGroup : LinearLayout {
         super.addView(child, index, params)
     }
 
-    fun addRadioButtons(options: Array<String>) {
-        for (option in options) {
-            val radioButton = RowItemRadioButton(context)
-            radioButton.setValue(option)
-            this.addView(radioButton)
-        }
-    }
 
     override fun setOnHierarchyChangeListener(listener: OnHierarchyChangeListener) {
         mPassThroughListener.mOnHierarchyChangeListener = listener

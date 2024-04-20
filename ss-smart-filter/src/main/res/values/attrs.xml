@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="orientation">
+    <attr name="orientation">
+        <enum name="vertical" value="0" />
+        <enum name="horizontal" value="1" />
+    </attr>
+    </declare-styleable>
 
     <declare-styleable name="SSRadioGroup">
         <attr name="radioButtonText" format="string" />
@@ -39,5 +45,11 @@
         <attr name="spacing" format="integer" />
         <attr name="includeEdge" format="boolean" />
         <attr name="addList" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="RowItemRadioGroup">
+        <attr name="row_text_size" format="dimension" />
+        <attr name="row_text_color" format="color" />
+        <attr name="row_orientation" format="integer" />
     </declare-styleable>
 </resources>
