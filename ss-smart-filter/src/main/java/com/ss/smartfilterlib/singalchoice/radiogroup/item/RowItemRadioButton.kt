@@ -118,7 +118,7 @@ class RowItemRadioButton @JvmOverloads constructor(context: Context,attrs: Attri
 
 
     private fun setCheckedState() {
-        setBackgroundResource(R.drawable.background_button_pressed)
+        setBackgroundResource(R.drawable.row_item_pressed)
         mtvTitle.setTextColor(mPressedTextColor)
         mtvDesc.setTextColor(mPressedTextColor)
     }

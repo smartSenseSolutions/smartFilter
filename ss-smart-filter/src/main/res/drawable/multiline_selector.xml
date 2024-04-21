@@ -2,15 +2,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/ss_radio_group_multiline_selected"
+        android:drawable="@drawable/multiline_selected"
         android:state_checked="true"
         android:state_pressed="true"/>
 
     <item
-        android:drawable="@drawable/ss_radio_group_multiline_selected"
+        android:drawable="@drawable/multiline_selected"
         android:state_checked="true"/>
 
     <item
-        android:drawable="@drawable/ss_radio_group_multiline_default"/>
+        android:drawable="@drawable/multiline_default"/>
 
 </selector>

@@ -12,7 +12,7 @@
         <attr name="radioButtonFontFamily" format="reference" />
         <attr name="radioButtonTextSize" format="dimension" />
         <attr name="radioButtonOrientation" format="integer" />
-        <attr name="radioButtonBackground" format="reference|color" />
+        <attr name="radioButtonBackground" format="reference" />
         <attr name="radioButtonTextSelector" format="color" />
         <attr name="radioButtonTextColor" format="color" />
         <attr name="radioButtonTextSelectorColor" format="color" />
@@ -43,12 +43,16 @@
     <declare-styleable name="MultiLineRadioGroup">
         <attr name="spanCount" format="integer" />
         <attr name="spacing" format="integer" />
+        <attr name="background" format="reference" />
+        <attr name="textSelector" format="color" />
         <attr name="includeEdge" format="boolean" />
         <attr name="addList" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="RowItemRadioGroup">
         <attr name="row_text_size" format="dimension" />
+        <attr name="row_background" format="reference" />
+        <attr name="row_textSelector" format="color" />
         <attr name="row_text_color" format="color" />
         <attr name="row_orientation" format="integer" />
     </declare-styleable>

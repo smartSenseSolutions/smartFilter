@@ -2,11 +2,18 @@ package com.ss.smartfilterlib.singalchoice.radiogroup
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.TypedArrayUtils.getResourceId
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +28,10 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
     private var spanCount: Int = 3
     private var spacing: Int = 4
     private var includeEdge: Boolean = false
-    var setOnChoseListener: OnChoseListener? = null
-
+    var setOnChoseListener: RadioGroupCallback? = null
+    private var bgSelectorResource: Int? = null
+    private var textSelectorColor: ColorStateList? = null
+    private var radioButtonDrawable: Drawable? = null
     init {
         initAttrs(attrs)
         setupView()
@@ -35,11 +44,30 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
 
         adapter = MultiLineRadioButtonAdapter(context).also { this.mAdapter = it }
-        mAdapter!!.onChoseListener = OnChoseListener {position, text ->
+       /* mAdapter!!.onChoseListener = OnChoseListener {position, text ->
             mAdapter!!.currentSelected = position
             mAdapter!!.notifyDataSetChanged()
             if (setOnChoseListener != null) {
                 setOnChoseListener!!.onChose(position, text)
+            }
+        }*/
+        mAdapter?.onChoseListener = object : RadioGroupCallback {
+            override fun multiLineCallBack(position: Int, data: RadioGroupData) {
+                // Update the currently selected position in the adapter
+                mAdapter?.currentSelected = position
+                // Notify all observers of the item range changed to rebind the modified items
+                mAdapter?.notifyDataSetChanged()
+
+                // Notify the parent class listener if it is not null
+                setOnChoseListener?.multiLineCallBack(position, data)
+            }
+
+            override fun onRowLineCallBackSelected(radioGroupData: RadioGroupData) {
+
+            }
+
+            override fun singleLineCallBack(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId: Int) {
+
             }
         }
     }
@@ -52,6 +80,9 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
             setSpanCount(typedArray.getInt(R.styleable.MultiLineRadioGroup_spanCount, spanCount))
             setSpacing(typedArray.getInt(R.styleable.MultiLineRadioGroup_spacing, spacing))
             setIncludeEdge(typedArray.getBoolean(R.styleable.MultiLineRadioGroup_includeEdge, includeEdge))
+            textSelectorColor = typedArray.getColorStateList(R.styleable.MultiLineRadioGroup_textSelector)
+            radioButtonDrawable = typedArray.getDrawable(R.styleable.MultiLineRadioGroup_background)
+
             val buttonText = typedArray.getTextArray(R.styleable.MultiLineRadioGroup_addList)
             //setData(buttonText.asList() as MutableList<String>)
         } finally {
@@ -60,7 +91,15 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
 
     }
 
-    fun setData(list: ArrayList<RadioGroupData>) {
+    fun setData(
+        list: ArrayList<RadioGroupData>,
+        bgSelector: Int,
+        textSelector: Int,
+        callback: RadioGroupCallback
+    ) {
+        this.radioButtonDrawable = ContextCompat.getDrawable(context, bgSelector)
+        this.textSelectorColor = ContextCompat.getColorStateList(context, textSelector)
+        this.setOnChoseListener = callback
         mAdapter?.setData(list)
     }
     fun setUsers(radioGroupData: ArrayList<RadioGroupData>) {
@@ -99,16 +138,19 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
     internal inner class MultiLineRadioButtonAdapter(private val context: Context) :
         Adapter<ViewHolder>() {
         var currentSelected: Int? = null
-        var onChoseListener: OnChoseListener? = null
+        var onChoseListener: RadioGroupCallback? = null
 
         internal inner class GridRadioHolder(itemView: MultiLineRadioButtonBinding) : ViewHolder(itemView.root) {
             private val binding = itemView
 
             fun setData(radioGroupData: RadioGroupData, selected: Boolean, function: (Int) -> Unit, position: Int) {
                 binding.multiLineRadioGroupDefaultRadioButton.text = radioGroupData.name
+             /*   binding.multiLineRadioGroupDefaultRadioButton.background = radioButtonDrawable
+                binding.multiLineRadioGroupDefaultRadioButton.buttonDrawable = radioButtonDrawable
+                binding.multiLineRadioGroupDefaultRadioButton.setTextColor(textSelectorColor)*/
                 binding.multiLineRadioGroupDefaultRadioButton.isChecked = selected
                 binding.multiLineRadioGroupDefaultRadioButton.setOnClickListener {
-                    onChoseListener!!.onChose(
+                    onChoseListener!!.multiLineCallBack(
                         position, radioGroupData
                     )
                     function(position)
@@ -188,15 +230,15 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         }
     }
 
-    class OnChoseListener(private val callbackChoseListener: (position: Int, text: RadioGroupData) -> Unit) : CallbackChoseListener {
+/*    class OnChoseListener(private val callbackChoseListener: (position: Int, text: RadioGroupData) -> Unit) : RadioGroupCallback.CallbackChoseListener {
         override fun onChose(position: Int, data: RadioGroupData) {
             callbackChoseListener(position, data)
         }
-    }
+    }*/
 
-   fun interface CallbackChoseListener {
+   /*fun interface CallbackChoseListener {
         fun onChose(position: Int, text: RadioGroupData)
-    }
+    }*/
 
     override fun canScrollVertically(direction: Int): Boolean {
         return false
