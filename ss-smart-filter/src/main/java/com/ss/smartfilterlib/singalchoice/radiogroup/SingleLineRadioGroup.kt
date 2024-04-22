@@ -14,6 +14,9 @@ import android.widget.RadioGroup
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
+import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
+import com.ss.smartfilterlib.singalchoice.data.RadioGroupData
+import com.ss.smartfilterlib.singalchoice.util.Orientation
 
 
 /**
@@ -51,18 +54,18 @@ class SingleLineRadioGroup : LinearLayout {
     private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SSRadioGroup, 0, 0)
         try {
-            orientation = typedArray.getInt(R.styleable.SSRadioGroup_radioButtonOrientation, Orientation.VERTICAL)
-            textSize = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonTextSize, 0)
-            textColor = typedArray.getColor(R.styleable.SSRadioGroup_radioButtonTextColor, Color.BLACK)
-            textSelectorColor = typedArray.getColorStateList(R.styleable.SSRadioGroup_radioButtonTextSelectorColor)
-            radioButtonDrawable =typedArray.getDrawable(R.styleable.SSRadioGroup_radioButtonBackground)
+            orientation = typedArray.getInt(R.styleable.SSRadioGroup_rg_Orientation, Orientation.VERTICAL)
+            textSize = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_TextSize, 0)
+            textColor = typedArray.getColor(R.styleable.SSRadioGroup_rg_TextColor, Color.BLACK)
+            textSelectorColor = typedArray.getColorStateList(R.styleable.SSRadioGroup_rg_TextSelectorColor)
+            radioButtonDrawable =typedArray.getDrawable(R.styleable.SSRadioGroup_rg_Background)
 
-            paddingStart = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingStart,0)
-            paddingTop = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingTop, 0)
-            paddingEnd = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingEnd, 0)
-            paddingBottom = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_radioButtonPaddingBottom,0)
+            paddingStart = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_PaddingStart,0)
+            paddingTop = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_PaddingTop, 0)
+            paddingEnd = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_PaddingEnd, 0)
+            paddingBottom = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_PaddingBottom,0)
 
-            dataFromXml = typedArray.getResourceId(R.styleable.SSRadioGroup_radioGrouplistitem, 0)
+            dataFromXml = typedArray.getResourceId(R.styleable.SSRadioGroup_rg_listitem, 0)
         } finally {
             typedArray.recycle()
         }

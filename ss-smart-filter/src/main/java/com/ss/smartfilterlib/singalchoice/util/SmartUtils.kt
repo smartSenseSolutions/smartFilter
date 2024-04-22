@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singalchoice.radiogroup
+package com.ss.smartfilterlib.singalchoice.util
 
 /**
  * created by Mala Ruparel ON 19/04/24

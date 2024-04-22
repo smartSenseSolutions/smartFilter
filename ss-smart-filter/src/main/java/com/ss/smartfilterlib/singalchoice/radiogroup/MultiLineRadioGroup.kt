@@ -3,7 +3,6 @@ package com.ss.smartfilterlib.singalchoice.radiogroup
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -13,12 +12,13 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.TypedArrayUtils.getResourceId
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.MultiLineRadioButtonBinding
+import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
+import com.ss.smartfilterlib.singalchoice.data.RadioGroupData
 import kotlin.collections.ArrayList
 
 class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
@@ -28,8 +28,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
     private var spanCount: Int = 3
     private var spacing: Int = 4
     private var includeEdge: Boolean = false
-    var setOnChoseListener: RadioGroupCallback? = null
-    private var bgSelectorResource: Int? = null
+    private var setOnChoseListener: RadioGroupCallback? = null
     private var textSelectorColor: ColorStateList? = null
     private var radioButtonDrawable: Drawable? = null
     init {
@@ -44,38 +43,25 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
 
         adapter = MultiLineRadioButtonAdapter(context).also { this.mAdapter = it }
-       /* mAdapter!!.onChoseListener = OnChoseListener {position, text ->
-            mAdapter!!.currentSelected = position
-            mAdapter!!.notifyDataSetChanged()
-            if (setOnChoseListener != null) {
-                setOnChoseListener!!.onChose(position, text)
-            }
-        }*/
         mAdapter?.onChoseListener = object : RadioGroupCallback {
             override fun multiLineCallBack(position: Int, data: RadioGroupData) {
-                // Update the currently selected position in the adapter
                 mAdapter?.currentSelected = position
-                // Notify all observers of the item range changed to rebind the modified items
                 mAdapter?.notifyDataSetChanged()
-
-                // Notify the parent class listener if it is not null
                 setOnChoseListener?.multiLineCallBack(position, data)
             }
 
-            override fun onRowLineCallBackSelected(radioGroupData: RadioGroupData) {
+            override fun onRowLineCallBackSelected(radioGroupData: RadioGroupData) {}
 
-            }
 
-            override fun singleLineCallBack(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId: Int) {
+            override fun singleLineCallBack(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId: Int) {}
 
-            }
+
         }
     }
 
     private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(
-            attrs, R.styleable.MultiLineRadioGroup, 0, 0
-        )
+            attrs, R.styleable.MultiLineRadioGroup, 0, 0)
         try {
             setSpanCount(typedArray.getInt(R.styleable.MultiLineRadioGroup_spanCount, spanCount))
             setSpacing(typedArray.getInt(R.styleable.MultiLineRadioGroup_spacing, spacing))
@@ -88,25 +74,15 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         } finally {
             typedArray.recycle()
         }
-
     }
 
-    fun setData(
-        list: ArrayList<RadioGroupData>,
-        bgSelector: Int,
-        textSelector: Int,
-        callback: RadioGroupCallback
-    ) {
-        this.radioButtonDrawable = ContextCompat.getDrawable(context, bgSelector)
-        this.textSelectorColor = ContextCompat.getColorStateList(context, textSelector)
-        this.setOnChoseListener = callback
-        mAdapter?.setData(list)
+    fun setData(mData: ArrayList<RadioGroupData>, bgSelector: Int, textSelector: Int, callback: RadioGroupCallback) {
+        radioButtonDrawable = ContextCompat.getDrawable(context, bgSelector)
+        textSelectorColor = ContextCompat.getColorStateList(context, textSelector)
+        setOnChoseListener = callback
+        mAdapter?.setData(mData)
     }
-    fun setUsers(radioGroupData: ArrayList<RadioGroupData>) {
-        this.mList = radioGroupData
-        mAdapter?.setData(mList)
-        setupView()
-    }
+
     private fun setSpanCount(spanCount: Int){
         if (spanCount < 2){
             throw IllegalArgumentException("spanCount minimum is 2, current: $spanCount")
@@ -145,9 +121,9 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
 
             fun setData(radioGroupData: RadioGroupData, selected: Boolean, function: (Int) -> Unit, position: Int) {
                 binding.multiLineRadioGroupDefaultRadioButton.text = radioGroupData.name
-             /*   binding.multiLineRadioGroupDefaultRadioButton.background = radioButtonDrawable
-                binding.multiLineRadioGroupDefaultRadioButton.buttonDrawable = radioButtonDrawable
-                binding.multiLineRadioGroupDefaultRadioButton.setTextColor(textSelectorColor)*/
+               // binding.multiLineRadioGroupDefaultRadioButton.background = radioButtonDrawable
+               // binding.multiLineRadioGroupDefaultRadioButton.buttonDrawable = radioButtonDrawable
+                binding.multiLineRadioGroupDefaultRadioButton.setTextColor(textSelectorColor)
                 binding.multiLineRadioGroupDefaultRadioButton.isChecked = selected
                 binding.multiLineRadioGroupDefaultRadioButton.setOnClickListener {
                     onChoseListener!!.multiLineCallBack(
@@ -209,18 +185,14 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         }
     }
 
-    internal inner class MultiLineDiffUtil(
-        private val oldList: ArrayList<RadioGroupData>,
-        private val newList: ArrayList<RadioGroupData>
+    internal inner class MultiLineDiffUtil(private val oldList: ArrayList<RadioGroupData>, private val newList: ArrayList<RadioGroupData>
     ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
             return oldList.size
         }
-
         override fun getNewListSize(): Int {
             return newList.size
         }
-
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return oldList[oldItemPosition] == newList[newItemPosition]
         }
@@ -229,16 +201,6 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
             return oldList == newList
         }
     }
-
-/*    class OnChoseListener(private val callbackChoseListener: (position: Int, text: RadioGroupData) -> Unit) : RadioGroupCallback.CallbackChoseListener {
-        override fun onChose(position: Int, data: RadioGroupData) {
-            callbackChoseListener(position, data)
-        }
-    }*/
-
-   /*fun interface CallbackChoseListener {
-        fun onChose(position: Int, text: RadioGroupData)
-    }*/
 
     override fun canScrollVertically(direction: Int): Boolean {
         return false

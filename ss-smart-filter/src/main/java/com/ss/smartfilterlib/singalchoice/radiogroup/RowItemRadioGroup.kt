@@ -4,12 +4,16 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
+import com.ss.smartfilterlib.databinding.RowItemBinding
+import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
+import com.ss.smartfilterlib.singalchoice.data.RadioGroupData
 
 /**
  * created by Mala Ruparel ON 19/04/24
@@ -38,23 +42,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         typedArray.recycle()
     }
     private fun setupView() {
-        /*val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 
-        if (orientation == VERTICAL) {
-            val scrollView = ScrollView(context)
-            scrollView.layoutParams = layoutParams
-            radioGroup = RadioGroup(context)
-            radioGroup.orientation = RadioGroup.VERTICAL
-            scrollView.addView(radioGroup)
-            addView(scrollView)
-        } else {
-            val horizontalScrollView = HorizontalScrollView(context)
-            horizontalScrollView.layoutParams = layoutParams
-            radioGroup = RadioGroup(context)
-            radioGroup.orientation = RadioGroup.HORIZONTAL
-            horizontalScrollView.addView(radioGroup)
-            addView(horizontalScrollView)
-        }*/
 
         containerScrollView = ScrollView(context)
         containerHorizontalScrollView = HorizontalScrollView(context)
@@ -67,10 +55,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         populateItems()
 
     }
-    fun setUsers(radioGroupData: ArrayList<RadioGroupData>?) {
-        this.radioGroupData = radioGroupData
-        setupView()
-    }
+
     fun setData(
         radioGroupData: ArrayList<RadioGroupData>,
         orientation: Int,
@@ -92,17 +77,17 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     private fun populateItems() {
         radioGroupData?.let {
             for (radioGroupData in it) {
-                val rowItem = CustomRowItem(context)
-                rowItem.setText(radioGroupData.name)
-                rowItem.setTextSize(itemTextSize)
-                rowItem.setTextColor(itemTextColor)
-                rowItem.setImage(radioGroupData.image)
-                rowItem.background=radioButtonDrawable?.constantState?.newDrawable()?.mutate()
-               // rowItem.setTextColor(textSelectorColor)
-                rowItem.setOnClickListener {
+
+                val binding = RowItemBinding.inflate(LayoutInflater.from(context), this, false)
+
+                binding.tvName.text = radioGroupData.name
+                binding.tvDes.text = radioGroupData.description
+                // binding.img.drawable=radioGroupData.image
+                // rowItem.background=radioButtonDrawable?.constantState?.newDrawable()?.mutate()
+                binding.rtl.setOnClickListener {
                     listener?.onRowLineCallBackSelected(radioGroupData)
                 }
-                radioGroup.addView(rowItem)
+                radioGroup.addView(binding.root)
             }
 
         }

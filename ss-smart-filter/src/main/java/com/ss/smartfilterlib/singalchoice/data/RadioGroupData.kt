@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singalchoice.radiogroup
+package com.ss.smartfilterlib.singalchoice.data
 
 import com.ss.smartfilterlib.R
 

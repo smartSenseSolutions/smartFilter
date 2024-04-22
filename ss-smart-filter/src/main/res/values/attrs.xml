@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="orientation">
-    <attr name="orientation">
-        <enum name="vertical" value="0" />
-        <enum name="horizontal" value="1" />
-    </attr>
-    </declare-styleable>
+
 
     <declare-styleable name="SSRadioGroup">
-        <attr name="radioButtonText" format="string" />
-        <attr name="radioButtonFontFamily" format="reference" />
-        <attr name="radioButtonTextSize" format="dimension" />
-        <attr name="radioButtonOrientation" format="integer" />
-        <attr name="radioButtonBackground" format="reference" />
-        <attr name="radioButtonTextSelector" format="color" />
-        <attr name="radioButtonTextColor" format="color" />
-        <attr name="radioButtonTextSelectorColor" format="color" />
-        <attr name="radioButtonMarginStart" format="dimension" />
-        <attr name="radioButtonMarginTop" format="dimension" />
-        <attr name="radioButtonMarginEnd" format="dimension" />
-        <attr name="radioButtonMarginBottom" format="dimension" />
-        <attr name="radioButtonPaddingStart" format="dimension" />
-        <attr name="radioButtonPaddingTop" format="dimension" />
-        <attr name="radioButtonPaddingEnd" format="dimension" />
-        <attr name="radioButtonPaddingBottom" format="dimension" />
-        <attr name="radioGrouplistitem" format="string" />
+
+        <attr name="rg_FontFamily" format="reference" />
+        <attr name="rg_TextSize" format="dimension" />
+        <attr name="rg_Orientation" format="integer" />
+        <attr name="rg_Background" format="reference" />
+        <attr name="rg_TextColor" format="color" />
+        <attr name="rg_TextSelectorColor" format="color" />
+        <attr name="rg_PaddingStart" format="dimension" />
+        <attr name="rg_PaddingTop" format="dimension" />
+        <attr name="rg_PaddingEnd" format="dimension" />
+        <attr name="rg_PaddingBottom" format="dimension" />
+        <attr name="rg_listitem" format="string" />
 
     </declare-styleable>
 
