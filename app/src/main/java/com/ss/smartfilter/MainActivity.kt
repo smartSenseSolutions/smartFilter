@@ -30,12 +30,14 @@ class MainActivity : ComponentActivity(), RadioGroupCallback
             bgSelector = com.ss.smartfilterlib.R.drawable.singleline_selector,
             textSelector = com.ss.smartfilterlib.R.color.single_text_color_selector,
             )
-
+        //single line selection
+        /*bgSelector = com.ss.smartfilterlib.R.drawable.singleline_selector,
+        textSelector = com.ss.smartfilterlib.R.color.single_text_color_selector,*/
     }
 
 
 
-    fun showToast(message: String) {
+    private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 

@@ -29,17 +29,5 @@
         <item name="android:textColor">@color/single_text_color_selector</item>
         <item name="android:textSize">8sp</item>
     </style>
-    <style name="SS_RG_RB_Item_Style">
-        <item name="android:background">@drawable/row_item_selector</item>
-        <item name="android:paddingBottom">10dp</item>
-        <item name="android:clickable">true</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-    <!--<style name="JobRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:button">@drawable/radio_button_selector</item>
-        <item name="android:textSize">@dimen/_11ssp</item>
-        <item name="android:fontFamily">@font/osans_regular</item>
-    </style>-->
 
 </resources>

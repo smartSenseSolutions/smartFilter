@@ -1,8 +1,3 @@
 <resources>
     <string name="app_name">SmartFilter</string>
-
-    <string name="radio_group_verticle">Radio Group vertical</string>
-    <string name="radio_group_horizental">Radio Group horizontal</string>
-    <string name="radio_group_MultiLine">Radio Group MultiLine</string>
-    <string name="radio_group_Item">Radio Group Item</string>
 </resources>

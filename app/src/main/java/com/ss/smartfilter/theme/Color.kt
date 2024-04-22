@@ -1,4 +1,4 @@
-package com.ss.orderfilter.ui.theme
+package com.ss.smartfilter.theme
 
 import androidx.compose.ui.graphics.Color
 
