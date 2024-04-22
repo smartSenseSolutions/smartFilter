@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.databinding.MultiLineRadioButtonBinding
+import com.ss.smartfilterlib.databinding.MultiLineBinding
 import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
 import com.ss.smartfilterlib.singalchoice.data.RadioGroupData
 import kotlin.collections.ArrayList
@@ -63,13 +63,13 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         val typedArray = context.theme.obtainStyledAttributes(
             attrs, R.styleable.MultiLineRadioGroup, 0, 0)
         try {
-            setSpanCount(typedArray.getInt(R.styleable.MultiLineRadioGroup_spanCount, spanCount))
-            setSpacing(typedArray.getInt(R.styleable.MultiLineRadioGroup_spacing, spacing))
-            setIncludeEdge(typedArray.getBoolean(R.styleable.MultiLineRadioGroup_includeEdge, includeEdge))
-            textSelectorColor = typedArray.getColorStateList(R.styleable.MultiLineRadioGroup_textSelector)
-            radioButtonDrawable = typedArray.getDrawable(R.styleable.MultiLineRadioGroup_background)
+            setSpanCount(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_SpanCount, spanCount))
+            setSpacing(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_Spacing, spacing))
+            setIncludeEdge(typedArray.getBoolean(R.styleable.MultiLineRadioGroup_rg_ml_IncludeEdge, includeEdge))
+            textSelectorColor = typedArray.getColorStateList(R.styleable.MultiLineRadioGroup_rg_ml_TextSelector)
+            radioButtonDrawable = typedArray.getDrawable(R.styleable.MultiLineRadioGroup_rg_ml_Background)
 
-            val buttonText = typedArray.getTextArray(R.styleable.MultiLineRadioGroup_addList)
+            val buttonText = typedArray.getTextArray(R.styleable.MultiLineRadioGroup_rg_ml_Listitem)
             //setData(buttonText.asList() as MutableList<String>)
         } finally {
             typedArray.recycle()
@@ -116,7 +116,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         var currentSelected: Int? = null
         var onChoseListener: RadioGroupCallback? = null
 
-        internal inner class GridRadioHolder(itemView: MultiLineRadioButtonBinding) : ViewHolder(itemView.root) {
+        internal inner class GridRadioHolder(itemView: MultiLineBinding) : ViewHolder(itemView.root) {
             private val binding = itemView
 
             fun setData(radioGroupData: RadioGroupData, selected: Boolean, function: (Int) -> Unit, position: Int) {
@@ -135,7 +135,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = MultiLineRadioButtonBinding.inflate(LayoutInflater.from(context), parent, false)
+            val view = MultiLineBinding.inflate(LayoutInflater.from(context), parent, false)
             return GridRadioHolder(view)
         }
 

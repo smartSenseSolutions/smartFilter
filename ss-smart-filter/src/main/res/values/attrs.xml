@@ -2,48 +2,37 @@
 <resources>
 
 
-    <declare-styleable name="SSRadioGroup">
+    <declare-styleable name="SingleLineRadioGroup">
 
-        <attr name="rg_FontFamily" format="reference" />
-        <attr name="rg_TextSize" format="dimension" />
-        <attr name="rg_Orientation" format="integer" />
-        <attr name="rg_Background" format="reference" />
-        <attr name="rg_TextColor" format="color" />
-        <attr name="rg_TextSelectorColor" format="color" />
-        <attr name="rg_PaddingStart" format="dimension" />
-        <attr name="rg_PaddingTop" format="dimension" />
-        <attr name="rg_PaddingEnd" format="dimension" />
-        <attr name="rg_PaddingBottom" format="dimension" />
-        <attr name="rg_listitem" format="string" />
+        <attr name="rg_sl_FontFamily" format="reference" />
+        <attr name="rg_sl_TextSize" format="dimension" />
+        <attr name="rg_sl_Orientation" format="integer" />
+        <attr name="rg_sl_Background" format="reference" />
+        <attr name="rg_sl_TextColor" format="color" />
+        <attr name="rg_sl_TextSelectorColor" format="color" />
+        <attr name="rg_sl_PaddingStart" format="dimension" />
+        <attr name="rg_sl_PaddingTop" format="dimension" />
+        <attr name="rg_sl_PaddingEnd" format="dimension" />
+        <attr name="rg_sl_PaddingBottom" format="dimension" />
+        <attr name="rg_sl_Listitem" format="string" />
 
     </declare-styleable>
 
-    <declare-styleable name="SSRadioGroupRowItemButton">
-        <attr name="presetButtonValueText" format="string" />
-        <attr name="presetButtonUnitText" format="string" />
-        <attr name="presetButtonValueTextColor" format="color" />
-        <attr name="presetButtonPressedTextColor" format="color" />
-        <attr name="presetButtonUnitTextColor" format="color" />
-    </declare-styleable>
-
-    <declare-styleable name="SSRadioGroupRowItemRadioGroup">
-        <attr name="presetRadioCheckedId" format="reference" />
-    </declare-styleable>
 
     <declare-styleable name="MultiLineRadioGroup">
-        <attr name="spanCount" format="integer" />
-        <attr name="spacing" format="integer" />
-        <attr name="background" format="reference" />
-        <attr name="textSelector" format="color" />
-        <attr name="includeEdge" format="boolean" />
-        <attr name="addList" format="reference" />
+        <attr name="rg_ml_SpanCount" format="integer" />
+        <attr name="rg_ml_Spacing" format="integer" />
+        <attr name="rg_ml_Background" format="reference" />
+        <attr name="rg_ml_TextSelector" format="color" />
+        <attr name="rg_ml_IncludeEdge" format="boolean" />
+        <attr name="rg_ml_Listitem" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="RowItemRadioGroup">
-        <attr name="row_text_size" format="dimension" />
-        <attr name="row_background" format="reference" />
-        <attr name="row_textSelector" format="color" />
-        <attr name="row_text_color" format="color" />
-        <attr name="row_orientation" format="integer" />
+        <attr name="rg_ri_TextSize" format="dimension" />
+        <attr name="rg_ri_Background" format="reference" />
+        <attr name="rg_ri_TextSelector" format="color" />
+        <attr name="rg_ri_Textcolor" format="color" />
+        <attr name="rg_ri_Orientation" format="integer" />
     </declare-styleable>
 </resources>

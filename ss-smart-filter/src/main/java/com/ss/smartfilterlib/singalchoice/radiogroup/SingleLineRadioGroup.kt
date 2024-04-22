@@ -52,20 +52,20 @@ class SingleLineRadioGroup : LinearLayout {
     }
 
     private fun initAttrs(attrs: AttributeSet?) {
-        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SSRadioGroup, 0, 0)
+        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SingleLineRadioGroup, 0, 0)
         try {
-            orientation = typedArray.getInt(R.styleable.SSRadioGroup_rg_Orientation, Orientation.VERTICAL)
-            textSize = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_TextSize, 0)
-            textColor = typedArray.getColor(R.styleable.SSRadioGroup_rg_TextColor, Color.BLACK)
-            textSelectorColor = typedArray.getColorStateList(R.styleable.SSRadioGroup_rg_TextSelectorColor)
-            radioButtonDrawable =typedArray.getDrawable(R.styleable.SSRadioGroup_rg_Background)
+            orientation = typedArray.getInt(R.styleable.SingleLineRadioGroup_rg_sl_Orientation, Orientation.VERTICAL)
+            textSize = typedArray.getDimensionPixelSize(R.styleable.SingleLineRadioGroup_rg_sl_TextSize, 0)
+            textColor = typedArray.getColor(R.styleable.SingleLineRadioGroup_rg_sl_TextColor, Color.BLACK)
+            textSelectorColor = typedArray.getColorStateList(R.styleable.SingleLineRadioGroup_rg_sl_TextSelectorColor)
+            radioButtonDrawable =typedArray.getDrawable(R.styleable.SingleLineRadioGroup_rg_sl_Background)
 
-            paddingStart = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_PaddingStart,0)
-            paddingTop = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_PaddingTop, 0)
-            paddingEnd = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_PaddingEnd, 0)
-            paddingBottom = typedArray.getDimensionPixelSize(R.styleable.SSRadioGroup_rg_PaddingBottom,0)
+            paddingStart = typedArray.getDimensionPixelSize(R.styleable.SingleLineRadioGroup_rg_sl_PaddingStart,0)
+            paddingTop = typedArray.getDimensionPixelSize(R.styleable.SingleLineRadioGroup_rg_sl_PaddingTop, 0)
+            paddingEnd = typedArray.getDimensionPixelSize(R.styleable.SingleLineRadioGroup_rg_sl_PaddingEnd, 0)
+            paddingBottom = typedArray.getDimensionPixelSize(R.styleable.SingleLineRadioGroup_rg_sl_PaddingBottom,0)
 
-            dataFromXml = typedArray.getResourceId(R.styleable.SSRadioGroup_rg_listitem, 0)
+            dataFromXml = typedArray.getResourceId(R.styleable.SingleLineRadioGroup_rg_sl_Listitem, 0)
         } finally {
             typedArray.recycle()
         }
