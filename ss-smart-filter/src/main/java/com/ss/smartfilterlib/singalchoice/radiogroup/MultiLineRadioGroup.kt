@@ -3,11 +3,9 @@ package com.ss.smartfilterlib.singalchoice.radiogroup
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -19,14 +17,15 @@ import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.MultiLineBinding
 import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
 import com.ss.smartfilterlib.singalchoice.data.RadioGroupData
-import kotlin.collections.ArrayList
+import com.ss.smartfilterlib.singalchoice.util.GridSpacingItemDecoration
+import com.ss.smartfilterlib.singalchoice.util.SingleChangeDiffUtil
 
 class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
 
     private var mList: ArrayList<RadioGroupData> = ArrayList()
     private var mAdapter: MultiLineRadioButtonAdapter? = null
-    private var spanCount: Int = 3
-    private var spacing: Int = 4
+    private var spanCount: Int = resources.getInteger(R.integer.int_03)
+    private var spacing: Int = resources.getInteger(R.integer.int_04)
     private var includeEdge: Boolean = false
     private var setOnChoseListener: RadioGroupCallback? = null
     private var textSelectorColor: ColorStateList? = null
@@ -35,7 +34,6 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         initAttrs(attrs)
         setupView()
     }
-
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setupView() {
@@ -50,10 +48,13 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
                 setOnChoseListener?.multiLineCallBack(position, data)
             }
 
-            override fun onRowLineCallBackSelected(radioGroupData: RadioGroupData) {}
+            override fun onRowLineCallBackSelected(radioGroupData: RadioGroupData) { // Noncompliant - method is empty
+                 }
 
 
-            override fun singleLineCallBack(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId: Int) {}
+            override fun singleLineCallBack(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId: Int) {
+                // Noncompliant - method is empty
+            }
 
 
         }
@@ -66,11 +67,11 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
             setSpanCount(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_SpanCount, spanCount))
             setSpacing(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_Spacing, spacing))
             setIncludeEdge(typedArray.getBoolean(R.styleable.MultiLineRadioGroup_rg_ml_IncludeEdge, includeEdge))
+
             textSelectorColor = typedArray.getColorStateList(R.styleable.MultiLineRadioGroup_rg_ml_TextSelector)
             radioButtonDrawable = typedArray.getDrawable(R.styleable.MultiLineRadioGroup_rg_ml_Background)
 
-            val buttonText = typedArray.getTextArray(R.styleable.MultiLineRadioGroup_rg_ml_Listitem)
-            //setData(buttonText.asList() as MutableList<String>)
+
         } finally {
             typedArray.recycle()
         }
@@ -111,8 +112,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         }
     }
 
-    internal inner class MultiLineRadioButtonAdapter(private val context: Context) :
-        Adapter<ViewHolder>() {
+    internal inner class MultiLineRadioButtonAdapter(private val context: Context) : Adapter<ViewHolder>() {
         var currentSelected: Int? = null
         var onChoseListener: RadioGroupCallback? = null
 
@@ -147,9 +147,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
                     notifyDataSetChanged()
                 }
             }
-            (holder as GridRadioHolder).setData(
-                mList[position], position == currentSelected, function, position
-            )
+            (holder as GridRadioHolder).setData(mList[position], position == currentSelected, function, position)
         }
 
         override fun getItemCount(): Int {
@@ -157,50 +155,14 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         }
 
         fun setData(newList: ArrayList<RadioGroupData>){
-            val diffUtil = MultiLineDiffUtil(mList, newList)
+            val diffUtil = SingleChangeDiffUtil(mList, newList)
             val diffResult = DiffUtil.calculateDiff(diffUtil)
             mList = newList
             diffResult.dispatchUpdatesTo(this)
         }
     }
 
-    inner class GridSpacingItemDecoration(private val spanCount: Int,private val spacing: Int,private val includeEdge: Boolean) : ItemDecoration() {
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
-            val position = parent.getChildAdapterPosition(view)
-            val column = position % spanCount
-            if (includeEdge){
-                outRect.left = spacing - column * spacing / spanCount
-                outRect.right = (column + 1) * spacing / spanCount
-                if (position < spanCount){
-                    outRect.top = spacing
-                }
-                outRect.bottom = spacing
-            } else {
-                outRect.left = column * spacing / spanCount
-                outRect.right = spacing - (column + 1) * spacing / spanCount
-                if (position >= spanCount){
-                    outRect.top = spacing
-                }
-            }
-        }
-    }
 
-    internal inner class MultiLineDiffUtil(private val oldList: ArrayList<RadioGroupData>, private val newList: ArrayList<RadioGroupData>
-    ) : DiffUtil.Callback() {
-        override fun getOldListSize(): Int {
-            return oldList.size
-        }
-        override fun getNewListSize(): Int {
-            return newList.size
-        }
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition] == newList[newItemPosition]
-        }
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList == newList
-        }
-    }
 
     override fun canScrollVertically(direction: Int): Boolean {
         return false

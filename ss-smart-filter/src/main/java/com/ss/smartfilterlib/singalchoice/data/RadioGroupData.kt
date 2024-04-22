@@ -7,8 +7,8 @@ import com.ss.smartfilterlib.R
  */
 class RadioGroupData(
     val id: Int = 0,
-    val name: String = "Smart Filter",
-    val description: String = "Smart Filter Description",
+    val name: String ,
+    val description: String,
     val image: Int = R.drawable.ic_documents
 
 )
@@ -23,32 +23,26 @@ fun getImages(data: List<RadioGroupData>): IntArray {
 
 fun mRadioGroupData(): ArrayList<RadioGroupData> {
     return arrayListOf(
-        RadioGroupData(1, "KitKat", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(2, "Lollipop", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(3, "Marshmallow", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(4, "Nougat", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(5, "Oreo", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(6, "Pie", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(7, "Quince Tart", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(8, "Red Velvet Cake", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(9, "Snow Cone", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(1, "KitKat", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(2, "Lollipop", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(3, "Marshmallow", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(4, "Nougat", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(5, "Oreo", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(6, "Pie", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(7, "Quince Tart", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(8, "Red Velvet Cake", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(9, "Snow Cone", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(1, "KitKat", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(2, "Lollipop", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(3, "Marshmallow", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(4, "Nougat", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(5, "Oreo", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(6, "Pie", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(7, "Quince Tart", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(8, "Red Velvet Cake", "Smart Filter Description", R.drawable.ic_documents),
-        RadioGroupData(9, "Snow Cone", "Smart Filter Description", R.drawable.ic_documents),
+        RadioGroupData(id=1, name="KitKat", description ="Smart Filter Description 1"  , image =  R.drawable.ic_documents),
+        RadioGroupData(id=2,  name="Lollipop", description ="Smart Filter Description 2",image =  R.drawable.ic_documents),
+        RadioGroupData(id=3,  name="Marshmallow", description ="Smart Filter Description 3", image = R.drawable.ic_documents),
+        RadioGroupData(id=4,  name="Nougat", description ="Smart Filter Description 4", image = R.drawable.ic_documents),
+        RadioGroupData(id=5,  name="Oreo", description ="Smart Filter Description 5",image =  R.drawable.ic_documents),
+        RadioGroupData(id=6,  name="Pie", description ="Smart Filter Description 6", image = R.drawable.ic_documents),
+        RadioGroupData(id=7,  name="Quince Tart", description ="Smart Filter Description 7",image =  R.drawable.ic_documents),
+        RadioGroupData(id=8,  name="Red Velvet Cake", description ="Smart Filter  8", image = R.drawable.ic_documents),
+        RadioGroupData(id=9,  name="Snow Cone ", description ="Smart Filter Description 9",image =  R.drawable.ic_documents),
+        RadioGroupData(id=10,  name="KitKat ", description ="Smart Filter Description 10",image =  R.drawable.ic_documents),
+        RadioGroupData(id=11,  name="Lollipop", description ="Smart Filter Description 11", image = R.drawable.ic_documents),
+        RadioGroupData(id=12,  name="Marshmallow", description ="Smart Filter Description 12", image = R.drawable.ic_documents),
+        RadioGroupData(id=13,  name="Nougat", description ="Smart Filter Description 13", image = R.drawable.ic_documents),
+        RadioGroupData(id=14,  name="Oreo", description ="Smart Filter Description 14", image = R.drawable.ic_documents),
+        RadioGroupData(id=15,  name="Pie", description ="Smart Filter Description 15",image =  R.drawable.ic_documents),
+        RadioGroupData(id=16,  name="Quince Tart", description ="Smart Filter Description16", image = R.drawable.ic_documents),
+        RadioGroupData(id=17,  name="Red Velvet Cake", description ="Smart Filter Description 17", image = R.drawable.ic_documents),
+        RadioGroupData(id=18,  name="Snow Cone", description ="Smart Filter Description 17",image =  R.drawable.ic_documents),
+        RadioGroupData(id=19,  name="KitKat", description ="Smart Filter Description 18",image =  R.drawable.ic_documents),
+        RadioGroupData(id=20,  name="Lollipop", description ="Smart Filter Description 19", image = R.drawable.ic_documents),
+
     )
 }

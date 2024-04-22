@@ -39,9 +39,9 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_TextSelector)
         radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_Background)
         orientation = typedArray.getInt(R.styleable.RowItemRadioGroup_rg_ri_Orientation, HORIZONTAL)
-            } finally {
-             typedArray.recycle()
-         }
+        } finally {
+            typedArray.recycle()
+        }
     }
     private fun setupView() {
 
