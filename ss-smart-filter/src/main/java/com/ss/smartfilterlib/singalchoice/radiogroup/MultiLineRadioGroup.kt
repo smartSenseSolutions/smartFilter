@@ -1,5 +1,6 @@
 package com.ss.smartfilterlib.singalchoice.radiogroup
 
+import RadioGroupCallback
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
@@ -15,7 +16,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.MultiLineBinding
-import com.ss.smartfilterlib.singalchoice.radiogroup.callback.RadioGroupCallback
 import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 import com.ss.smartfilterlib.singalchoice.util.GridSpacingItemDecoration
 import com.ss.smartfilterlib.singalchoice.util.SingleChangeDiffUtil
@@ -57,17 +57,17 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
 
         adapter = MultiLineRadioButtonAdapter(context).also { this.mAdapter = it }
         mAdapter?.onChoseListener = object : RadioGroupCallback {
-            override fun multiLineCallBack(position: Int, data: RadioGroupData) {
+            override fun onMultiLineSelected(position: Int, radioGroupData: RadioGroupData) {
                 mAdapter?.currentSelected = position
                 mAdapter?.notifyDataSetChanged()
-                setOnChoseListener?.multiLineCallBack(position, data)
+                setOnChoseListener?.onMultiLineSelected(position, radioGroupData)
             }
 
-            override fun onRowLineCallBackSelected(radioGroupData: RadioGroupData) { // Noncompliant - method is empty
+            override fun onRowItemSelected(radioGroupData: RadioGroupData) { // Noncompliant - method is empty
             }
 
 
-            override fun singleLineCallBack(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId: Int) { // Noncompliant - method is empty
+            override fun onSingleLineSelected(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId: Int) { // Noncompliant - method is empty
             }
 
         }
@@ -82,10 +82,8 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         mAdapter?.setData(mData)
     }
 
-    private fun setSpanCount(spanCount: Int){
-        if (spanCount < 2){
-            throw IllegalArgumentException("spanCount minimum is 2, current: $spanCount")
-        }
+    private fun setSpanCount(spanCount: Int) {
+        require(spanCount >= 2) { "spanCount minimum is 2, current: $spanCount" }
         this.spanCount = spanCount
         setupView()
     }
@@ -118,16 +116,16 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
             private val binding = itemView
 
             fun setData(radioGroupData: RadioGroupData, selected: Boolean, function: (Int) -> Unit, position: Int) {
-                binding.multiLineRadioGroupDefaultRadioButton.text = radioGroupData.name
-                binding.multiLineRadioGroupDefaultRadioButton.background = radioButtonDrawable?.constantState?.newDrawable()?.mutate()
-                binding.multiLineRadioGroupDefaultRadioButton.buttonDrawable = radioButtonDrawable?.constantState?.newDrawable()?.mutate()
-                binding.multiLineRadioGroupDefaultRadioButton.setTextColor(textSelectorColor)
-                binding.multiLineRadioGroupDefaultRadioButton.isChecked = selected
-                binding.multiLineRadioGroupDefaultRadioButton.setOnClickListener {
-                    onChoseListener!!.multiLineCallBack(
-                        position, radioGroupData
-                    )
-                    function(position)
+                binding.multiLineRadioGroupDefaultRadioButton.apply {
+                    text = radioGroupData.name
+                    background = radioButtonDrawable?.constantState?.newDrawable()?.mutate()
+                    buttonDrawable = radioButtonDrawable?.constantState?.newDrawable()?.mutate()
+                    setTextColor(textSelectorColor)
+                    isChecked = selected
+                    setOnClickListener {
+                        onChoseListener!!.onMultiLineSelected(position, radioGroupData)
+                        function(position)
+                    }
                 }
             }
         }

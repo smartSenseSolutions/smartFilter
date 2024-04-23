@@ -1,68 +1,40 @@
 package com.ss.smartfilter
 
+import RadioGroupCallback
 import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.ss.smartfilter.databinding.ActivityMainBinding
 import com.ss.smartfilterlib.SmartFilter
-import com.ss.smartfilterlib.singalchoice.util.Orientation
-import com.ss.smartfilterlib.singalchoice.radiogroup.callback.RadioGroupCallback
+
 import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.mRadioGroupData
-import com.ss.smartfilterlib.singalchoice.util.ChipType
-import com.ss.smartfilterlib.singalchoice.util.SingleGroupSubType
-import com.ss.smartfilterlib.singalchoice.util.SingleGroupType
 
-
-class MainActivity : ComponentActivity(), RadioGroupCallback
-     {
+class MainActivity : ComponentActivity(), RadioGroupCallback {
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SmartFilter.addSingleSelection(
-            rootView = binding.root,
-            singleGroupType = SingleGroupType.CHIPGROUP,
-            singleGroupSubType= SingleGroupSubType.SINGLE_LINE,
-            chipGroupSubType = ChipType.FILTER_CHIP,
-            orientation = Orientation.HORIZONTAL,
-            mData = mRadioGroupData(),
-            callbacks = this,
-            bgSelector = com.ss.smartfilterlib.R.drawable.singleline_selector,
-            textSelector = com.ss.smartfilterlib.R.color.single_text_color_selector,
-            )
-       /* bgSelector = com.ss.smartfilterlib.R.drawable.singleline_selector,
-        textSelector = com.ss.smartfilterlib.R.color.single_text_color_selector,*/
-
-        /*bgSelector = com.ss.smartfilterlib.R.drawable.multiline_selector,
-        textSelector = com.ss.smartfilterlib.R.color.multiline_text_selector,*/
+        SmartFilter.addSingleSelection(addRadioGroupSingleLineVertical(binding.root, this))
     }
 
-
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    override fun onRowItemSelected(radioGroupData: RadioGroupData) {
+        showToast(radioGroupData.name, this)
     }
 
-    override fun onRowLineCallBackSelected(radioGroupData: RadioGroupData) {
-        showToast(radioGroupData.name)
+    override fun onMultiLineSelected(position: Int, radioGroupData: RadioGroupData) {
+        showToast(radioGroupData.name, this)
     }
 
-    override fun multiLineCallBack(position: Int, text: RadioGroupData) {
-        showToast(text.name)
+    override fun onSingleLineSelected(
+        radioGroupData: RadioGroupData,
+        radioGroup: RadioGroup,
+        radioButton: RadioButton,
+        checkId: Int
+    ) {
+        showToast(radioGroupData.name, this)
     }
-
-    override fun singleLineCallBack(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId: Int) {
-        showToast(radioGroupData.name)
-    }
-
-
 }
-
-
-
-
