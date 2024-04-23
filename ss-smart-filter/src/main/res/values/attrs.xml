@@ -4,7 +4,7 @@
 
     <declare-styleable name="SingleLineRadioGroup">
 
-        <attr name="rg_sl_FontFamily" format="reference" />
+
         <attr name="rg_sl_TextSize" format="dimension" />
         <attr name="rg_sl_Orientation" format="integer" />
         <attr name="rg_sl_Background" format="reference" />
@@ -24,6 +24,7 @@
         <attr name="rg_ml_Spacing" format="integer" />
         <attr name="rg_ml_Background" format="reference" />
         <attr name="rg_ml_TextSelector" format="color" />
+        <attr name="rg_ml_Textcolor" format="color" />
         <attr name="rg_ml_IncludeEdge" format="boolean" />
         <attr name="rg_ml_Listitem" format="reference" />
     </declare-styleable>
@@ -34,5 +35,15 @@
         <attr name="rg_ri_TextSelector" format="color" />
         <attr name="rg_ri_Textcolor" format="color" />
         <attr name="rg_ri_Orientation" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ChipGroup">
+        <attr name="cg_sl_close_icon_color" format="reference" />
+        <attr name="cg_sl_close_icon_drawable" format="reference" />
+        <attr name="cg_sl_TextSize" format="dimension" />
+        <attr name="cg_sl_Background" format="reference" />
+        <attr name="cg_sl_TextSelector" format="color" />
+        <attr name="cg_sl_Textcolor" format="color" />
+        <attr name="cg_sl_Orientation" format="integer" />
     </declare-styleable>
 </resources>
