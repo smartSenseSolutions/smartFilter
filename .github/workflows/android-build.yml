@@ -1,10 +1,9 @@
-name: Android stage build
+name: Android build
 
 on:
   pull_request:
     branches:
       - "development"
-      - "main"
 
 
 jobs:
