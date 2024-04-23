@@ -29,4 +29,6 @@ These instructions will get you a copy of the project up and running on your loc
 To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:
 
 ```kotlin
+
 implementation 'com.ss:smartfilterlib:1.0.0'
+
