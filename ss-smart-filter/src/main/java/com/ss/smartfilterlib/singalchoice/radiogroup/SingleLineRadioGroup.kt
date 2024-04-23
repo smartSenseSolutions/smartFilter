@@ -22,7 +22,7 @@ import com.ss.smartfilterlib.singalchoice.util.Orientation
 /**
  * created by Mala Ruparel ON 17/04/24
  */
-class SingleLineRadioGroup : LinearLayout {
+class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
 
 
     private var textSelectorColor: ColorStateList? = null
@@ -39,12 +39,9 @@ class SingleLineRadioGroup : LinearLayout {
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
 
-    constructor(context: Context) : super(context) {
-        setupView()
-    }
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+    init {
         initAttrs(attrs)
+        setupView()
     }
 
     private fun initAttrs(attrs: AttributeSet?) {

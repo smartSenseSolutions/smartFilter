@@ -23,17 +23,14 @@ class MainActivity : ComponentActivity(), RadioGroupCallback
 
         SmartFilter.addSingleSelection(
             rootView = binding.root,
-            selectionType = SingleSelectionType.MULTILINE,
+            selectionType = SingleSelectionType.ROWITEM,
             orientation = Orientation.VERTICAL,
             mData = mRadioGroupData(),
             callbacks = this,
             bgSelector = com.ss.smartfilterlib.R.drawable.singleline_selector,
             textSelector = com.ss.smartfilterlib.R.color.single_text_color_selector,
-
             )
-        //single line selection
-        /*bgSelector = com.ss.smartfilterlib.R.drawable.singleline_selector,
-        textSelector = com.ss.smartfilterlib.R.color.single_text_color_selector,*/
+
     }
 
 
