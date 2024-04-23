@@ -7,7 +7,7 @@
         android:left="16dp"
         android:right="16dp"
         android:top="0dp" />
-    <solid android:color="?attr/colorPrimary" />
+    <solid android:color="@color/purple_200" />
     <corners android:radius="160dp" />
 
 </shape>

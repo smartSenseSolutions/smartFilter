@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/llMain"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,7 +10,7 @@
         style="@style/SS_RG_RB_Title_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/radio_group_verticle" />
+        android:text="radio_group_verticle" />
 
 
     <com.ss.smartfilterlib.singalchoice.radiogroup.SingleLineRadioGroup
@@ -18,35 +18,37 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:padding="10dp"
-        app:radioButtonBackground="@drawable/ss_rg_rb_radio_button_bg_selector"
-        app:radioButtonOrientation="1"
-        app:radioButtonTextSelectorColor="@color/ss_rg_rb_text_color_selector"
-        app:radioButtonTextSize="8sp"
-        app:radioButtonMarginBottom="4dp"
-       />
-    &lt;!&ndash;app:radioGrouplistitem="@array/ss_array"&ndash;&gt;
+        app:rg_sl_Orientation="1"
+        app:rg_sl_TextColor="@color/single_text_color_selector"
+        app:rg_sl_Background="@drawable/singleline_selector"
+        app:rg_sl_TextSize="8sp"
+        app:rg_sl_PaddingEnd="10dp"
+        app:rg_sl_Listitem="@array/ss_array"
+        />
+
    <androidx.appcompat.widget.AppCompatTextView
         style="@style/SS_RG_RB_Title_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/radio_group_horizental" />
+        android:text="radio_group_horizental" />
 
     <com.ss.smartfilterlib.singalchoice.radiogroup.SingleLineRadioGroup
         android:id="@+id/RgHorizental"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        app:radioButtonOrientation="0"
-        app:radioButtonTextSelectorColor="@color/ss_rg_rb_text_color_selector"
-        app:radioButtonTextSize="8sp"
-        app:radioButtonPaddingEnd="10dp"
-        app:radioGrouplistitem="@array/ss_array" />
+        app:rg_sl_Orientation="0"
+        app:rg_sl_TextColor="@color/single_text_color_selector"
+        app:rg_sl_Background="@drawable/singleline_selector"
+        app:rg_sl_TextSize="8sp"
+        app:rg_sl_PaddingEnd="10dp"
+        app:rg_sl_Listitem="@array/ss_array" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/SS_RG_RB_Title_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/radio_group_MultiLine" />
+        android:text="radio_group_MultiLine" />
 
     <com.ss.smartfilterlib.singalchoice.radiogroup.MultiLineRadioGroup
         android:id="@+id/RGMultiline"
@@ -56,27 +58,28 @@
         android:layout_marginTop="16dp"
         android:overScrollMode="never"
         android:scrollbars="none"
-        app:spanCount="3"
-        app:addList="@array/ss_array" />
+        app:rg_ml_SpanCount="3"
+        app:rg_ml_Listitem="@array/ss_array" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/SS_RG_RB_Title_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/radio_group_Item" />
+        android:text="radio_group_Item" />
 
     <com.ss.smartfilterlib.singalchoice.radiogroup.RowItemRadioGroup
         android:id="@+id/RGGRowItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:row_text_size="10sp"
-        app:row_text_color="@color/black"
-        app:row_orientation="1" />
-  &lt;!&ndash;  <include
+        app:rg_ri_TextSize="10sp"
+        app:rg_ri_Textcolor="@color/black"
+        app:rg_ri_Orientation="1" />
+  &lt;!&ndash;&lt;!&ndash;  <include
         android:id="@+id/incSingleSelRadioGroup"
-        layout="@layout/include_single_sel_radio_group" />&ndash;&gt;
+        layout="@layout/include_single_sel_radio_group" />&ndash;&gt;&ndash;&gt;
 
 </LinearLayout>-->
+
 
 
 <LinearLayout
@@ -87,6 +90,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Root view where the custom view will be added programmatically -->
+
 
 </LinearLayout>
+

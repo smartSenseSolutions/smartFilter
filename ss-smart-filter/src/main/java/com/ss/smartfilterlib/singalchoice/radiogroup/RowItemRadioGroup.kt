@@ -32,13 +32,17 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
     init {
+        initAttrs(attrs)
+        setupView()
+    }
+    private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.RowItemRadioGroup)
         try {
-        itemTextSize = typedArray.getDimension(R.styleable.RowItemRadioGroup_rg_ri_TextSize, resources.getDimension(R.dimen._12))
-        itemTextColor = typedArray.getColor(R.styleable.RowItemRadioGroup_rg_ri_Textcolor, ContextCompat.getColor(context, R.color.black))
-        textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_TextSelector)
-        radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_Background)
-        orientation = typedArray.getInt(R.styleable.RowItemRadioGroup_rg_ri_Orientation, HORIZONTAL)
+            itemTextSize = typedArray.getDimension(R.styleable.RowItemRadioGroup_rg_ri_TextSize, resources.getDimension(R.dimen._12))
+            itemTextColor = typedArray.getColor(R.styleable.RowItemRadioGroup_rg_ri_Textcolor, ContextCompat.getColor(context, R.color.black))
+            textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_TextSelector)
+            radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_Background)
+            orientation = typedArray.getInt(R.styleable.RowItemRadioGroup_rg_ri_Orientation, HORIZONTAL)
         } finally {
             typedArray.recycle()
         }
@@ -53,7 +57,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         containerHorizontalScrollView.layoutParams = layoutParams
 
         radioGroup = RadioGroup(context)
-        populateItems()
+
 
     }
 
@@ -64,11 +68,12 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         this.radioButtonDrawable = ContextCompat.getDrawable(context, bgSelector)
         this.textSelectorColor = ContextCompat.getColorStateList(context, textSelector)
         this.listener = callback
-        setupView()
+
         setupRadioGroup()
+        addDynamicRadioButton()
 
     }
-    private fun populateItems() {
+    private fun addDynamicRadioButton() {
         radioGroupData?.let {
             for (radioGroupData in it) {
 

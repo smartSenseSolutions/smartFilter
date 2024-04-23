@@ -4,11 +4,11 @@
     <item
         android:drawable="@drawable/multiline_selected"
         android:state_checked="true"
-        android:state_pressed="true"/>
+       />
 
     <item
-        android:drawable="@drawable/multiline_selected"
-        android:state_checked="true"/>
+        android:drawable="@drawable/multiline_default"
+        android:state_checked="false"/>
 
     <item
         android:drawable="@drawable/multiline_default"/>

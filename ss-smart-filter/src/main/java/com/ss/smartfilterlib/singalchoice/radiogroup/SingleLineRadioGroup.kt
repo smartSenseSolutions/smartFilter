@@ -64,10 +64,11 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
             )
 
             dataFromXml = typedArray.getResourceId(R.styleable.SingleLineRadioGroup_rg_sl_Listitem, 0)
+            // var mData = resources.getStringArray(dataFromXml);
         } finally {
             typedArray.recycle()
         }
-        setupView()
+
     }
 
     private fun setupView() {
