@@ -5,19 +5,27 @@ package com.ss.smartfilterlib.singalchoice.util
  */
 
 
-enum class SelectionMode {
-    SINGLE,
-    MULTI,
-    RANGE
+
+
+
+enum class SingleGroupSubType {
+    SINGLE_LINE,
+    MULTI_LINE,
+    ROW_ITEM
 }
 
-enum class SingleSelectionType {
-    SINGLELINE,
-    MULTILINE,
-    ROWITEM
+enum class SingleGroupType {
+    RADIO_GROUP,
+    CHIPGROUP,
 }
 
 object Orientation {
     const val VERTICAL = 1
     const val HORIZONTAL = 0
+}
+enum class ChipType {
+    ASSIST_CHIP,
+    FILTER_CHIP,
+    INPUT_CHIP,
+    SUGGESTION_CHIP
 }

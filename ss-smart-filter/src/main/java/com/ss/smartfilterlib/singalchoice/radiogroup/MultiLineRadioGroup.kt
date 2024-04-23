@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.MultiLineBinding
-import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
-import com.ss.smartfilterlib.singalchoice.data.RadioGroupData
+import com.ss.smartfilterlib.singalchoice.radiogroup.callback.RadioGroupCallback
+import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 import com.ss.smartfilterlib.singalchoice.util.GridSpacingItemDecoration
 import com.ss.smartfilterlib.singalchoice.util.SingleChangeDiffUtil
 

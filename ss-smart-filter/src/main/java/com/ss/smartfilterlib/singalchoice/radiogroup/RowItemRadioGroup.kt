@@ -2,6 +2,7 @@ package com.ss.smartfilterlib.singalchoice.radiogroup
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -12,13 +13,18 @@ import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.RowItemBinding
-import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
-import com.ss.smartfilterlib.singalchoice.data.RadioGroupData
+import com.ss.smartfilterlib.singalchoice.PaddingAttributes
+import com.ss.smartfilterlib.singalchoice.TextAttributes
+import com.ss.smartfilterlib.singalchoice.radiogroup.callback.RadioGroupCallback
+import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 
 /**
  * created by Mala Ruparel ON 19/04/24
  */
 class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLayout(context, attrs) {
+
+    private var textAttributes: TextAttributes? = null
+    private var paddingAttributes: PaddingAttributes? = null
 
     private var itemTextSize: Float = 0f
     private var itemTextColor: Int = 0
@@ -31,6 +37,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
 
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
+
     init {
         initAttrs(attrs)
         setupView()
@@ -38,8 +45,11 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.RowItemRadioGroup)
         try {
-            itemTextSize = typedArray.getDimension(R.styleable.RowItemRadioGroup_rg_ri_TextSize, resources.getDimension(R.dimen._12))
-            itemTextColor = typedArray.getColor(R.styleable.RowItemRadioGroup_rg_ri_Textcolor, ContextCompat.getColor(context, R.color.black))
+            textAttributes = TextAttributes(
+                textSize = typedArray.getFloat(R.styleable.RowItemRadioGroup_rg_ri_TextSize,12f),
+                textColor = typedArray.getColor(R.styleable.RowItemRadioGroup_rg_ri_Textcolor, Color.BLACK),
+            )
+
             textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_TextSelector)
             radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_Background)
             orientation = typedArray.getInt(R.styleable.RowItemRadioGroup_rg_ri_Orientation, HORIZONTAL)
@@ -47,6 +57,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
             typedArray.recycle()
         }
     }
+
     private fun setupView() {
 
         containerScrollView = ScrollView(context)
@@ -61,7 +72,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
 
     }
 
-    fun setData(radioGroupData: ArrayList<RadioGroupData>,orientation: Int, bgSelector: Int, textSelector: Int, callback: RadioGroupCallback)
+    fun setData(radioGroupData: ArrayList<RadioGroupData>, orientation: Int, bgSelector: Int, textSelector: Int, callback: RadioGroupCallback)
     {
         this.orientation = orientation
         this.radioGroupData = radioGroupData

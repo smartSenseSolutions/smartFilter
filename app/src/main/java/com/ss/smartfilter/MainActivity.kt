@@ -8,10 +8,13 @@ import androidx.activity.ComponentActivity
 import com.ss.smartfilter.databinding.ActivityMainBinding
 import com.ss.smartfilterlib.SmartFilter
 import com.ss.smartfilterlib.singalchoice.util.Orientation
-import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
-import com.ss.smartfilterlib.singalchoice.data.RadioGroupData
-import com.ss.smartfilterlib.singalchoice.util.SingleSelectionType
-import com.ss.smartfilterlib.singalchoice.data.mRadioGroupData
+import com.ss.smartfilterlib.singalchoice.radiogroup.callback.RadioGroupCallback
+import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.singalchoice.radiogroup.data.mRadioGroupData
+import com.ss.smartfilterlib.singalchoice.util.ChipType
+import com.ss.smartfilterlib.singalchoice.util.SingleGroupSubType
+import com.ss.smartfilterlib.singalchoice.util.SingleGroupType
+
 
 class MainActivity : ComponentActivity(), RadioGroupCallback
      {
@@ -23,15 +26,20 @@ class MainActivity : ComponentActivity(), RadioGroupCallback
 
         SmartFilter.addSingleSelection(
             rootView = binding.root,
-            selectionType = SingleSelectionType.MULTILINE,
+            singleGroupType = SingleGroupType.CHIPGROUP,
+            singleGroupSubType= SingleGroupSubType.SINGLE_LINE,
+            chipGroupSubType = ChipType.FILTER_CHIP,
             orientation = Orientation.HORIZONTAL,
             mData = mRadioGroupData(),
             callbacks = this,
-            bgSelector = com.ss.smartfilterlib.R.drawable.multiline_selector,
-            textSelector = com.ss.smartfilterlib.R.color.multiline_text_selector,
+            bgSelector = com.ss.smartfilterlib.R.drawable.singleline_selector,
+            textSelector = com.ss.smartfilterlib.R.color.single_text_color_selector,
             )
        /* bgSelector = com.ss.smartfilterlib.R.drawable.singleline_selector,
         textSelector = com.ss.smartfilterlib.R.color.single_text_color_selector,*/
+
+        /*bgSelector = com.ss.smartfilterlib.R.drawable.multiline_selector,
+        textSelector = com.ss.smartfilterlib.R.color.multiline_text_selector,*/
     }
 
 

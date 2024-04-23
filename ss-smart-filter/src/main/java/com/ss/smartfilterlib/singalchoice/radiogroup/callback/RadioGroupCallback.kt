@@ -1,8 +1,8 @@
-package com.ss.smartfilterlib.singalchoice.callback
+package com.ss.smartfilterlib.singalchoice.radiogroup.callback
 
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import com.ss.smartfilterlib.singalchoice.data.RadioGroupData
+import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 
 /**
  * created by Mala Ruparel ON 21/04/24
