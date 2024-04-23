@@ -10,5 +10,5 @@ import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 interface RadioGroupCallback {
     fun singleLineCallBack(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId : Int)
     fun multiLineCallBack(position: Int, text: RadioGroupData)
-    fun onRowLineCallBackSelected(radioGroupData: RadioGroupData)
+    fun onRowItemCallBack(radioGroupData: RadioGroupData)
 }

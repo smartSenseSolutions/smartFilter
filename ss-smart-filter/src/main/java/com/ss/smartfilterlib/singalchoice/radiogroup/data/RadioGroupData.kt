@@ -12,14 +12,10 @@ class RadioGroupData(
     val image: Int = R.drawable.ic_documents
 
 )
-
-fun getNames(data: List<RadioGroupData>): Array<String> {
-    return data.map { it.name }.toTypedArray()
+fun getNames(data: ArrayList<RadioGroupData>): ArrayList<String> {
+    return data.map { it.name }.toCollection(ArrayList())
 }
 
-fun getImages(data: List<RadioGroupData>): IntArray {
-    return data.map { it.image }.toIntArray()
-}
 
 fun mRadioGroupData(): ArrayList<RadioGroupData> {
     return arrayListOf(

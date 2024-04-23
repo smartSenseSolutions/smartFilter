@@ -13,8 +13,8 @@ import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.RowItemBinding
-import com.ss.smartfilterlib.singalchoice.PaddingAttributes
-import com.ss.smartfilterlib.singalchoice.TextAttributes
+import com.ss.smartfilterlib.singalchoice.util.PaddingAttributes
+import com.ss.smartfilterlib.singalchoice.util.TextAttributes
 import com.ss.smartfilterlib.singalchoice.radiogroup.callback.RadioGroupCallback
 import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 
@@ -95,7 +95,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
                 // binding.img.drawable=radioGroupData.image
                 // rowItem.background=radioButtonDrawable?.constantState?.newDrawable()?.mutate()
                 binding.rtl.setOnClickListener {
-                    listener?.onRowLineCallBackSelected(radioGroupData)
+                    listener?.onRowItemCallBack(radioGroupData)
                 }
                 radioGroup.addView(binding.root)
             }

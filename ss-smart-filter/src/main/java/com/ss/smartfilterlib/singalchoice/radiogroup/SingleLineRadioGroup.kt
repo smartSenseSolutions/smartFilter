@@ -14,8 +14,8 @@ import android.widget.RadioGroup
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singalchoice.PaddingAttributes
-import com.ss.smartfilterlib.singalchoice.TextAttributes
+import com.ss.smartfilterlib.singalchoice.util.PaddingAttributes
+import com.ss.smartfilterlib.singalchoice.util.TextAttributes
 import com.ss.smartfilterlib.singalchoice.radiogroup.callback.RadioGroupCallback
 import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 import com.ss.smartfilterlib.singalchoice.util.Orientation
@@ -66,7 +66,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
             )
 
             dataFromXml = typedArray.getResourceId(R.styleable.SingleLineRadioGroup_rg_sl_Listitem, 0)
-            // var mData = resources.getStringArray(dataFromXml);
+
         } finally {
             typedArray.recycle()
         }
@@ -150,12 +150,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
         textAttributes?.textSize = 40f
 
     }
-    private fun setTextAttributes(
-        radioButton: RadioButton
 
-    ) {
-        radioButton.textSize= textAttributes?.textSize!!
-    }
     private var defaultPadding = resources.getDimension(R.dimen._10).toInt()
 
 

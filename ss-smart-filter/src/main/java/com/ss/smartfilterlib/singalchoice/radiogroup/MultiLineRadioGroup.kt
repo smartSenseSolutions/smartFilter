@@ -63,7 +63,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
                 setOnChoseListener?.multiLineCallBack(position, data)
             }
 
-            override fun onRowLineCallBackSelected(radioGroupData: RadioGroupData) { // Noncompliant - method is empty
+            override fun onRowItemCallBack(radioGroupData: RadioGroupData) { // Noncompliant - method is empty
             }
 
 
@@ -82,10 +82,8 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
         mAdapter?.setData(mData)
     }
 
-    private fun setSpanCount(spanCount: Int){
-        if (spanCount < 2){
-            throw IllegalArgumentException("spanCount minimum is 2, current: $spanCount")
-        }
+    private fun setSpanCount(spanCount: Int) {
+        require(spanCount >= 2) { "spanCount minimum is 2, current: $spanCount" }
         this.spanCount = spanCount
         setupView()
     }
