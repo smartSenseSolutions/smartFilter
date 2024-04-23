@@ -5,9 +5,6 @@ package com.ss.smartfilterlib.singalchoice.util
  */
 
 
-
-
-
 enum class SingleGroupSubType {
     SINGLE_LINE,
     MULTI_LINE,

@@ -19,14 +19,14 @@ object SmartFilter {
 
                     SingleGroupSubType.SINGLE_LINE -> {
 
-                        val singleLineRadioGroup = SingleLineRadioGroup(params.rootView.context)
-                        singleLineRadioGroup.setData(
-                            params.mData,
-                            params.orientation,
-                            params.bgSelector,
-                            params.textSelector,
-                            params.callbacks
-                        )
+                        val singleLineRadioGroup =   SingleLineRadioGroup(params.rootView.context)
+                        singleLineRadioGroup .setData(
+                                params.mData,
+                                params.orientation,
+                                params.bgSelector,
+                                params.textSelector,
+                                params.callbacks
+                            )
 
                         params.rootView.addView(singleLineRadioGroup)
                     }

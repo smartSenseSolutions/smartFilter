@@ -1,5 +1,6 @@
 package com.ss.smartfilterlib.singalchoice.radiogroup
 
+import RadioGroupCallback
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -15,7 +16,6 @@ import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.RowItemBinding
 import com.ss.smartfilterlib.singalchoice.util.PaddingAttributes
 import com.ss.smartfilterlib.singalchoice.util.TextAttributes
-import com.ss.smartfilterlib.singalchoice.radiogroup.callback.RadioGroupCallback
 import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 
 /**
@@ -49,6 +49,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
                 textSize = typedArray.getFloat(R.styleable.RowItemRadioGroup_rg_ri_TextSize,12f),
                 textColor = typedArray.getColor(R.styleable.RowItemRadioGroup_rg_ri_Textcolor, Color.BLACK),
             )
+
 
             textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_TextSelector)
             radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_Background)
@@ -86,16 +87,12 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     }
     private fun addDynamicRadioButton() {
         radioGroupData?.let {
-            for (radioGroupData in it) {
-
+            for (item in it) {
                 val binding = RowItemBinding.inflate(LayoutInflater.from(context), this, false)
-
-                binding.tvName.text = radioGroupData.name
-                binding.tvDes.text = radioGroupData.description
-                // binding.img.drawable=radioGroupData.image
-                // rowItem.background=radioButtonDrawable?.constantState?.newDrawable()?.mutate()
+                binding.tvName.text = item.name
+                binding.tvDes.text = item.description
                 binding.rtl.setOnClickListener {
-                    listener?.onRowItemCallBack(radioGroupData)
+                    listener?.onRowItemSelected(item)
                 }
                 radioGroup.addView(binding.root)
             }

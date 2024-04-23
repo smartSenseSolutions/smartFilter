@@ -5,15 +5,16 @@ import com.ss.smartfilterlib.R
 /**
  * created by Mala Ruparel ON 19/04/24
  */
-class RadioGroupData(
+data class RadioGroupData(
     val id: Int = 0,
-    val name: String ,
+    val name: String,
     val description: String,
     val image: Int = R.drawable.ic_documents
-
 )
-fun getNames(data: ArrayList<RadioGroupData>): ArrayList<String> {
-    return data.map { it.name }.toCollection(ArrayList())
+
+
+fun getNamesFromRadioGroupDataList(data: List<RadioGroupData>): List<String> {
+    return data.map { it.name }
 }
 
 

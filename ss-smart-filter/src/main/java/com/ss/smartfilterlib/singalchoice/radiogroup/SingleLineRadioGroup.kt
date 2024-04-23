@@ -1,6 +1,7 @@
 package com.ss.smartfilterlib.singalchoice.radiogroup
 
 
+import RadioGroupCallback
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -16,7 +17,6 @@ import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.singalchoice.util.PaddingAttributes
 import com.ss.smartfilterlib.singalchoice.util.TextAttributes
-import com.ss.smartfilterlib.singalchoice.radiogroup.callback.RadioGroupCallback
 import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 import com.ss.smartfilterlib.singalchoice.util.Orientation
 
@@ -137,7 +137,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
         radioGroup.addView(radioButton)
         radioGroup.setOnCheckedChangeListener { radioGroup, checkedId ->
             val rb = radioGroup.findViewById<RadioButton>(checkedId)
-            onCheckedChangeListener?.singleLineCallBack(data, radioGroup, rb, checkedId)
+            onCheckedChangeListener?.onSingleLineSelected(data, radioGroup, rb, checkedId)
 
         }
     }
@@ -147,7 +147,6 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
         data: RadioGroupData
     ) {
         radioButton.text = data.name
-        textAttributes?.textSize = 40f
 
     }
 

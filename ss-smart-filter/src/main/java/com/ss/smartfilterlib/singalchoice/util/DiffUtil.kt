@@ -15,7 +15,7 @@ import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
         return newList.size
     }
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition] == newList[newItemPosition]
+        return oldList[oldItemPosition].id == newList[newItemPosition].id
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
