@@ -9,12 +9,16 @@ import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
  */
 data class SingleSelectionParams(
     val rootView: ViewGroup,
-    val singleGroupType: SingleGroupType,
-    val singleGroupSubType: SingleGroupSubType,
-    val chipType: ChipType,
-    val orientation: Int,
+    val singleGroupSubType: SingleGroupSubType= SingleGroupSubType.NONE,
+    val chipType: ChipType = ChipType.NONE,
+    val orientation: Int = Orientation.VERTICAL,
     val mData: ArrayList<RadioGroupData>,
     val callbacks: RadioGroupCallback,
-    val bgSelector: Int,
-    val textSelector: Int
-)
+    val bgSelector: Int = DEFAULT_BG_SELECTOR,
+    val textSelector: Int = DEFAULT_TEXT_SELECTOR
+){
+    companion object {
+        const val DEFAULT_BG_SELECTOR = 0
+        const val DEFAULT_TEXT_SELECTOR = 0
+    }
+}

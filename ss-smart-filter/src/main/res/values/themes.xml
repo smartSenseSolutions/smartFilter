@@ -15,4 +15,10 @@
         <item name="android:paddingTop">0dp</item>
     </style>
 
+    <style name="EntryChipStyle" parent="Widget.MaterialComponents.Chip.Entry"/>
+    <style name="FilterChipStyle" parent="Widget.MaterialComponents.Chip.Filter"/>
+
+    <style name="ChoiceChipStyle" parent="Widget.MaterialComponents.Chip.Choice"/>
+
+    <style name="ActionChipStyle" parent="Widget.MaterialComponents.Chip.Action"/>
 </resources>

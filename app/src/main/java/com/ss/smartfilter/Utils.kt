@@ -9,7 +9,6 @@ import com.ss.smartfilterlib.singalchoice.radiogroup.data.mRadioGroupData
 import com.ss.smartfilterlib.singalchoice.util.ChipType
 import com.ss.smartfilterlib.singalchoice.util.Orientation
 import com.ss.smartfilterlib.singalchoice.util.SingleGroupSubType
-import com.ss.smartfilterlib.singalchoice.util.SingleGroupType
 import com.ss.smartfilterlib.singalchoice.util.SingleSelectionParams
 
 /**
@@ -18,9 +17,7 @@ import com.ss.smartfilterlib.singalchoice.util.SingleSelectionParams
 fun addRadioGroupSingleLineVertical(rootView: ViewGroup, callback: RadioGroupCallback) =
     SingleSelectionParams(
         rootView = rootView,
-        singleGroupType = SingleGroupType.RADIO_GROUP,
         singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
-        chipType = ChipType.NONE,
         orientation = Orientation.VERTICAL,
         mData = mRadioGroupData(),
         callbacks = callback,
@@ -31,9 +28,7 @@ fun addRadioGroupSingleLineVertical(rootView: ViewGroup, callback: RadioGroupCal
 fun addRadioGroupSingleLineHorizontal(rootView: ViewGroup, callback: RadioGroupCallback) =
     SingleSelectionParams(
         rootView = rootView,
-        singleGroupType = SingleGroupType.RADIO_GROUP,
         singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
-        chipType = ChipType.NONE,
         orientation = Orientation.HORIZONTAL,
         mData = mRadioGroupData(),
         callbacks = callback,
@@ -44,42 +39,44 @@ fun addRadioGroupSingleLineHorizontal(rootView: ViewGroup, callback: RadioGroupC
 fun addRadioGroupMultiline(rootView: ViewGroup, callback: RadioGroupCallback) =
     SingleSelectionParams(
         rootView = rootView,
-        singleGroupType = SingleGroupType.RADIO_GROUP,
         singleGroupSubType = SingleGroupSubType.MULTI_LINE,
-        chipType = ChipType.NONE,
-        orientation = Orientation.NONE,
         mData = mRadioGroupData(),
         callbacks = callback,
-        bgSelector = R.drawable.multiline_selector,
+        bgSelector = R.drawable.multiline_bg_selector,
         textSelector = R.color.multiline_text_selector
     )
 
 fun addRadioGroupHorizontalRow(rootView: ViewGroup,callback: RadioGroupCallback) =
     SingleSelectionParams(
         rootView = rootView,
-        singleGroupType = SingleGroupType.RADIO_GROUP,
         singleGroupSubType = SingleGroupSubType.ROW_ITEM,
-        chipType = ChipType.NONE,
         orientation = Orientation.HORIZONTAL,
         mData = mRadioGroupData(),
         callbacks = callback,
-        bgSelector = R.drawable.multiline_selector,
+        bgSelector = R.drawable.multiline_bg_selector,
         textSelector = R.color.multiline_text_selector
     )
 
 fun addRadioGroupVerticalRow(rootView: ViewGroup, callback: RadioGroupCallback) =
     SingleSelectionParams(
         rootView = rootView,
-        singleGroupType = SingleGroupType.RADIO_GROUP,
         singleGroupSubType = SingleGroupSubType.ROW_ITEM,
-        chipType = ChipType.NONE,
         orientation = Orientation.VERTICAL,
         mData = mRadioGroupData(),
         callbacks = callback,
-        bgSelector = R.drawable.multiline_selector,
+        bgSelector = R.drawable.multiline_bg_selector,
         textSelector = R.color.multiline_text_selector
     )
-
+fun addChipGroup(rootView: ViewGroup, callback: RadioGroupCallback) =
+    SingleSelectionParams(
+        rootView = rootView,
+        chipType = ChipType.ACTION_CHIP,
+        orientation = Orientation.VERTICAL,
+        mData = mRadioGroupData(),
+        callbacks = callback,
+        bgSelector = R.color.chip_bg_default,
+        textSelector = R.color.chip_text_default
+    )
 fun showToast(message: String, context: Context) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }

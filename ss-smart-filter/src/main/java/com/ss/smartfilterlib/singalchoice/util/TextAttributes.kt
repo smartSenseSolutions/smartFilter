@@ -9,7 +9,6 @@ data class TextAttributes(
     var textSize: Float = 12f,
     val textColor: Int = Color.BLACK // Default text color is black
 )
-
 data class PaddingAttributes(
     val paddingStart: Int = 0,
     val paddingTop: Int = 0,

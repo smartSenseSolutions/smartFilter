@@ -2,114 +2,170 @@ package com.ss.smartfilterlib.singalchoice.chipgroup
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.widget.HorizontalScrollView
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 import com.ss.smartfilterlib.singalchoice.util.ChipType
-
+import com.ss.smartfilterlib.singalchoice.util.Orientation
 /**
- * created by Mala Ruparel ON 22/04/24
+ * created by Mala Ruparel ON 24/04/24
  */
-class SingleChipgroup(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : ChipGroup(context, attrs) {
+class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
 
-    private var chipBackgroundColor: ColorStateList? = null
+    private var chipBGColor: ColorStateList? = null
     private var chipTextColor: ColorStateList? = null
-    private var closeIconColor: ColorStateList? = null
-    private var closeIconDrawable: Drawable? = null
-
+    private var orientation: Int = Orientation.VERTICAL
+    private lateinit var chipGroup: ChipGroup
+    private lateinit var containerScrollView: ScrollView
+    private lateinit var containerHorizontalScrollView: HorizontalScrollView
     init {
         initAttrs(attrs)
         setupView()
     }
 
-
     private fun initAttrs(attrs: AttributeSet?) {
-        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.ChipGroup, 0, 0)
+        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SingleLineChipGroup, 0, 0)
         try {
-            chipBackgroundColor = typedArray.getColorStateList(R.styleable.ChipGroup_cg_sl_Background)
-            chipTextColor = typedArray.getColorStateList(R.styleable.ChipGroup_cg_sl_Textcolor)
-            closeIconColor = typedArray.getColorStateList(R.styleable.ChipGroup_cg_sl_close_icon_color)
-            closeIconDrawable = typedArray.getDrawable(R.styleable.ChipGroup_cg_sl_close_icon_drawable)
+            orientation = typedArray.getInt(R.styleable.SingleLineChipGroup_cg_sl_Orientation, Orientation.VERTICAL)
+            chipBGColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_Background)
+            chipTextColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_TextSelector)
+
         } finally {
             typedArray.recycle()
         }
     }
 
     private fun setupView() {
-        isSingleLine = true
+
+        containerScrollView = ScrollView(context)
+        containerHorizontalScrollView = HorizontalScrollView(context)
+
+        val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        containerScrollView.layoutParams = layoutParams
+        containerHorizontalScrollView.layoutParams = layoutParams
+
+        chipGroup = ChipGroup(context)
     }
 
-    fun setData(chipData: List<RadioGroupData>, chipType: ChipType) {
+    fun setData(
+        chipData: List<RadioGroupData>,
+        chipType: ChipType,
+        orientation: Int,
+        bgSelector: Int,
+        textSelector: Int,
+    ) {
+        chipGroup.removeAllViews()
+        this.orientation = orientation
+        this.chipBGColor = ContextCompat.getColorStateList(context, bgSelector)
+        this.chipTextColor = ContextCompat.getColorStateList(context, textSelector)
+        chipGroup.isSingleLine = orientation == Orientation.HORIZONTAL
+        chipGroup.isSingleSelection = true
+        chipGroup.isSelectionRequired=true
+        setupRadioGroup()
         chipData.forEach { data ->
             val chip = createChip(chipType)
             chip.text = data.name
+            setChipEvents(chip)
             setChipAttributes(chip)
-           // chip.setOnClickListener { callback(data.name) }
-            addView(chip)
+            chipGroup.addView(chip)
         }
     }
 
     private fun createChip(chipType: ChipType): Chip {
         return when (chipType) {
-            ChipType.ASSIST_CHIP -> createAssistChip()
+            ChipType.ENTRY_CHIP -> creatEntryChip()
             ChipType.FILTER_CHIP -> createFilterChip()
-            ChipType.INPUT_CHIP -> createInputChip()
-            ChipType.SUGGESTION_CHIP -> createSuggestionChip()
+            ChipType.CHOICE_CHIP -> createInputChip()
+            ChipType.ACTION_CHIP -> createActionChip()
+            ChipType.NONE -> throw IllegalArgumentException("Invalid chip type")
         }
     }
 
-    private fun createAssistChip(): Chip {
-        return Chip(context).apply {
-            chipIcon = context.getDrawable(R.drawable.ic_free)
-            chipIconTint = ColorStateList.valueOf(context.getColor(R.color.purple_200))
-            chipBackgroundColor = chipBackgroundColor // Set chip background color
-            chipTextColor = chipTextColor // Set chip tex
+    private fun creatEntryChip(): Chip {
+        return Chip(context, null, R.style.EntryChipStyle).apply {
+            isClickable = true
+            isCheckedIconVisible=false
         }
     }
 
+    private fun setupRadioGroup() {
+
+        if (this.orientation == VERTICAL) {
+
+            if (containerHorizontalScrollView.parent != null) {
+                removeView(containerHorizontalScrollView)
+            }
+            if (containerScrollView.parent == null) {
+                addView(containerScrollView)
+            }
+
+            containerScrollView.addView(chipGroup)
+        } else {
+
+            if (containerScrollView.parent != null) {
+                removeView(containerScrollView)
+            }
+            if (containerHorizontalScrollView.parent == null) {
+                addView(containerHorizontalScrollView)
+            }
+
+            containerHorizontalScrollView.addView(chipGroup)
+        }
+
+    }
     private fun createFilterChip(): Chip {
-        return Chip(context).apply {
-            isCloseIconVisible = true
-            closeIcon = context.getDrawable(R.drawable.ic_close)
-            closeIconTint = closeIconColor
-            chipBackgroundColor = chipBackgroundColor // Set chip background color
-            chipTextColor = chipTextColor // Set chip text color
+        return Chip(context, null, R.style.FilterChipStyle).apply {
+            isCloseIconVisible = false
+            isChipIconVisible=true
         }
     }
 
     private fun createInputChip(): Chip {
-        return Chip(context).apply {
-            chipBackgroundColor = chipBackgroundColor
-            //chipStrokeColor = chipTextColor
+        return Chip(context, null, R.style.FilterChipStyle).apply {
             chipStrokeWidth = 2f
-
-            chipTextColor = chipTextColor // Set chip text color
+            isCloseIconVisible = true
+            isChipIconVisible=false
+            isCheckedIconVisible=false
         }
     }
 
-    private fun createSuggestionChip(): Chip {
+    private fun createActionChip(): Chip {
         return Chip(context).apply {
-            isClickable = true
-            isCheckable = true
-            chipBackgroundColor = chipBackgroundColor
-            checkedIcon = context.getDrawable(R.drawable.ic_check)
-            //chipStrokeColor = chipTextColor
+            isChipIconVisible=true
+            isCheckedIconVisible=true
+            isCloseIconVisible=true
             chipStrokeWidth = 2f
-            chipTextColor =chipTextColor
-
-
-
         }
     }
 
     private fun setChipAttributes(chip: Chip) {
-        chipBackgroundColor?.let { chip.chipBackgroundColor = it }
-        chipTextColor?.let { chip.setTextColor(it) }
+        chip.apply {
+            chipBackgroundColor = chipBGColor
+            setTextColor(chipTextColor)
+            isClickable = true
+            isCheckable = true
+        }
     }
 
+    private fun setChipEvents(chip: Chip) {
+        chip.setOnClickListener {
+            Toast.makeText(context, "Chip setOnClickListener: ${chip.text}", Toast.LENGTH_SHORT).show()
+        }
 
+        chip.setOnCloseIconClickListener {
+            Toast.makeText(context, "Chip setOnCloseIconClickListener: ${chip.text}", Toast.LENGTH_SHORT).show()
+        }
+
+        chip.setOnCheckedChangeListener { chip, _ ->
+            Toast.makeText(context, "Chip setOnCheckedChangeListener: ${chip.text}", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
+

@@ -21,6 +21,7 @@ import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 import com.ss.smartfilterlib.singalchoice.util.Orientation
 
 
+
 /**
  * created by Mala Ruparel ON 17/04/24
  */
@@ -40,7 +41,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
     private lateinit var radioGroup: RadioGroup
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
-
+    private var defaultPadding = resources.getDimension(R.dimen._10).toInt()
     init {
         initAttrs(attrs)
         setupView()
@@ -54,8 +55,8 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
             radioButtonDrawable =typedArray.getDrawable(R.styleable.SingleLineRadioGroup_rg_sl_Background)
 
             textAttributes = TextAttributes(
-                textSize = typedArray.getFloat(R.styleable.SingleLineRadioGroup_rg_sl_TextSize, 40f),
-                textColor = typedArray.getColor(R.styleable.SingleLineRadioGroup_rg_sl_TextColor, Color.BLACK),
+                textSize = typedArray.getDimension(R.styleable.SingleLineRadioGroup_rg_sl_TextSize, 0f),
+                textColor = typedArray.getColor(R.styleable.SingleLineRadioGroup_rg_sl_TextColor, Color.BLUE),
             )
 
             paddingAttributes = PaddingAttributes(
@@ -105,6 +106,15 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
             radioGroup.orientation = HORIZONTAL
             containerHorizontalScrollView.addView(radioGroup)
         }
+        /*val optionsArray = resources.getStringArray(dataFromXml)
+        if(optionsArray.isNotEmpty()){
+            optionsArray.forEach { data ->
+               *//* addDynamicRadioButton(
+                    data
+                )*//*
+            }
+        }
+*/
     }
 
     fun setData(
@@ -120,7 +130,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
         this.onCheckedChangeListener = callbacks
 
         setupRadioGroup()
-        radioGroup.removeAllViews()
+
         mData.forEach { data ->
             addDynamicRadioButton(
                 data
@@ -150,7 +160,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
 
     }
 
-    private var defaultPadding = resources.getDimension(R.dimen._10).toInt()
+
 
 
     private fun setSelector(view: RadioButton) {
@@ -159,6 +169,15 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
     }
 
     private fun setPaddingToView(view: View) {
-        view.setPadding(defaultPadding, defaultPadding, defaultPadding, defaultPadding)
+
+        paddingAttributes?.let { paddingAttrs ->
+            view.setPadding(
+                paddingAttrs.paddingStart,
+                paddingAttrs.paddingTop,
+                paddingAttrs.paddingEnd,
+                paddingAttrs.paddingBottom
+            )
+        }
+
     }
 }

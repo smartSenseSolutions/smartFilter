@@ -37,7 +37,7 @@
         <attr name="rg_ri_Orientation" format="integer" />
     </declare-styleable>
 
-    <declare-styleable name="ChipGroup">
+    <declare-styleable name="SingleLineChipGroup">
         <attr name="cg_sl_close_icon_color" format="reference" />
         <attr name="cg_sl_close_icon_drawable" format="reference" />
         <attr name="cg_sl_TextSize" format="dimension" />
@@ -46,4 +46,6 @@
         <attr name="cg_sl_Textcolor" format="color" />
         <attr name="cg_sl_Orientation" format="integer" />
     </declare-styleable>
-</resources>
+
+
+    </resources>

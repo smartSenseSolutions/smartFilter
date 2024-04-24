@@ -18,7 +18,8 @@ class MainActivity : ComponentActivity(), RadioGroupCallback {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SmartFilter.addSingleSelection(addRadioGroupSingleLineVertical(binding.root, this))
+
+        SmartFilter.addChipGroupSingleSelection(addChipGroup(binding.root, this))
     }
 
     override fun onRowItemSelected(radioGroupData: RadioGroupData) {
