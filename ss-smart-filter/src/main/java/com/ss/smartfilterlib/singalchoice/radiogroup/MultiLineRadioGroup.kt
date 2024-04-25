@@ -57,18 +57,13 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
 
         adapter = MultiLineRadioButtonAdapter(context).also { this.mAdapter = it }
         mAdapter?.onChoseListener = object : RadioGroupCallback {
-            override fun onMultiLineSelected(position: Int, radioGroupData: RadioGroupData) {
-                mAdapter?.currentSelected = position
+            override fun onRowItemSelected(radioGroupData: RadioGroupData) {
                 mAdapter?.notifyDataSetChanged()
-                setOnChoseListener?.onMultiLineSelected(position, radioGroupData)
-            }
-
-            override fun onRowItemSelected(radioGroupData: RadioGroupData) { // Noncompliant - method is empty
-            }
-
+                setOnChoseListener?.onRowItemSelected(radioGroupData) }
 
             override fun onSingleLineSelected(radioGroupData: RadioGroupData, radioGroup: RadioGroup, radioButton: RadioButton, checkId: Int) { // Noncompliant - method is empty
             }
+
 
         }
     }
@@ -123,7 +118,7 @@ class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: Att
                     setTextColor(textSelectorColor)
                     isChecked = selected
                     setOnClickListener {
-                        onChoseListener!!.onMultiLineSelected(position, radioGroupData)
+                        onChoseListener!!.onRowItemSelected(radioGroupData)
                         function(position)
                     }
                 }

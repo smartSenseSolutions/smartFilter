@@ -14,7 +14,6 @@ import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.RowItemBinding
-import com.ss.smartfilterlib.singalchoice.util.PaddingAttributes
 import com.ss.smartfilterlib.singalchoice.util.TextAttributes
 import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 
@@ -24,10 +23,7 @@ import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
 class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLayout(context, attrs) {
 
     private var textAttributes: TextAttributes? = null
-    private var paddingAttributes: PaddingAttributes? = null
 
-    private var itemTextSize: Float = 0f
-    private var itemTextColor: Int = 0
     private var radioGroupData: ArrayList<RadioGroupData>? = null
     private var listener: RadioGroupCallback? = null
     private lateinit var radioGroup: RadioGroup

@@ -1,5 +1,6 @@
 package com.ss.smartfilterlib.singalchoice.util
 
+import BaseEventListener
 import RadioGroupCallback
 import android.view.ViewGroup
 import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
@@ -13,7 +14,7 @@ data class SingleSelectionParams(
     val chipType: ChipType = ChipType.NONE,
     val orientation: Int = Orientation.VERTICAL,
     val mData: ArrayList<RadioGroupData>,
-    val callbacks: RadioGroupCallback,
+    val callbacks: BaseEventListener,
     val bgSelector: Int = DEFAULT_BG_SELECTOR,
     val textSelector: Int = DEFAULT_TEXT_SELECTOR
 ){

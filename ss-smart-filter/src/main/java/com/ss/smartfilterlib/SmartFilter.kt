@@ -68,6 +68,7 @@ object SmartFilter {
                     params.orientation,
                     params.bgSelector,
                     params.textSelector,
+                        params.callbacks
                 )
                 params.rootView.addView(singleChipgroup)
 

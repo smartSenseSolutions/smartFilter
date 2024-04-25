@@ -1,12 +1,12 @@
 package com.ss.smartfilterlib.singalchoice.chipgroup
 
+import ChipClickListener
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.ScrollView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -25,6 +25,7 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
     private lateinit var chipGroup: ChipGroup
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
+    private var onChipGroupClickListener: ChipClickListener? = null
     init {
         initAttrs(attrs)
         setupView()
@@ -60,8 +61,10 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
         orientation: Int,
         bgSelector: Int,
         textSelector: Int,
+        callbacks: ChipClickListener,
     ) {
         chipGroup.removeAllViews()
+        this.onChipGroupClickListener= callbacks
         this.orientation = orientation
         this.chipBGColor = ContextCompat.getColorStateList(context, bgSelector)
         this.chipTextColor = ContextCompat.getColorStateList(context, textSelector)
@@ -156,15 +159,17 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
 
     private fun setChipEvents(chip: Chip) {
         chip.setOnClickListener {
-            Toast.makeText(context, "Chip setOnClickListener: ${chip.text}", Toast.LENGTH_SHORT).show()
+            onChipGroupClickListener?.onChipClick(chip, chip.isChecked)
+
         }
 
         chip.setOnCloseIconClickListener {
-            Toast.makeText(context, "Chip setOnCloseIconClickListener: ${chip.text}", Toast.LENGTH_SHORT).show()
+            onChipGroupClickListener?.onChipCloseIconClick(chip)
         }
 
-        chip.setOnCheckedChangeListener { chip, _ ->
-            Toast.makeText(context, "Chip setOnCheckedChangeListener: ${chip.text}", Toast.LENGTH_SHORT).show()
+        chip.setOnCheckedChangeListener { compondButton, isChecked ->
+            onChipGroupClickListener?.onChipCheckedChanged(compondButton,null, isChecked)
+
         }
     }
 }
