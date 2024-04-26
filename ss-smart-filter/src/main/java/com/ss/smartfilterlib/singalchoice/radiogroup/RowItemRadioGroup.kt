@@ -37,7 +37,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     init {
         initAttrs(attrs)
         setupView()
-        setupRadioGroup()
+
     }
     private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.RowItemRadioGroup)
@@ -77,6 +77,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         this.radioButtonDrawable = ContextCompat.getDrawable(context, bgSelector)
         this.textSelectorColor = ContextCompat.getColorStateList(context, textSelector)
         this.listener = callback
+        setupRadioGroup()
         addDynamicRadioButton()
 
     }
