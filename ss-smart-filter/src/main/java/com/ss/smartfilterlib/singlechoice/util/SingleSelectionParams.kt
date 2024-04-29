@@ -18,7 +18,7 @@ data class SingleSelectionParams(
     val orientation: Int,
     val mData: ArrayList<RadioGroupData>,
     val callbacks: RadioGroupCallback,
-    @DrawableRes val bgSelector: Int = R.drawable.multiline_default,
+    @DrawableRes val bgSelector: Int = androidx.appcompat.R.drawable.abc_btn_radio_material,
     @ColorRes val textSelector: Int = android.R.color.black
 )
 
