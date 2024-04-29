@@ -9,10 +9,9 @@ import com.ss.smartfilterlib.singlechoice.util.SingleSelectionParams
 
 
 object SmartFilter {
-
     fun addSingleSelection( params: () -> SingleSelectionParams) {
-        val param = params()
-                when (param.singleGroupSubType) {
+                    val param = params()
+                    when (param.singleGroupSubType) {
                     SingleGroupSubType.SINGLE_LINE -> {
                         val singleLineRadioGroup = SingleLineRadioGroup(param.rootView.context)
                         singleLineRadioGroup.setData(
