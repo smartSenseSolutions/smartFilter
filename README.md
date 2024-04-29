@@ -36,7 +36,7 @@ To use the Smart Filter library in your Android application, you need to include
 - **onChipSelected**: This method is called when a chip is selected in a chip group.
 - **onChipUnselected**: This method is called when a chip is unselected in a chip group.
 
-## Different methods to call from MainActivity to call single and multi line radio group ,chip group and row item radio group
+
 ## SingleSelection
 ### SingleSelectionRadioGroup(Verticle/Horizontal)
   
@@ -69,10 +69,11 @@ To use the Smart Filter library in your Android application, you need to include
    
 
 ### SingleSelectionMultiLine(MultiRaw)
-    ```kotlin
+<img src="media/single_selection_multiline.png" width="250" />
+   
     SmartFilter.addSingleSelectionRadioGroup(singleSelectionMultiLine(binding.root, this))
-    ```
-    ### Params
+    
+### Params
     ```kotlin
 
     fun singleSelectionMultiLine(rootView: ViewGroup, callback: BaseEventListener) =
@@ -86,11 +87,8 @@ To use the Smart Filter library in your Android application, you need to include
     )   
 
 
-
-
-      
+### Attribute      
          
-    
     | Attribute | Description | Type | Default Value |
     | --- | --- | --- | --- |
     | rootView | The root view of the radio group. | ViewGroup | - |
@@ -102,6 +100,5 @@ To use the Smart Filter library in your Android application, you need to include
     | textSelector | The text color selector for the radio group items. | Int | - |
      
  
-
 ```kotlin
 implementation 'com.ss:smartfilterlib:1.0.0'
