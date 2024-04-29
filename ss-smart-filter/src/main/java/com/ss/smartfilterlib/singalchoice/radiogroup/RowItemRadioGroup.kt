@@ -14,8 +14,8 @@ import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.RowItemBinding
-import com.ss.smartfilterlib.singalchoice.util.TextAttributes
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.utils.TextAttributes
+import com.ss.smartfilterlib.data.RadioGroupData
 
 /**
  * created by Mala Ruparel ON 19/04/24

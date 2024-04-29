@@ -1,25 +1,26 @@
 package com.ss.smartfilter
 
 import BaseEventListener
-import RadioGroupCallback
 import android.content.Context
 import android.view.ViewGroup
 import android.widget.Toast
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.mRadioGroupData
-import com.ss.smartfilterlib.singalchoice.util.ChipType
-import com.ss.smartfilterlib.singalchoice.util.Orientation
-import com.ss.smartfilterlib.singalchoice.util.SingleGroupSubType
-import com.ss.smartfilterlib.singalchoice.util.SingleSelectionParams
+import com.ss.smartfilterlib.data.mRadioGroupData
+import com.ss.smartfilterlib.utils.MultiChipType
+import com.ss.smartfilterlib.utils.MultiSelectionParams
+import com.ss.smartfilterlib.utils.Orientation
+import com.ss.smartfilterlib.utils.SingleChipType
+import com.ss.smartfilterlib.utils.SingleGroupSubType
+import com.ss.smartfilterlib.utils.SingleSelectionParams
 
 /**
  * created by Mala Ruparel ON 23/04/24
  */
-fun addRadioGroupSingleLineVertical(rootView: ViewGroup, callback: BaseEventListener) =
+fun singleSelectionData(rootView: ViewGroup, callback: BaseEventListener) =
     SingleSelectionParams(
         rootView = rootView,
         singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
-        orientation = Orientation.VERTICAL,
+        orientation = Orientation.HORIZONTAL,
         mData = mRadioGroupData(),
         callbacks = callback,
         bgSelector = R.drawable.singleline_selector,
@@ -27,7 +28,7 @@ fun addRadioGroupSingleLineVertical(rootView: ViewGroup, callback: BaseEventList
     )
 
 
-fun addRadioGroupMultiline(rootView: ViewGroup, callback: BaseEventListener) =
+fun singleSelectionMultiLine(rootView: ViewGroup, callback: BaseEventListener) =
     SingleSelectionParams(
         rootView = rootView,
         singleGroupSubType = SingleGroupSubType.MULTI_LINE,
@@ -49,10 +50,20 @@ fun addRadioGroupHorizontalRow(rootView: ViewGroup,callback: BaseEventListener) 
     )
 
 
-fun addChipGroup(rootView: ViewGroup, callback: BaseEventListener) =
+fun addSingleSelectionChipGroup(rootView: ViewGroup, callback: BaseEventListener) =
     SingleSelectionParams(
         rootView = rootView,
-        chipType = ChipType.ACTION_CHIP,
+        chipType = SingleChipType.CHOICE_CHIP,
+        orientation = Orientation.VERTICAL,
+        mData = mRadioGroupData(),
+        callbacks = callback,
+        bgSelector = R.color.chip_bg_default,
+        textSelector = R.color.chip_text_default
+    )
+fun addMultiSelectionChipGroup(rootView: ViewGroup, callback: BaseEventListener) =
+    MultiSelectionParams(
+        rootView = rootView,
+        chipType = MultiChipType.FILTER_CHIP,
         orientation = Orientation.VERTICAL,
         mData = mRadioGroupData(),
         callbacks = callback,

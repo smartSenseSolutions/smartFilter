@@ -11,7 +11,7 @@ import com.google.android.material.chip.Chip
 import com.ss.smartfilter.databinding.ActivityMainBinding
 import com.ss.smartfilterlib.SmartFilter
 
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.data.RadioGroupData
 
 class MainActivity : ComponentActivity(), BaseEventListener {
     private lateinit var binding: ActivityMainBinding
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity(), BaseEventListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SmartFilter.addRadioGroupSingleSelection(addRadioGroupSingleLineVertical(binding.root, this))
+        SmartFilter.addRadioGroupSingleSelection(singleSelectionMultiLine(binding.root, this))
     }
 
     override fun onRowItemSelected(radioGroupData: RadioGroupData) {
@@ -42,6 +42,10 @@ class MainActivity : ComponentActivity(), BaseEventListener {
         isChecked: Boolean
     ) {
         showToast(compoundButton.text.toString(), this)
+    }
+
+    override fun onMultiChipCheckedChanged(checkedChipIds: List<Int>) {
+        showToast("Checked IDs: ${checkedChipIds.joinToString(", ")}", this)
     }
 
     override fun onSingleLineSelected(

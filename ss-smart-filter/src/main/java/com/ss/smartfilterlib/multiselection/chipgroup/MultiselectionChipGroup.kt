@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singalchoice.chipgroup
+package com.ss.smartfilterlib.multiselection.chipgroup
 
 import ChipClickListener
 import android.content.Context
@@ -12,13 +12,14 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.utils.MultiChipType
 import com.ss.smartfilterlib.utils.Orientation
-import com.ss.smartfilterlib.utils.SingleChipType
 
 /**
- * created by Mala Ruparel ON 24/04/24
+ * created by Mala Ruparel ON 25/04/24
  */
-class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
+class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
+    LinearLayout(context, attrs, defStyle) {
 
     private var chipBGColor: ColorStateList? = null
     private var chipTextColor: ColorStateList? = null
@@ -27,6 +28,9 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
     private var onChipGroupClickListener: ChipClickListener? = null
+    private var chipData: ArrayList<RadioGroupData> = arrayListOf()
+    private var checkedChipIds: ArrayList<Int> = arrayListOf()
+
     init {
         initAttrs(attrs)
         setupView()
@@ -45,7 +49,6 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
     }
 
     private fun setupView() {
-
         containerScrollView = ScrollView(context)
         containerHorizontalScrollView = HorizontalScrollView(context)
 
@@ -58,87 +61,95 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
 
     fun setData(
         chipData: List<RadioGroupData>,
-        chipType: SingleChipType,
+        chipType: MultiChipType,
         orientation: Int,
         bgSelector: Int,
         textSelector: Int,
         callbacks: ChipClickListener,
+
     ) {
+        var chipIds = chipData.map { it.id } // Update chipIds property
+
         chipGroup.removeAllViews()
-        this.onChipGroupClickListener= callbacks
+        this.onChipGroupClickListener = callbacks
         this.orientation = orientation
         this.chipBGColor = ContextCompat.getColorStateList(context, bgSelector)
         this.chipTextColor = ContextCompat.getColorStateList(context, textSelector)
         chipGroup.isSingleLine = orientation == Orientation.HORIZONTAL
-        chipGroup.isSingleSelection = true
-        chipGroup.isSelectionRequired=true
+        chipGroup.isSingleSelection = false
+        chipGroup.isSelectionRequired = true
         setupRadioGroup()
-        chipData.forEach { data ->
+        chipData.forEachIndexed { index, data ->
             val chip = createChip(chipType)
             chip.text = data.name
-            setChipEvents(chip)
+
+            if (chipIds.size > index) {
+                chip.id = chipIds[index]
+            }
+            setChipEvents(chip, data)
             setChipAttributes(chip)
             chipGroup.addView(chip)
         }
     }
 
-    private fun createChip(chipType: SingleChipType): Chip {
+    private fun createChip(chipType: MultiChipType): Chip {
         return when (chipType) {
-            SingleChipType.ENTRY_CHIP -> creatEntryChip()
-            SingleChipType.CHOICE_CHIP -> createInputChip()
-            SingleChipType.ACTION_CHIP -> createActionChip()
-            SingleChipType.NONE -> throw IllegalArgumentException("Invalid chip type")
+            MultiChipType.ENTRY_CHIP -> createEntryChip()
+            MultiChipType.FILTER_CHIP -> createFilterChip()
+            MultiChipType.ACTION_CHIP -> createActionChip()
+            MultiChipType.NONE -> throw IllegalArgumentException("Invalid chip type")
+
         }
     }
 
-    private fun creatEntryChip(): Chip {
+    private fun createEntryChip(): Chip {
         return Chip(context, null, R.style.EntryChipStyle).apply {
             isClickable = true
-            isCheckedIconVisible=false
+            isCheckedIconVisible = false
         }
     }
 
     private fun setupRadioGroup() {
-
-        if (this.orientation == VERTICAL) {
-
+        if (this.orientation == Orientation.VERTICAL) {
             if (containerHorizontalScrollView.parent != null) {
                 removeView(containerHorizontalScrollView)
             }
             if (containerScrollView.parent == null) {
                 addView(containerScrollView)
             }
-
             containerScrollView.addView(chipGroup)
         } else {
-
             if (containerScrollView.parent != null) {
                 removeView(containerScrollView)
             }
             if (containerHorizontalScrollView.parent == null) {
                 addView(containerHorizontalScrollView)
             }
-
             containerHorizontalScrollView.addView(chipGroup)
         }
-
     }
 
+    private fun createFilterChip(): Chip {
+        return Chip(context, null, R.style.FilterChipStyle).apply {
+            isCloseIconVisible = false
+            isChipIconVisible = true
+        }
+    }
 
     private fun createInputChip(): Chip {
         return Chip(context, null, R.style.FilterChipStyle).apply {
             chipStrokeWidth = 2f
-            isCloseIconVisible = true
-            isChipIconVisible=false
-            isCheckedIconVisible=false
+            isCloseIconVisible = false
+            isChipIconVisible = false
+            isCheckedIconVisible = false
         }
     }
 
     private fun createActionChip(): Chip {
         return Chip(context).apply {
-            isChipIconVisible=true
-            isCheckedIconVisible=true
-            isCloseIconVisible=true
+            isChipIconVisible = true
+            isCheckedIconVisible = true
+            isCloseIconVisible = true
             chipStrokeWidth = 2f
         }
     }
@@ -152,20 +163,28 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
         }
     }
 
-    private fun setChipEvents(chip: Chip) {
-        chip.setOnClickListener {
-            onChipGroupClickListener?.onChipClick(chip, chip.isChecked)
+    private fun setChipEvents(chip: Chip,data: RadioGroupData) {
+
+        chip.setOnCheckedChangeListener { copoundButton, isChecked ->
+            data.isSelected = isChecked
+            if (isChecked) {
+                checkedChipIds += chip.id
+            } else {
+                checkedChipIds -= chip.id
+            }
+            data.isSelected = isChecked
+            if (isChecked) {
+                if (!checkedChipIds.contains(chip.id)) {
+                    checkedChipIds.add(chip.id)
+                }
+            } else {
+                checkedChipIds.remove(chip.id)
+            }
+
+            onChipGroupClickListener?.onMultiChipCheckedChanged( checkedChipIds.toList())
 
         }
 
-        chip.setOnCloseIconClickListener {
-            onChipGroupClickListener?.onChipCloseIconClick(chip)
-        }
-
-        chip.setOnCheckedChangeListener { compondButton, isChecked ->
-            onChipGroupClickListener?.onChipCheckedChanged(compondButton,null, isChecked)
-
-        }
     }
-}
 
+}

@@ -15,10 +15,10 @@ import android.widget.RadioGroup
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singalchoice.util.PaddingAttributes
-import com.ss.smartfilterlib.singalchoice.util.TextAttributes
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singalchoice.util.Orientation
+import com.ss.smartfilterlib.utils.PaddingAttributes
+import com.ss.smartfilterlib.utils.TextAttributes
+import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.utils.Orientation
 
 
 

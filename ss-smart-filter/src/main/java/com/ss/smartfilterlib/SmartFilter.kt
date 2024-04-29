@@ -1,11 +1,13 @@
 package com.ss.smartfilterlib
 
+import com.ss.smartfilterlib.multiselection.chipgroup.MultiselectionChipGroup
 import com.ss.smartfilterlib.singalchoice.chipgroup.SingleChipgroup
 import com.ss.smartfilterlib.singalchoice.radiogroup.MultiLineRadioGroup
 import com.ss.smartfilterlib.singalchoice.radiogroup.RowItemRadioGroup
 import com.ss.smartfilterlib.singalchoice.radiogroup.SingleLineRadioGroup
-import com.ss.smartfilterlib.singalchoice.util.SingleGroupSubType
-import com.ss.smartfilterlib.singalchoice.util.SingleSelectionParams
+import com.ss.smartfilterlib.utils.MultiSelectionParams
+import com.ss.smartfilterlib.utils.SingleGroupSubType
+import com.ss.smartfilterlib.utils.SingleSelectionParams
 
 
 object SmartFilter {
@@ -71,6 +73,19 @@ object SmartFilter {
                         params.callbacks
                 )
                 params.rootView.addView(singleChipgroup)
+
+    }
+    fun addChipGroupMultiSelection(params: MultiSelectionParams) {
+        val multiselectionChipGroup = MultiselectionChipGroup(params.rootView.context)
+        multiselectionChipGroup.setData(
+            params.mData,
+            params.chipType,
+            params.orientation,
+            params.bgSelector,
+            params.textSelector,
+            params.callbacks
+        )
+        params.rootView.addView(multiselectionChipGroup)
 
     }
 }

@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.MultiLineBinding
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singalchoice.util.GridSpacingItemDecoration
-import com.ss.smartfilterlib.singalchoice.util.SingleChangeDiffUtil
+import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.utils.GridSpacingItemDecoration
+import com.ss.smartfilterlib.utils.SingleChangeDiffUtil
 
 class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
 
