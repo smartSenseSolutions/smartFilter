@@ -40,12 +40,12 @@ To use the Smart Filter library in your Android application, you need to include
 ## SingleSelection
 ### SingleSelectionRadioGroup(Verticle/Horizontal)
   
-    ### How to Use
+### How to Use
     ```kotlin
      SmartFilter.addSingleSelectionRadioGroup(addSingleSelectionRadioGroup(binding.root, this))
     ```
        ```
-    ### Params
+### Params
     ```kotlin
 
     fun SingleSelectionRadioData(rootView: ViewGroup, callback: BaseEventListener) =
