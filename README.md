@@ -60,10 +60,10 @@ To use the Smart Filter library in your Android application, you need to include
     )
 ### Verticle
     orientation = Orientation.VERTICAL,
-    <img src="single_selection_verticle.png" width="250" />
+    <img src="media/single_selection_verticle.png" width="250" />
     ```
 ### Horizontal
-    <img src="single_selection_horizental.png" width="250" />
+    <img src="media/single_selection_horizental.png" width="250" />
     orientation = Orientation.HORIZONTAL,
 
 ### SingleSelectionMultiLine(MultiRaw)
