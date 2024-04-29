@@ -37,7 +37,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     init {
         initAttrs(attrs)
         setupView()
-        setupRadioGroup()
+
     }
     private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.RowItemRadioGroup)
@@ -46,7 +46,6 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
                 textSize = typedArray.getFloat(R.styleable.RowItemRadioGroup_rg_ri_TextSize,12f),
                 textColor = typedArray.getColor(R.styleable.RowItemRadioGroup_rg_ri_Textcolor, Color.BLACK),
             )
-
 
             textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_TextSelector)
             radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_Background)
@@ -77,6 +76,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         this.radioButtonDrawable = ContextCompat.getDrawable(context, bgSelector)
         this.textSelectorColor = ContextCompat.getColorStateList(context, textSelector)
         this.listener = callback
+        setupRadioGroup()
         addDynamicRadioButton()
 
     }

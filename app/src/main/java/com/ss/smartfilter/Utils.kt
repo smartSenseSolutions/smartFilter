@@ -42,7 +42,7 @@ fun addRadioGroupHorizontalRow(rootView: ViewGroup,callback: BaseEventListener) 
     SingleSelectionParams(
         rootView = rootView,
         singleGroupSubType = SingleGroupSubType.ROW_ITEM,
-        orientation = Orientation.HORIZONTAL,
+        orientation = Orientation.VERTICAL,
         mData = mRadioGroupData(),
         callbacks = callback,
         bgSelector = R.drawable.multiline_bg_selector,

@@ -10,26 +10,26 @@ This is a library for creating and managing radio groups in Android. It provides
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+- **These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-- Android Studio Iguana | 2023.2.1 Patch 2 or later
-- JDK 8
-- Android SDK 24 or later
+- ** Android Studio Iguana | 2023.2.1 Patch 2 or later
+- ** JDK 8
+- ** Android SDK 24 or later
 
 ### Installing
 
-1. Clone the repository: `git clone https://github.com/smartSenseSolutions/smart-filter-library.git`
-2. Open the project in Android Studio.
-3. Build and run the project on an emulator or device.
+- ** Clone the repository: `git clone https://github.com/smartSenseSolutions/smart-filter-library.git`
+- ** Open the project in Android Studio.
+- ** Build and run the project on an emulator or device.
 
 ## Usage
 
-To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:
+- **To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:
 
 ## Events Handling
-**BaseEventListener** is an interface that provides a set of methods to handle events in the Smart Filter library. You can implement this interface in your activity or fragment to handle these events. The following events are available:
+- **BaseEventListener** is an interface that provides a set of methods to handle events in the Smart Filter library. You can implement this interface in your activity or fragment to handle these events. The following events are available:
 
 - **onSingleSelectionChanged**: This method is called when the selected item in a single selection radio group is changed.
 - **onMultiSelectionChanged**: This method is called when the selected item in a multi selection radio group is changed.
@@ -38,54 +38,68 @@ To use the Smart Filter library in your Android application, you need to include
 
 
 ## SingleSelection
-### SingleSelectionRadioGroup(Verticle/Horizontal)
+  - **SingleSelectionRadioGroup(Verticle/Horizontal)
   
-### How to Use
-    ```kotlin
-     SmartFilter.addSingleSelectionRadioGroup(addSingleSelectionRadioGroup(binding.root, this))
-    ```
-       ```
-### Params
-    ```kotlin
+     ```kotlin              
+      SmartFilter.addSingleSelectionRadioGroup(addSingleSelectionRadioGroup(binding.root, this))
+        
+    - **Params
+      ```kotlin
+              fun SingleSelectionRadioData(rootView: ViewGroup, callback: BaseEventListener) =
+             SingleSelectionParams(
+             rootView = rootView,
+             singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
+             orientation = Orientation.VERTICAL,
+             mData = mRadioGroupData(),
+             callbacks = callback,
+             bgSelector = R.drawable.singleline_selector,
+             textSelector = R.color.single_text_color_selector
+         )
+    
+   - **Verticle && Horizontal
+        
+      ```kotlin
+          orientation = Orientation.VERTICAL,/ orientation = Orientation.HORIZONTAL,
 
-    fun SingleSelectionRadioData(rootView: ViewGroup, callback: BaseEventListener) =
+   <img src="media/single_selection_verticle.png" width="250" />  <img src="media/single_selection_horizental.png" width="250" />
+
+
+  - ** SingleSelectionMultiLine(MultiRaw)
+       
+        SmartFilter.addSingleSelectionRadioGroup(singleSelectionMultiLine(binding.root, this))
+
+    - **Params
+    ```kotlin
+      fun singleSelectionMultiLine(rootView: ViewGroup, callback: BaseEventListener) =
+      SingleSelectionParams(
+      rootView = rootView,
+      singleGroupSubType = SingleGroupSubType.MULTI_LINE,
+      mData = mRadioGroupData(),
+      callbacks = callback,
+      bgSelector = R.drawable.multiline_bg_selector,
+      textSelector = R.color.multiline_text_selector
+      )   
+    
+  <img src="media/single_selection_multiline.png" width="250" />
+
+  - ** SingleSelectionRowItem(Verticle/Horizontal)
+           
+        SmartFilter.addSingleSelectionRadioGroup(singleSelectionRowItem(binding.root, this))
+    
+     - **Params
+     ```kotlin
+        fun singleSelectionRowItem(rootView: ViewGroup, callback: BaseEventListener) =
         SingleSelectionParams(
         rootView = rootView,
-        singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
+        singleGroupSubType = SingleGroupSubType.ROW_ITEM,
         orientation = Orientation.VERTICAL,
         mData = mRadioGroupData(),
         callbacks = callback,
-        bgSelector = R.drawable.singleline_selector,
-        textSelector = R.color.single_text_color_selector
-    )
-### Verticle
-    orientation = Orientation.VERTICAL,
-
-<img src="media/single_selection_verticle.png" width="250" />
-  
-### Horizontal
-    orientation = Orientation.HORIZONTAL,
-<img src="media/single_selection_horizental.png" width="250" />
-   
-
-### SingleSelectionMultiLine(MultiRaw)
-<img src="media/single_selection_multiline.png" width="250" />
-   
-    SmartFilter.addSingleSelectionRadioGroup(singleSelectionMultiLine(binding.root, this))
+        bgSelector = R.drawable.rowitem_bg_selector,
+        textSelector = R.color.rowitem_text_selector
+        )
     
-### Params
-    ```kotlin
-
-    fun singleSelectionMultiLine(rootView: ViewGroup, callback: BaseEventListener) =
-    SingleSelectionParams(
-    rootView = rootView,
-    singleGroupSubType = SingleGroupSubType.MULTI_LINE,
-    mData = mRadioGroupData(),
-    callbacks = callback,
-    bgSelector = R.drawable.multiline_bg_selector,
-    textSelector = R.color.multiline_text_selector
-    )   
-
+<img src="media/single_selection_row_item_horizental.png" width="250" /> <img src="media/single_selection_row_item_verticle.png.png" width="250" />
 
 ### Attribute      
          
