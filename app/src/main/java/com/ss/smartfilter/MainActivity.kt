@@ -1,16 +1,13 @@
 package com.ss.smartfilter
 
-import RadioGroupCallback
 import android.os.Bundle
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.activity.ComponentActivity
 import com.ss.smartfilter.databinding.ActivityMainBinding
 import com.ss.smartfilterlib.SmartFilter
 
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
 
-class MainActivity : ComponentActivity(), RadioGroupCallback {
+class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,23 +15,15 @@ class MainActivity : ComponentActivity(), RadioGroupCallback {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SmartFilter.addSingleSelection(addRadioGroupSingleLineVertical(binding.root, this))
+            SmartFilter.addSingleSelection {
+                addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
+                    onSingleLineSelected(radioGroupData)
+                }
+            }
     }
 
-    override fun onRowItemSelected(radioGroupData: RadioGroupData) {
-        showToast(radioGroupData.name, this)
-    }
 
-    override fun onMultiLineSelected(position: Int, radioGroupData: RadioGroupData) {
-        showToast(radioGroupData.name, this)
-    }
-
-    override fun onSingleLineSelected(
-        radioGroupData: RadioGroupData,
-        radioGroup: RadioGroup,
-        radioButton: RadioButton,
-        checkId: Int
-    ) {
+     private fun onSingleLineSelected( radioGroupData: RadioGroupData) {
         showToast(radioGroupData.name, this)
     }
 }

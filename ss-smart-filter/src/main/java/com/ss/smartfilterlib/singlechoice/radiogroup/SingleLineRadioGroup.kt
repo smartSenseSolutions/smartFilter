@@ -1,4 +1,5 @@
-package com.ss.smartfilterlib.singalchoice.radiogroup
+package com.ss.smartfilterlib.singlechoice.radiogroup
+
 
 
 import RadioGroupCallback
@@ -15,10 +16,10 @@ import android.widget.RadioGroup
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singalchoice.util.PaddingAttributes
-import com.ss.smartfilterlib.singalchoice.util.TextAttributes
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singalchoice.util.Orientation
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.singlechoice.util.Orientation
+import com.ss.smartfilterlib.singlechoice.util.PaddingAttributes
+import com.ss.smartfilterlib.singlechoice.util.TextAttributes
 
 
 /**
@@ -51,7 +52,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
         try {
             orientation = typedArray.getInt(R.styleable.SingleLineRadioGroup_rg_sl_Orientation, Orientation.VERTICAL)
             textSelectorColor = typedArray.getColorStateList(R.styleable.SingleLineRadioGroup_rg_sl_TextSelectorColor)
-            radioButtonDrawable =typedArray.getDrawable(R.styleable.SingleLineRadioGroup_rg_sl_Background)
+            radioButtonDrawable = typedArray.getDrawable(R.styleable.SingleLineRadioGroup_rg_sl_Background)
 
             textAttributes = TextAttributes(
                 textSize = typedArray.getFloat(R.styleable.SingleLineRadioGroup_rg_sl_TextSize, 40f),
@@ -115,8 +116,8 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
         callbacks: RadioGroupCallback
     ) {
         this.orientation = orientation
-        this.radioButtonDrawable = ContextCompat.getDrawable(context, bgSelector)
-        this.textSelectorColor = ContextCompat.getColorStateList(context, textSelector)
+        this.radioButtonDrawable = bgSelector.let { ContextCompat.getDrawable(context, it) }
+        this.textSelectorColor = textSelector.let { ContextCompat.getColorStateList(context, it) }
         this.onCheckedChangeListener = callbacks
 
         setupRadioGroup()
@@ -135,22 +136,17 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context, attrs: At
         setPaddingToView(radioButton)
         radioButton.id = View.generateViewId()
         radioGroup.addView(radioButton)
-        radioGroup.setOnCheckedChangeListener { radioGroup, checkedId ->
-            val rb = radioGroup.findViewById<RadioButton>(checkedId)
-            onCheckedChangeListener?.onSingleLineSelected(data, radioGroup, rb, checkedId)
+        radioGroup.setOnCheckedChangeListener { _, _ ->
+            onCheckedChangeListener?.onSingleSelection(data)
 
         }
     }
 
-    private fun setData(
-        radioButton: RadioButton,
-        data: RadioGroupData
-    ) {
+    private fun setData(radioButton: RadioButton,data: RadioGroupData) {
         radioButton.text = data.name
-
     }
 
-    private var defaultPadding = resources.getDimension(R.dimen._10).toInt()
+    private var defaultPadding = resources.getDimension(com.intuit.sdp.R.dimen._10sdp).toInt()
 
 
     private fun setSelector(view: RadioButton) {

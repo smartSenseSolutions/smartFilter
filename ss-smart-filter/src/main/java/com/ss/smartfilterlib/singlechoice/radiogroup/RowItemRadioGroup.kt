@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singalchoice.radiogroup
+package com.ss.smartfilterlib.singlechoice.radiogroup
 
 import RadioGroupCallback
 import android.content.Context
@@ -14,9 +14,9 @@ import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.databinding.RowItemBinding
-import com.ss.smartfilterlib.singalchoice.util.PaddingAttributes
-import com.ss.smartfilterlib.singalchoice.util.TextAttributes
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.singlechoice.util.PaddingAttributes
+import com.ss.smartfilterlib.singlechoice.util.TextAttributes
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
 
 /**
  * created by Mala Ruparel ON 19/04/24
@@ -33,7 +33,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     private lateinit var radioGroup: RadioGroup
     private var orientation: Int = VERTICAL
     private var radioButtonDrawable: Drawable? = null
-    private var textSelectorColor: ColorStateList? = null
+    private var textSelectorColor: ColorStateList? = ContextCompat.getColorStateList(context, R.color.black)
 
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
@@ -73,12 +73,14 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
 
     }
 
-    fun setData(radioGroupData: ArrayList<RadioGroupData>, orientation: Int, bgSelector: Int, textSelector: Int, callback: RadioGroupCallback)
+    fun setData(radioGroupData: ArrayList<RadioGroupData>, orientation: Int, bgSelector: Int?, textSelector: Int?, callback: RadioGroupCallback)
     {
         this.orientation = orientation
         this.radioGroupData = radioGroupData
-        this.radioButtonDrawable = ContextCompat.getDrawable(context, bgSelector)
-        this.textSelectorColor = ContextCompat.getColorStateList(context, textSelector)
+        this.radioButtonDrawable = bgSelector?.let { ContextCompat.getDrawable(context, it) }
+         ///   ?: ContextCompat.getDrawable(context, R.drawable.default_radio_button_drawable)
+        this.textSelectorColor = textSelector?.let { ContextCompat.getColorStateList(context, it) }
+            ?: ContextCompat.getColorStateList(context, R.color.black)
         this.listener = callback
 
         setupRadioGroup()
@@ -92,7 +94,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
                 binding.tvName.text = item.name
                 binding.tvDes.text = item.description
                 binding.rtl.setOnClickListener {
-                    listener?.onRowItemSelected(item)
+                    listener?.onSingleSelection(item)
                 }
                 radioGroup.addView(binding.root)
             }

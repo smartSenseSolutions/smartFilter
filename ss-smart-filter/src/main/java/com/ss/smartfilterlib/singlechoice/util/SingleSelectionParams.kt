@@ -1,8 +1,11 @@
-package com.ss.smartfilterlib.singalchoice.util
+package com.ss.smartfilterlib.singlechoice.util
 
 import RadioGroupCallback
 import android.view.ViewGroup
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import com.ss.smartfilterlib.R
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
 
 /**
  * created by Mala Ruparel ON 23/04/24
@@ -15,6 +18,8 @@ data class SingleSelectionParams(
     val orientation: Int,
     val mData: ArrayList<RadioGroupData>,
     val callbacks: RadioGroupCallback,
-    val bgSelector: Int,
-    val textSelector: Int
+    @DrawableRes val bgSelector: Int = R.drawable.multiline_default,
+    @ColorRes val textSelector: Int = android.R.color.black
 )
+
+
