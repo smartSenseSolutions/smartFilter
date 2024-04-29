@@ -4,7 +4,6 @@ import RadioGroupCallback
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
 
 /**

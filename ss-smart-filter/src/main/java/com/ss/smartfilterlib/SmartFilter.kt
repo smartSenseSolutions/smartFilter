@@ -10,40 +10,40 @@ import com.ss.smartfilterlib.singlechoice.util.SingleSelectionParams
 
 object SmartFilter {
 
-    fun addSingleSelection( createParams: () -> SingleSelectionParams) {
-        val params = createParams()
-                when (params.singleGroupSubType) {
+    fun addSingleSelection( params: () -> SingleSelectionParams) {
+        val param = params()
+                when (param.singleGroupSubType) {
                     SingleGroupSubType.SINGLE_LINE -> {
-                        val singleLineRadioGroup = SingleLineRadioGroup(params.rootView.context)
+                        val singleLineRadioGroup = SingleLineRadioGroup(param.rootView.context)
                         singleLineRadioGroup.setData(
-                            params.mData,
-                            params.orientation,
-                            params.bgSelector,
-                            params.textSelector,
-                            params.callbacks
+                            param.mData,
+                            param.orientation,
+                            param.bgSelector,
+                            param.textSelector,
+                            param.callbacks
                         )
-                        params.rootView.addView(singleLineRadioGroup)
+                        param.rootView.addView(singleLineRadioGroup)
                     }
                     SingleGroupSubType.MULTI_LINE -> {
-                        val multiLineRadioGroup = MultiLineRadioGroup(params.rootView.context)
+                        val multiLineRadioGroup = MultiLineRadioGroup(param.rootView.context)
                         multiLineRadioGroup.setData(
-                            params.mData,
-                            params.bgSelector,
-                            params.textSelector,
-                            params.callbacks
+                            param.mData,
+                            param.bgSelector,
+                            param.textSelector,
+                            param.callbacks
                         )
-                        params.rootView.addView(multiLineRadioGroup)
+                        param.rootView.addView(multiLineRadioGroup)
                     }
                     SingleGroupSubType.ROW_ITEM -> {
-                        val rowItemRadioGroup = RowItemRadioGroup(params.rootView.context)
+                        val rowItemRadioGroup = RowItemRadioGroup(param.rootView.context)
                         rowItemRadioGroup.setData(
-                            params.mData,
-                            params.orientation,
-                            params.bgSelector,
-                            params.textSelector,
-                            params.callbacks
+                            param.mData,
+                            param.orientation,
+                            param.bgSelector,
+                            param.textSelector,
+                            param.callbacks
                         )
-                        params.rootView.addView(rowItemRadioGroup)
+                        param.rootView.addView(rowItemRadioGroup)
                     }
                 }
             }
