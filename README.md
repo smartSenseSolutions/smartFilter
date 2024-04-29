@@ -12,32 +12,33 @@ This is a library for creating and managing radio groups in Android. It provides
 
 - **These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
+    ### Prerequisites
 
-- ** Android Studio Iguana | 2023.2.1 Patch 2 or later
-- ** JDK 8
-- ** Android SDK 24 or later
+  - ** Android Studio Iguana | 2023.2.1 Patch 2 or later
+  - ** JDK 8
+  - ** Android SDK 24 or later
 
-### Installing
+    ### Installing
 
-- ** Clone the repository: `git clone https://github.com/smartSenseSolutions/smart-filter-library.git`
-- ** Open the project in Android Studio.
-- ** Build and run the project on an emulator or device.
+  - ** Clone the repository: `git clone https://github.com/smartSenseSolutions/smart-filter-library.git`
+  - ** Open the project in Android Studio.
+  - ** Build and run the project on an emulator or device.
 
-## Usage
+    ### Usage
 
-- **To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:
+  - **To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:
 
-## Events Handling
-- **BaseEventListener** is an interface that provides a set of methods to handle events in the Smart Filter library. You can implement this interface in your activity or fragment to handle these events. The following events are available:
+    ### Events Handling
+  - **BaseEventListener** is an interface that provides a set of methods to handle events in the Smart Filter library. You can implement this interface in your activity or fragment to handle these events. The following events are available:
 
-- **onSingleSelectionChanged**: This method is called when the selected item in a single selection radio group is changed.
-- **onMultiSelectionChanged**: This method is called when the selected item in a multi selection radio group is changed.
-- **onChipSelected**: This method is called when a chip is selected in a chip group.
-- **onChipUnselected**: This method is called when a chip is unselected in a chip group.
+  - **onSingleSelectionChanged**: This method is called when the selected item in a single selection radio group is changed.
+  - **onMultiSelectionChanged**: This method is called when the selected item in a multi selection radio group is changed.
+  - **onChipSelected**: This method is called when a chip is selected in a chip group.
+  - **onChipUnselected**: This method is called when a chip is unselected in a chip group.
 
 
 ## SingleSelection
+
   - **SingleSelectionRadioGroup(Verticle/Horizontal)
   
      ```kotlin              
@@ -99,7 +100,68 @@ This is a library for creating and managing radio groups in Android. It provides
         textSelector = R.color.rowitem_text_selector
         )
     
-<img src="media/single_selection_row_item_horizental.png" width="250" /> <img src="media/single_selection_row_item_verticle.png.png" width="250" />
+    
+   <img src="media/single_selection_row_item_horizental.png" width="250" /> <img src="media/single_selection_row_item_verticle.png.png" width="250" />
+
+- ** SingleSelectionChipGroup(MultiRaw)
+           
+        SmartFilter.addSingleSelectionRadioGroup(singleSelectionChipGroup(binding.root, this))
+    
+     - **Params
+     ```kotlin
+        fun singleSelectionChipGroup(rootView: ViewGroup, callback: BaseEventListener) =
+        SingleSelectionParams(
+        rootView = rootView,
+        singleGroupSubType = SingleGroupSubType.CHIP_GROUP,
+        orientation = Orientation.VERTICAL,
+        mData = mRadioGroupData(),
+        callbacks = callback,
+        bgSelector = R.drawable.chipgroup_bg_selector,
+        textSelector = R.color.chipgroup_text_selector
+        )
+    
+    
+ <img src="media/single_selection_chip.png" width="250" /> 
+
+- ** SingleSelectionChipGroup(MultiRaw)
+
+        SmartFilter.addSingleSelectionRadioGroup(singleSelectionChipGroup(binding.root, this))
+    
+     - **Params
+     ```kotlin
+        fun singleSelectionChipGroup(rootView: ViewGroup, callback: BaseEventListener) =
+        SingleSelectionParams(
+        rootView = rootView,
+        singleGroupSubType = SingleGroupSubType.CHIP_GROUP,
+        orientation = Orientation.VERTICAL,
+        mData = mRadioGroupData(),
+        callbacks = callback,
+        bgSelector = R.drawable.chipgroup_bg_selector,
+        textSelector = R.color.chipgroup_text_selector
+        )
+
+
+ <img src="media/single_selection_chip.png" width="250" /> 
+
+- ** MultiSelectionChipGroup(MultiRaw)
+        
+            SmartFilter.addChipGroupMultiSelection(multiSelectionChipGroup(binding.root, this))
+         
+    - **Params
+  
+          ```kotlin
+              fun multiSelectionChipGroup(rootView: ViewGroup, callback: BaseEventListener) =
+              SingleSelectionParams(
+              rootView = rootView,
+              singleGroupSubType = SingleGroupSubType.MULTI_SELECTION_CHIP_GROUP,
+              orientation = Orientation.VERTICAL,
+              mData = mRadioGroupData(),
+              callbacks = callback,
+              bgSelector = R.drawable.chipgroup_bg_selector,
+              textSelector = R.color.chipgroup_text_selector
+              )
+    
+      <img src="media/multiselect_chip.png" width="250" />
 
 ### Attribute      
          
