@@ -74,12 +74,19 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
         }
     }
     private fun setupView() {
-        val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         containerScrollView = ScrollView(context)
         containerHorizontalScrollView = HorizontalScrollView(context)
+
+        val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        containerScrollView.layoutParams = layoutParams
+        containerHorizontalScrollView.layoutParams = layoutParams
+
         radioGroup = RadioGroup(context)
+    }
+
+    private fun setupRadioGroup() {
+
         if (this.orientation == VERTICAL) {
-            containerScrollView.layoutParams = layoutParams
             if (containerHorizontalScrollView.parent != null) {
                 removeView(containerHorizontalScrollView)
             }
@@ -88,10 +95,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
             }
             radioGroup.orientation = VERTICAL
             containerScrollView.addView(radioGroup)
-
         } else {
-            containerHorizontalScrollView.layoutParams = layoutParams
-
             if (containerScrollView.parent != null) {
                 removeView(containerScrollView)
             }
@@ -101,8 +105,8 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
             radioGroup.orientation = HORIZONTAL
             containerHorizontalScrollView.addView(radioGroup)
         }
-
     }
+
 
     fun configureRadioButton(
         mData: ArrayList<RadioGroupData>,
@@ -115,7 +119,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
         this.radioButtonDrawable = bgSelector.let { ContextCompat.getDrawable(context, it) }
         this.textSelectorColor = textSelector.let { ContextCompat.getColorStateList(context, it) }
         this.onCheckedChangeListener = callbacks
-        radioGroup.removeAllViews()
+        setupRadioGroup()
         mData.forEach { data ->
             addRadioButtonView(
                 data
@@ -183,7 +187,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
     private fun applyPaddingAttributes(radioButton: RadioButton) {
         paddingAttributes.let { attributes ->
             radioButton.setPadding(
-                defaultPadding,
+                attributes.paddingStart,
                 attributes.paddingTop,
                 attributes.paddingEnd,
                 attributes.paddingBottom

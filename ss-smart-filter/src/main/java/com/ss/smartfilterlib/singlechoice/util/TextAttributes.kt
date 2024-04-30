@@ -18,8 +18,8 @@ data class TextAttributes(
 )
 
 data class PaddingAttributes(
-    val paddingStart: Int = com.intuit.sdp.R.dimen._4sdp,
-    val paddingTop: Int = com.intuit.sdp.R.dimen._4sdp,
-    val paddingEnd: Int = com.intuit.sdp.R.dimen._4sdp,
-    val paddingBottom: Int = com.intuit.sdp.R.dimen._4sdp
+    val paddingStart: Int = 8,
+    val paddingTop: Int = 8,
+    val paddingEnd: Int = 8,
+    val paddingBottom: Int = 8
 )
