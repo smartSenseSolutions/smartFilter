@@ -1,5 +1,6 @@
 package com.ss.smartfilterlib.data
 
+
 import com.ss.smartfilterlib.R
 
 /**
@@ -8,7 +9,7 @@ import com.ss.smartfilterlib.R
 data class RadioGroupData(
     val id: Int = 0,
     val name: String,
-    val description: String,
+    val description: String = "",
     var isSelected : Boolean = false,
     val image: Int = R.drawable.ic_documents
 )

@@ -12,8 +12,8 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.data.RadioGroupData
-import com.ss.smartfilterlib.utils.MultiChipType
-import com.ss.smartfilterlib.utils.Orientation
+import com.ss.smartfilterlib.singlechoice.util.MultiChipType
+import com.ss.smartfilterlib.singlechoice.util.Orientation
 
 /**
  * created by Mala Ruparel ON 25/04/24
@@ -67,7 +67,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         textSelector: Int,
         callbacks: ChipClickListener,
 
-    ) {
+        ) {
         var chipIds = chipData.map { it.id } // Update chipIds property
 
         chipGroup.removeAllViews()
@@ -165,7 +165,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
 
     private fun setChipEvents(chip: Chip,data: RadioGroupData) {
 
-        chip.setOnCheckedChangeListener { copoundButton, isChecked ->
+        chip.setOnCheckedChangeListener { _, isChecked ->
             data.isSelected = isChecked
             if (isChecked) {
                 checkedChipIds += chip.id

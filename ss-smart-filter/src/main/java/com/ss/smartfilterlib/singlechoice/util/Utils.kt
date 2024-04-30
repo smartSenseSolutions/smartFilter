@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.utils
+package com.ss.smartfilterlib.singlechoice.util
 
 /**
  * created by Mala Ruparel ON 19/04/24
