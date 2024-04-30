@@ -9,7 +9,6 @@ import com.ss.smartfilterlib.singlechoice.radiogroup.data.mRadioGroupData
 import com.ss.smartfilterlib.singlechoice.util.ChipType
 import com.ss.smartfilterlib.singlechoice.util.Orientation
 import com.ss.smartfilterlib.singlechoice.util.SingleGroupSubType
-import com.ss.smartfilterlib.singlechoice.util.SingleGroupType
 import com.ss.smartfilterlib.singlechoice.util.SingleSelectionParams
 
 /**
@@ -18,7 +17,6 @@ import com.ss.smartfilterlib.singlechoice.util.SingleSelectionParams
 fun addRadioGroupSingleLineVertical(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
     SingleSelectionParams(
         rootView = rootView,
-        singleGroupType = SingleGroupType.RADIO_GROUP,
         singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
         chipType = ChipType.NONE,
         orientation = Orientation.HORIZONTAL,
@@ -33,7 +31,6 @@ fun addRadioGroupSingleLineVertical(rootView: ViewGroup,radioGroupCallback: (Rad
 fun addRadioGroupMultiRow(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
     SingleSelectionParams(
         rootView = rootView,
-        singleGroupType = SingleGroupType.RADIO_GROUP,
         singleGroupSubType = SingleGroupSubType.MULTI_LINE,
         chipType = ChipType.NONE,
         orientation = Orientation.VERTICAL,
@@ -42,7 +39,18 @@ fun addRadioGroupMultiRow(rootView: ViewGroup,radioGroupCallback: (RadioGroupDat
         bgSelector = R.drawable.multiline_selector,
         textSelector = R.color.multiline_text_selector
     )
+fun addRadioGroupRowItem(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
+    SingleSelectionParams(
+        rootView = rootView,
+        singleGroupSubType = SingleGroupSubType.ROW_ITEM,
+        chipType = ChipType.NONE,
+        orientation = Orientation.VERTICAL,
+        mData = mRadioGroupData(),
+        callbacks = radioGroupCallback,
+        bgSelector = R.drawable.row_item_selector,
+        textSelector = R.color.single_text_color_selector
 
+    )
 fun showToast(message: String, context: Context) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }

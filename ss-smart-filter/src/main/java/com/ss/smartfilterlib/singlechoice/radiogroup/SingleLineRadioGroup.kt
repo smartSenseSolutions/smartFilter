@@ -5,7 +5,7 @@ package com.ss.smartfilterlib.singlechoice.radiogroup
 import RadioGroupCallback
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
@@ -25,19 +25,15 @@ import com.ss.smartfilterlib.singlechoice.util.TextAttributes
 /**
  * created by Mala Ruparel ON 17/04/24
  */
-class SingleLineRadioGroup @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
+class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
 
 
     private var textSelectorColor: ColorStateList? = null
     private var radioButtonDrawable: Drawable? = null
     private var orientation: Int = Orientation.VERTICAL
 
-    private var textAttributes: TextAttributes? = null
-    private var paddingAttributes: PaddingAttributes? = null
+    private var textAttributes: TextAttributes = TextAttributes()
+    private var paddingAttributes: PaddingAttributes = PaddingAttributes()
 
     private var dataFromXml: Int = 0
     private var onCheckedChangeListener: RadioGroupCallback? = null
@@ -59,17 +55,6 @@ class SingleLineRadioGroup @JvmOverloads constructor(
             textSelectorColor = typedArray.getColorStateList(R.styleable.SingleLineRadioGroup_rg_sl_TextSelectorColor)
             radioButtonDrawable = typedArray.getDrawable(R.styleable.SingleLineRadioGroup_rg_sl_Background)
 
-            textAttributes = TextAttributes(
-                textSize = typedArray.getFloat(R.styleable.SingleLineRadioGroup_rg_sl_TextSize, 40f),
-                textColor = typedArray.getColor(R.styleable.SingleLineRadioGroup_rg_sl_TextColor, Color.BLACK),
-            )
-
-            paddingAttributes = PaddingAttributes(
-                paddingStart = typedArray.getDimensionPixelSize(R.styleable.SingleLineRadioGroup_rg_sl_PaddingStart, defaultPadding),
-                paddingTop = typedArray.getDimensionPixelSize(R.styleable.SingleLineRadioGroup_rg_sl_PaddingTop, defaultPadding),
-                paddingEnd = typedArray.getDimensionPixelSize(R.styleable.SingleLineRadioGroup_rg_sl_PaddingEnd, defaultPadding),
-                paddingBottom = typedArray.getDimensionPixelSize(R.styleable.SingleLineRadioGroup_rg_sl_PaddingBottom, defaultPadding)
-            )
 
             dataFromXml = typedArray.getResourceId(R.styleable.SingleLineRadioGroup_rg_sl_Listitem, 0)
 
@@ -79,15 +64,15 @@ class SingleLineRadioGroup @JvmOverloads constructor(
     }
 
 
-private fun setDataFromAttrs(){
-    if (dataFromXml != 0) {
-        val mData = resources.getStringArray(dataFromXml);
-        mData.forEach {
-            val data = RadioGroupData(name = it)
-            configureRadioButton(data)
+    private fun setDataFromAttrs() {
+        if (dataFromXml != 0) {
+            val mData = resources.getStringArray(dataFromXml);
+            mData.forEach {
+                val data = RadioGroupData(name = it)
+                addRadioButtonView(data)
+            }
         }
     }
-}
     private fun setupView() {
         val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         containerScrollView = ScrollView(context)
@@ -132,23 +117,22 @@ private fun setDataFromAttrs(){
         this.onCheckedChangeListener = callbacks
         radioGroup.removeAllViews()
         mData.forEach { data ->
-            configureRadioButton(
+            addRadioButtonView(
                 data
             )
         }
     }
 
-    private fun configureRadioButton(data: RadioGroupData) {
+    private fun addRadioButtonView(data: RadioGroupData) {
         val radioButton = RadioButton(context)
         radioButton.apply {
             text = setData(data)
-
+            applyTextAttributes(this)
+            applyPaddingAttributes(this)
+            applySelector(this)
         }
 
-        setSelector(radioButton)
-        setPaddingToView(radioButton)
         generateViewWithId(radioButton, data)
-        //getView(radioButton, data)
         radioGroup.addView(radioButton)
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val checkedRadioButton: RadioButton = findViewById(checkedId)
@@ -160,10 +144,10 @@ private fun setDataFromAttrs(){
     private fun setData(data: RadioGroupData) = data.name
 
 
-    private var defaultPadding = resources.getDimension(com.intuit.sdp.R.dimen._10sdp).toInt()
+    private var defaultPadding = resources.getDimension(com.intuit.sdp.R.dimen._8sdp).toInt()
 
 
-    private fun setSelector(radioButton: RadioButton) {
+    private fun applySelector(radioButton: RadioButton) {
         if(textSelectorColor == null){
             textSelectorColor= setDefaultTextColor()
         }
@@ -174,9 +158,7 @@ private fun setDataFromAttrs(){
         radioButton.buttonDrawable = radioButtonDrawable?.constantState?.newDrawable()?.mutate()
     }
 
-    private fun setPaddingToView(view: View) {
-        view.setPadding(defaultPadding, defaultPadding, defaultPadding, defaultPadding)
-    }
+
     private fun generateViewWithId(radioButton: RadioButton, data: RadioGroupData)  {
         radioButton.id = View.generateViewId()
         radioButton.tag = data
@@ -189,6 +171,24 @@ private fun setDataFromAttrs(){
      return ContextCompat.getColorStateList(context, R.color.black)
     }
 
+    private fun applyTextAttributes(radioButton: RadioButton) {
+        textAttributes.let { attributes ->
+            radioButton.apply {
+                textSize = attributes.textSize
+                typeface = Typeface.create(Typeface.DEFAULT, attributes.fontFamily)
+            }
+        }
+    }
 
+    private fun applyPaddingAttributes(radioButton: RadioButton) {
+        paddingAttributes.let { attributes ->
+            radioButton.setPadding(
+                defaultPadding,
+                attributes.paddingTop,
+                attributes.paddingEnd,
+                attributes.paddingBottom
+            )
+        }
+    }
 
 }

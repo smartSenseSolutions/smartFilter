@@ -25,7 +25,7 @@ object SmartFilter {
                     }
                     SingleGroupSubType.MULTI_LINE -> {
                         val multiLineRadioGroup = MultiLineRadioGroup(param.rootView.context)
-                        multiLineRadioGroup.setData(
+                        multiLineRadioGroup.configureRadioButton(
                             param.mData,
                             param.bgSelector,
                             param.textSelector,
@@ -35,7 +35,7 @@ object SmartFilter {
                     }
                     SingleGroupSubType.ROW_ITEM -> {
                         val rowItemRadioGroup = RowItemRadioGroup(param.rootView.context)
-                        rowItemRadioGroup.setData(
+                        rowItemRadioGroup.configureRadioButton(
                             param.mData,
                             param.orientation,
                             param.bgSelector,

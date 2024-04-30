@@ -5,20 +5,17 @@
     android:id="@+id/mCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/_15sdp"
-    android:layout_marginTop="@dimen/_5sdp"
-    android:layout_marginEnd="@dimen/_1sdp"
-    android:layout_marginBottom="@dimen/_5sdp"
+   android:layout_margin="@dimen/_4sdp"
     android:background="?attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardCornerRadius="@dimen/_4sdp"
     app:cardElevation="@dimen/_4sdp"
-    app:contentPadding="@dimen/_40sdp">
+    app:contentPadding="@dimen/_4sdp">
 
     <RelativeLayout
         android:id="@+id/rtl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_8sdp">
+        android:padding="@dimen/_2sdp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img"
