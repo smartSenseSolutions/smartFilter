@@ -28,6 +28,31 @@ These instructions will get you a copy of the project up and running on your loc
 
 To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:
 
+### Default Drawable for SingleSelectionRadioGroup
+
+        @DrawableRes val bgSelector: Int = androidx.appcompat.R.drawable.abc_btn_radio_material,
+        @ColorRes val textSelector: Int = android.R.color.black
+
+##Selector
+
+         bgSelector = R.drawable.singleline_rb_selector,
+        textSelector = R.color.single_text_color_selector
+
+###  Drawable for SingleSelectionMultiRaw
+
+##Default
+       
+         ```kotlin
+        @DrawableRes val bgSelector: Int = R.drawable.multiline_default,
+        @ColorRes val textSelector: Int = android.R.color.black
+
+##Selector  
+
+            ```kotlin    
+            bgSelector = R.drawable.multiline_selector,
+            textSelector = R.color.multiline_text_selector
+
+
 ## Events Handling
 **BaseEventListener** is an interface that provides a set of methods to handle events in the Smart Filter library. You can implement this interface in your activity or fragment to handle these events. The following events are available:
 

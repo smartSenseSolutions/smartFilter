@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singalchoice.util
+package com.ss.smartfilterlib.singlechoice.util
 
 import android.graphics.Color
 
@@ -7,7 +7,7 @@ import android.graphics.Color
  */
 data class TextAttributes(
     var textSize: Float = 12f,
-    val textColor: Int = Color.BLACK // Default text color is black
+    val textColor: Int = Color.BLACK
 )
 data class PaddingAttributes(
     val paddingStart: Int = 0,

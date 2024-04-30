@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singalchoice.util
+package com.ss.smartfilterlib.singlechoice.util
 
 import android.graphics.Rect
 import android.view.View

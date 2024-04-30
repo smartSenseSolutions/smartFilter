@@ -1,7 +1,7 @@
-package com.ss.smartfilterlib.singalchoice.util
+package com.ss.smartfilterlib.singlechoice.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
 
 /**
  * created by Mala Ruparel ON 22/04/24
