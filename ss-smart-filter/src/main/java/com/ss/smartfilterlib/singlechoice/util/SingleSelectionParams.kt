@@ -4,6 +4,7 @@ import RadioGroupCallback
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
 
 /**
@@ -11,7 +12,6 @@ import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
  */
 data class SingleSelectionParams(
     val rootView: ViewGroup,
-    val singleGroupType: SingleGroupType,
     val singleGroupSubType: SingleGroupSubType,
     val chipType: ChipType,
     val orientation: Int,
