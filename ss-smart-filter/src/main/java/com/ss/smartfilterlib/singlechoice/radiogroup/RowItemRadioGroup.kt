@@ -51,13 +51,19 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     }
 
     private fun setupView() {
-
-        val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         containerScrollView = ScrollView(context)
         containerHorizontalScrollView = HorizontalScrollView(context)
+
+        val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        containerScrollView.layoutParams = layoutParams
+        containerHorizontalScrollView.layoutParams = layoutParams
+
         radioGroup = RadioGroup(context)
+    }
+
+    private fun setupRadioGroup() {
+
         if (this.orientation == VERTICAL) {
-            containerScrollView.layoutParams = layoutParams
             if (containerHorizontalScrollView.parent != null) {
                 removeView(containerHorizontalScrollView)
             }
@@ -66,10 +72,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
             }
             radioGroup.orientation = VERTICAL
             containerScrollView.addView(radioGroup)
-
         } else {
-            containerHorizontalScrollView.layoutParams = layoutParams
-
             if (containerScrollView.parent != null) {
                 removeView(containerScrollView)
             }
@@ -79,7 +82,6 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
             radioGroup.orientation = HORIZONTAL
             containerHorizontalScrollView.addView(radioGroup)
         }
-
     }
 
 
@@ -94,7 +96,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         this.radioButtonDrawable = bgSelector.let { ContextCompat.getDrawable(context, it) }
         this.textSelectorColor = textSelector.let { ContextCompat.getColorStateList(context, it) }
         this.onCheckedChangeListener = callbacks
-        radioGroup.removeAllViews()
+        setupRadioGroup()
         mData.forEach { data ->
             addRadioButtonView(
                 data
