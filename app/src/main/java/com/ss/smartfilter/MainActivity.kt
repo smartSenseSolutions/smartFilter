@@ -1,19 +1,13 @@
 package com.ss.smartfilter
 
-
-import BaseEventListener
 import android.os.Bundle
-import android.widget.CompoundButton
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.activity.ComponentActivity
-import com.google.android.material.chip.Chip
 import com.ss.smartfilter.databinding.ActivityMainBinding
 import com.ss.smartfilterlib.SmartFilter
-
 import com.ss.smartfilterlib.data.RadioGroupData
 
-class MainActivity : ComponentActivity(), BaseEventListener {
+
+class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,39 +15,15 @@ class MainActivity : ComponentActivity(), BaseEventListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SmartFilter.addRadioGroupSingleSelection(singleSelectionMultiLine(binding.root, this))
+        SmartFilter.addSingleSelection {
+            addRadioGroupRowItem(binding.root) { radioGroupData ->
+                onSingleLineSelected(radioGroupData)
+            }
+        }
     }
 
-    override fun onRowItemSelected(radioGroupData: RadioGroupData) {
-        showToast(radioGroupData.name, this)
-    }
 
-    override fun onChipClick(chip: Chip, isChecked: Boolean) {
-        showToast(chip.text.toString(), this)
-    }
-
-    override fun onChipCloseIconClick(chip: Chip) {
-        showToast(chip.text.toString(), this)
-    }
-
-    override fun onChipCheckedChanged(
-        compoundButton: CompoundButton,
-        chip: Chip?,
-        isChecked: Boolean
-    ) {
-        showToast(compoundButton.text.toString(), this)
-    }
-
-    override fun onMultiChipCheckedChanged(checkedChipIds: List<Int>) {
-        showToast("Checked IDs: ${checkedChipIds.joinToString(", ")}", this)
-    }
-
-    override fun onSingleLineSelected(
-        radioGroupData: RadioGroupData,
-        radioGroup: RadioGroup,
-        radioButton: RadioButton,
-        checkId: Int
-    ) {
+    private fun onSingleLineSelected( radioGroupData: RadioGroupData) {
         showToast(radioGroupData.name, this)
     }
 }
