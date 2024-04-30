@@ -13,8 +13,8 @@ object SmartFilter {
                     val param = params()
                     when (param.singleGroupSubType) {
                     SingleGroupSubType.SINGLE_LINE -> {
-                        val singleLineRadioGroup = SingleLineRadioGroup(param.rootView.context)
-                        singleLineRadioGroup.setData(
+                     val singleLineRadioGroup = SingleLineRadioGroup(param.rootView.context)
+                     singleLineRadioGroup.configureRadioButton(
                             param.mData,
                             param.orientation,
                             param.bgSelector,

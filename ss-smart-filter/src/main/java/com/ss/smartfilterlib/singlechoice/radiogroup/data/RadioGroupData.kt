@@ -8,7 +8,7 @@ import com.ss.smartfilterlib.R
 data class RadioGroupData(
     val id: Int = 0,
     val name: String,
-    val description: String,
+    val description: String ="Smart Filter Description 1",
     val image: Int = R.drawable.ic_documents
 )
 

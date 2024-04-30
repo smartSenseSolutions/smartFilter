@@ -21,9 +21,11 @@ fun addRadioGroupSingleLineVertical(rootView: ViewGroup,radioGroupCallback: (Rad
         singleGroupType = SingleGroupType.RADIO_GROUP,
         singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
         chipType = ChipType.NONE,
-        orientation = Orientation.VERTICAL,
+        orientation = Orientation.HORIZONTAL,
         mData = mRadioGroupData(),
         callbacks = radioGroupCallback,
+        bgSelector = R.drawable.singleline_rb_selector,
+        textSelector = R.color.single_text_color_selector
     )
 
 
