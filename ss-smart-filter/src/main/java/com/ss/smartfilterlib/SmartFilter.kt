@@ -44,7 +44,9 @@ object SmartFilter {
                         )
                         param.rootView.addView(rowItemRadioGroup)
                     }
-                }
+
+                        SingleGroupSubType.NONE -> TODO()
+                    }
             }
 
 

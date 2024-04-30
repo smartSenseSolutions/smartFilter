@@ -1,5 +1,6 @@
 package com.ss.smartfilterlib.singalchoice.chipgroup
 
+
 import ChipClickListener
 import android.content.Context
 import android.content.res.ColorStateList
@@ -11,9 +12,10 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singalchoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singalchoice.util.ChipType
-import com.ss.smartfilterlib.singalchoice.util.Orientation
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.singlechoice.util.ChipType
+import com.ss.smartfilterlib.singlechoice.util.Orientation
+
 /**
  * created by Mala Ruparel ON 24/04/24
  */

@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         setContentView(binding.root)
 
             SmartFilter.addSingleSelection {
-                addRadioGroupRowItem(binding.root) { radioGroupData ->
+                addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
                     onSingleLineSelected(radioGroupData)
                 }
             }

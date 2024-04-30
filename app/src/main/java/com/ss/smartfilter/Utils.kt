@@ -36,7 +36,7 @@ fun addRadioGroupMultiRow(rootView: ViewGroup,radioGroupCallback: (RadioGroupDat
         orientation = Orientation.VERTICAL,
         mData = mRadioGroupData(),
         callbacks = radioGroupCallback,
-        bgSelector = R.drawable.multiline_selector,
+        bgSelector = R.drawable.multiline_bg_selector,
         textSelector = R.color.multiline_text_selector
     )
 fun addRadioGroupRowItem(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
@@ -44,7 +44,7 @@ fun addRadioGroupRowItem(rootView: ViewGroup,radioGroupCallback: (RadioGroupData
         rootView = rootView,
         singleGroupSubType = SingleGroupSubType.ROW_ITEM,
         chipType = ChipType.NONE,
-        orientation = Orientation.VERTICAL,
+        orientation = Orientation.HORIZONTAL,
         mData = mRadioGroupData(),
         callbacks = radioGroupCallback,
         bgSelector = R.drawable.row_item_selector,
