@@ -1,4 +1,4 @@
-package com.ss.smartfilter.ui.theme
+package com.ss.smartfilter.theme
 
 import androidx.compose.ui.graphics.Color
 

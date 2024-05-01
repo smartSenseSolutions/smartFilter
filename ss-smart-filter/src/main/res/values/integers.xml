@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="int_01">1</integer>
+    <integer name="int_02">2</integer>
+    <integer name="int_03">3</integer>
+    <integer name="int_04">4</integer>
+    <integer name="int_05">5</integer>
+    <integer name="int_06">6</integer>
+    <integer name="int_07">7</integer>
+    <integer name="int_08">8</integer>
+    <integer name="int_09">9</integer>
+    <integer name="int_10">10</integer>
+
+
+
+</resources>

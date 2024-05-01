@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="SingleLineRadioGroup">
+
+        <attr name="rg_sl_FontFamily" format="reference" />
+        <attr name="rg_sl_TextSize" format="dimension" />
+        <attr name="rg_sl_Orientation" format="integer" />
+        <attr name="rg_sl_Background" format="reference" />
+        <attr name="rg_sl_TextSelectorColor" format="color" />
+        <attr name="rg_sl_PaddingStart" format="dimension" />
+        <attr name="rg_sl_PaddingTop" format="dimension" />
+        <attr name="rg_sl_PaddingEnd" format="dimension" />
+        <attr name="rg_sl_PaddingBottom" format="dimension" />
+        <attr name="rg_sl_Listitem" format="string" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="MultiLineRadioGroup">
+        <attr name="rg_ml_SpanCount" format="integer" />
+        <attr name="rg_ml_Spacing" format="integer" />
+        <attr name="rg_ml_Background" format="reference" />
+        <attr name="rg_ml_TextSelector" format="color" />
+        <attr name="rg_ml_IncludeEdge" format="boolean" />
+        <attr name="rg_ml_Listitem" format="reference" />
+        <attr name="rg_ml_TextSize" format="reference" />
+        <attr name="rg_ml_FontFamily" format="reference" />
+        <attr name="rg_ml_PaddingStart" format="dimension" />
+        <attr name="rg_ml_PaddingTop" format="dimension" />
+        <attr name="rg_ml_PaddingEnd" format="dimension" />
+        <attr name="rg_ml_PaddingBottom" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="RowItemRadioGroup">
+        <attr name="rg_ri_TextSize" format="dimension" />
+        <attr name="rg_ri_FontFamily" format="reference" />
+        <attr name="rg_ri_Background" format="reference" />
+        <attr name="rg_ri_TextSelector" format="color" />
+        <attr name="rg_ri_Orientation" format="integer" />
+        <attr name="rg_ri_PaddingStart" format="dimension" />
+        <attr name="rg_ri_PaddingTop" format="dimension" />
+        <attr name="rg_ri_PaddingEnd" format="dimension" />
+        <attr name="rg_ri_PaddingBottom" format="dimension" />
+    </declare-styleable>
+</resources>
