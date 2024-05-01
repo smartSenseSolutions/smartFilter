@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.ViewGroup
 import android.widget.Toast
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.mRadioGroupData
+import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.mRadioGroupData
 import com.ss.smartfilterlib.utils.MultiChipType
 import com.ss.smartfilterlib.utils.Orientation
 import com.ss.smartfilterlib.utils.SingleChipType

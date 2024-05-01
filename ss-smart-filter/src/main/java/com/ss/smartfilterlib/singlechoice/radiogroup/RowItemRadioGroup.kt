@@ -13,9 +13,9 @@ import android.widget.RelativeLayout
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
+import com.ss.smartfilterlib.callback.RadioGroupCallback
+import com.ss.smartfilterlib.data.RadioGroupData
 import com.ss.smartfilterlib.databinding.RowItemBinding
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
 import com.ss.smartfilterlib.utils.Orientation
 
 /**

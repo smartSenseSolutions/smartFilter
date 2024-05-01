@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.ss.smartfilter.databinding.ActivityMainBinding
 import com.ss.smartfilterlib.SmartFilter
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
-
-
+import com.ss.smartfilterlib.data.RadioGroupData
 
 
 class MainActivity : ComponentActivity() {
@@ -17,8 +15,8 @@ class MainActivity : ComponentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SmartFilter.addRadioGroupSingleSelection {
-            addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
+        SmartFilter.addChipGroupMultiSelection {
+            addMultiSelectionChipGroup(binding.root) { radioGroupData ->
                 showMessage(radioGroupData) } }
     }
 

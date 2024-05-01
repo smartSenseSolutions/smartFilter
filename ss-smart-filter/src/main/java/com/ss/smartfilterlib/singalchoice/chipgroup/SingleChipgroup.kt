@@ -13,8 +13,8 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.callback.RadioGroupCallback
 import com.ss.smartfilterlib.utils.Orientation
 import com.ss.smartfilterlib.utils.SingleChipType
 

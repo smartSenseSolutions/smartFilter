@@ -1,5 +1,5 @@
-package com.ss.smartfilterlib.singalchoice.callback
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+package com.ss.smartfilterlib.callback
+import com.ss.smartfilterlib.data.RadioGroupData
 
 
 /**

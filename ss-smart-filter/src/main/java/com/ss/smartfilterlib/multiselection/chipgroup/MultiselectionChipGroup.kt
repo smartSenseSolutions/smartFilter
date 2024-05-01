@@ -1,6 +1,5 @@
 package com.ss.smartfilterlib.multiselection.chipgroup
 
-import ChipClickListener
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
@@ -12,8 +11,9 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.data.RadioGroupData
-import com.ss.smartfilterlib.singlechoice.util.MultiChipType
-import com.ss.smartfilterlib.singlechoice.util.Orientation
+import com.ss.smartfilterlib.callback.ChipGroupCallback
+import com.ss.smartfilterlib.utils.MultiChipType
+import com.ss.smartfilterlib.utils.Orientation
 
 /**
  * created by Mala Ruparel ON 25/04/24
@@ -27,7 +27,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
     private lateinit var chipGroup: ChipGroup
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
-    private var onChipGroupClickListener: ChipClickListener? = null
+    private var onChipGroupClickListener: ChipGroupCallback? = null
     private var chipData: ArrayList<RadioGroupData> = arrayListOf()
     private var checkedChipIds: ArrayList<Int> = arrayListOf()
 
@@ -65,7 +65,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         orientation: Int,
         bgSelector: Int,
         textSelector: Int,
-        callbacks: ChipClickListener,
+        callbacks: ChipGroupCallback,
 
         ) {
         var chipIds = chipData.map { it.id } // Update chipIds property
@@ -136,14 +136,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         }
     }
 
-    private fun createInputChip(): Chip {
-        return Chip(context, null, R.style.FilterChipStyle).apply {
-            chipStrokeWidth = 2f
-            isCloseIconVisible = false
-            isChipIconVisible = false
-            isCheckedIconVisible = false
-        }
-    }
+
 
     private fun createActionChip(): Chip {
         return Chip(context).apply {
