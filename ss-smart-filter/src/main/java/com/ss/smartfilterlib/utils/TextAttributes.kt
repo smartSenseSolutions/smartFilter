@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singlechoice.util
+package com.ss.smartfilterlib.utils
 
 import android.graphics.Color
 import com.ss.smartfilterlib.R
@@ -17,8 +17,8 @@ data class TextAttributes(
     val textEllipsize: Int = 0
 )
 data class PaddingAttributes(
-    val paddingStart: Int = 8,
-    val paddingTop: Int = 8,
-    val paddingEnd: Int = 8,
-    val paddingBottom: Int = 8
+    val paddingStart: Int = 20,
+    val paddingTop: Int = 20,
+    val paddingEnd: Int = 20,
+    val paddingBottom: Int = 20
 )
