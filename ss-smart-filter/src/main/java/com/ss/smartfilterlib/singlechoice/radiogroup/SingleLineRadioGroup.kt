@@ -2,7 +2,6 @@ package com.ss.smartfilterlib.singlechoice.radiogroup
 
 
 
-import RadioGroupCallback
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
@@ -16,10 +15,11 @@ import android.widget.RadioGroup
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singlechoice.util.Orientation
-import com.ss.smartfilterlib.singlechoice.util.PaddingAttributes
-import com.ss.smartfilterlib.singlechoice.util.TextAttributes
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.utils.Orientation
+import com.ss.smartfilterlib.utils.PaddingAttributes
+import com.ss.smartfilterlib.utils.TextAttributes
 
 
 /**

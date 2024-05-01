@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.ss.smartfilter.databinding.ActivityMainBinding
 import com.ss.smartfilterlib.SmartFilter
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+
+
 
 
 class MainActivity : ComponentActivity() {
@@ -15,15 +17,15 @@ class MainActivity : ComponentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SmartFilter.addSingleSelection {
-            addRadioGroupRowItem(binding.root) { radioGroupData ->
-                onSingleLineSelected(radioGroupData)
-            }
-        }
+        SmartFilter.addRadioGroupSingleSelection {
+            addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
+                showMessage(radioGroupData) } }
     }
 
-
-    private fun onSingleLineSelected( radioGroupData: RadioGroupData) {
-        showToast(radioGroupData.name, this)
+    private fun showMessage(data: RadioGroupData) {
+        showToast(data.name, this)
+    }
+    private fun showMessage(data: List<Int>) {
+       showToast("Checked IDs: ${data.joinToString(", ")}", this)
     }
 }

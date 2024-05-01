@@ -1,5 +1,4 @@
 package com.ss.smartfilterlib.singlechoice.radiogroup
-import RadioGroupCallback
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
@@ -14,12 +13,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.data.RadioGroupData
 import com.ss.smartfilterlib.databinding.MultiLineBinding
-import com.ss.smartfilterlib.singlechoice.util.PaddingAttributes
-import com.ss.smartfilterlib.singlechoice.util.TextAttributes
-import com.ss.smartfilterlib.utils.GridSpacingItemDecoration
-import com.ss.smartfilterlib.utils.SingleChangeDiffUtil
+import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.singlechoice.util.GridSpacingItemDecoration
+import com.ss.smartfilterlib.singlechoice.util.SingleChangeDiffUtil
+import com.ss.smartfilterlib.utils.PaddingAttributes
+import com.ss.smartfilterlib.utils.TextAttributes
 
 class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
 

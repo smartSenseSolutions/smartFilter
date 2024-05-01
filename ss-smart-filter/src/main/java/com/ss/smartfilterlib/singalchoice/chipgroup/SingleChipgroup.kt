@@ -1,10 +1,11 @@
 package com.ss.smartfilterlib.singalchoice.chipgroup
 
 
-import ChipClickListener
+
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
+import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -12,9 +13,10 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.data.RadioGroupData
-import com.ss.smartfilterlib.singlechoice.util.Orientation
-import com.ss.smartfilterlib.singlechoice.util.SingleChipType
+import com.ss.smartfilterlib.singalchoice.callback.RadioGroupCallback
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.utils.Orientation
+import com.ss.smartfilterlib.utils.SingleChipType
 
 
 /**
@@ -28,7 +30,7 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
     private lateinit var chipGroup: ChipGroup
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
-    private var onChipGroupClickListener: ChipClickListener? = null
+    private var onChipGroupClickListener: RadioGroupCallback? = null
     init {
         initAttrs(attrs)
         setupView()
@@ -64,7 +66,7 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
         orientation: Int,
         bgSelector: Int,
         textSelector: Int,
-        callbacks: ChipClickListener,
+        callbacks: RadioGroupCallback,
     ) {
         chipGroup.removeAllViews()
         this.onChipGroupClickListener= callbacks
@@ -78,6 +80,7 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
         chipData.forEach { data ->
             val chip = createChip(chipType)
             chip.text = data.name
+            generateViewWithId(chip, data)
             setChipEvents(chip)
             setChipAttributes(chip)
             chipGroup.addView(chip)
@@ -155,19 +158,13 @@ class SingleChipgroup @JvmOverloads constructor(context: Context,attrs: Attribut
     }
 
     private fun setChipEvents(chip: Chip) {
-        chip.setOnClickListener {
-            onChipGroupClickListener?.onChipClick(chip, chip.isChecked)
-
+        chip.setOnCheckedChangeListener { _, _ ->
+            onChipGroupClickListener?.onSingleSelection(chip.tag as RadioGroupData)
         }
-
-        chip.setOnCloseIconClickListener {
-            onChipGroupClickListener?.onChipCloseIconClick(chip)
-        }
-
-        chip.setOnCheckedChangeListener { compondButton, isChecked ->
-            onChipGroupClickListener?.onChipCheckedChanged(compondButton,null, isChecked)
-
-        }
+    }
+    private fun generateViewWithId(radioButton: Chip, data: RadioGroupData)  {
+        radioButton.id = View.generateViewId()
+        radioButton.tag = data
     }
 }
 

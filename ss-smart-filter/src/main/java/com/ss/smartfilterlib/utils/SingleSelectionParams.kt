@@ -1,43 +1,56 @@
 package com.ss.smartfilterlib.utils
 
-import BaseEventListener
 import android.view.ViewGroup
-import com.ss.smartfilterlib.data.RadioGroupData
-import com.ss.smartfilterlib.singlechoice.util.MultiChipType
-import com.ss.smartfilterlib.singlechoice.util.Orientation
-import com.ss.smartfilterlib.singlechoice.util.SingleChipType
-import com.ss.smartfilterlib.singlechoice.util.SingleGroupSubType
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.appcompat.R
+import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+
 
 /**
  * created by Mala Ruparel ON 23/04/24
  */
+
 data class SingleSelectionParams(
     val rootView: ViewGroup,
-    val singleGroupSubType: SingleGroupSubType = SingleGroupSubType.NONE,
-    val chipType: SingleChipType = SingleChipType.NONE,
-    val orientation: Int = Orientation.VERTICAL,
+    val singleGroupSubType: SingleGroupSubType,
+    val chipType: SingleChipType,
+    val orientation: Int,
     val mData: ArrayList<RadioGroupData>,
-    val callbacks: BaseEventListener,
-    val bgSelector: Int = DEFAULT_BG_SELECTOR,
-    val textSelector: Int = DEFAULT_TEXT_SELECTOR
-){
-    companion object {
-        const val DEFAULT_BG_SELECTOR = 0
-        const val DEFAULT_TEXT_SELECTOR = 0
-    }
-}
+    val callbacks: (RadioGroupData) -> Unit,
+    @DrawableRes val bgSelector: Int = R.drawable.abc_btn_radio_material,
+    @ColorRes val textSelector: Int = android.R.color.black
+
+)
+data class SingleSelectionMultiRawParams(
+    val rootView: ViewGroup,
+    val singleGroupSubType: SingleGroupSubType,
+    val chipType: SingleChipType,
+    val orientation: Int,
+    val mData: ArrayList<RadioGroupData>,
+    val callbacks: (RadioGroupData) -> Unit,
+    @DrawableRes val bgSelector: Int = com.ss.smartfilterlib.R.drawable.multiline_default,
+    @ColorRes val textSelector: Int = com.ss.smartfilterlib.R.color.black
+
+)
+data class SingleChipSelectionParams(
+    val rootView: ViewGroup,
+    val singleGroupSubType: SingleGroupSubType,
+    val chipType: SingleChipType,
+    val orientation: Int,
+    val mData: ArrayList<RadioGroupData>,
+    val callbacks: (RadioGroupData) -> Unit,
+    @ColorRes val bgSelector: Int = android.R.color.darker_gray,
+    @ColorRes val textSelector: Int = android.R.color.black
+
+)
 data class MultiSelectionParams(
     val rootView: ViewGroup,
     val singleGroupSubType: SingleGroupSubType = SingleGroupSubType.NONE,
     val chipType: MultiChipType = MultiChipType.NONE,
-    val orientation: Int = Orientation.VERTICAL,
+    val orientation: Int = Orientation.HORIZONTAL,
     val mData: ArrayList<RadioGroupData>,
-    val callbacks: BaseEventListener,
-    val bgSelector: Int = DEFAULT_BG_SELECTOR,
-    val textSelector: Int = DEFAULT_TEXT_SELECTOR
-){
-    companion object {
-        const val DEFAULT_BG_SELECTOR = 0
-        const val DEFAULT_TEXT_SELECTOR = 0
-    }
-}
+    val callbacks: (List<Int>) -> Unit,
+    @ColorRes val bgSelector: Int = android.R.color.darker_gray,
+    @ColorRes val textSelector: Int = android.R.color.black
+)
