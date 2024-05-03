@@ -7,7 +7,7 @@ import com.ss.smartfilterlib.R
  * created by Mala Ruparel ON 23/04/24
  */
 data class TextAttributes(
-    var textSize: Float = 12f,
+    var textSize: Float = 18f,
     val fontFamily: Int = R.font.pop_medium,
     val textColor: Int = Color.CYAN,
     val textStyle: Int = 0,
@@ -18,8 +18,8 @@ data class TextAttributes(
 )
 
 data class PaddingAttributes(
-    val paddingStart: Int = 8,
-    val paddingTop: Int = 8,
-    val paddingEnd: Int = 8,
-    val paddingBottom: Int = 8
+    var paddingStart: Int = 16,
+    val paddingTop: Int = 16,
+    val paddingEnd: Int = 16,
+    val paddingBottom: Int = 16
 )

@@ -44,7 +44,20 @@ object SmartFilter {
                         )
                         param.rootView.addView(rowItemRadioGroup)
                     }
-                }
+
+                        SingleGroupSubType.NONE -> {
+                            val singleLineRadioGroup = SingleSelectionView(param.rootView.context)
+                            singleLineRadioGroup.configureRadioButton(
+                                param.mData,
+                                param.orientation,
+                                param.bgSelector,
+                                param.textSelector,
+                                param.callbacks
+                            )
+                            param.rootView.addView(singleLineRadioGroup)
+                        }
+                    }
+
             }
 
 

@@ -44,4 +44,18 @@
         <attr name="rg_ri_PaddingEnd" format="dimension" />
         <attr name="rg_ri_PaddingBottom" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="SingleSelectionView">
+        <attr name="ss_TextSize" format="dimension" />
+        <attr name="ss_FontFamily" format="reference" />
+        <attr name="ss_Background" format="reference" />
+        <attr name="ss_TextSelector" format="color" />
+        <attr name="ss_Checkable" format="boolean" />
+        <attr name="ss_Orientation" format="integer" />
+        <attr name="ss_PaddingStart" format="dimension" />
+        <attr name="ss_PaddingTop" format="dimension" />
+        <attr name="ss_PaddingEnd" format="dimension" />
+        <attr name="ss_PaddingBottom" format="dimension" />
+        <attr name="ss_checkDrawableSelector" format="reference" />
+
+    </declare-styleable>
 </resources>

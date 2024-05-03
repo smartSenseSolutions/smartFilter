@@ -14,7 +14,10 @@ import com.ss.smartfilterlib.singlechoice.util.SingleSelectionParams
 /**
  * created by Mala Ruparel ON 23/04/24
  */
-fun addRadioGroupSingleLineVertical(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
+fun addRadioGroupSingleLineVertical(
+    rootView: ViewGroup,
+    radioGroupCallback: (RadioGroupData) -> Unit
+) =
     SingleSelectionParams(
         rootView = rootView,
         singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
@@ -27,8 +30,7 @@ fun addRadioGroupSingleLineVertical(rootView: ViewGroup,radioGroupCallback: (Rad
     )
 
 
-
-fun addRadioGroupMultiRow(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
+fun addRadioGroupMultiRow(rootView: ViewGroup, radioGroupCallback: (RadioGroupData) -> Unit) =
     SingleSelectionParams(
         rootView = rootView,
         singleGroupSubType = SingleGroupSubType.MULTI_LINE,
@@ -39,7 +41,8 @@ fun addRadioGroupMultiRow(rootView: ViewGroup,radioGroupCallback: (RadioGroupDat
         bgSelector = R.drawable.multiline_selector,
         textSelector = R.color.multiline_text_selector
     )
-fun addRadioGroupRowItem(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
+
+fun addRadioGroupRowItem(rootView: ViewGroup, radioGroupCallback: (RadioGroupData) -> Unit) =
     SingleSelectionParams(
         rootView = rootView,
         singleGroupSubType = SingleGroupSubType.ROW_ITEM,
@@ -51,6 +54,20 @@ fun addRadioGroupRowItem(rootView: ViewGroup,radioGroupCallback: (RadioGroupData
         textSelector = R.color.single_text_color_selector
 
     )
+
+fun addSingleSelectionListView(rootView: ViewGroup, radioGroupCallback: (RadioGroupData) -> Unit) =
+    SingleSelectionParams(
+        rootView = rootView,
+        singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
+        chipType = ChipType.NONE,
+        orientation = Orientation.VERTICAL,
+        mData = mRadioGroupData(),
+        callbacks = radioGroupCallback,
+        bgSelector = R.drawable.ic_check_selector,
+        textSelector = R.color.single_text_color_selector
+
+    )
+
 fun showToast(message: String, context: Context) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
