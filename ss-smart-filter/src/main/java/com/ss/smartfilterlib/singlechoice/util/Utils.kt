@@ -8,7 +8,9 @@ package com.ss.smartfilterlib.singlechoice.util
 enum class SingleGroupSubType {
     SINGLE_LINE,
     MULTI_LINE,
-    ROW_ITEM
+    ROW_ITEM,
+    NONE
+
 }
 
 enum class SingleGroupType {
