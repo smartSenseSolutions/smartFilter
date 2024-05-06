@@ -56,6 +56,6 @@
         <attr name="ss_PaddingEnd" format="dimension" />
         <attr name="ss_PaddingBottom" format="dimension" />
         <attr name="ss_checkDrawableSelector" format="reference" />
-
+        <attr name="ss_Listitem" format="reference" />
     </declare-styleable>
 </resources>

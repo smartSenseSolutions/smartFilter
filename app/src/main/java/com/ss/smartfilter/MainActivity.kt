@@ -14,19 +14,12 @@ class MainActivity : ComponentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-           SmartFilter.addSingleSelection {
-               addSingleSelectionListView(binding.root) { radioGroupData ->
-                    onSingleLineSelected(radioGroupData)
-                }
-            }
-
-
-
+        binding.multiSelectionListView.setOnMultiSelectionClicked() {
+            showToast("MultiSelection", this)
+        }
 
     }
 
 
-     private fun onSingleLineSelected( radioGroupData: RadioGroupData) {
-        showToast(radioGroupData.name, this)
-    }
+
 }

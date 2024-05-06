@@ -47,7 +47,7 @@ object SmartFilter {
 
                         SingleGroupSubType.NONE -> {
                             val singleLineRadioGroup = SingleSelectionView(param.rootView.context)
-                            singleLineRadioGroup.configureRadioButton(
+                            singleLineRadioGroup.configureView(
                                 param.mData,
                                 param.orientation,
                                 param.bgSelector,
