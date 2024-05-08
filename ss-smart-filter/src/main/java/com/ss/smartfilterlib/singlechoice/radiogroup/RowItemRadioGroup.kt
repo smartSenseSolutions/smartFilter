@@ -87,7 +87,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
 
 
     fun configureRadioButton(
-        mData: ArrayList<RadioGroupData>,
+        mData: ArrayList<RadioGroupData>?,
         orientation: Int,
         bgSelector: Int,
         textSelector: Int,
@@ -98,29 +98,25 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         this.textSelectorColor = textSelector.let { ContextCompat.getColorStateList(context, it) }
         this.onCheckedChangeListener = callbacks
         setupRadioGroup()
-        mData.forEach { data ->
+        mData?.forEach { data ->
             addRadioButtonView(
                 data
             )
         }
     }
 
-    private fun addRadioButtonView(data: RadioGroupData) {
-        data.let {
-
+    private fun addRadioButtonView(data: RadioGroupData?) {
             val binding = RowItemBinding.inflate(LayoutInflater.from(context), this, false)
             binding.apply {
-                tvName.text = data.name
-                tvDes.text = data.description
+                tvName.text = data?.name
+                tvDes.text = data?.description
             }
             applySelector(binding.rtl)
             radioGroup.addView(binding.root)
             binding.rtl.setOnClickListener {
-                onCheckedChangeListener?.onSingleSelection(data)
+                data?.let { mData -> onCheckedChangeListener?.onSingleSelection(mData) }
             }
 
-
-        }
     }
 
     private fun applySelector(rtl: RelativeLayout) {
