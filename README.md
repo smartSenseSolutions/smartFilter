@@ -45,33 +45,25 @@ This is a library for creating and managing radio groups in Android. It provides
                    
           SmartFilter.addRadioGroupSingleSelection {
                 addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
-                    showMessage(radioGroupData) } }
+                      toast("name: ${radioGroupData.name} ") }}
+       
       
-            
-            private fun showMessage(data: RadioGroupData) {
-            showToast(data.name, this) }
-      
-     - ***Horizontal
+   - ***Horizontal
       
             SmartFilter.addRadioGroupSingleSelection {
-                      addRadioGroupSingleLineHorizontal(binding.root) { radioGroupData ->
-                          showMessage(radioGroupData) } }
+                  addRadioGroupSingleLineHorizontal(binding.root) { radioGroupData ->
+                        toast("name: ${radioGroupData.name} ") } }
     
-
-            private fun showMessage(data: RadioGroupData) {
-            showToast(data.name, this) }
+         
     
-   <img src="media/single_selection_vertical.png" width="250" />  <img src="media/single_selection_horizontal.png" width="250" />
+   <img src="media/single_selection_vertical.png" width="250" />                      <img src="media/single_selection_horizontal.png" width="250" />
 
 
   - **SingleSelectionMultiLine(MultiRaw)
        
-            SmartFilter.addRadioMultiRawSingleSelection {
+           SmartFilter.addRadioMultiRawSingleSelection {
                 addRadioMultiRow(binding.root) { radioGroupData ->
-                showMessage(radioGroupData) } }
-   
-            private fun showMessage(data: RadioGroupData) {
-            showToast(data.name, this) }
+                    toast("name: ${radioGroupData.name} ")  } }
 
     <img src="media/single_selection_multiline.png" width="250" />
 
@@ -85,36 +77,28 @@ This is a library for creating and managing radio groups in Android. It provides
 
       - ***Horizontal
   
-            private fun showMessage(data: RadioGroupData) { SmartFilter.addRadioRawItemSingleSelection {
-                    addRadioGroupRowItemHorizontal(binding.root) { radioGroupData ->
-                        showMessage(radioGroupData) }  }
-            
-            private fun showMessage(data: RadioGroupData) {
-                showToast(data.name, this)}
+            SmartFilter.addRadioRawItemSingleSelection {
+                  addRadioGroupSingleLineHorizontal(binding.root) { radioGroupData ->
+                      toast("name: ${radioGroupData.name} ")  } }
 
         <img src="media/single_selection_row_item_horizontal.png" width="250" /> <img src="media/single_selection_row_item_verticle.png.png" width="250" />
 
         - ** SingleSelectionChipGroup((Verticle/Horizontal))
 
               SmartFilter.addChipGroupSingleSelection {
-                addSingleSelectionChipGroup(binding.root) { radioGroupData ->
-                    showMessage(radioGroupData)  } }
-                       
-
-               private fun showMessage(data: RadioGroupData) {
-                showToast(data.name, this) }
+                  addSingleSelectionChipGroup(binding.root) { radioGroupData ->
+                      toast("name: ${radioGroupData.name} ") } }
         
            <img src="media/single_selection_chip.png" width="250" />       
    
-        - ** MultiSelectionChipGroup(MultiRaw)
+          - ** MultiSelectionChipGroup(MultiRaw)
         
-              SmartFilter.addChipGroupMultiSelection {
-                addMultiSelectionChipGroup(binding.root) { radioGroupData ->
-                    showMessage(radioGroupData) } }
-            
-
-            private fun showMessage(data: List<Int>) {
-            showToast("Checked IDs: ${data.joinToString(", ")}", this) }
+                SmartFilter.addChipGroupMultiSelection {
+                    addMultiSelectionChipGroup(binding.root) { radioGroupData ->
+                         toast("Checked IDs: ${radioGroupData.joinToString(", ")}")
+                      }
+                  }
+         
              
    <img src="media/multiselect_chip.png" width="250" />
 

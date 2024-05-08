@@ -17,8 +17,7 @@ import com.ss.smartfilterlib.utils.Orientation
 /**
  * created by Mala Ruparel ON 25/04/24
  */
-class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
-    LinearLayout(context, attrs, defStyle) {
+class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :LinearLayout(context, attrs, defStyle) {
 
     private var chipBGColor: ColorStateList? = null
     private var chipTextColor: ColorStateList? = null
@@ -37,9 +36,9 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
     private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SingleLineChipGroup, 0, 0)
         try {
-            orientation = typedArray.getInt(R.styleable.SingleLineChipGroup_cg_sl_Orientation, Orientation.VERTICAL)
-            chipBGColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_Background)
-            chipTextColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_TextSelector)
+            orientation = typedArray.getInt(R.styleable.SingleLineChipGroup_cg_sl_orientation, Orientation.VERTICAL)
+            chipBGColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_background)
+            chipTextColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_textselector)
 
         } finally {
             typedArray.recycle()
@@ -57,15 +56,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         chipGroup = ChipGroup(context)
     }
 
-    fun setData(
-        chipData: List<RadioGroupData>,
-        chipType: MultiChipType,
-        orientation: Int,
-        bgSelector: Int,
-        textSelector: Int,
-        checkedChangedListener: ( List<Int>) -> Unit
-
-        ) {
+    fun setData(chipData: List<RadioGroupData>,chipType: MultiChipType,orientation: Int,bgSelector: Int,textSelector: Int, checkedChangedListener: ( List<Int>) -> Unit ) {
         var chipIds = chipData.map { it.id } // Update chipIds property
 
         chipGroup.removeAllViews()

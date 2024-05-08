@@ -39,9 +39,9 @@ class SingleChipGroup @JvmOverloads constructor(context: Context, attrs: Attribu
     private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SingleLineChipGroup, 0, 0)
         try {
-            orientation = typedArray.getInt(R.styleable.SingleLineChipGroup_cg_sl_Orientation, Orientation.VERTICAL)
-            chipBGColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_Background)
-            chipTextColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_TextSelector)
+            orientation = typedArray.getInt(R.styleable.SingleLineChipGroup_cg_sl_orientation, Orientation.VERTICAL)
+            chipBGColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_background)
+            chipTextColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_textselector)
 
         } finally {
             typedArray.recycle()

@@ -36,8 +36,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
     private var paddingAttributes: PaddingAttributes = PaddingAttributes()
 
     private var dataFromXml: Int = 0
-    private var onCheckedChangeListener: RadioGroupCallback? = null
-
+    private var onCheckedChangeListener: ((RadioGroupData) -> Unit)? = null
     private lateinit var radioGroup: RadioGroup
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
@@ -51,12 +50,10 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
     private fun initAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SingleLineRadioGroup, 0, 0)
         try {
-            orientation = typedArray.getInt(R.styleable.SingleLineRadioGroup_rg_sl_Orientation, Orientation.VERTICAL)
-            textSelectorColor = typedArray.getColorStateList(R.styleable.SingleLineRadioGroup_rg_sl_TextSelectorColor)
-            radioButtonDrawable = typedArray.getDrawable(R.styleable.SingleLineRadioGroup_rg_sl_Background)
-
-
-            dataFromXml = typedArray.getResourceId(R.styleable.SingleLineRadioGroup_rg_sl_Listitem, 0)
+            orientation = typedArray.getInt(R.styleable.SingleLineRadioGroup_rg_sl_orientation, Orientation.VERTICAL)
+            textSelectorColor = typedArray.getColorStateList(R.styleable.SingleLineRadioGroup_rg_sl_textcolor)
+            radioButtonDrawable = typedArray.getDrawable(R.styleable.SingleLineRadioGroup_rg_sl_background)
+            dataFromXml = typedArray.getResourceId(R.styleable.SingleLineRadioGroup_rg_sl_listitem, 0)
 
         } finally {
             typedArray.recycle()
@@ -95,6 +92,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
             }
             radioGroup.orientation = VERTICAL
             containerScrollView.addView(radioGroup)
+
         } else {
             if (containerScrollView.parent != null) {
                 removeView(containerScrollView)
@@ -108,17 +106,11 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
     }
 
 
-    fun configureRadioButton(
-        mData: ArrayList<RadioGroupData>,
-        orientation: Int,
-        bgSelector: Int,
-        textSelector: Int,
-        callbacks: RadioGroupCallback
-    ) {
+    fun configureRadioButton( mData: ArrayList<RadioGroupData>,orientation: Int,bgSelector: Int,textSelector: Int,checkedChangedListener: ( RadioGroupData) -> Unit) {
         this.orientation = orientation
         this.radioButtonDrawable = bgSelector.let { ContextCompat.getDrawable(context, it) }
         this.textSelectorColor = textSelector.let { ContextCompat.getColorStateList(context, it) }
-        this.onCheckedChangeListener = callbacks
+        this.onCheckedChangeListener = checkedChangedListener
         setupRadioGroup()
         mData.forEach { data ->
             addRadioButtonView(
@@ -129,6 +121,7 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
 
     private fun addRadioButtonView(data: RadioGroupData) {
         val radioButton = RadioButton(context)
+
         radioButton.apply {
             text = setData(data)
             applyTextAttributes(this)
@@ -141,14 +134,9 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val checkedRadioButton: RadioButton = findViewById(checkedId)
             val checkedData = checkedRadioButton.tag as RadioGroupData?
-            checkedData?.let { onCheckedChangeListener?.onSingleSelection(it) }
+            checkedData?.let { onCheckedChangeListener?.invoke(it) }
         }
     }
-
-    private fun setData(data: RadioGroupData) = data.name
-
-
-    private var defaultPadding = resources.getDimension(com.intuit.sdp.R.dimen._8sdp).toInt()
 
 
     private fun applySelector(radioButton: RadioButton) {
@@ -194,5 +182,8 @@ class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: Att
             )
         }
     }
+    private fun setData(data: RadioGroupData) = data.name
 
+
+    private var defaultPadding = resources.getDimension(com.intuit.sdp.R.dimen._8sdp).toInt()
 }

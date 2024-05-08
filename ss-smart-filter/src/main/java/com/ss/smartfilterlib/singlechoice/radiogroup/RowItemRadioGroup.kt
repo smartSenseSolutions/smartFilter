@@ -42,10 +42,9 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.RowItemRadioGroup)
         try {
 
-
-            textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_TextSelector)
-            radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_Background)
-            orientation = typedArray.getInt(R.styleable.RowItemRadioGroup_rg_ri_Orientation, HORIZONTAL)
+            textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_textselector)
+            radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_background)
+            orientation = typedArray.getInt(R.styleable.RowItemRadioGroup_rg_ri_orientation, HORIZONTAL)
         } finally {
             typedArray.recycle()
         }
@@ -86,13 +85,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     }
 
 
-    fun configureRadioButton(
-        mData: ArrayList<RadioGroupData>?,
-        orientation: Int,
-        bgSelector: Int,
-        textSelector: Int,
-        callbacks: RadioGroupCallback
-    ) {
+    fun configureRadioButton(mData: ArrayList<RadioGroupData>?,orientation: Int,bgSelector: Int,textSelector: Int,callbacks: RadioGroupCallback) {
         this.orientation = orientation
         this.radioButtonDrawable = bgSelector.let { ContextCompat.getDrawable(context, it) }
         this.textSelectorColor = textSelector.let { ContextCompat.getColorStateList(context, it) }
