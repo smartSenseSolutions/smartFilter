@@ -1,70 +1,56 @@
 package com.ss.smartfilterlib
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckedTextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singlechoice.util.PaddingAttributes
 
 
 /**
  * created by Mala Ruparel ON 02/05/24
  */
-class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
+class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) :  BaseClass<RadioGroupData>(context, attrs, defStyle){
 
-    private var textSelectorColor: ColorStateList? = null
-    private var bgSelector: Drawable? = null
-    private var orientation: Int = com.ss.smartfilterlib.singlechoice.util.Orientation.VERTICAL
-    private var checkDrawableSelector: Int = 0
-    private  var paddingAttributes: PaddingAttributes = PaddingAttributes()
-    private var onMultiSelectionClicked: ((List<RadioGroupData>) -> Unit)? = null
-
-    private var dataFromXml: Int = 0
-    private val selectedItemsPositions = mutableListOf<Int>()
 
     init {
-        initAttrs(attrs)
-        setupView()
-        setDataFromAttrs()
+        initAttributes(attrs=attrs)
+        initializeView()
+        populateDataFromAttributes()
     }
 
-    private fun setDataFromAttrs() {
-        if (dataFromXml != 0) {
-            val mData = resources.getStringArray(dataFromXml);
-            val data = ArrayList<RadioGroupData>()
-            for (i in mData.indices) {
-                data.add(RadioGroupData(name = mData[i]))
-            }
-            configureView(data,orientation,checkDrawableSelector,textSelectorColor,onMultiSelectionClicked)
+    private fun populateDataFromAttributes() {
+        val mData = resources.getStringArray(dataFromXml);
+        val data = mData.map { RadioGroupData(name = it) } as ArrayList<RadioGroupData>
+        configureView(
+            data = data,
+            orientation = orientation,
+            checkSelector = checkSelector,
+            primaryTextColor = primaryTextColor,
+            onCheckedChangeListener = onMultiSelectionClicked
+        )
 
-
-        }
     }
 
-    private fun setupView() {
+    override fun initializeView() {
         layoutManager = when (orientation) {
-            com.ss.smartfilterlib.singlechoice.util.Orientation.VERTICAL -> LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            else -> LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            SmartOrientation.VERTICAL -> LinearLayoutManager(context, VERTICAL, false)
+            else -> LinearLayoutManager(context, HORIZONTAL, false)
         }
-
     }
 
-    private fun initAttrs(attrs: AttributeSet?) {
+    override fun initAttributes(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SingleSelectionView)
         try {
-            bgSelector = typedArray.getDrawable(R.styleable.SingleSelectionView_ss_Background)
-            textSelectorColor = typedArray.getColorStateList(R.styleable.SingleSelectionView_ss_TextSelector)
+            primaryTextColor = typedArray.getColor(R.styleable.SingleSelectionView_ss_TextSelector, primaryTextColor)
             orientation = typedArray.getInt(R.styleable.SingleSelectionView_ss_Orientation,RecyclerView.VERTICAL)
-            checkDrawableSelector = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_checkDrawableSelector,R.drawable.ic_check_selector)
+            checkSelector = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_checkDrawableSelector,R.drawable.ic_check_selector)
             dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_Listitem, 0)
         } finally {
             typedArray.recycle()
@@ -72,27 +58,32 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
     }
 
     fun configureView(
-        mData: ArrayList<RadioGroupData>,
+        data: ArrayList<RadioGroupData>,
         orientation: Int,
-        checkSelector: Int, textSelector: ColorStateList?, onCheckedChangeListener: ((List<RadioGroupData>) -> Unit)?
+        checkSelector: Int, primaryTextColor: Int, onCheckedChangeListener: ((List<RadioGroupData>) -> Unit)?
     ) {
 
-        this.orientation = orientation
+       updateValue(orientation, checkSelector, primaryTextColor, onCheckedChangeListener)
+        initializeView()
+        setItems(data)
+    }
+
+    private fun updateValue(
+        orientation: Int,
+        checkSelector: Int,
+        primaryTextColor: Int,
+        onCheckedChangeListener: ((List<RadioGroupData>) -> Unit)?
+    ) {
         this.onMultiSelectionClicked = onCheckedChangeListener
-        setupView()
-        adapter = CustomAdapter(checkSelector, textSelector)
-        setItems(mData)
+        this.orientation = orientation
+        this.checkSelector = checkSelector
+        this.primaryTextColor = primaryTextColor
     }
-
     private fun setItems(items: List<RadioGroupData>) {
-        (adapter as? CustomAdapter)?.data = items
+        adapter = MultiSelectionListAdapter().apply { data = items }
     }
 
-    private inner class CustomAdapter(
-        var checkSelector: Int,
-        var textSelector: ColorStateList?,
-
-    ) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
+    private inner class MultiSelectionListAdapter() : RecyclerView.Adapter<MultiSelectionListAdapter.MultiselectionViewHolder>() {
 
         private var selectedItemPosition: Int = RecyclerView.NO_POSITION
 
@@ -102,34 +93,31 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
                 notifyDataSetChanged()
             }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_simple_list_checkable, parent, false)
-            return CustomViewHolder(view)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MultiselectionViewHolder {
+            val view = LayoutInflater.from(parent.context) .inflate(R.layout.item_simple_list_checkable, parent, false)
+            return MultiselectionViewHolder(view)
         }
 
-        override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-            holder.bind(data[position],
-                position == selectedItemPosition
-            )
+        override fun onBindViewHolder(holder: MultiselectionViewHolder, position: Int) {
+            holder.bind(data[position],position == selectedItemPosition)
         }
 
         override fun getItemCount(): Int = data.size
 
-        inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        inner class MultiselectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-            private val cardView = MaterialCardView(itemView.context)
-            private val textView = CheckedTextView(itemView.context)
+            val cardView: MaterialCardView by lazy { MaterialCardView(itemView.context) }
+            val textView: CheckedTextView by lazy { CheckedTextView(itemView.context) }
+
 
             init {
-                cardView.apply {
+                with(cardView) {
                     layoutParams = ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                     )
                     addView(textView)
                 }
-
 
                 (itemView as ViewGroup).addView(cardView)
 
@@ -144,28 +132,24 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
 
             fun bind(data: RadioGroupData, isSelected: Boolean) {
                 textView.apply {
-
-                    setPadding(
-                        paddingAttributes.paddingStart,
-                        paddingAttributes.paddingTop,
-                        paddingAttributes.paddingEnd,
-                        paddingAttributes.paddingBottom
-                    ) // Set
-                    text = data.name
-                    applySelector(this)
-                   // setTextColor(textSelector)
-                    isChecked = adapterPosition == selectedItemPosition
-                    checkDrawableSelector = checkSelector
-                    setCheckMarkDrawable(checkDrawableSelector)
-                    checkMarkDrawable?.setBounds(
-                        40,
-                        400,
-                        checkMarkDrawable.intrinsicWidth,
-                        checkMarkDrawable.intrinsicHeight
-                    )
                     isChecked = selectedItemsPositions.contains(adapterPosition)
+                    applyTextAttributes(this)
+                    applyPaddingAttributes(this)
+                    text = setData(data)
+                    applySelector(this)
+                    extracted()
                 }
 
+            }
+            private fun CheckedTextView.extracted() {
+                checkMarkDrawable?.setBounds(
+                    0,
+                    0,
+                    checkMarkDrawable.intrinsicWidth,
+                    checkMarkDrawable.intrinsicHeight
+                )
+                gravity = Gravity.CENTER_VERTICAL
+                setPadding(10, 10, 10, 10)
             }
         }
 
@@ -181,20 +165,13 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
         }
     }
     private fun applySelector(textView: CheckedTextView) {
-        with(textView) {
-            setTextColor(textSelectorColor ?: setDefaultTextColor())
-            // radioButton.buttonDrawable = checkDrawableSelector?.constantState?.newDrawable()?.mutate()
-        }
-    }
-    private fun setDefaultTextColor(): ColorStateList? {
-        return ContextCompat.getColorStateList(context, R.color.black)?.let {
-            it
-        } ?: run {
-            null
-        }
+
+        textView.setTextColor(primaryTextColor)
+        textView.setCheckMarkDrawable(checkSelector)
+
     }
 
-    fun setOnMultiSelectionClicked(callback: (List<RadioGroupData>) -> Unit) {
+    fun setOnMultiSelection(callback: (List<RadioGroupData>) -> Unit) {
         onMultiSelectionClicked = callback
     }
 }

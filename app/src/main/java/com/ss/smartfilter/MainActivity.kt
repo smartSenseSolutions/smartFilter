@@ -14,8 +14,8 @@ class MainActivity : ComponentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.multiSelectionListView.setOnMultiSelectionClicked() {
-            showToast("MultiSelection", this)
+        binding.multiSelectionListView.setOnMultiSelection {
+            showToast(  it.joinToString { it.name } , this)
         }
 
     }
