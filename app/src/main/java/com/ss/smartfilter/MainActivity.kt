@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import com.ss.smartfilter.databinding.ActivityMainBinding
 import com.ss.smartfilterlib.SmartFilter
 import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.utils.toast
 
 
 class MainActivity : ComponentActivity() {
@@ -17,13 +18,9 @@ class MainActivity : ComponentActivity() {
 
         SmartFilter.addChipGroupMultiSelection {
             addMultiSelectionChipGroup(binding.root) { radioGroupData ->
-                showMessage(radioGroupData) } }
+                toast("Checked IDs: ${radioGroupData.joinToString(", ")}")
+            }
+        }
     }
 
-    private fun showMessage(data: RadioGroupData) {
-        showToast(data.name, this)
-    }
-    private fun showMessage(data: List<Int>) {
-       showToast("Checked IDs: ${data.joinToString(", ")}", this)
-    }
 }
