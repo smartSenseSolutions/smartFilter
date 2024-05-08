@@ -11,7 +11,6 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.data.RadioGroupData
-import com.ss.smartfilterlib.callback.ChipGroupCallback
 import com.ss.smartfilterlib.utils.MultiChipType
 import com.ss.smartfilterlib.utils.Orientation
 
@@ -27,8 +26,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
     private lateinit var chipGroup: ChipGroup
     private lateinit var containerScrollView: ScrollView
     private lateinit var containerHorizontalScrollView: HorizontalScrollView
-    private var onChipGroupClickListener: ChipGroupCallback? = null
-    private var chipData: ArrayList<RadioGroupData> = arrayListOf()
+    private var checkedChangedListener: ((List<Int>) -> Unit)? = null
     private var checkedChipIds: ArrayList<Int> = arrayListOf()
 
     init {
@@ -65,13 +63,13 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         orientation: Int,
         bgSelector: Int,
         textSelector: Int,
-        callbacks: ChipGroupCallback,
+        checkedChangedListener: ( List<Int>) -> Unit
 
         ) {
         var chipIds = chipData.map { it.id } // Update chipIds property
 
         chipGroup.removeAllViews()
-        this.onChipGroupClickListener = callbacks
+        this.checkedChangedListener = checkedChangedListener
         this.orientation = orientation
         this.chipBGColor = ContextCompat.getColorStateList(context, bgSelector)
         this.chipTextColor = ContextCompat.getColorStateList(context, textSelector)
@@ -174,7 +172,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
                 checkedChipIds.remove(chip.id)
             }
 
-            onChipGroupClickListener?.onMultiChipCheckedChanged( checkedChipIds.toList())
+            checkedChangedListener?.invoke( checkedChipIds.toList())
 
         }
 
