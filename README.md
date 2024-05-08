@@ -92,7 +92,7 @@ This is a library for creating and managing radio groups in Android. It provides
             private fun showMessage(data: RadioGroupData) {
                 showToast(data.name, this)}
 
-        <img src="media/single_selection_row_item_horizental.png" width="250" /> <img src="media/single_selection_row_item_verticle.png.png" width="250" />
+        <img src="media/single_selection_row_item_horizontal.png" width="250" /> <img src="media/single_selection_row_item_verticle.png.png" width="250" />
 
         - ** SingleSelectionChipGroup((Verticle/Horizontal))
 
