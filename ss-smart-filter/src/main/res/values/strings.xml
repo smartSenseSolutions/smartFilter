@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="ss_array">
+    <string-array name="array_android_version">
         <item>KitKat</item>
         <item>Lollipop</item>
         <item>Marshmallow</item>

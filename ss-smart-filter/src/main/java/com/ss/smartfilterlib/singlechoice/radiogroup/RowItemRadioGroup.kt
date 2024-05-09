@@ -1,6 +1,6 @@
 package com.ss.smartfilterlib.singlechoice.radiogroup
 
-import RadioGroupCallback
+
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -13,9 +13,10 @@ import android.widget.RelativeLayout
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
+import com.ss.smartfilterlib.callback.RadioGroupCallback
+import com.ss.smartfilterlib.data.RadioGroupData
 import com.ss.smartfilterlib.databinding.RowItemBinding
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singlechoice.util.Orientation
+import com.ss.smartfilterlib.utils.Orientation
 
 /**
  * created by Mala Ruparel ON 19/04/24
@@ -25,7 +26,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     private var textSelectorColor: ColorStateList? = null
     private var radioButtonDrawable: Drawable? = null
     private var orientation: Int = Orientation.VERTICAL
-    private var onCheckedChangeListener: RadioGroupCallback? = null
+    private var onCheckedChangeListener: ((RadioGroupData) -> Unit)? = null
 
     private lateinit var radioGroup: RadioGroup
     private lateinit var containerScrollView: ScrollView
@@ -41,10 +42,9 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.RowItemRadioGroup)
         try {
 
-
-            textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_TextSelector)
-            radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_Background)
-            orientation = typedArray.getInt(R.styleable.RowItemRadioGroup_rg_ri_Orientation, HORIZONTAL)
+            textSelectorColor = typedArray.getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_textselector)
+            radioButtonDrawable = typedArray.getDrawable(R.styleable.RowItemRadioGroup_rg_ri_background)
+            orientation = typedArray.getInt(R.styleable.RowItemRadioGroup_rg_ri_orientation, HORIZONTAL)
         } finally {
             typedArray.recycle()
         }
@@ -85,19 +85,13 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     }
 
 
-    fun configureRadioButton(
-        mData: ArrayList<RadioGroupData>,
-        orientation: Int,
-        bgSelector: Int,
-        textSelector: Int,
-        callbacks: RadioGroupCallback
-    ) {
+    fun configureRadioButton(mData: ArrayList<RadioGroupData>?,orientation: Int,bgSelector: Int,textSelector: Int,checkedChangedListener: ( RadioGroupData) -> Unit) {
         this.orientation = orientation
         this.radioButtonDrawable = bgSelector.let { ContextCompat.getDrawable(context, it) }
         this.textSelectorColor = textSelector.let { ContextCompat.getColorStateList(context, it) }
-        this.onCheckedChangeListener = callbacks
+        this.onCheckedChangeListener = checkedChangedListener
         setupRadioGroup()
-        mData.forEach { data ->
+        mData?.forEach { data ->
             addRadioButtonView(
                 data
             )
@@ -105,8 +99,6 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     }
 
     private fun addRadioButtonView(data: RadioGroupData) {
-        data.let {
-
             val binding = RowItemBinding.inflate(LayoutInflater.from(context), this, false)
             binding.apply {
                 tvName.text = data.name
@@ -115,11 +107,9 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
             applySelector(binding.rtl)
             radioGroup.addView(binding.root)
             binding.rtl.setOnClickListener {
-                onCheckedChangeListener?.onSingleSelection(data)
+                data.let { mData -> onCheckedChangeListener?.invoke(mData) }
             }
 
-
-        }
     }
 
     private fun applySelector(rtl: RelativeLayout) {

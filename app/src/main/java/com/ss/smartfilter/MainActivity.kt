@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.ss.smartfilter.databinding.ActivityMainBinding
 import com.ss.smartfilterlib.SmartFilter
+import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.utils.Params
+import com.ss.smartfilterlib.utils.toast
 
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
 
 class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -15,15 +17,11 @@ class MainActivity : ComponentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-            SmartFilter.addSingleSelection {
-                addRadioGroupRowItem(binding.root) { radioGroupData ->
-                    onSingleLineSelected(radioGroupData)
-                }
-            }
+
+        SmartFilter.addRadioRawItemSingleSelection {
+            addRadioGroupRowItemVertical(binding.root) { radioGroupData ->
+                toast("name: ${radioGroupData.name} ")  } }
+
     }
 
-
-     private fun onSingleLineSelected( radioGroupData: RadioGroupData) {
-        showToast(radioGroupData.name, this)
-    }
 }

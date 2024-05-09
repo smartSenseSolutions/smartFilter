@@ -1,49 +1,95 @@
 package com.ss.smartfilter
 
-import android.content.Context
 import android.view.ViewGroup
-import android.widget.Toast
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.mRadioGroupData
-import com.ss.smartfilterlib.singlechoice.util.ChipType
-import com.ss.smartfilterlib.singlechoice.util.Orientation
-import com.ss.smartfilterlib.singlechoice.util.SingleGroupSubType
-import com.ss.smartfilterlib.singlechoice.util.SingleSelectionParams
+import com.ss.smartfilterlib.data.MultiSelectionParams
+import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.SingleChipSelectionParams
+import com.ss.smartfilterlib.data.SingleSelectionMultiRawParams
+import com.ss.smartfilterlib.data.SingleSelectionParams
+import com.ss.smartfilterlib.data.mRadioGroupData
+import com.ss.smartfilterlib.utils.MultiChipType
+import com.ss.smartfilterlib.utils.Orientation
+import com.ss.smartfilterlib.utils.Params
+import com.ss.smartfilterlib.utils.SingleChipType
+import com.ss.smartfilterlib.utils.SingleGroupSubType
 
 /**
  * created by Mala Ruparel ON 23/04/24
  */
-fun addRadioGroupSingleLineVertical(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
-    SingleSelectionParams(
-        rootView = rootView,
-        singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
-        chipType = ChipType.NONE,
-        orientation = Orientation.VERTICAL,
-        mData = mRadioGroupData(),
-        callbacks = radioGroupCallback,
-        bgSelector = R.drawable.singleline_rb_selector,
-        textSelector = R.color.single_text_color_selector
+fun addRadioGroupSingleLineVertical(
+    rootView: ViewGroup,
+    radioGroupCallback: (RadioGroupData) -> Unit
+) =
+    Params.SingleSelection(
+        SingleSelectionParams(
+            rootView = rootView,
+            singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
+            chipType = SingleChipType.NONE,
+            orientation = Orientation.VERTICAL,
+            mData = mRadioGroupData(),
+            callbacks = radioGroupCallback,
+            bgSelector = R.drawable.singleline_rb_selector,
+            textSelector = R.color.single_text_color_selector
+        )
+    )
+
+fun addRadioGroupSingleLineHorizontal(
+    rootView: ViewGroup,
+    radioGroupCallback: (RadioGroupData) -> Unit
+) =
+    Params.SingleSelection(
+        SingleSelectionParams(
+            rootView = rootView,
+            singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
+            chipType = SingleChipType.NONE,
+            orientation = Orientation.HORIZONTAL,
+            mData = mRadioGroupData(),
+            callbacks = radioGroupCallback,
+            bgSelector = R.drawable.singleline_rb_selector,
+            textSelector = R.color.single_text_color_selector
+        )
+    )
+
+fun addRadioMultiRow(rootView: ViewGroup, radioGroupCallback: (RadioGroupData) -> Unit) =
+    Params.SingleSelectionMultiRaw(
+        SingleSelectionMultiRawParams(
+            rootView = rootView,
+            singleGroupSubType = SingleGroupSubType.MULTI_LINE,
+            chipType = SingleChipType.NONE,
+            orientation = Orientation.VERTICAL,
+            mData = mRadioGroupData(),
+            callbacks = radioGroupCallback,
+            bgSelector = R.drawable.multiline_bg_selector,
+            textSelector = R.color.multiline_text_selector
+        )
     )
 
 
-
-fun addRadioGroupMultiRow(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
-    SingleSelectionParams(
-        rootView = rootView,
-        singleGroupSubType = SingleGroupSubType.MULTI_LINE,
-        chipType = ChipType.NONE,
-        orientation = Orientation.VERTICAL,
-        mData = mRadioGroupData(),
-        callbacks = radioGroupCallback,
-        bgSelector = R.drawable.multiline_selector,
-        textSelector = R.color.multiline_text_selector
-    )
-fun addRadioGroupRowItem(rootView: ViewGroup,radioGroupCallback: (RadioGroupData) -> Unit) =
+fun addRadioGroupRowItemHorizontal(
+    rootView: ViewGroup,
+    radioGroupCallback: (RadioGroupData) -> Unit
+) = Params.SingleSelection(
     SingleSelectionParams(
         rootView = rootView,
         singleGroupSubType = SingleGroupSubType.ROW_ITEM,
-        chipType = ChipType.NONE,
+        chipType = SingleChipType.NONE,
+        orientation = Orientation.HORIZONTAL,
+        mData = mRadioGroupData(),
+        callbacks = radioGroupCallback,
+        bgSelector = R.drawable.row_item_selector,
+        textSelector = R.color.single_text_color_selector
+
+    )
+)
+fun addRadioGroupRowItemVertical(
+    rootView: ViewGroup,
+    radioGroupCallback: (RadioGroupData) -> Unit
+) = Params.SingleSelection(
+    SingleSelectionParams(
+        rootView = rootView,
+        singleGroupSubType = SingleGroupSubType.ROW_ITEM,
+        chipType = SingleChipType.NONE,
         orientation = Orientation.VERTICAL,
         mData = mRadioGroupData(),
         callbacks = radioGroupCallback,
@@ -51,9 +97,30 @@ fun addRadioGroupRowItem(rootView: ViewGroup,radioGroupCallback: (RadioGroupData
         textSelector = R.color.single_text_color_selector
 
     )
-fun showToast(message: String, context: Context) {
-    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-}
+)
+fun addSingleSelectionChipGroup(rootView: ViewGroup, radioGroupCallback: (RadioGroupData) -> Unit) =
+
+    SingleChipSelectionParams(
+        rootView = rootView,
+        singleGroupSubType = SingleGroupSubType.CHIP_GROUP,
+        chipType = SingleChipType.CHOICE_CHIP,
+        orientation = Orientation.VERTICAL,
+        mData = mRadioGroupData(),
+        callbacks = radioGroupCallback,
+        bgSelector = R.color.chip_bg_selector,
+        textSelector = R.color.chip_text_selector
+    )
+
+fun addMultiSelectionChipGroup(rootView: ViewGroup, radioGroupCallback: (List<Int>) -> Unit) =
+    MultiSelectionParams(
+        rootView = rootView,
+        chipType = MultiChipType.FILTER_CHIP,
+        orientation = Orientation.VERTICAL,
+        mData = mRadioGroupData(),
+        callbacks = radioGroupCallback,
+        bgSelector = R.color.chip_bg_selector,
+        textSelector = R.color.chip_text_selector
+    )
 
 
 
