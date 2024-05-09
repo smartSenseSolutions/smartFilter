@@ -120,5 +120,30 @@ This is a library for creating and managing ....
 
 ### Dependency
 
+### Default Drawable for SingleSelectionRadioGroup
+
+        @DrawableRes val bgSelector: Int = androidx.appcompat.R.drawable.abc_btn_radio_material,
+        @ColorRes val textSelector: Int = android.R.color.black
+
+##Selector
+
+         bgSelector = R.drawable.singleline_rb_selector,
+        textSelector = R.color.single_text_color_selector
+
+###  Drawable for SingleSelectionMultiRaw
+
+##Default
+       
+         ```kotlin
+        @DrawableRes val bgSelector: Int = R.drawable.multiline_default,
+        @ColorRes val textSelector: Int = android.R.color.black
+
+##Selector  
+
+            ```kotlin    
+            bgSelector = R.drawable.multiline_selector,
+            textSelector = R.color.multiline_text_selector
+
+
 ```kotlin
 implementation 'com.ss:smartfilterlib:1.0.0'
