@@ -8,10 +8,6 @@ import com.ss.smartfilterlib.data.RadioGroupData
 import com.ss.smartfilterlib.utils.Params
 import com.ss.smartfilterlib.utils.toast
 
-import com.ss.smartfilter.databinding.ActivityMainBinding
-import com.ss.smartfilterlib.SmartFilter
-
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
 
 class MainActivity : ComponentActivity() {
     private lateinit var binding: ActivityMainBinding
