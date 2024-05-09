@@ -73,7 +73,7 @@ This is a library for creating and managing ....
                       showMessage(radioGroupData) } }
 
        
-<img src="media/single_selection_row_item_verticle.png.png" width="250" />
+    <img src="media/single_selection_row_item_vertical.png.png" width="250" />
 
    - **Horizontal**
   
@@ -117,8 +117,9 @@ This is a library for creating and managing ....
 
 ### Usage
 
-  - **To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:
+  - **To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:**
  
 ### Dependency
+
 ```kotlin
 implementation 'com.ss:smartfilterlib:1.0.0'
