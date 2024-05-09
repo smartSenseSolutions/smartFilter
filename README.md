@@ -73,7 +73,7 @@ This is a library for creating and managing ....
                       showMessage(radioGroupData) } }
 
        
-    <img src="media/single_selection_row_item_vertical.png.png" width="250" />
+   <img src="media/single_selection_row_item_vertical.png" width="250" />
 
    - **Horizontal**
   
@@ -82,7 +82,7 @@ This is a library for creating and managing ....
                       toast("name: ${radioGroupData.name} ")  } }
      
 
-     <img src="media/single_selection_row_item_horizontal.png" width="250" /> 
+  <img src="media/single_selection_row_item_horizontal.png" width="250" /> 
 
 ### SingleSelectionChipGroup((Verticle/Horizontal))
 
