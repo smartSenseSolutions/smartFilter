@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="ss_array">
+    <string-array name="item_list">
         <item>KitKat</item>
         <item>Lollipop</item>
         <item>Marshmallow</item>
