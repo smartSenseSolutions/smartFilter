@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="item_title">
+    <style name="itemTitleStyle">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
         <item name="android:layout_centerHorizontal">true</item>
@@ -8,7 +8,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="item_description">
+    <style name="itemDescStyle">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">14sp</item>
         <item name="android:layout_centerHorizontal">true</item>
