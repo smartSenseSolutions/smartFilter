@@ -98,16 +98,16 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
         }
     }
 
-    private fun addRadioButtonView(data: RadioGroupData?) {
+    private fun addRadioButtonView(data: RadioGroupData) {
             val binding = RowItemBinding.inflate(LayoutInflater.from(context), this, false)
             binding.apply {
-                tvName.text = data?.name
-                tvDes.text = data?.description
+                tvName.text = data.name
+                tvDes.text = data.description
             }
             applySelector(binding.rtl)
             radioGroup.addView(binding.root)
             binding.rtl.setOnClickListener {
-                data?.let { mData -> onCheckedChangeListener?.invoke(mData) }
+                data.let { mData -> onCheckedChangeListener?.invoke(mData) }
             }
 
     }
