@@ -18,11 +18,10 @@ class MainActivity : ComponentActivity() {
         setContentView(binding.root)
 
 
-        SmartFilter.addChipGroupMultiSelection {
-            addMultiSelectionChipGroup(binding.root) { radioGroupData ->
-                toast("Checked IDs: ${radioGroupData.joinToString(", ")}")
-            }
-        }
+        SmartFilter.addRadioRawItemSingleSelection {
+            addRadioGroupRowItemVertical(binding.root) { radioGroupData ->
+                toast("name: ${radioGroupData.name} ")  } }
+
     }
 
 }

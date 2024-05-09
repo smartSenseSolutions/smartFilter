@@ -43,8 +43,7 @@ This is a library for creating and managing ....
 
       
    - **Horizontal**
-
-     
+    
       
             SmartFilter.addRadioGroupSingleSelection {
                   addRadioGroupSingleLineHorizontal(binding.root) { radioGroupData ->			
@@ -69,8 +68,8 @@ This is a library for creating and managing ....
    - **Verticle**
         
             SmartFilter.addRadioRawItemSingleSelection {
-                  addRadioGroupRowItemVertical(binding.root) { radioGroupData ->
-                      showMessage(radioGroupData) } }
+               addRadioGroupRowItemVertical(binding.root) { radioGroupData ->
+                   toast("name: ${radioGroupData.name} ")  } }
 
        
    <img src="media/single_selection_row_item_vertical.png" width="250" />
@@ -78,8 +77,8 @@ This is a library for creating and managing ....
    - **Horizontal**
   
           SmartFilter.addRadioRawItemSingleSelection {
-                  addRadioGroupSingleLineHorizontal(binding.root) { radioGroupData ->
-                      toast("name: ${radioGroupData.name} ")  } }
+            addRadioGroupRowItemHorizontal(binding.root) { radioGroupData ->
+                toast("name: ${radioGroupData.name} ")  } }
      
 
   <img src="media/single_selection_row_item_horizontal.png" width="250" /> 

@@ -26,7 +26,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     private var textSelectorColor: ColorStateList? = null
     private var radioButtonDrawable: Drawable? = null
     private var orientation: Int = Orientation.VERTICAL
-    private var onCheckedChangeListener: RadioGroupCallback? = null
+    private var onCheckedChangeListener: ((RadioGroupData) -> Unit)? = null
 
     private lateinit var radioGroup: RadioGroup
     private lateinit var containerScrollView: ScrollView
@@ -85,11 +85,11 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
     }
 
 
-    fun configureRadioButton(mData: ArrayList<RadioGroupData>?,orientation: Int,bgSelector: Int,textSelector: Int,callbacks: RadioGroupCallback) {
+    fun configureRadioButton(mData: ArrayList<RadioGroupData>?,orientation: Int,bgSelector: Int,textSelector: Int,checkedChangedListener: ( RadioGroupData) -> Unit) {
         this.orientation = orientation
         this.radioButtonDrawable = bgSelector.let { ContextCompat.getDrawable(context, it) }
         this.textSelectorColor = textSelector.let { ContextCompat.getColorStateList(context, it) }
-        this.onCheckedChangeListener = callbacks
+        this.onCheckedChangeListener = checkedChangedListener
         setupRadioGroup()
         mData?.forEach { data ->
             addRadioButtonView(
@@ -107,7 +107,7 @@ class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLa
             applySelector(binding.rtl)
             radioGroup.addView(binding.root)
             binding.rtl.setOnClickListener {
-                data?.let { mData -> onCheckedChangeListener?.onSingleSelection(mData) }
+                data?.let { mData -> onCheckedChangeListener?.invoke(mData) }
             }
 
     }
