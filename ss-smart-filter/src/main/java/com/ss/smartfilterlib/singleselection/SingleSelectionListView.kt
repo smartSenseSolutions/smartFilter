@@ -1,6 +1,5 @@
-package com.ss.smartfilterlib
+package com.ss.smartfilterlib.singleselection
 
-import RadioGroupCallback
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
@@ -11,10 +10,10 @@ import android.widget.CheckedTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
-
-typealias SmartOrientation = com.ss.smartfilterlib.singlechoice.util.Orientation
-
+import com.ss.smartfilterlib.utils.BaseClass
+import com.ss.smartfilterlib.R
+import com.ss.smartfilterlib.data.RadioGroupData
+typealias SmartOrientation = com.ss.smartfilterlib.utils.Orientation
 /**
  * created by Mala Ruparel ON 02/05/24
  */
@@ -51,14 +50,17 @@ class SingleSelectionView @JvmOverloads constructor( context: Context,attrs: Att
         try {
             primaryTextColor = typedArray.getColor(R.styleable.SingleSelectionView_ss_textselector, primaryTextColor)
             orientation = typedArray.getInt(R.styleable.SingleSelectionView_ss_orientation,RecyclerView.VERTICAL)
-            checkSelector = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_checkdrawableselector,R.drawable.ic_check_selector)
+            checkSelector = typedArray.getResourceId(
+                R.styleable.SingleSelectionView_ss_checkdrawableselector,
+                R.drawable.ic_check_selector
+            )
             dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_listitem, 0)
         } finally {
             typedArray.recycle()
         }
     }
 
-    fun configureView(data: ArrayList<RadioGroupData>, orientation: Int, checkSelector: Int, primaryTextColor: Int, onCheckedChangeListener: RadioGroupCallback?){
+    private fun configureView(data: ArrayList<RadioGroupData>, orientation: Int, checkSelector: Int, primaryTextColor: Int, onCheckedChangeListener: ((RadioGroupData) -> Unit)?){
         updateValue(orientation, checkSelector, primaryTextColor, onCheckedChangeListener)
         initializeView()
         setItems(data)
@@ -67,9 +69,9 @@ class SingleSelectionView @JvmOverloads constructor( context: Context,attrs: Att
         orientation: Int,
         checkSelector: Int,
         primaryTextColor: Int,
-        onCheckedChangeListener: RadioGroupCallback?
+        checkedChangedListener: ((RadioGroupData) -> Unit)?
     ) {
-        this.onSingleSelectionClicked = onCheckedChangeListener
+        this.onSingleSelectionClicked = checkedChangedListener
         this.orientation = orientation
         this.checkSelector = checkSelector
         this.primaryTextColor = primaryTextColor
@@ -158,7 +160,7 @@ class SingleSelectionView @JvmOverloads constructor( context: Context,attrs: Att
             selectedItemPosition = position
             notifyItemChanged(previousSelectedItemPosition)
             notifyItemChanged(selectedItemPosition)
-            onSingleSelectionClicked?.onSingleSelection(data[position])
+            onSingleSelectionClicked?.invoke(data[position])
 
         }
 
@@ -172,7 +174,7 @@ class SingleSelectionView @JvmOverloads constructor( context: Context,attrs: Att
 
 
 
-  fun setOnSingleSelection(callback: RadioGroupCallback) {
-      onSingleSelectionClicked = callback
-  }
+    fun setOnSingleSelection(callback: (RadioGroupData) -> Unit) {
+        onSingleSelectionClicked = callback
+    }
 }

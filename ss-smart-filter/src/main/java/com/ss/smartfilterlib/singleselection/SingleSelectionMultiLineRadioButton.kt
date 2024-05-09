@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singlechoice.radiogroup
+package com.ss.smartfilterlib.singleselection
 
 
 import android.annotation.SuppressLint
@@ -23,7 +23,7 @@ import com.ss.smartfilterlib.utils.PaddingAttributes
 import com.ss.smartfilterlib.utils.SingleChangeDiffUtil
 import com.ss.smartfilterlib.utils.TextAttributes
 
-class MultiLineRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
+class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
 
     private var textSelectorColor: ColorStateList? = null
     private var radioButtonDrawable: Drawable? = null

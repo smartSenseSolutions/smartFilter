@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.multiselection.chipgroup
+package com.ss.smartfilterlib.multiselection
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -57,7 +57,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
     }
 
     fun setData(chipData: List<RadioGroupData>,chipType: MultiChipType,orientation: Int,bgSelector: Int,textSelector: Int, checkedChangedListener: ( List<Int>) -> Unit ) {
-        var chipIds = chipData.map { it.id } // Update chipIds property
+        var chipIds = chipData.map { it.id }
 
         chipGroup.removeAllViews()
         this.checkedChangedListener = checkedChangedListener

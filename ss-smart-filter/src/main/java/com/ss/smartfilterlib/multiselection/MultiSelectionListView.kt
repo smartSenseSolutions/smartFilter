@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib
+package com.ss.smartfilterlib.multiselection
 
 import android.content.Context
 import android.util.AttributeSet
@@ -10,7 +10,11 @@ import android.widget.CheckedTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+import com.ss.smartfilterlib.utils.BaseClass
+import com.ss.smartfilterlib.R
+import com.ss.smartfilterlib.singleselection.SmartOrientation
+import com.ss.smartfilterlib.data.RadioGroupData
+
 
 
 /**
@@ -50,30 +54,24 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
         try {
             primaryTextColor = typedArray.getColor(R.styleable.SingleSelectionView_ss_textselector, primaryTextColor)
             orientation = typedArray.getInt(R.styleable.SingleSelectionView_ss_orientation,RecyclerView.VERTICAL)
-            checkSelector = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_checkdrawableselector,R.drawable.ic_check_selector)
+            checkSelector = typedArray.getResourceId(
+                R.styleable.SingleSelectionView_ss_checkdrawableselector,
+                R.drawable.ic_check_selector
+            )
             dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_listitem, 0)
         } finally {
             typedArray.recycle()
         }
     }
 
-    fun configureView(
-        data: ArrayList<RadioGroupData>,
-        orientation: Int,
-        checkSelector: Int, primaryTextColor: Int, onCheckedChangeListener: ((List<RadioGroupData>) -> Unit)?
-    ) {
+    private fun configureView(data: ArrayList<RadioGroupData>, orientation: Int, checkSelector: Int, primaryTextColor: Int, onCheckedChangeListener: ((List<RadioGroupData>) -> Unit)?) {
 
-       updateValue(orientation, checkSelector, primaryTextColor, onCheckedChangeListener)
+        updateValue(orientation, checkSelector, primaryTextColor, onCheckedChangeListener)
         initializeView()
         setItems(data)
     }
 
-    private fun updateValue(
-        orientation: Int,
-        checkSelector: Int,
-        primaryTextColor: Int,
-        onCheckedChangeListener: ((List<RadioGroupData>) -> Unit)?
-    ) {
+    private fun updateValue(orientation: Int,checkSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((List<RadioGroupData>) -> Unit)?) {
         this.onMultiSelectionClicked = onCheckedChangeListener
         this.orientation = orientation
         this.checkSelector = checkSelector

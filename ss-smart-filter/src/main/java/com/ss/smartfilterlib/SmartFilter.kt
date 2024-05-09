@@ -2,18 +2,18 @@ package com.ss.smartfilterlib
 
 import com.ss.smartfilterlib.data.MultiSelectionParams
 import com.ss.smartfilterlib.data.SingleChipSelectionParams
-import com.ss.smartfilterlib.multiselection.chipgroup.MultiselectionChipGroup
-import com.ss.smartfilterlib.singalchoice.chipgroup.SingleChipGroup
-import com.ss.smartfilterlib.singlechoice.radiogroup.MultiLineRadioGroup
-import com.ss.smartfilterlib.singlechoice.radiogroup.RowItemRadioGroup
-import com.ss.smartfilterlib.singlechoice.radiogroup.SingleLineRadioGroup
+import com.ss.smartfilterlib.multiselection.MultiselectionChipGroup
+import com.ss.smartfilterlib.singleselection.SingleSelectionChipGroup
+import com.ss.smartfilterlib.singleselection.SingleSelectionMultiLineRadioButton
+import com.ss.smartfilterlib.singleselection.SingleSelectionItemRadioGroup
+import com.ss.smartfilterlib.singleselection.SingleSelectionRadioGroup
 import com.ss.smartfilterlib.utils.Params
 
 
 object SmartFilter {
     fun addRadioGroupSingleSelection(singleSelectionParams: () -> Params.SingleSelection) {
         val param = singleSelectionParams().data
-        val singleLineRadioGroup = SingleLineRadioGroup(param.rootView.context)
+        val singleLineRadioGroup = SingleSelectionRadioGroup(param.rootView.context)
         singleLineRadioGroup.configureRadioButton(
             param.mData,
             param.orientation,
@@ -26,7 +26,7 @@ object SmartFilter {
     }
     fun addRadioMultiRawSingleSelection(singleSelectionMultiRawParams: () -> Params.SingleSelectionMultiRaw) {
         val param = singleSelectionMultiRawParams().data
-        val multiLineRadioGroup = MultiLineRadioGroup(param.rootView.context)
+        val multiLineRadioGroup = SingleSelectionMultiLineRadioButton(param.rootView.context)
         multiLineRadioGroup.configureRadioButton(
             param.mData,
             param.bgSelector,
@@ -39,7 +39,7 @@ object SmartFilter {
 
     fun addRadioRawItemSingleSelection(singleSelectionParams: () -> Params.SingleSelection) {
         val param = singleSelectionParams().data
-        val rowItemRadioGroup = RowItemRadioGroup(param.rootView.context)
+        val rowItemRadioGroup = SingleSelectionItemRadioGroup(param.rootView.context)
         rowItemRadioGroup.configureRadioButton(
             param.mData,
             param.orientation,
@@ -53,7 +53,7 @@ object SmartFilter {
 
     fun addChipGroupSingleSelection(singleChipSelectionParams: () -> SingleChipSelectionParams) {
         val param = singleChipSelectionParams()
-        val singleChipgroup = SingleChipGroup(param.rootView.context)
+        val singleChipgroup = SingleSelectionChipGroup(param.rootView.context)
         singleChipgroup.setData(
             param.mData,
             param.chipType,

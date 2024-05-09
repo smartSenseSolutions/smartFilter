@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <com.ss.smartfilterlib.MultiSelectionListView
+    <com.ss.smartfilterlib.multiselection.MultiSelectionListView
         android:id="@+id/multiSelectionListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

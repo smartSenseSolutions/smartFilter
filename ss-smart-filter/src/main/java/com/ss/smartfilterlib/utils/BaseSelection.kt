@@ -1,15 +1,12 @@
-package com.ss.smartfilterlib
+package com.ss.smartfilterlib.utils
 
-import RadioGroupCallback
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.widget.CheckedTextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
-import com.ss.smartfilterlib.singlechoice.util.Constant
-import com.ss.smartfilterlib.singlechoice.util.PaddingAttributes
-import com.ss.smartfilterlib.singlechoice.util.TextAttributes
+import com.ss.smartfilterlib.data.RadioGroupData
+typealias SmartOrientation = com.ss.smartfilterlib.utils.Orientation
 
 /**
  * created by Mala Ruparel ON 08/05/24
@@ -23,7 +20,7 @@ abstract class BaseClass<T> : RecyclerView {
     protected var paddingAttributes: PaddingAttributes = PaddingAttributes()
     protected var textAttributes: TextAttributes = TextAttributes()
     protected var onMultiSelectionClicked: ((List<RadioGroupData>) -> Unit)? = null
-    protected var onSingleSelectionClicked: RadioGroupCallback? = null
+    protected var onSingleSelectionClicked: ((RadioGroupData) -> Unit)? = null
     protected var dataFromXml: Int = 0
     protected var data: List<T> = emptyList()
     protected val selectedItemsPositions = mutableListOf<Int>()

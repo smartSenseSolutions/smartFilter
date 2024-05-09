@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singlechoice.radiogroup
+package com.ss.smartfilterlib.singleselection
 
 
 
@@ -15,7 +15,6 @@ import android.widget.RadioGroup
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.callback.RadioGroupCallback
 import com.ss.smartfilterlib.data.RadioGroupData
 import com.ss.smartfilterlib.utils.Orientation
 import com.ss.smartfilterlib.utils.PaddingAttributes
@@ -25,7 +24,7 @@ import com.ss.smartfilterlib.utils.TextAttributes
 /**
  * created by Mala Ruparel ON 17/04/24
  */
-class SingleLineRadioGroup @JvmOverloads constructor(context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
+class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
 
 
     private var textSelectorColor: ColorStateList? = null

@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singlechoice.radiogroup
+package com.ss.smartfilterlib.singleselection
 
 
 import android.content.Context
@@ -13,7 +13,6 @@ import android.widget.RelativeLayout
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.callback.RadioGroupCallback
 import com.ss.smartfilterlib.data.RadioGroupData
 import com.ss.smartfilterlib.databinding.RowItemBinding
 import com.ss.smartfilterlib.utils.Orientation
@@ -21,7 +20,7 @@ import com.ss.smartfilterlib.utils.Orientation
 /**
  * created by Mala Ruparel ON 19/04/24
  */
-class RowItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLayout(context, attrs) {
+class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null) : LinearLayout(context, attrs) {
 
     private var textSelectorColor: ColorStateList? = null
     private var radioButtonDrawable: Drawable? = null

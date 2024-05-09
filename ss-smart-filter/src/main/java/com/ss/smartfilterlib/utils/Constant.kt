@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singlechoice.util
+package com.ss.smartfilterlib.utils
 
 import android.graphics.Color
 

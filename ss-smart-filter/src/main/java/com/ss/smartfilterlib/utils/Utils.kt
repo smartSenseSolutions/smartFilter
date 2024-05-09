@@ -23,7 +23,7 @@ object Orientation {
 }
 enum class MultiChipType {
     ENTRY_CHIP,
-    FILTER_CHIP, //input
+    FILTER_CHIP,
     ACTION_CHIP,
     NONE
 }

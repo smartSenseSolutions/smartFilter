@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singalchoice.chipgroup
+package com.ss.smartfilterlib.singleselection
 
 
 
@@ -22,7 +22,7 @@ import com.ss.smartfilterlib.utils.SingleChipType
 /**
  * created by Mala Ruparel ON 24/04/24
  */
-class SingleChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
+class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
 
     private var chipBGColor: ColorStateList? = null
     private var chipTextColor: ColorStateList? = null
