@@ -19,67 +19,67 @@ This is a library for creating and managing ....
 
 ## Prerequisites
 
-  
-  
+
+
 ## Installing
 
-  - **Clone the repository: `git clone https://github.com/smartSenseSolutions/smart-filter-library.git`**
-  - **Open the project in Android Studio.**
-  - **Build and run the project on an emulator or device.**
+- **Clone the repository: `git clone https://github.com/smartSenseSolutions/smart-filter-library.git`**
+- **Open the project in Android Studio.**
+- **Build and run the project on an emulator or device.**
 
 
 ## SingleSelection
 
-  ### SingleSelectionRadioGroup(Verticle/Horizontal)
-    
-   - **Verticle**   
-         
-                   
+### SingleSelectionRadioGroup(Verticle/Horizontal)
+
+- **Verticle**
+
+
           SmartFilter.addRadioGroupSingleSelection {
                 addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
                       toast("name: ${radioGroupData.name} ") }}
-       
+
 <img src="media/single_selection_vertical.png" width="250" />
 
-      
-   - **Horizontal**
-    
-      
+
+- **Horizontal**
+
+
             SmartFilter.addRadioGroupSingleSelection {
                   addRadioGroupSingleLineHorizontal(binding.root) { radioGroupData ->			
                         toast("name: ${radioGroupData.name} ") } }
-    
-         
+
+
 <img src="media/single_selection_horizontal.png" width="250" />
-           
+
 
 ### SingleSelectionMultiLine(MultiRaw)
-       
+
            SmartFilter.addRadioMultiRawSingleSelection {
                 addRadioMultiRow(binding.root) { radioGroupData ->
                     toast("name: ${radioGroupData.name} ")  } }
-		    
+
 
 <img src="media/single_selection_multiline.png" width="250" />
 
 
 ### SingleSelectionRowItem(Verticle/Horizontal)
 
-   - **Verticle**
-        
-            SmartFilter.addRadioRawItemSingleSelection {
-               addRadioGroupRowItemVertical(binding.root) { radioGroupData ->
-                   toast("name: ${radioGroupData.name} ")  } }
+- **Verticle**
 
-       
+         SmartFilter.addRadioRawItemSingleSelection {
+            addRadioGroupRowItemVertical(binding.root) { radioGroupData ->
+                toast("name: ${radioGroupData.name} ")  } }
+
+
    <img src="media/single_selection_row_item_vertical.png" width="250" />
 
-   - **Horizontal**
-  
-          SmartFilter.addRadioRawItemSingleSelection {
-            addRadioGroupRowItemHorizontal(binding.root) { radioGroupData ->
-                toast("name: ${radioGroupData.name} ")  } }
-     
+- **Horizontal**
+
+       SmartFilter.addRadioRawItemSingleSelection {
+         addRadioGroupRowItemHorizontal(binding.root) { radioGroupData ->
+             toast("name: ${radioGroupData.name} ")  } }
+
 
   <img src="media/single_selection_row_item_horizontal.png" width="250" /> 
 
@@ -88,22 +88,22 @@ This is a library for creating and managing ....
               SmartFilter.addChipGroupSingleSelection {
                   addSingleSelectionChipGroup(binding.root) { radioGroupData ->
                       toast("name: ${radioGroupData.name} ") } }
-     
-        
+
+
 <img src="media/single_selection_chip.png" width="250" />       
-   
+
 ### MultiSelectionChipGroup(MultiRaw)
-        
+
                 SmartFilter.addChipGroupMultiSelection {
                     addMultiSelectionChipGroup(binding.root) { radioGroupData ->
                          toast("Checked IDs: ${radioGroupData.joinToString(", ")}")  } }
-         
-             
+
+
    <img src="media/multiselect_chip.png" width="250" />
 
 
-### Attribute      
-         
+### Attribute
+
     | Attribute | Description | Type | Default Value |
     | --- | --- | --- | --- |
     | rootView | The root view of the radio group. | ViewGroup | - |
@@ -116,8 +116,8 @@ This is a library for creating and managing ....
 
 ### Usage
 
-  - **To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:**
- 
+- **To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:**
+
 ### Dependency
 
 ```kotlin
