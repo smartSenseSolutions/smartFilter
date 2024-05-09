@@ -48,10 +48,10 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
     override fun initAttributes(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SingleSelectionView)
         try {
-            primaryTextColor = typedArray.getColor(R.styleable.SingleSelectionView_ss_TextSelector, primaryTextColor)
-            orientation = typedArray.getInt(R.styleable.SingleSelectionView_ss_Orientation,RecyclerView.VERTICAL)
-            checkSelector = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_checkDrawableSelector,R.drawable.ic_check_selector)
-            dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_Listitem, 0)
+            primaryTextColor = typedArray.getColor(R.styleable.SingleSelectionView_ss_textselector, primaryTextColor)
+            orientation = typedArray.getInt(R.styleable.SingleSelectionView_ss_orientation,RecyclerView.VERTICAL)
+            checkSelector = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_checkdrawableselector,R.drawable.ic_check_selector)
+            dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_listitem, 0)
         } finally {
             typedArray.recycle()
         }

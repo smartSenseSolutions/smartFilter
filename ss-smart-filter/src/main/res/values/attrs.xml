@@ -57,5 +57,10 @@
         <attr name="cg_sl_orientation" format="integer" />
     </declare-styleable>
 
-
+    <declare-styleable name="SingleSelectionView">
+        <attr name="ss_textselector" format="reference" />
+        <attr name="ss_orientation" format="reference" />
+        <attr name="ss_checkdrawableselector" format="dimension" />
+        <attr name="ss_listitem" format="reference" />
+    </declare-styleable>
     </resources>

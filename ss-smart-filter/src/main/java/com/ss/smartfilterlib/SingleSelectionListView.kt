@@ -2,7 +2,6 @@ package com.ss.smartfilterlib
 
 import RadioGroupCallback
 import android.content.Context
-import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.ss.smartfilterlib.singlechoice.radiogroup.data.RadioGroupData
+
 typealias SmartOrientation = com.ss.smartfilterlib.singlechoice.util.Orientation
 
 /**
@@ -49,10 +49,10 @@ class SingleSelectionView @JvmOverloads constructor( context: Context,attrs: Att
     override fun initAttributes(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SingleSelectionView)
         try {
-            primaryTextColor = typedArray.getColor(R.styleable.SingleSelectionView_ss_TextSelector, primaryTextColor)
-            orientation = typedArray.getInt(R.styleable.SingleSelectionView_ss_Orientation,RecyclerView.VERTICAL)
-            checkSelector = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_checkDrawableSelector,R.drawable.ic_check_selector)
-            dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_Listitem, 0)
+            primaryTextColor = typedArray.getColor(R.styleable.SingleSelectionView_ss_textselector, primaryTextColor)
+            orientation = typedArray.getInt(R.styleable.SingleSelectionView_ss_orientation,RecyclerView.VERTICAL)
+            checkSelector = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_checkdrawableselector,R.drawable.ic_check_selector)
+            dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_listitem, 0)
         } finally {
             typedArray.recycle()
         }

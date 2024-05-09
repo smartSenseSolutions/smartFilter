@@ -12,9 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        app:ss_Listitem="@array/ss_array"
-
-        />
+        app:ss_listitem="@array/array_android_version"/>
 
 </LinearLayout>
 
