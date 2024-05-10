@@ -98,32 +98,71 @@ fun addRadioGroupRowItemVertical(
 
     )
 )
-fun addSingleSelectionChipGroup(rootView: ViewGroup, radioGroupCallback: (RadioGroupData) -> Unit) =
 
-    SingleChipSelectionParams(
-        rootView = rootView,
-        singleGroupSubType = SingleGroupSubType.CHIP_GROUP,
-        chipType = SingleChipType.CHOICE_CHIP,
-        orientation = Orientation.VERTICAL,
-        mData = mRadioGroupData(),
-        callbacks = radioGroupCallback,
-        bgSelector = R.color.chip_bg_selector,
-        textSelector = R.color.chip_text_selector
+fun addSingleSelectionChipGroupVertical(rootView: ViewGroup, radioGroupCallback: (RadioGroupData) -> Unit) =
+    Params.SingleChipSelection(
+        SingleChipSelectionParams(
+            rootView = rootView,
+            singleGroupSubType = SingleGroupSubType.CHIP_GROUP,
+            chipType = SingleChipType.ENTRY_CHIP,
+            orientation = Orientation.VERTICAL,
+            mData = mRadioGroupData(),
+            callbacks = radioGroupCallback,
+            bgSelector = R.color.chip_bg_selector,
+            textSelector = R.color.chip_text_selector
+        )
+    )
+fun addSingleSelectionChipGroupHorizontal(rootView: ViewGroup, radioGroupCallback: (RadioGroupData) -> Unit) =
+    Params.SingleChipSelection(
+        SingleChipSelectionParams(
+            rootView = rootView,
+            singleGroupSubType = SingleGroupSubType.CHIP_GROUP,
+            chipType = SingleChipType.ENTRY_CHIP,
+            orientation = Orientation.HORIZONTAL,
+            mData = mRadioGroupData(),
+            callbacks = radioGroupCallback,
+            bgSelector = R.color.chip_bg_selector,
+            textSelector = R.color.chip_text_selector
+        )
+    )
+fun addMultiSelectionChipGroupVertical(rootView: ViewGroup, radioGroupCallback: (List<Int>) -> Unit) =
+    Params.MultiChipSelection(
+        MultiSelectionParams(
+            rootView = rootView,
+            chipType = MultiChipType.FILTER_CHIP,
+            orientation = Orientation.VERTICAL,
+            mData = mRadioGroupData(),
+            callbacks = radioGroupCallback,
+            bgSelector = R.color.chip_bg_selector,
+            textSelector = R.color.chip_text_selector
+        )
     )
 
-fun addMultiSelectionChipGroup(rootView: ViewGroup, radioGroupCallback: (List<Int>) -> Unit) =
-    MultiSelectionParams(
-        rootView = rootView,
-        chipType = MultiChipType.FILTER_CHIP,
-        orientation = Orientation.VERTICAL,
-        mData = mRadioGroupData(),
-        callbacks = radioGroupCallback,
-        bgSelector = R.color.chip_bg_selector,
-        textSelector = R.color.chip_text_selector
+
+fun addMultiSelectionChipGroupHorizontal(rootView: ViewGroup, radioGroupCallback: (List<Int>) -> Unit) =
+    Params.MultiChipSelection(
+        MultiSelectionParams(
+            rootView = rootView,
+            chipType = MultiChipType.FILTER_CHIP,
+            orientation = Orientation.HORIZONTAL,
+            mData = mRadioGroupData(),
+            callbacks = radioGroupCallback,
+            bgSelector = R.color.chip_bg_selector,
+            textSelector = R.color.chip_text_selector
+        )
     )
-
-
-
-
+fun addSingleSelectionListVertical(rootView: ViewGroup, radioGroupCallback: (RadioGroupData) -> Unit) =
+    Params.SingleSelection(
+        SingleSelectionParams(
+            rootView = rootView,
+            singleGroupSubType = SingleGroupSubType.SINGLE_LINE,
+            chipType = SingleChipType.NONE,
+            orientation = Orientation.VERTICAL,
+            mData = mRadioGroupData(),
+            callbacks = radioGroupCallback,
+            bgSelector = R.drawable.ic_check_selector,
+            textSelector = R.color.chip_text_selector
+        )
+    )
 
 

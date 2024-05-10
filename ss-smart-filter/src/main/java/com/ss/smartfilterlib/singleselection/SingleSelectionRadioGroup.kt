@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.HorizontalScrollView
-import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.ScrollView
@@ -17,107 +16,103 @@ import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.data.RadioGroupData
 import com.ss.smartfilterlib.utils.Orientation
-import com.ss.smartfilterlib.utils.PaddingAttributes
-import com.ss.smartfilterlib.utils.TextAttributes
 
 
 /**
  * created by Mala Ruparel ON 17/04/24
  */
-class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
-
-
-    private var textSelectorColor: ColorStateList? = null
-    private var radioButtonDrawable: Drawable? = null
-    private var orientation: Int = Orientation.VERTICAL
-
-    private var textAttributes: TextAttributes = TextAttributes()
-    private var paddingAttributes: PaddingAttributes = PaddingAttributes()
-
-    private var dataFromXml: Int = 0
-    private var onCheckedChangeListener: ((RadioGroupData) -> Unit)? = null
-    private lateinit var radioGroup: RadioGroup
-    private lateinit var containerScrollView: ScrollView
-    private lateinit var containerHorizontalScrollView: HorizontalScrollView
+class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseLinearLayout<RadioGroupData>(context, attrs, defStyle) {
 
     init {
-        initAttrs(attrs)
-        setupView()
-        setDataFromAttrs()
+        initAttributes(attrs=attrs)
+        initializeView()
+        populateDataFromAttributes()
     }
 
-    private fun initAttrs(attrs: AttributeSet?) {
+    override fun initAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SingleLineRadioGroup, 0, 0)
-        try {
-            orientation = typedArray.getInt(R.styleable.SingleLineRadioGroup_rg_sl_orientation, Orientation.VERTICAL)
-            textSelectorColor = typedArray.getColorStateList(R.styleable.SingleLineRadioGroup_rg_sl_textcolor)
-            radioButtonDrawable = typedArray.getDrawable(R.styleable.SingleLineRadioGroup_rg_sl_background)
-            dataFromXml = typedArray.getResourceId(R.styleable.SingleLineRadioGroup_rg_sl_listitem, 0)
+        with(typedArray) {
+            try {
+                smartOrientation = getInt(R.styleable.SingleLineRadioGroup_rg_sl_orientation, Orientation.VERTICAL)
+                viewTextSelector = getColorStateList(R.styleable.SingleLineRadioGroup_rg_sl_text_color) ?: setDefaultTextColor()
+                viewBgSelector = getDrawable(R.styleable.SingleLineRadioGroup_rg_sl_background) ?: setDefaultDrawable()
+                dataFromXml = getResourceId(R.styleable.SingleLineRadioGroup_rg_sl_list_item, 0)
 
-        } finally {
-            typedArray.recycle()
+            } finally {
+                typedArray.recycle()
+            }
         }
+
     }
 
 
-    private fun setDataFromAttrs() {
+    private fun populateDataFromAttributes() {
         if (dataFromXml != 0) {
             val mData = resources.getStringArray(dataFromXml);
+            setOrientation()
             mData.forEach {
                 val data = RadioGroupData(name = it)
                 addRadioButtonView(data)
             }
         }
     }
-    private fun setupView() {
+    override fun initializeView() {
         containerScrollView = ScrollView(context)
         containerHorizontalScrollView = HorizontalScrollView(context)
 
         val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         containerScrollView.layoutParams = layoutParams
         containerHorizontalScrollView.layoutParams = layoutParams
-
         radioGroup = RadioGroup(context)
+
     }
 
-    private fun setupRadioGroup() {
+    private fun setOrientation() {
+        when (smartOrientation) {
+            VERTICAL -> {
+                if (containerHorizontalScrollView.parent != null) {
+                    removeView(containerHorizontalScrollView)
+                }
+                if (containerScrollView.parent == null) {
+                    addView(containerScrollView)
+                }
+                radioGroup.orientation = VERTICAL
+                containerScrollView.addView(radioGroup)
 
-        if (this.orientation == VERTICAL) {
-            if (containerHorizontalScrollView.parent != null) {
-                removeView(containerHorizontalScrollView)
             }
-            if (containerScrollView.parent == null) {
-                addView(containerScrollView)
-            }
-            radioGroup.orientation = VERTICAL
-            containerScrollView.addView(radioGroup)
 
-        } else {
-            if (containerScrollView.parent != null) {
-                removeView(containerScrollView)
+            HORIZONTAL -> {
+                if (containerScrollView.parent != null) {
+                    removeView(containerScrollView)
+                }
+                if (containerHorizontalScrollView.parent == null) {
+                    addView(containerHorizontalScrollView)
+                }
+                radioGroup.orientation = HORIZONTAL
+                containerHorizontalScrollView.addView(radioGroup)
             }
-            if (containerHorizontalScrollView.parent == null) {
-                addView(containerHorizontalScrollView)
-            }
-            radioGroup.orientation = HORIZONTAL
-            containerHorizontalScrollView.addView(radioGroup)
         }
     }
 
 
     fun configureRadioButton( mData: ArrayList<RadioGroupData>,orientation: Int,bgSelector: Int,textSelector: Int,checkedChangedListener: ( RadioGroupData) -> Unit) {
-        this.orientation = orientation
-        this.radioButtonDrawable = bgSelector.let { ContextCompat.getDrawable(context, it) }
-        this.textSelectorColor = textSelector.let { ContextCompat.getColorStateList(context, it) }
-        this.onCheckedChangeListener = checkedChangedListener
-        setupRadioGroup()
+        updateValue(orientation, bgSelector, textSelector, checkedChangedListener)
+        setOrientation()
+        setItems(mData)
+    }
+    private fun updateValue(orientation: Int,checkSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((RadioGroupData) -> Unit)?) {
+        this.smartOrientation = orientation
+        this.viewBgSelector = checkSelector.let { ContextCompat.getDrawable(context, it) }
+        this.viewTextSelector = primaryTextColor.let { ContextCompat.getColorStateList(context, it) }
+        this.singleCheckedChangeListener = onCheckedChangeListener
+    }
+    private fun setItems(mData: List<RadioGroupData>) {
         mData.forEach { data ->
             addRadioButtonView(
                 data
             )
         }
     }
-
     private fun addRadioButtonView(data: RadioGroupData) {
         val radioButton = RadioButton(context)
 
@@ -133,20 +128,14 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val checkedRadioButton: RadioButton = findViewById(checkedId)
             val checkedData = checkedRadioButton.tag as RadioGroupData?
-            checkedData?.let { onCheckedChangeListener?.invoke(it) }
+            checkedData?.let { singleCheckedChangeListener?.invoke(it) }
         }
     }
 
 
     private fun applySelector(radioButton: RadioButton) {
-        if(textSelectorColor == null){
-            textSelectorColor= setDefaultTextColor()
-        }
-        if(radioButtonDrawable == null){
-            radioButtonDrawable=setDefaultDrawable()
-        }
-        radioButton.setTextColor(textSelectorColor)
-        radioButton.buttonDrawable = radioButtonDrawable?.constantState?.newDrawable()?.mutate()
+        viewTextSelector?.let { radioButton.setTextColor(it) }
+        viewBgSelector?.let { radioButton.buttonDrawable = it.constantState?.newDrawable()?.mutate() }
     }
 
 
@@ -181,8 +170,8 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
             )
         }
     }
-    private fun setData(data: RadioGroupData) = data.name
 
-
-    private var defaultPadding = resources.getDimension(com.intuit.sdp.R.dimen._8sdp).toInt()
+    fun onCheckedChangeListener(onCheckedChangeListener: (RadioGroupData) -> Unit) {
+        this.singleCheckedChangeListener = onCheckedChangeListener
+    }
 }

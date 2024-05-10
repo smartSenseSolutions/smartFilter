@@ -7,4 +7,6 @@ import android.graphics.Color
  */
 object Constant {
     const val PRIMARY_TEXT_COLOR = Color.BLACK
+    const val DEFAULT_SPAN_COUNT = 3
+    const val DEFAULT_SPACING = 4
 }

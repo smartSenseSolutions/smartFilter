@@ -1,11 +1,10 @@
 package com.ss.smartfilterlib
 
-import com.ss.smartfilterlib.data.MultiSelectionParams
-import com.ss.smartfilterlib.data.SingleChipSelectionParams
 import com.ss.smartfilterlib.multiselection.MultiselectionChipGroup
 import com.ss.smartfilterlib.singleselection.SingleSelectionChipGroup
-import com.ss.smartfilterlib.singleselection.SingleSelectionMultiLineRadioButton
 import com.ss.smartfilterlib.singleselection.SingleSelectionItemRadioGroup
+import com.ss.smartfilterlib.singleselection.SingleSelectionListView
+import com.ss.smartfilterlib.singleselection.SingleSelectionMultiLineRadioButton
 import com.ss.smartfilterlib.singleselection.SingleSelectionRadioGroup
 import com.ss.smartfilterlib.utils.Params
 
@@ -51,10 +50,10 @@ object SmartFilter {
 
     }
 
-    fun addChipGroupSingleSelection(singleChipSelectionParams: () -> SingleChipSelectionParams) {
-        val param = singleChipSelectionParams()
+    fun addChipGroupSingleSelection(singleChipSelectionParams: () -> Params.SingleChipSelection) {
+        val param = singleChipSelectionParams().data
         val singleChipgroup = SingleSelectionChipGroup(param.rootView.context)
-        singleChipgroup.setData(
+        singleChipgroup.configureView(
             param.mData,
             param.chipType,
             param.orientation,
@@ -65,10 +64,10 @@ object SmartFilter {
         param.rootView.addView(singleChipgroup)
 
     }
-    fun addChipGroupMultiSelection(multiselectionChipGroup: () -> MultiSelectionParams) {
-        val param = multiselectionChipGroup()
+    fun addChipGroupMultiSelection(multiselectionChipGroup: () -> Params.MultiChipSelection) {
+        val param = multiselectionChipGroup().data
         val multiselectionChipGroup = MultiselectionChipGroup(param.rootView.context)
-        multiselectionChipGroup.setData(
+        multiselectionChipGroup.configureView(
             param.mData,
             param.chipType,
             param.orientation,
@@ -79,7 +78,19 @@ object SmartFilter {
         param.rootView.addView(multiselectionChipGroup)
 
     }
+    fun addListViewSingleSelection(singleSelectionParams: () -> Params.SingleSelection) {
+        val param = singleSelectionParams().data
+        val singleSelectionListView = SingleSelectionListView(param.rootView.context)
+        singleSelectionListView.configureView(
+            param.mData,
+            param.orientation,
+            param.bgSelector,
+            param.textSelector,
+            param.callbacks
+        )
+        param.rootView.addView(singleSelectionListView)
 
+    }
 }
 
 

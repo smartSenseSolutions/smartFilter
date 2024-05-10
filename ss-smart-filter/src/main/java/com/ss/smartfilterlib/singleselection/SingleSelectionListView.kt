@@ -1,45 +1,33 @@
 package com.ss.smartfilterlib.singleselection
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.CheckedTextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
-import com.ss.smartfilterlib.utils.BaseClass
 import com.ss.smartfilterlib.R
+import com.ss.smartfilterlib.adapter.SingleSelectionListAdapter
 import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.utils.BaseRecycleView
+
 typealias SmartOrientation = com.ss.smartfilterlib.utils.Orientation
 /**
  * created by Mala Ruparel ON 02/05/24
  */
-class SingleSelectionView @JvmOverloads constructor( context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : BaseClass<RadioGroupData>(context, attrs, defStyle){
+class SingleSelectionListView @JvmOverloads constructor( context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : BaseRecycleView<RadioGroupData>(context, attrs, defStyle){
 
 
     init {
         initAttributes(attrs=attrs)
         initializeView()
-        populateDataFromAttributes()
+
     }
 
-    private fun populateDataFromAttributes() {
-        val mData = resources.getStringArray(dataFromXml);
-        val data = mData.map { RadioGroupData(name = it) } as ArrayList<RadioGroupData>
-        configureView(
-            data = data,
-            orientation = orientation,
-            checkSelector = checkSelector,
-            primaryTextColor = primaryTextColor,
-            onCheckedChangeListener = onSingleSelectionClicked
-        )
-    }
+
 
     override fun initializeView() {
-        layoutManager = when (orientation) {
+        layoutManager = when (smartOrientation) {
             SmartOrientation.VERTICAL -> LinearLayoutManager(context, VERTICAL, false)
             else -> LinearLayoutManager(context, HORIZONTAL, false)
         }
@@ -47,133 +35,38 @@ class SingleSelectionView @JvmOverloads constructor( context: Context,attrs: Att
 
     override fun initAttributes(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SingleSelectionView)
-        try {
-            primaryTextColor = typedArray.getColor(R.styleable.SingleSelectionView_ss_textselector, primaryTextColor)
-            orientation = typedArray.getInt(R.styleable.SingleSelectionView_ss_orientation,RecyclerView.VERTICAL)
-            checkSelector = typedArray.getResourceId(
-                R.styleable.SingleSelectionView_ss_checkdrawableselector,
-                R.drawable.ic_check_selector
-            )
-            dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_listitem, 0)
-        } finally {
-            typedArray.recycle()
+        with(typedArray) {
+            try {
+                viewTextSelector =getColorStateList(R.styleable.SingleSelectionView_ss_text_selector) ?: setDefaultTextColor()
+                smartOrientation = getInt(R.styleable.SingleSelectionView_ss_orientation, RecyclerView.VERTICAL)
+                checkSelector = getResourceId(R.styleable.SingleSelectionView_ss_check_drawable_selector,R.drawable.ic_check_selector)
+                dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_list_item, 0)
+            } finally {
+                typedArray.recycle()
+            }
         }
     }
 
-    private fun configureView(data: ArrayList<RadioGroupData>, orientation: Int, checkSelector: Int, primaryTextColor: Int, onCheckedChangeListener: ((RadioGroupData) -> Unit)?){
-        updateValue(orientation, checkSelector, primaryTextColor, onCheckedChangeListener)
+
+    fun configureView(data: ArrayList<RadioGroupData>, orientation: Int, checkSelector: Int, textSelector: Int, onCheckedChangeListener: ((RadioGroupData) -> Unit)?){
+        updateValue(orientation, checkSelector, textSelector, onCheckedChangeListener)
         initializeView()
         setItems(data)
     }
-    private fun updateValue(
-        orientation: Int,
-        checkSelector: Int,
-        primaryTextColor: Int,
-        checkedChangedListener: ((RadioGroupData) -> Unit)?
-    ) {
+    private fun updateValue(orientation: Int,checkSelector: Int,textSelector: Int,checkedChangedListener: ((RadioGroupData) -> Unit)?) {
         this.onSingleSelectionClicked = checkedChangedListener
-        this.orientation = orientation
+        this.smartOrientation = orientation
         this.checkSelector = checkSelector
-        this.primaryTextColor = primaryTextColor
+        this.viewTextSelector =textSelector.let { ContextCompat.getColorStateList(context, it) }
     }
 
     private fun setItems(items: List<RadioGroupData>) {
-        adapter = SingleSelectionListAdapter().apply { data = items }
+        adapter = SingleSelectionListAdapter(checkSelector,primaryTextColor,onSingleSelectionClicked).apply { data = items }
     }
 
-    private inner class SingleSelectionListAdapter() : RecyclerView.Adapter<SingleSelectionListAdapter.SingleSelectionListViewHolder>() {
-
-        private var selectedItemPosition: Int = RecyclerView.NO_POSITION
-
-        var data: List<RadioGroupData> = emptyList()
-            set(value) {
-                field = value
-                notifyDataSetChanged()
-            }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleSelectionListViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_simple_list_checkable, parent, false)
-            return SingleSelectionListViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: SingleSelectionListViewHolder, position: Int) {
-            holder.bind(data[position],position == selectedItemPosition)
-        }
-
-        override fun getItemCount(): Int = data.size
-
-        inner class SingleSelectionListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-            val cardView: MaterialCardView by lazy { MaterialCardView(itemView.context) }
-            val textView: CheckedTextView by lazy { CheckedTextView(itemView.context) }
-
-            init {
-                with(cardView) {
-                    layoutParams = ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT
-                    )
-                    addView(textView)
-                }
-
-                (itemView as ViewGroup).addView(cardView)
-
-                itemView.setOnClickListener {
-                    val position = adapterPosition
-                    if (position != RecyclerView.NO_POSITION) {
-                        toggleItemSelection(position)
-                    }
-                }
-            }
-
-
-            fun bind(data: RadioGroupData, isSelected: Boolean) {
-                textView.apply {
-                    isChecked = adapterPosition == selectedItemPosition
-                    applyTextAttributes(this)
-                    applyPaddingAttributes(this)
-                    text = setData(data)
-                    applySelector(this)
-                    compoundDrawablePadding =10
-                    extracted()
-
-                }
-
-            }
-
-
-                private fun CheckedTextView.extracted() {
-                    checkMarkDrawable?.setBounds(
-                        0,
-                        0,
-                        checkMarkDrawable.intrinsicWidth,
-                        checkMarkDrawable.intrinsicHeight
-                    )
-                    gravity = Gravity.CENTER_VERTICAL
-                    setPadding(10, 10, 10, 10)
-
-            }
-        }
-
-        private fun toggleItemSelection(position: Int) {
-            val previousSelectedItemPosition = selectedItemPosition
-            selectedItemPosition = position
-            notifyItemChanged(previousSelectedItemPosition)
-            notifyItemChanged(selectedItemPosition)
-            onSingleSelectionClicked?.invoke(data[position])
-
-        }
-
+    private fun setDefaultTextColor(): ColorStateList? {
+        return ContextCompat.getColorStateList(context, R.color.black)
     }
-    private fun applySelector(textView: CheckedTextView) {
-
-        textView.setTextColor(primaryTextColor)
-        textView.setCheckMarkDrawable(checkSelector)
-
-    }
-
-
-
     fun setOnSingleSelection(callback: (RadioGroupData) -> Unit) {
         onSingleSelectionClicked = callback
     }

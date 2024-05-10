@@ -85,20 +85,31 @@ This is a library for creating and managing ....
 
 ### SingleSelectionChipGroup((Verticle/Horizontal))
 
-              SmartFilter.addChipGroupSingleSelection {
-                  addSingleSelectionChipGroup(binding.root) { radioGroupData ->
+               SmartFilter.addChipGroupSingleSelection {
+                  addSingleSelectionChipGroupVertical(binding.root) { radioGroupData ->
                       toast("name: ${radioGroupData.name} ") } }
 
+- **Horizontal**
+ 
+              SmartFilter.addChipGroupSingleSelection {
+                    addSingleSelectionChipGroupHorizontal(binding.root) { radioGroupData ->
+                        toast("name: ${radioGroupData.name} ") } }
+                 
+  <img src="media/single_selection_chip.png" width="250" />       
 
-<img src="media/single_selection_chip.png" width="250" />       
+### MultiSelectionChipGroup(MultiRaw - (Verticle/Horizontal))
 
-### MultiSelectionChipGroup(MultiRaw)
+- **Verticle**
+              
+              SmartFilter.addChipGroupMultiSelection {
+                    addMultiSelectionChipGroupVertical(binding.root) { radioGroupData ->
+                       toast("Checked IDs: ${radioGroupData.joinToString(", ")}")  } }
+- **Horizontal**
 
-                SmartFilter.addChipGroupMultiSelection {
-                    addMultiSelectionChipGroup(binding.root) { radioGroupData ->
-                         toast("Checked IDs: ${radioGroupData.joinToString(", ")}")  } }
-
-
+                 SmartFilter.addChipGroupMultiSelection {
+                    addMultiSelectionChipGroupHorizontal(binding.root) { radioGroupData ->
+                        toast("Checked IDs: ${radioGroupData.joinToString(", ")}")}}
+        
    <img src="media/multiselect_chip.png" width="250" />
 
 

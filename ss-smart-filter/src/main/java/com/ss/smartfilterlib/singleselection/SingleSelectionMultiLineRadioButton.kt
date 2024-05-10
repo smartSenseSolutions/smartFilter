@@ -4,7 +4,6 @@ package com.ss.smartfilterlib.singleselection
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -13,63 +12,53 @@ import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.callback.RadioGroupCallback
-import com.ss.smartfilterlib.databinding.MultiLineBinding
 import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.databinding.RowItemMultiLineBinding
+import com.ss.smartfilterlib.utils.BaseRecycleView
+import com.ss.smartfilterlib.utils.Constant.DEFAULT_SPACING
+import com.ss.smartfilterlib.utils.Constant.DEFAULT_SPAN_COUNT
 import com.ss.smartfilterlib.utils.GridSpacingItemDecoration
-import com.ss.smartfilterlib.utils.PaddingAttributes
 import com.ss.smartfilterlib.utils.SingleChangeDiffUtil
-import com.ss.smartfilterlib.utils.TextAttributes
 
-class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RecyclerView(context, attrs, defStyle) {
-
-    private var textSelectorColor: ColorStateList? = null
-    private var radioButtonDrawable: Drawable? = null
-
-    private var dataFromXml: Int = 0
-    private var onCheckedChangeListener: ((RadioGroupData) -> Unit)? = null
-    private var mList: ArrayList<RadioGroupData> = ArrayList()
-    private var mAdapter: MultiLineRadioButtonAdapter? = null
-    private var spanCount: Int = resources.getInteger(R.integer.int_03)
-    private var spacing: Int = resources.getInteger(R.integer.int_04)
-    private var includeEdge: Boolean = false
-
-    private var textAttributes: TextAttributes = TextAttributes()
-    private var paddingAttributes: PaddingAttributes = PaddingAttributes()
+class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseRecycleView<RadioGroupData>(context, attrs, defStyle){
 
 
     init {
-        initAttrs(attrs)
-        setupView()
-        setDataFromAttrs()
+        initAttributes(attrs=attrs)
+        initializeView()
+        populateDataFromAttributes()
     }
-    private fun initAttrs(attrs: AttributeSet?) {
-        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.MultiLineRadioGroup, 0, 0)
-        try {
-            setSpanCount(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_spancount, spanCount))
-            setSpacing(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_spacing, spacing))
-            setIncludeEdge(typedArray.getBoolean(R.styleable.MultiLineRadioGroup_rg_ml_includeedge, includeEdge))
+    override fun initAttributes(attrs: AttributeSet?) {
+        val typedArray =
+            context.theme.obtainStyledAttributes(attrs, R.styleable.MultiLineRadioGroup, 0, 0)
+        with(typedArray) {
+            try {
+                setColumnCount(getInt(R.styleable.MultiLineRadioGroup_rg_ml_spancount,DEFAULT_SPAN_COUNT))
+                setSpace(getInt(R.styleable.MultiLineRadioGroup_rg_ml_spacing, DEFAULT_SPACING))
+                setEdge(getBoolean(R.styleable.MultiLineRadioGroup_rg_ml_includeedge, false))
 
-            textSelectorColor = typedArray.getColorStateList(R.styleable.MultiLineRadioGroup_rg_ml_textselector)
-            radioButtonDrawable = typedArray.getDrawable(R.styleable.MultiLineRadioGroup_rg_ml_background)
+                viewTextSelector =getColorStateList(R.styleable.MultiLineRadioGroup_rg_ml_text_selector) ?: setDefaultTextColor()
+                viewBgSelector = getDrawable(R.styleable.MultiLineRadioGroup_rg_ml_background) ?: setDefaultDrawable()
 
-            dataFromXml = typedArray.getResourceId(R.styleable.MultiLineRadioGroup_rg_ml_listitem, 0)
+                dataFromXml = getResourceId(R.styleable.MultiLineRadioGroup_rg_ml_list_item, 0)
 
-        } finally {
-            typedArray.recycle()
+            } finally {
+                typedArray.recycle()
+            }
         }
+
     }
     @SuppressLint("NotifyDataSetChanged")
-    private fun setupView() {
+    override fun initializeView() {
         layoutManager = GridLayoutManager(context, spanCount)
         addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
 
         adapter = MultiLineRadioButtonAdapter(context).also { this.mAdapter = it }
-        mAdapter?.onChoseListener = RadioGroupCallback { radioGroupData -> onCheckedChangeListener?.invoke( radioGroupData) }
+        mAdapter?.onChoseListener = RadioGroupCallback { radioGroupData -> onSingleSelectionClicked?.invoke( radioGroupData) }
     }
-    private fun setDataFromAttrs(){
+    private fun populateDataFromAttributes(){
         if (dataFromXml != 0) {
             val mData = resources.getStringArray(dataFromXml);
             mData.forEach {
@@ -81,27 +70,30 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     }
 
 
-    fun configureRadioButton(mData: ArrayList<RadioGroupData>, bgSelector: Int?, textSelector: Int?,  checkedChangedListener: (RadioGroupData) -> Unit) {
-        this.radioButtonDrawable = bgSelector?.let { ContextCompat.getDrawable(context, it) }
-        this.textSelectorColor = textSelector?.let { ContextCompat.getColorStateList(context, it) }
-        onCheckedChangeListener = checkedChangedListener
+    fun configureRadioButton(mData: ArrayList<RadioGroupData>, bgSelector: Int, textSelector: Int,  checkedChangedListener: (RadioGroupData) -> Unit) {
+       updateValue(bgSelector, textSelector, checkedChangedListener)
         mAdapter?.setData(mData)
     }
+    private fun updateValue(checkSelector: Int, textSelector: Int,onCheckedChangeListener: ((RadioGroupData) -> Unit)?) {
+        this.viewBgSelector = checkSelector.let { ContextCompat.getDrawable(context, it) }
+        this.viewTextSelector = textSelector.let { ContextCompat.getColorStateList(context, it) }
+        this.onSingleSelectionClicked = onCheckedChangeListener
 
-    private fun setSpanCount(spanCount: Int) {
+    }
+    private fun setColumnCount(spanCount: Int) {
         require(spanCount >= 2) { "spanCount minimum is 2, current: $spanCount" }
         this.spanCount = spanCount
-        setupView()
+        initializeView()
     }
 
-    private fun setSpacing(spacing: Int){
+    private fun setSpace(spacing: Int){
         this.spacing = spacing
-        setupView()
+        initializeView()
     }
 
-    private fun setIncludeEdge(includeEdge: Boolean){
+    private fun setEdge(includeEdge: Boolean){
         this.includeEdge = includeEdge
-        setupView()
+        initializeView()
     }
 
 
@@ -114,18 +106,16 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
         }
     }
 
-    internal inner class MultiLineRadioButtonAdapter(private val context: Context) : Adapter<ViewHolder>() {
+    inner class MultiLineRadioButtonAdapter(private val context: Context) : Adapter<ViewHolder>() {
         var currentSelected: Int? = null
         var onChoseListener: RadioGroupCallback? = null
 
-        internal inner class GridRadioHolder(itemView: MultiLineBinding) : ViewHolder(itemView.root) {
+        internal inner class GridRadioHolder(itemView: RowItemMultiLineBinding) : ViewHolder(itemView.root) {
             private val binding = itemView
 
             fun setData(radioGroupData: RadioGroupData, selected: Boolean, function: (Int) -> Unit, position: Int) {
                 binding.multiLineRadioGroupDefaultRadioButton.apply {
                     text = setData(radioGroupData)
-                    applyTextAttributes(this)
-                    applyPaddingAttributes(this)
                     applySelector(this)
                     isChecked = selected
                     setOnClickListener {
@@ -137,7 +127,7 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = MultiLineBinding.inflate(LayoutInflater.from(context), parent, false)
+            val view = RowItemMultiLineBinding.inflate(LayoutInflater.from(context), parent, false)
             return GridRadioHolder(view)
         }
 
@@ -169,42 +159,23 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     override fun canScrollVertically(direction: Int): Boolean {
         return false
     }
-    private fun setData(data: RadioGroupData) = data.name
+
 
     private fun applySelector(radioButton: RadioButton) {
-        if(textSelectorColor == null){
-            textSelectorColor= setDefaultTextColor()
-        }
-        if(radioButtonDrawable == null){
-            radioButtonDrawable=setDefaultDrawable()
-        }
-        radioButton.setTextColor(textSelectorColor)
-        radioButton.buttonDrawable = radioButtonDrawable?.constantState?.newDrawable()?.mutate()
-        radioButton.background = radioButtonDrawable?.constantState?.newDrawable()?.mutate()
+        radioButton.setTextColor(viewTextSelector)
+        radioButton.buttonDrawable = viewBgSelector?.constantState?.newDrawable()?.mutate()
+        radioButton.background = viewBgSelector?.constantState?.newDrawable()?.mutate()
     }
     private fun setDefaultDrawable() : Drawable?{
-        return  ContextCompat.getDrawable(context,R.drawable.multiline_default,)
+        return  ContextCompat.getDrawable(context, R.drawable.multiline_default,)
     }
     private fun setDefaultTextColor(): ColorStateList? {
         return ContextCompat.getColorStateList(context, R.color.black)
     }
-    private fun applyTextAttributes(radioButton: RadioButton) {
-        textAttributes.let { attributes ->
-            radioButton.apply {
-                textSize = attributes.textSize
-                typeface = Typeface.create(Typeface.MONOSPACE, attributes.fontFamily)
-            }
-        }
-    }
 
-    private fun applyPaddingAttributes(radioButton: RadioButton) {
-        paddingAttributes.let { attributes ->
-            radioButton.setPadding(
-                attributes.paddingStart,
-                attributes.paddingTop,
-                attributes.paddingEnd,
-                attributes.paddingBottom
-            )
-        }
+
+
+    fun onCheckedChangeListener(onCheckedChangeListener: (RadioGroupData) -> Unit) {
+        this.onSingleSelectionClicked = onCheckedChangeListener
     }
 }

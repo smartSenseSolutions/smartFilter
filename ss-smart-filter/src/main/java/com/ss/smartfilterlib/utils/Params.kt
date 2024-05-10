@@ -11,8 +11,8 @@ sealed class Params {
     data class SingleSelection(val data: SingleSelectionParams) : Params()
     data class SingleSelectionMultiRaw(val data: SingleSelectionMultiRawParams) : Params()
 
-    data class MultiSelection(val data: MultiSelectionParams) : Params()
     data class SingleChipSelection(val data: SingleChipSelectionParams) : Params()
+    data class MultiChipSelection(val data: MultiSelectionParams) : Params()
 }
 
 

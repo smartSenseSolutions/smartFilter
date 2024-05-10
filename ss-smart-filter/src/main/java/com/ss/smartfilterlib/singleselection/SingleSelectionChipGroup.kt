@@ -3,18 +3,15 @@ package com.ss.smartfilterlib.singleselection
 
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.View
 import android.widget.HorizontalScrollView
-import android.widget.LinearLayout
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.data.RadioGroupData
-import com.ss.smartfilterlib.callback.RadioGroupCallback
 import com.ss.smartfilterlib.utils.Orientation
 import com.ss.smartfilterlib.utils.SingleChipType
 
@@ -22,33 +19,31 @@ import com.ss.smartfilterlib.utils.SingleChipType
 /**
  * created by Mala Ruparel ON 24/04/24
  */
-class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : LinearLayout(context, attrs, defStyle) {
+class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseLinearLayout<RadioGroupData>(context, attrs, defStyle) {
 
-    private var chipBGColor: ColorStateList? = null
-    private var chipTextColor: ColorStateList? = null
-    private var orientation: Int = Orientation.VERTICAL
-    private lateinit var chipGroup: ChipGroup
-    private lateinit var containerScrollView: ScrollView
-    private lateinit var containerHorizontalScrollView: HorizontalScrollView
-    private var onChipGroupClickListener: RadioGroupCallback? = null
+
     init {
-        initAttrs(attrs)
-        setupView()
+        initAttributes(attrs=attrs)
+        initializeView()
+        populateDataFromAttributes()
+
     }
 
-    private fun initAttrs(attrs: AttributeSet?) {
+    override fun initAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.SingleLineChipGroup, 0, 0)
-        try {
-            orientation = typedArray.getInt(R.styleable.SingleLineChipGroup_cg_sl_orientation, Orientation.VERTICAL)
-            chipBGColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_background)
-            chipTextColor = typedArray.getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_textselector)
-
-        } finally {
-            typedArray.recycle()
+        with(typedArray) {
+            try {
+                smartOrientation = getInt(R.styleable.SingleLineChipGroup_cg_sl_orientation,Orientation.VERTICAL)
+                chipBgSelector = getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_background)
+                viewTextSelector =getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_text_selector)
+                dataFromXml = getResourceId(R.styleable.SingleLineChipGroup_cg_sl_list_item, 0)
+            } finally {
+                typedArray.recycle()
+            }
         }
     }
 
-    private fun setupView() {
+    override fun initializeView() {
 
         containerScrollView = ScrollView(context)
         containerHorizontalScrollView = HorizontalScrollView(context)
@@ -59,33 +54,44 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
 
         chipGroup = ChipGroup(context)
     }
+    private fun populateDataFromAttributes() {
+        if (dataFromXml != 0) {
+            val mData = resources.getStringArray(dataFromXml);
+            val data = mData.map { RadioGroupData(name = it) } as ArrayList<RadioGroupData>
+            setOrientation()
+            setItems(data, SingleChipType.ENTRY_CHIP)
+        }
+    }
+    fun configureView(chipData: List<RadioGroupData>,chipType: SingleChipType,orientation: Int,bgSelector: Int, textSelector: Int, checkedChangedListener: ( RadioGroupData) -> Unit,) {
 
-    fun setData(
-        chipData: List<RadioGroupData>,
-        chipType: SingleChipType,
-        orientation: Int,
-        bgSelector: Int,
-        textSelector: Int,
-        callbacks: RadioGroupCallback,
-    ) {
-        chipGroup.removeAllViews()
-        this.onChipGroupClickListener= callbacks
-        this.orientation = orientation
-        this.chipBGColor = ContextCompat.getColorStateList(context, bgSelector)
-        this.chipTextColor = ContextCompat.getColorStateList(context, textSelector)
-        chipGroup.isSingleLine = orientation == Orientation.HORIZONTAL
+        updateValue(orientation, bgSelector, textSelector, checkedChangedListener)
+        setOrientation()
+        setItems(chipData,chipType)
+    }
+    private fun updateValue(orientation: Int,bgSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((RadioGroupData) -> Unit)?) {
         chipGroup.isSingleSelection = true
         chipGroup.isSelectionRequired=true
-        setupRadioGroup()
-        chipData.forEach { data ->
+        chipGroup.isSingleLine = orientation == Orientation.HORIZONTAL
+        this.chipBgSelector = ContextCompat.getColorStateList(context, bgSelector)
+        this.viewTextSelector = primaryTextColor.let { ContextCompat.getColorStateList(context, it) }
+        this.singleCheckedChangeListener = onCheckedChangeListener
+    }
+    private fun setItems(mData: List<RadioGroupData>, chipType: SingleChipType) {
+        mData.forEach { data ->
             val chip = createChip(chipType)
-            chip.text = data.name
-            generateViewWithId(chip, data)
-            setChipEvents(chip)
-            setChipAttributes(chip)
+            with(chip) {
+                text = setData(data)
+                applyTextAttributes(this)
+                applyPaddingAttributes(this)
+                generateViewWithId(this, data)
+                applyChipAttributes(this)
+                setChipEvents(chip)
+            }
+
             chipGroup.addView(chip)
         }
     }
+
 
     private fun createChip(chipType: SingleChipType): Chip {
         return when (chipType) {
@@ -103,30 +109,33 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
         }
     }
 
-    private fun setupRadioGroup() {
+    private fun setOrientation() {
 
-        if (this.orientation == VERTICAL) {
+        when (smartOrientation) {
+            VERTICAL -> {
 
-            if (containerHorizontalScrollView.parent != null) {
-                removeView(containerHorizontalScrollView)
-            }
-            if (containerScrollView.parent == null) {
-                addView(containerScrollView)
-            }
+                if (containerHorizontalScrollView.parent != null) {
+                    removeView(containerHorizontalScrollView)
+                }
+                if (containerScrollView.parent == null) {
+                    addView(containerScrollView)
+                }
 
-            containerScrollView.addView(chipGroup)
-        } else {
-
-            if (containerScrollView.parent != null) {
-                removeView(containerScrollView)
-            }
-            if (containerHorizontalScrollView.parent == null) {
-                addView(containerHorizontalScrollView)
+                containerScrollView.addView(chipGroup)
             }
 
-            containerHorizontalScrollView.addView(chipGroup)
+            HORIZONTAL -> {
+                if (containerScrollView.parent != null) {
+                    removeView(containerScrollView)
+                }
+                if (containerHorizontalScrollView.parent == null) {
+                    addView(containerHorizontalScrollView)
+                }
+
+                containerHorizontalScrollView.addView(chipGroup)
+            }
+
         }
-
     }
 
 
@@ -148,10 +157,10 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
         }
     }
 
-    private fun setChipAttributes(chip: Chip) {
+    private fun applyChipAttributes(chip: Chip) {
         chip.apply {
-            chipBackgroundColor = chipBGColor
-            setTextColor(chipTextColor)
+            chipBackgroundColor = chipBgSelector
+            setTextColor(viewTextSelector)
             isClickable = true
             isCheckable = true
         }
@@ -159,12 +168,15 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
 
     private fun setChipEvents(chip: Chip) {
         chip.setOnCheckedChangeListener { _, _ ->
-            onChipGroupClickListener?.onSingleSelection(chip.tag as RadioGroupData)
+            singleCheckedChangeListener?.invoke(chip.tag as RadioGroupData)
         }
     }
     private fun generateViewWithId(radioButton: Chip, data: RadioGroupData)  {
         radioButton.id = View.generateViewId()
         radioButton.tag = data
+    }
+    fun setonCheckedChangeListener(onCheckedChangeListener: (RadioGroupData) -> Unit) {
+        this.singleCheckedChangeListener = onCheckedChangeListener
     }
 }
 
