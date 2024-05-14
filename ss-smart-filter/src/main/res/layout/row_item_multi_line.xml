@@ -7,4 +7,3 @@
     android:textAlignment="center"
     android:textSize="@dimen/_16ssp" />
 
-    <!--android:textColor="@color/multiline_text_selector"-->

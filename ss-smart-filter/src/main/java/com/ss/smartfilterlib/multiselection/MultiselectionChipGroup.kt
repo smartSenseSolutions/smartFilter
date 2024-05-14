@@ -8,15 +8,15 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.data.RadioGroupData
-import com.ss.smartfilterlib.singleselection.BaseLinearLayout
+import com.ss.smartfilterlib.data.Data
+import com.ss.smartfilterlib.utils.BaseLinearLayout
 import com.ss.smartfilterlib.utils.MultiChipType
 import com.ss.smartfilterlib.utils.Orientation
 
 /**
  * created by Mala Ruparel ON 25/04/24
  */
-class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseLinearLayout<RadioGroupData>(context, attrs, defStyle) {
+class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseLinearLayout(context, attrs, defStyle) {
 
     init {
         initAttributes(attrs=attrs)
@@ -39,8 +39,8 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
     }
     private fun populateDataFromAttributes() {
         if (dataFromXml != 0) {
-            val mData = resources.getStringArray(dataFromXml);
-            val data = mData.map { RadioGroupData(name = it) } as ArrayList<RadioGroupData>
+            val mData = resources.getStringArray(dataFromXml)
+            val data = mData.map { Data(name = it) } as ArrayList<Data>
             setOrientation()
             setItems(data, MultiChipType.ENTRY_CHIP)
         }
@@ -56,7 +56,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         chipGroup = ChipGroup(context)
     }
 
-    fun configureView(chipData: List<RadioGroupData>,chipType: MultiChipType,orientation: Int,bgSelector: Int,textSelector: Int, checkedChangedListener: ( List<Int>) -> Unit ) {
+    fun configureView(chipData: List<Data>,chipType: MultiChipType,orientation: Int,bgSelector: Int,textSelector: Int, checkedChangedListener: ( List<Int>) -> Unit ) {
 
         updateValue(orientation, bgSelector, textSelector, checkedChangedListener)
         setOrientation()
@@ -73,7 +73,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         chipGroup.isSelectionRequired = true
 
     }
-    private fun setItems(mData: List<RadioGroupData>, chipType: MultiChipType) {
+    private fun setItems(mData: List<Data>, chipType: MultiChipType) {
         val chipIds = mData.map { it.id }
         mData.forEachIndexed {index, data ->
             val chip = createChip(chipType)
@@ -160,14 +160,8 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         }
     }
 
-    private fun setChipEvents(chip: Chip,data: RadioGroupData) {
+    private fun setChipEvents(chip: Chip,data: Data) {
         chip.setOnCheckedChangeListener { _, isChecked ->
-            data.isSelected = isChecked
-            if (isChecked) {
-                checkedChipIds += chip.id
-            } else {
-                checkedChipIds -= chip.id
-            }
             data.isSelected = isChecked
             if (isChecked) {
                 if (!checkedChipIds.contains(chip.id)) {

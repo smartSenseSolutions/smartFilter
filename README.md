@@ -113,23 +113,43 @@ This is a library for creating and managing ....
    <img src="media/multiselect_chip.png" width="250" />
 
 
-### Attribute
+### SingleSelectionListView((Verticle/Horizontal))
 
-    | Attribute | Description | Type | Default Value |
-    | --- | --- | --- | --- |
-    | rootView | The root view of the radio group. | ViewGroup | - |
-    | singleGroupSubType | The type of the radio group. | SingleGroupSubType | - |
-    | orientation | The orientation of the radio group. | Orientation | VERTICAL |
-    | mData | The list of radio group items. | List<RadioGroupData> | - |
-    | callbacks | The event listener for the radio group. | BaseEventListener | - |
-    | bgSelector | The background selector for the radio group items. | Int | - |
-    | textSelector | The text color selector for the radio group items. | Int | - |
+- **Verticle**
+              
+            SmartFilter.addListViewSingleSelection {
+                    addSingleSelectionListVertical(binding.root) { radioGroupData ->
+                        toast("id:  " + radioGroupData)  } }
 
-### Usage
+    <img src="media/single_selection_vertical.png.png" width="250" />   
+- **Horizontal**
 
-- **To use the Smart Filter library in your Android application, you need to include it in your project's dependencies. Add the following line to your `build.gradle` file:**
+                SmartFilter.addListViewSingleSelection {
+                   addSingleSelectionListHorizontal(binding.root) { radioGroupData ->
+                       toast("id:  " + radioGroupData)  } }
 
-### Dependency
+<img src="media/single_selection_horizental.png.png.png" width="250" />   
+
+
+### MultiSelectionListView((Verticle/Horizontal))
+
+- **Verticle**
+
+           SmartFilter.addListViewMultiSelection{
+               addMultiSelectionList(binding.root) { radioGroupData ->
+                   toast("id:  " + radioGroupData)  } }
+
+    <img src="media/multi_selection_vertical.png" width="250" />   
+  
+  - **Horizontal**
+
+          SmartFilter.addListViewMultiSelection{
+             addMultiSelectionListHorizontal(binding.root) { radioGroupData ->
+                  toast("id:  " + radioGroupData)  } }
+
+  <img src="media/multi_selection_horizontal.png" width="250" />   
+
+
 
 ### Default Drawable for SingleSelectionRadioGroup
 
@@ -156,5 +176,6 @@ This is a library for creating and managing ....
             textSelector = R.color.multiline_text_selector
 
 
+### Dependency
 ```kotlin
 implementation 'com.ss:smartfilterlib:1.0.0'

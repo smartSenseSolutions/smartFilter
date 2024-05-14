@@ -12,13 +12,14 @@ import android.widget.RelativeLayout
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.Data
 import com.ss.smartfilterlib.databinding.RowItemBinding
+import com.ss.smartfilterlib.utils.BaseLinearLayout
 
 /**
  * created by Mala Ruparel ON 19/04/24
  */
-class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null,defStyle: Int = 0) :  BaseLinearLayout<RadioGroupData>(context, attrs, defStyle) {
+class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null,defStyle: Int = 0) :  BaseLinearLayout(context, attrs, defStyle) {
 
 
     init {       
@@ -45,7 +46,7 @@ class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null
             val mData = resources.getStringArray(dataFromXml);
             setOrientation()
             mData.forEach {
-                val data = RadioGroupData(name = it)
+                val data = Data(name = it)
                 addRadioButtonView(data)
             }
         }
@@ -89,25 +90,25 @@ class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null
     }
 
 
-    fun configureRadioButton(mData: ArrayList<RadioGroupData>,orientation: Int,bgSelector: Int,textSelector: Int,checkedChangedListener: ( RadioGroupData) -> Unit) {
+    fun configureRadioButton(mData: ArrayList<Data>,orientation: Int,bgSelector: Int,textSelector: Int,checkedChangedListener: ( Data) -> Unit) {
         updateValue(orientation, bgSelector, textSelector, checkedChangedListener)
         setOrientation()
         setItems(mData)      
     }
-    private fun setItems(mData: ArrayList<RadioGroupData>) {
+    private fun setItems(mData: ArrayList<Data>) {
         mData.forEach { data ->
             addRadioButtonView(
                 data
             )
         }
     }
-    private fun updateValue(orientation: Int,checkSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((RadioGroupData) -> Unit)?) {
+    private fun updateValue(orientation: Int,checkSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((Data) -> Unit)?) {
         this.smartOrientation = orientation
         this.viewBgSelector = checkSelector.let { ContextCompat.getDrawable(context, it) }
         this.viewTextSelector = primaryTextColor.let { ContextCompat.getColorStateList(context, it) }
         this.singleCheckedChangeListener = onCheckedChangeListener
     }
-    private fun addRadioButtonView(data: RadioGroupData) {
+    private fun addRadioButtonView(data: Data) {
             val binding = RowItemBinding.inflate(LayoutInflater.from(context), this, false)
             binding.apply {
                 tvName.text = data.name

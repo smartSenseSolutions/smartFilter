@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckedTextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.Data
 import com.ss.smartfilterlib.databinding.RowItemCheckableBinding
 
 /**
@@ -16,12 +16,12 @@ class MultiSelectionListAdapter(
     private val checkSelector: Int,
     private val primaryTextColor: ColorStateList?,
     private val selectedItemsPositions: MutableList<Int>,
-    private val onMultiSelectionClicked: ((List<RadioGroupData>) -> Unit)?
+    private val onMultiSelectionClicked: ((List<Int>) -> Unit)?
 ) : RecyclerView.Adapter<MultiSelectionListAdapter.MultiselectionViewHolder>() {
 
     private var selectedItemPosition: Int = RecyclerView.NO_POSITION
 
-    var data: List<RadioGroupData> = emptyList()
+    var data: List<Data> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -48,8 +48,8 @@ class MultiSelectionListAdapter(
             }
         }
 
-        fun bind(data: RadioGroupData, isSelected: Boolean) {
-            binding.text1.apply {
+        fun bind(data: Data, isSelected: Boolean) {
+            binding.ctv.apply {
                 isChecked = selectedItemsPositions.contains(adapterPosition)
                 text = data.name
                 applySelector(this)
@@ -76,10 +76,11 @@ class MultiSelectionListAdapter(
             selectedItemsPositions.add(position)
         }
         notifyItemChanged(position)
-        onMultiSelectionClicked?.invoke(data.filterIndexed { index, _ -> selectedItemsPositions.contains(index) })
+        onMultiSelectionClicked?.invoke(selectedItemsPositions)
     }
 
-   protected fun setData(data: RadioGroupData) = data.name
+
+   protected fun setData(data: Data) = data.name
 
     private fun applySelector(textView: CheckedTextView) {
         textView.setTextColor(primaryTextColor)

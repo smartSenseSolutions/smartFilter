@@ -14,14 +14,15 @@ import android.widget.RadioGroup
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.Data
+import com.ss.smartfilterlib.utils.BaseLinearLayout
 import com.ss.smartfilterlib.utils.Orientation
 
 
 /**
  * created by Mala Ruparel ON 17/04/24
  */
-class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseLinearLayout<RadioGroupData>(context, attrs, defStyle) {
+class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseLinearLayout(context, attrs, defStyle) {
 
     init {
         initAttributes(attrs=attrs)
@@ -51,7 +52,7 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
             val mData = resources.getStringArray(dataFromXml);
             setOrientation()
             mData.forEach {
-                val data = RadioGroupData(name = it)
+                val data = Data(name = it)
                 addRadioButtonView(data)
             }
         }
@@ -95,25 +96,25 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
     }
 
 
-    fun configureRadioButton( mData: ArrayList<RadioGroupData>,orientation: Int,bgSelector: Int,textSelector: Int,checkedChangedListener: ( RadioGroupData) -> Unit) {
+    fun configureRadioButton(mData: ArrayList<Data>, orientation: Int, bgSelector: Int, textSelector: Int, checkedChangedListener: (Data) -> Unit) {
         updateValue(orientation, bgSelector, textSelector, checkedChangedListener)
         setOrientation()
         setItems(mData)
     }
-    private fun updateValue(orientation: Int,checkSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((RadioGroupData) -> Unit)?) {
+    private fun updateValue(orientation: Int,checkSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((Data) -> Unit)?) {
         this.smartOrientation = orientation
         this.viewBgSelector = checkSelector.let { ContextCompat.getDrawable(context, it) }
         this.viewTextSelector = primaryTextColor.let { ContextCompat.getColorStateList(context, it) }
         this.singleCheckedChangeListener = onCheckedChangeListener
     }
-    private fun setItems(mData: List<RadioGroupData>) {
+    private fun setItems(mData: List<Data>) {
         mData.forEach { data ->
             addRadioButtonView(
                 data
             )
         }
     }
-    private fun addRadioButtonView(data: RadioGroupData) {
+    private fun addRadioButtonView(data: Data) {
         val radioButton = RadioButton(context)
 
         radioButton.apply {
@@ -127,7 +128,7 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
         radioGroup.addView(radioButton)
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val checkedRadioButton: RadioButton = findViewById(checkedId)
-            val checkedData = checkedRadioButton.tag as RadioGroupData?
+            val checkedData = checkedRadioButton.tag as Data?
             checkedData?.let { singleCheckedChangeListener?.invoke(it) }
         }
     }
@@ -139,7 +140,7 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
     }
 
 
-    private fun generateViewWithId(radioButton: RadioButton, data: RadioGroupData)  {
+    private fun generateViewWithId(radioButton: RadioButton, data: Data)  {
         radioButton.id = View.generateViewId()
         radioButton.tag = data
     }
@@ -171,7 +172,7 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
         }
     }
 
-    fun onCheckedChangeListener(onCheckedChangeListener: (RadioGroupData) -> Unit) {
+    fun onCheckedChangeListener(onCheckedChangeListener: (Data) -> Unit) {
         this.singleCheckedChangeListener = onCheckedChangeListener
     }
 }

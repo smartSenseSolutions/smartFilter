@@ -11,7 +11,8 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.Data
+import com.ss.smartfilterlib.utils.BaseLinearLayout
 import com.ss.smartfilterlib.utils.Orientation
 import com.ss.smartfilterlib.utils.SingleChipType
 
@@ -19,7 +20,7 @@ import com.ss.smartfilterlib.utils.SingleChipType
 /**
  * created by Mala Ruparel ON 24/04/24
  */
-class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseLinearLayout<RadioGroupData>(context, attrs, defStyle) {
+class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseLinearLayout(context, attrs, defStyle) {
 
 
     init {
@@ -57,18 +58,18 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
     private fun populateDataFromAttributes() {
         if (dataFromXml != 0) {
             val mData = resources.getStringArray(dataFromXml);
-            val data = mData.map { RadioGroupData(name = it) } as ArrayList<RadioGroupData>
+            val data = mData.map { Data(name = it) } as ArrayList<Data>
             setOrientation()
             setItems(data, SingleChipType.ENTRY_CHIP)
         }
     }
-    fun configureView(chipData: List<RadioGroupData>,chipType: SingleChipType,orientation: Int,bgSelector: Int, textSelector: Int, checkedChangedListener: ( RadioGroupData) -> Unit,) {
+    fun configureView(chipData: List<Data>,chipType: SingleChipType,orientation: Int,bgSelector: Int, textSelector: Int, checkedChangedListener: ( Data) -> Unit,) {
 
         updateValue(orientation, bgSelector, textSelector, checkedChangedListener)
         setOrientation()
         setItems(chipData,chipType)
     }
-    private fun updateValue(orientation: Int,bgSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((RadioGroupData) -> Unit)?) {
+    private fun updateValue(orientation: Int,bgSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((Data) -> Unit)?) {
         chipGroup.isSingleSelection = true
         chipGroup.isSelectionRequired=true
         chipGroup.isSingleLine = orientation == Orientation.HORIZONTAL
@@ -76,7 +77,7 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
         this.viewTextSelector = primaryTextColor.let { ContextCompat.getColorStateList(context, it) }
         this.singleCheckedChangeListener = onCheckedChangeListener
     }
-    private fun setItems(mData: List<RadioGroupData>, chipType: SingleChipType) {
+    private fun setItems(mData: List<Data>, chipType: SingleChipType) {
         mData.forEach { data ->
             val chip = createChip(chipType)
             with(chip) {
@@ -168,14 +169,14 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
 
     private fun setChipEvents(chip: Chip) {
         chip.setOnCheckedChangeListener { _, _ ->
-            singleCheckedChangeListener?.invoke(chip.tag as RadioGroupData)
+            singleCheckedChangeListener?.invoke(chip.tag as Data)
         }
     }
-    private fun generateViewWithId(radioButton: Chip, data: RadioGroupData)  {
+    private fun generateViewWithId(radioButton: Chip, data: Data)  {
         radioButton.id = View.generateViewId()
         radioButton.tag = data
     }
-    fun setonCheckedChangeListener(onCheckedChangeListener: (RadioGroupData) -> Unit) {
+    fun setonCheckedChangeListener(onCheckedChangeListener: (Data) -> Unit) {
         this.singleCheckedChangeListener = onCheckedChangeListener
     }
 }

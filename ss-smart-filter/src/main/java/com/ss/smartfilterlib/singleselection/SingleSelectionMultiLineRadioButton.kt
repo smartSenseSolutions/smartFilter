@@ -13,8 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.callback.RadioGroupCallback
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.Data
 import com.ss.smartfilterlib.databinding.RowItemMultiLineBinding
 import com.ss.smartfilterlib.utils.BaseRecycleView
 import com.ss.smartfilterlib.utils.Constant.DEFAULT_SPACING
@@ -22,7 +21,7 @@ import com.ss.smartfilterlib.utils.Constant.DEFAULT_SPAN_COUNT
 import com.ss.smartfilterlib.utils.GridSpacingItemDecoration
 import com.ss.smartfilterlib.utils.SingleChangeDiffUtil
 
-class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseRecycleView<RadioGroupData>(context, attrs, defStyle){
+class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseRecycleView(context, attrs, defStyle){
 
 
     init {
@@ -54,15 +53,14 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     override fun initializeView() {
         layoutManager = GridLayoutManager(context, spanCount)
         addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+        adapter = MultiLineRadioButtonAdapter(context,onSingleSelectionClicked).also { this.mAdapter = it }
 
-        adapter = MultiLineRadioButtonAdapter(context).also { this.mAdapter = it }
-        mAdapter?.onChoseListener = RadioGroupCallback { radioGroupData -> onSingleSelectionClicked?.invoke( radioGroupData) }
     }
     private fun populateDataFromAttributes(){
         if (dataFromXml != 0) {
             val mData = resources.getStringArray(dataFromXml);
             mData.forEach {
-                val data = RadioGroupData(name = it)
+                val data = Data(name = it)
                 mList.add(data)
             }
             mAdapter?.setData(mList)
@@ -70,11 +68,11 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     }
 
 
-    fun configureRadioButton(mData: ArrayList<RadioGroupData>, bgSelector: Int, textSelector: Int,  checkedChangedListener: (RadioGroupData) -> Unit) {
+    fun configureRadioButton(mData: ArrayList<Data>, bgSelector: Int, textSelector: Int,  checkedChangedListener: (Data) -> Unit) {
        updateValue(bgSelector, textSelector, checkedChangedListener)
         mAdapter?.setData(mData)
     }
-    private fun updateValue(checkSelector: Int, textSelector: Int,onCheckedChangeListener: ((RadioGroupData) -> Unit)?) {
+    private fun updateValue(checkSelector: Int, textSelector: Int,onCheckedChangeListener: ((Data) -> Unit)?) {
         this.viewBgSelector = checkSelector.let { ContextCompat.getDrawable(context, it) }
         this.viewTextSelector = textSelector.let { ContextCompat.getColorStateList(context, it) }
         this.onSingleSelectionClicked = onCheckedChangeListener
@@ -106,20 +104,21 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
         }
     }
 
-    inner class MultiLineRadioButtonAdapter(private val context: Context) : Adapter<ViewHolder>() {
+
+    inner class MultiLineRadioButtonAdapter(private val context: Context, var onSingleSelectionClicked: ((Data) -> Unit)?) : Adapter<ViewHolder>() {
         var currentSelected: Int? = null
-        var onChoseListener: RadioGroupCallback? = null
+
 
         internal inner class GridRadioHolder(itemView: RowItemMultiLineBinding) : ViewHolder(itemView.root) {
             private val binding = itemView
 
-            fun setData(radioGroupData: RadioGroupData, selected: Boolean, function: (Int) -> Unit, position: Int) {
+            fun setData(data: Data, selected: Boolean, function: (Int) -> Unit, position: Int) {
                 binding.multiLineRadioGroupDefaultRadioButton.apply {
-                    text = setData(radioGroupData)
+                    text = setData(data)
                     applySelector(this)
                     isChecked = selected
                     setOnClickListener {
-                        onChoseListener!!.onSingleSelection( radioGroupData)
+                        onSingleSelectionClicked?.invoke(data)
                         function(position)
                     }
                 }
@@ -146,7 +145,7 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
             return mList.size
         }
 
-        fun setData(newList: ArrayList<RadioGroupData>){
+        fun setData(newList: ArrayList<Data>){
             val diffUtil = SingleChangeDiffUtil(mList, newList)
             val diffResult = DiffUtil.calculateDiff(diffUtil)
             mList = newList
@@ -175,7 +174,7 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
 
 
 
-    fun onCheckedChangeListener(onCheckedChangeListener: (RadioGroupData) -> Unit) {
+    fun onCheckedChangeListener(onCheckedChangeListener: (Data) -> Unit) {
         this.onSingleSelectionClicked = onCheckedChangeListener
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mCardView"
+    android:id="@+id/mcv"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_4sdp"
@@ -10,10 +10,13 @@
     app:cardElevation="@dimen/_4sdp"
     app:contentPadding="@dimen/_4sdp">
 
-<CheckedTextView
-    android:id="@+id/text1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:checked="false"/>
+    <CheckedTextView
+        android:id="@+id/ctv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:checked="false"
+        android:drawablePadding="@dimen/_4sdp"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault"
+        />
 
 </com.google.android.material.card.MaterialCardView>

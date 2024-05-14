@@ -1,4 +1,4 @@
-package com.ss.smartfilterlib.singleselection
+package com.ss.smartfilterlib.utils
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -11,15 +11,12 @@ import android.widget.RadioGroup
 import android.widget.ScrollView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.ss.smartfilterlib.data.RadioGroupData
-import com.ss.smartfilterlib.utils.Orientation
-import com.ss.smartfilterlib.utils.PaddingAttributes
-import com.ss.smartfilterlib.utils.TextAttributes
+import com.ss.smartfilterlib.data.Data
 
 /**
  * created by Mala Ruparel ON 10/05/24
  */
-abstract class BaseLinearLayout<T> : LinearLayout {
+abstract class BaseLinearLayout : LinearLayout {
 
     protected var viewTextSelector: ColorStateList? = null
     protected var chipBgSelector: ColorStateList? = null
@@ -27,7 +24,7 @@ abstract class BaseLinearLayout<T> : LinearLayout {
     protected var smartOrientation: Int = Orientation.VERTICAL
 
     protected var dataFromXml: Int = 0
-    protected var singleCheckedChangeListener: ((RadioGroupData) -> Unit)? = null
+    protected var singleCheckedChangeListener: ((Data) -> Unit)? = null
     protected var multiCheckedChangeListener: ((List<Int>) -> Unit)? = null
     protected var checkedChipIds: ArrayList<Int> = arrayListOf()
 
@@ -68,5 +65,5 @@ abstract class BaseLinearLayout<T> : LinearLayout {
             )
         }
     }
-    protected fun setData(data: RadioGroupData) = data.name
+    protected fun setData(data: Data) = data.name
 }

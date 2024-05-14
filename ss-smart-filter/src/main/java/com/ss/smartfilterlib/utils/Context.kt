@@ -4,26 +4,16 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
-import com.ss.smartfilterlib.data.RadioGroupData
 
 
-fun Context.toast(id: Int, length: Int = Toast.LENGTH_SHORT) {
-    toast(getString(id), length)
+/**
+ * created by Mala Ruparel ON 08/05/24
+ */
+fun Context.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
+    Handler(Looper.getMainLooper()).post {
+        Toast.makeText(this, message, length).show()
+    }
 }
-
-fun Context.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
-    try {
-        if (isOnMainThread()) {
-            Toast.makeText(applicationContext, msg, length).show()
-        } else {
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(applicationContext, msg, length).show()
-            }
-        }
-    } catch (_: Exception) {}
-
-}
-fun isOnMainThread() = Looper.myLooper() == Looper.getMainLooper()
 
 
 

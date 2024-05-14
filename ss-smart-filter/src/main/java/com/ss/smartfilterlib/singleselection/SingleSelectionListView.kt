@@ -8,20 +8,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.adapter.SingleSelectionListAdapter
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.Data
 import com.ss.smartfilterlib.utils.BaseRecycleView
 
 typealias SmartOrientation = com.ss.smartfilterlib.utils.Orientation
 /**
  * created by Mala Ruparel ON 02/05/24
  */
-class SingleSelectionListView @JvmOverloads constructor( context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : BaseRecycleView<RadioGroupData>(context, attrs, defStyle){
+class SingleSelectionListView @JvmOverloads constructor( context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) : BaseRecycleView(context, attrs, defStyle){
 
 
     init {
         initAttributes(attrs=attrs)
         initializeView()
-
+        populateDataFromAttributes()
     }
 
 
@@ -39,35 +39,46 @@ class SingleSelectionListView @JvmOverloads constructor( context: Context,attrs:
             try {
                 viewTextSelector =getColorStateList(R.styleable.SingleSelectionView_ss_text_selector) ?: setDefaultTextColor()
                 smartOrientation = getInt(R.styleable.SingleSelectionView_ss_orientation, RecyclerView.VERTICAL)
-                checkSelector = getResourceId(R.styleable.SingleSelectionView_ss_check_drawable_selector,R.drawable.ic_check_selector)
+                checkSelector = getResourceId(R.styleable.SingleSelectionView_ss_checked_selector,R.drawable.ic_check_selector)
                 dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_list_item, 0)
             } finally {
                 typedArray.recycle()
             }
         }
     }
+    private fun populateDataFromAttributes() {
+        if (dataFromXml != 0) {
+            val mData = resources.getStringArray(dataFromXml);
+            initializeView()
+            mData.forEach {
+                val data = Data(name = it)
+                mList.add(data)
+            }
+            setItems(mList)
+        }
 
+    }
 
-    fun configureView(data: ArrayList<RadioGroupData>, orientation: Int, checkSelector: Int, textSelector: Int, onCheckedChangeListener: ((RadioGroupData) -> Unit)?){
+    fun configureView(data: ArrayList<Data>, orientation: Int, checkSelector: Int, textSelector: Int, onCheckedChangeListener: ((Data) -> Unit)?){
         updateValue(orientation, checkSelector, textSelector, onCheckedChangeListener)
         initializeView()
         setItems(data)
     }
-    private fun updateValue(orientation: Int,checkSelector: Int,textSelector: Int,checkedChangedListener: ((RadioGroupData) -> Unit)?) {
+    private fun updateValue(orientation: Int,checkSelector: Int,textSelector: Int,checkedChangedListener: ((Data) -> Unit)?) {
         this.onSingleSelectionClicked = checkedChangedListener
         this.smartOrientation = orientation
         this.checkSelector = checkSelector
         this.viewTextSelector =textSelector.let { ContextCompat.getColorStateList(context, it) }
     }
 
-    private fun setItems(items: List<RadioGroupData>) {
-        adapter = SingleSelectionListAdapter(checkSelector,primaryTextColor,onSingleSelectionClicked).apply { data = items }
+    private fun setItems(items: List<Data>) {
+        adapter = SingleSelectionListAdapter(checkSelector,viewTextSelector,onSingleSelectionClicked).apply { data = items }
     }
 
     private fun setDefaultTextColor(): ColorStateList? {
         return ContextCompat.getColorStateList(context, R.color.black)
     }
-    fun setOnSingleSelection(callback: (RadioGroupData) -> Unit) {
-        onSingleSelectionClicked = callback
+    fun setOnSingleSelection(onItemSelected: (Data) -> Unit) {
+        onSingleSelectionClicked = onItemSelected
     }
 }

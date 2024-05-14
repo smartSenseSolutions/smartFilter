@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.CheckedTextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.Data
 import com.ss.smartfilterlib.singleselection.SingleSelectionMultiLineRadioButton
 
 typealias SmartOrientation = com.ss.smartfilterlib.utils.Orientation
@@ -15,22 +15,21 @@ typealias SmartOrientation = com.ss.smartfilterlib.utils.Orientation
 /**
  * created by Mala Ruparel ON 08/05/24
  */
-abstract class BaseRecycleView<T> : RecyclerView {
+abstract class BaseRecycleView : RecyclerView {
 
     protected var viewTextSelector: ColorStateList? = null
     protected var viewBgSelector: Drawable? = null
-    protected var mList: ArrayList<RadioGroupData> = ArrayList()
+    protected var mList: ArrayList<Data> = ArrayList()
     protected var mAdapter: SingleSelectionMultiLineRadioButton.MultiLineRadioButtonAdapter? = null
     protected var spanCount: Int = 0
     protected var spacing: Int = 0
     protected var includeEdge: Boolean = false
-    protected var primaryTextColor: Int = Constant.PRIMARY_TEXT_COLOR
     protected var smartOrientation: Int = SmartOrientation.VERTICAL
     protected var checkSelector: Int = 0
     protected var paddingAttributes: PaddingAttributes = PaddingAttributes()
     protected var textAttributes: TextAttributes = TextAttributes()
-    protected var onMultiSelectionClicked: ((List<RadioGroupData>) -> Unit)? = null
-    protected var onSingleSelectionClicked: ((RadioGroupData) -> Unit)? = null
+    protected var onMultiSelectionClicked: ((List<Int>) -> Unit)? = null
+    protected var onSingleSelectionClicked: ((Data) -> Unit)? = null
     protected var dataFromXml: Int = 0
     protected val selectedItemsPositions = mutableListOf<Int>()
     constructor(context: Context) : super(context)
@@ -59,5 +58,5 @@ abstract class BaseRecycleView<T> : RecyclerView {
             )
         }
     }
-    protected fun setData(data: RadioGroupData) = data.name
+    protected fun setData(data: Data) = data.name
 }

@@ -1,10 +1,11 @@
 package com.ss.smartfilterlib.adapter
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckedTextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.Data
 import com.ss.smartfilterlib.databinding.RowItemCheckableBinding
 
 /**
@@ -12,12 +13,12 @@ import com.ss.smartfilterlib.databinding.RowItemCheckableBinding
  */
 class SingleSelectionListAdapter(
     private val checkSelector: Int,
-    private val primaryTextColor: Int,
-    private val onItemSelectionChanged: ((RadioGroupData) -> Unit)?
+    private val viewTextColor: ColorStateList?,
+    private val onItemSelectionChanged: ((Data) -> Unit)?
 ) : RecyclerView.Adapter<SingleSelectionListAdapter.SingleSelectionViewHolder>() {
 
     private var selectedItemPosition: Int = RecyclerView.NO_POSITION
-    var data: List<RadioGroupData> = emptyList()
+    var data: List<Data> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -44,9 +45,9 @@ class SingleSelectionListAdapter(
             }
         }
 
-        fun bind(data: RadioGroupData, isSelected: Boolean) {
+        fun bind(data: Data, isSelected: Boolean) {
             binding.apply {
-                text1.apply {
+                ctv.apply {
                     isChecked = isSelected
                     text = data.name
                     applySelector(this)
@@ -55,7 +56,7 @@ class SingleSelectionListAdapter(
         }
 
         private fun applySelector(textView: CheckedTextView) {
-            textView.setTextColor(primaryTextColor)
+            textView.setTextColor(viewTextColor)
             textView.setCheckMarkDrawable(checkSelector)
         }
     }
