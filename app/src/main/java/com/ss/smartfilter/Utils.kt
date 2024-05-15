@@ -23,8 +23,8 @@ fun addRadioGroupSingleLineVertical(rootView: ViewGroup,onItemSelected: (Data) -
             orientation = Orientation.VERTICAL,
             mData = mData(),
             onItemSelected = onItemSelected,
-            bgSelector = R.drawable.singleline_rb_selector,
-            textSelector = R.color.single_text_color_selector
+            bgSelector = R.drawable.rb_selector,
+            textSelector = R.color.text_color_selector
         )
     )
 
@@ -36,8 +36,8 @@ fun addRadioGroupSingleLineHorizontal(rootView: ViewGroup,onItemSelected: (Data)
             orientation = Orientation.HORIZONTAL,
             mData = mData(),
             onItemSelected = onItemSelected,
-            bgSelector = R.drawable.singleline_rb_selector,
-            textSelector = R.color.single_text_color_selector
+            bgSelector = R.drawable.rb_selector,
+            textSelector = R.color.text_color_selector
         )
     )
 
@@ -64,7 +64,7 @@ fun addRadioGroupRowItemHorizontal(rootView: ViewGroup,onItemSelected: (Data) ->
         mData = mData(),
         onItemSelected = onItemSelected,
         bgSelector = R.drawable.row_item_selector,
-        textSelector = R.color.single_text_color_selector
+        textSelector = R.color.text_color_selector
 
     )
 )
@@ -77,7 +77,7 @@ fun addRadioGroupRowItemVertical(rootView: ViewGroup,onItemSelected: (Data) -> U
         mData = mData(),
         onItemSelected = onItemSelected,
         bgSelector = R.drawable.row_item_selector,
-        textSelector = R.color.single_text_color_selector
+        textSelector = R.color.text_color_selector
 
     )
 )
@@ -86,12 +86,12 @@ fun addSingleSelectionChipGroupVertical(rootView: ViewGroup, onItemSelected: (Da
         SingleSelectionParams(
             rootView = rootView,
             singleGroupSubType = SingleGroupSubType.CHIP_GROUP,
-            chipType = SingleChipType.ENTRY_CHIP,
+            chipType = SingleChipType.ACTION_CHIP,
             orientation = Orientation.VERTICAL,
             mData = mData(),
             onItemSelected = onItemSelected,
             bgSelector = R.color.chip_bg_selector,
-            textSelector = R.color.multiline_text_selector
+            textSelector = R.color.chip_text_selector
         )
     )
 fun addSingleSelectionChipGroupHorizontal(rootView: ViewGroup, onItemSelected: (Data) -> Unit) = Params.SingleSelection(
@@ -109,7 +109,7 @@ fun addSingleSelectionChipGroupHorizontal(rootView: ViewGroup, onItemSelected: (
 fun addMultiSelectionChipGroupVertical(rootView: ViewGroup, onItemsSelected: (List<Int>) -> Unit) = Params.MultiSelection(
         MultiSelectionParams(
             rootView = rootView,
-            chipType = MultiChipType.FILTER_CHIP,
+            chipType = MultiChipType.ACTION_CHIP,
             orientation = Orientation.VERTICAL,
             mData = mData(),
             onItemsSelected = onItemsSelected,
@@ -139,7 +139,7 @@ fun addSingleSelectionListHorizontal(rootView: ViewGroup, onItemselected: (Data)
             mData = mData(),
             onItemSelected = onItemselected,
             bgSelector = R.drawable.ic_check_selector,
-            textSelector = R.color.chip_text_selector
+            textSelector = R.color.text_color_selector
         )
     )
 fun addSingleSelectionListVertical(rootView: ViewGroup, onItemselected: (Data) -> Unit) =  Params.SingleSelection(
@@ -151,7 +151,7 @@ fun addSingleSelectionListVertical(rootView: ViewGroup, onItemselected: (Data) -
         mData = mData(),
         onItemSelected = onItemselected,
         bgSelector = R.drawable.ic_check_selector,
-        textSelector = R.color.chip_text_selector
+        textSelector = R.color.text_color_selector
     )
 )
 fun addMultiSelectionListVertical(rootView: ViewGroup, onItemsSelected:  (List<Int>) -> Unit) =  Params.MultiSelection(
@@ -162,8 +162,8 @@ fun addMultiSelectionListVertical(rootView: ViewGroup, onItemsSelected:  (List<I
             orientation = Orientation.VERTICAL,
             mData = mData(),
             onItemsSelected = onItemsSelected,
-            bgSelector =  R.color.chip_bg_selector,
-            textSelector = R.color.chip_text_selector
+            bgSelector = R.drawable.ic_check_selector,
+            textSelector = R.color.text_color_selector
         )
     )
 fun addMultiSelectionListHorizontal(rootView: ViewGroup, onItemsSelected:  (List<Int>) -> Unit) =  Params.MultiSelection(
@@ -174,7 +174,7 @@ fun addMultiSelectionListHorizontal(rootView: ViewGroup, onItemsSelected:  (List
         orientation = Orientation.HORIZONTAL,
         mData = mData(),
         onItemsSelected = onItemsSelected,
-        bgSelector = R.color.chip_bg_selector,
-        textSelector = R.color.chip_text_selector
+        bgSelector = R.drawable.ic_check_selector,
+        textSelector = R.color.text_color_selector
     )
 )

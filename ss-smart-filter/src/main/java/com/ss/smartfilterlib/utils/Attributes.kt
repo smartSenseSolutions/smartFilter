@@ -15,7 +15,7 @@ data class TextAttributes(
     val textEllipsize: Int = 0
 )
 data class PaddingAttributes(
-    val paddingStart: Int = 20,
+    val paddingStart: Int = 30,
     val paddingTop: Int = 20,
     val paddingEnd: Int = 20,
     val paddingBottom: Int = 20

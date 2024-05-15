@@ -2,6 +2,7 @@ package com.ss.smartfilterlib.multiselection
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.ScrollView
 import androidx.core.content.ContextCompat
@@ -39,19 +40,17 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
     }
     private fun populateDataFromAttributes() {
         if (dataFromXml != 0) {
-            val mData = resources.getStringArray(dataFromXml)
-            val data = mData.map { Data(name = it) } as ArrayList<Data>
             setOrientation()
-            setItems(data, MultiChipType.ENTRY_CHIP)
+            setItems(resources.getStringArray(dataFromXml).map { Data(name = it) }, MultiChipType.ENTRY_CHIP)
         }
     }
     override fun initializeView() {
-        containerScrollView = ScrollView(context)
-        containerHorizontalScrollView = HorizontalScrollView(context)
-
-        val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        containerScrollView.layoutParams = layoutParams
-        containerHorizontalScrollView.layoutParams = layoutParams
+        containerScrollView = ScrollView(context).apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
+        containerHorizontalScrollView = HorizontalScrollView(context).apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
 
         chipGroup = ChipGroup(context)
     }
@@ -106,6 +105,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         return Chip(context, null, R.style.EntryChipStyle).apply {
             isClickable = true
             isCheckedIconVisible = false
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
         }
     }
 
@@ -137,6 +137,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         return Chip(context, null, R.style.FilterChipStyle).apply {
             isCloseIconVisible = false
             isChipIconVisible = true
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
         }
     }
 
@@ -173,6 +174,11 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
 
             multiCheckedChangeListener?.invoke( checkedChipIds.toList())
 
+        }
+        chip.setOnCloseIconClickListener {
+            chipGroup.removeView(chip)
+            checkedChipIds.remove(chip.id)
+            multiCheckedChangeListener?.invoke(checkedChipIds.toList())
         }
 
     }

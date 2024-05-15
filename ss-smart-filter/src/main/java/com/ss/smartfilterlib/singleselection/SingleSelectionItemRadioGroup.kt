@@ -17,7 +17,17 @@ import com.ss.smartfilterlib.databinding.RowItemBinding
 import com.ss.smartfilterlib.utils.BaseLinearLayout
 
 /**
- * created by Mala Ruparel ON 19/04/24
+ * SingleSelectionItemRadioGroup is a custom view that allows single selection from a list of options.
+ * The options are presented as RadioButtons within a RadioGroup.
+ * The RadioGroup can be oriented either horizontally or vertically.
+ *
+ * @property smartOrientation The orientation of the RadioGroup, can be either horizontal or vertical.
+ * @property viewTextSelector The ColorStateList for the text color of the RadioButtons.
+ * @property viewBgSelector The Drawable for the background of the RadioButtons.
+ * @property dataFromXml The resource ID of the string array containing the list items.
+ * @property singleCheckedChangeListener The listener for checked change events of the RadioButtons.
+ *
+ * @constructor Creates a new SingleSelectionItemRadioGroup with the given context, attrs, and defStyle.
  */
 class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null,defStyle: Int = 0) :  BaseLinearLayout(context, attrs, defStyle) {
 
@@ -41,24 +51,21 @@ class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null
             }
         }
     }
-    private fun populateDataFromAttributes(){
+    private fun populateDataFromAttributes() {
         if (dataFromXml != 0) {
-            val mData = resources.getStringArray(dataFromXml);
             setOrientation()
-            mData.forEach {
-                val data = Data(name = it)
-                addRadioButtonView(data)
+            resources.getStringArray(dataFromXml).forEach {
+                addRadioButtonView(Data(name = it))
             }
         }
     }
     override fun initializeView() {
-        containerScrollView = ScrollView(context)
-        containerHorizontalScrollView = HorizontalScrollView(context)
-
-        val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        containerScrollView.layoutParams = layoutParams
-        containerHorizontalScrollView.layoutParams = layoutParams
-
+        containerScrollView = ScrollView(context).apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
+        containerHorizontalScrollView = HorizontalScrollView(context).apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
         radioGroup = RadioGroup(context)
     }
 

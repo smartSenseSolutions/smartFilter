@@ -13,17 +13,24 @@ import com.ss.smartfilterlib.utils.BaseRecycleView
 
 
 /**
- * created by Mala Ruparel ON 02/05/24
+ * MultiSelectionListView is a custom view that allows multiple selection from a list of options.
+ * The options are presented in a RecyclerView.
+ *
+ * @property smartOrientation The orientation of the RecyclerView, can be either vertical or horizontal.
+ * @property viewTextSelector The ColorStateList for the text color of the list items.
+ * @property checkSelector The resource ID for the drawable to use when an item is checked.
+ * @property dataFromXml The resource ID of the string array containing the list items.
+ * @property onMultiSelectionClicked The listener for checked change events of the list items.
+ *
+ * @constructor Creates a new MultiSelectionListView with the given context, attrs, and defStyle.
  */
 class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: AttributeSet? = null,defStyle: Int = 0) :  BaseRecycleView(context, attrs, defStyle){
-
 
     init {
         initAttributes(attrs=attrs)
         initializeView()
         populateDataFromAttributes()
     }
-
 
 
     override fun initializeView() {
@@ -48,14 +55,11 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
     }
     private fun populateDataFromAttributes() {
         if (dataFromXml != 0) {
-            val mData = resources.getStringArray(dataFromXml);
-            mData.forEach {
-                val data = Data(name = it)
-                mList.add(data)
+            resources.getStringArray(dataFromXml).forEach {
+                mList.add(Data(name = it))
             }
             setItems(mList)
         }
-
     }
 
     fun configureView(data: ArrayList<Data>, orientation: Int, checkSelector: Int, primaryTextColor: Int, onCheckedChangeListener: ((List<Int>) -> Unit)?) {
