@@ -2,10 +2,10 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mCardView"
+    android:id="@+id/mcv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-   android:layout_margin="@dimen/_4sdp"
+    android:layout_margin="@dimen/_4sdp"
     android:background="?attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/_4sdp"
     app:cardElevation="@dimen/_4sdp"
@@ -31,13 +31,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:textSize="14sp"
             android:layout_toEndOf="@+id/img"
             android:ellipsize="end"
             android:includeFontPadding="false"
             android:maxLines="1"
             android:textColor="@color/black"
-
+            android:textSize="14sp"
             tools:text="Title" />
 
 

@@ -1,12 +1,12 @@
 package com.ss.smartfilterlib.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.ss.smartfilterlib.data.RadioGroupData
+import com.ss.smartfilterlib.data.Data
 
 /**
  * created by Mala Ruparel ON 22/04/24
  */
- class SingleChangeDiffUtil(private val oldList: ArrayList<RadioGroupData>, private val newList: ArrayList<RadioGroupData>
+ class SingleChangeDiffUtil(private val oldList: ArrayList<Data>, private val newList: ArrayList<Data>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size

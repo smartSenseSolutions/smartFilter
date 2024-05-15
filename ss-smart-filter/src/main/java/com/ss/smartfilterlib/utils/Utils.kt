@@ -12,10 +12,7 @@ enum class SingleGroupSubType {
     CHIP_GROUP,
     NONE
 }
-enum class MultiGroupSubType {
-    CHIP_GROUP,
-    NONE
-}
+
 object Orientation {
     const val VERTICAL = 1
     const val HORIZONTAL = 0
@@ -23,7 +20,7 @@ object Orientation {
 }
 enum class MultiChipType {
     ENTRY_CHIP,
-    FILTER_CHIP, //input
+    FILTER_CHIP,
     ACTION_CHIP,
     NONE
 }

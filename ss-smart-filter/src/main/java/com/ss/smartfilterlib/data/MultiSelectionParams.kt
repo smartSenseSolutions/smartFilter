@@ -14,8 +14,8 @@ data class MultiSelectionParams(
     val singleGroupSubType: SingleGroupSubType = SingleGroupSubType.NONE,
     val chipType: MultiChipType = MultiChipType.NONE,
     val orientation: Int = Orientation.HORIZONTAL,
-    val mData: ArrayList<RadioGroupData>,
-    val callbacks: (List<Int>) -> Unit,
+    val mData: ArrayList<Data>,
+    val onItemsSelected: (List<Int>) -> Unit,
     @ColorRes val bgSelector: Int = android.R.color.darker_gray,
     @ColorRes val textSelector: Int = android.R.color.black
 )
