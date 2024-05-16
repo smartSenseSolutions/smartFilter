@@ -159,7 +159,9 @@ The library depends on the following libraries:
 <img src="media/test1.png" width="250" />   <img src="media/test2.png" width="250" />  
 <img src="media/test3.png" width="250" />   <img src="media/test4.png" width="250" />   
 
-https://raw.githubusercontent.com/MalaRuparel2023/smartSenseSolutions/smartFilter/main/media/test.mp4
+<video width="320" height="240" controls>
+  <source src="media/test.gif">
+</video>
 
 
 ### Dependency
