@@ -45,22 +45,19 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
     }
 
     override fun initializeView() {
-
-        containerScrollView = ScrollView(context)
-        containerHorizontalScrollView = HorizontalScrollView(context)
-
-        val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        containerScrollView.layoutParams = layoutParams
-        containerHorizontalScrollView.layoutParams = layoutParams
+        containerScrollView = ScrollView(context).apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
+        containerHorizontalScrollView = HorizontalScrollView(context).apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
 
         chipGroup = ChipGroup(context)
     }
     private fun populateDataFromAttributes() {
         if (dataFromXml != 0) {
-            val mData = resources.getStringArray(dataFromXml);
-            val data = mData.map { Data(name = it) } as ArrayList<Data>
             setOrientation()
-            setItems(data, SingleChipType.ENTRY_CHIP)
+            setItems(resources.getStringArray(dataFromXml).map { Data(name = it) }, SingleChipType.ENTRY_CHIP)
         }
     }
     fun configureView(chipData: List<Data>,chipType: SingleChipType,orientation: Int,bgSelector: Int, textSelector: Int, checkedChangedListener: ( Data) -> Unit,) {
@@ -107,6 +104,7 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
         return Chip(context, null, R.style.EntryChipStyle).apply {
             isClickable = true
             isCheckedIconVisible=false
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
         }
     }
 
@@ -169,6 +167,10 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
 
     private fun setChipEvents(chip: Chip) {
         chip.setOnCheckedChangeListener { _, _ ->
+            singleCheckedChangeListener?.invoke(chip.tag as Data)
+        }
+        chip.setOnCloseIconClickListener {
+            chipGroup.removeView(chip)
             singleCheckedChangeListener?.invoke(chip.tag as Data)
         }
     }

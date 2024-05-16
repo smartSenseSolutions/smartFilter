@@ -17,13 +17,7 @@ data class SingleSelectionParams(
     val orientation: Int,
     val mData: ArrayList<Data>,
     val onItemSelected: (Data) -> Unit,
-    @DrawableRes val bgSelector: Int =android.R.color.darker_gray,
+    @DrawableRes val bgSelector: Int = R.drawable.abc_btn_radio_material,
     @ColorRes val textSelector: Int = android.R.color.black
 
 )
-/*
-@DrawableRes val bgSelector: Int = com.ss.smartfilterlib.R.drawable.multiline_default,
-@ColorRes val textSelector: Int = com.ss.smartfilterlib.R.color.black*/
-/*
-@ColorRes val bgSelector: Int = android.R.color.darker_gray,
-@ColorRes val textSelector: Int = android.R.color.black*/

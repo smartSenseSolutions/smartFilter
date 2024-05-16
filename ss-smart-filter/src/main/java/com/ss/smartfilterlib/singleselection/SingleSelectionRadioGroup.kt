@@ -18,6 +18,20 @@ import com.ss.smartfilterlib.data.Data
 import com.ss.smartfilterlib.utils.BaseLinearLayout
 import com.ss.smartfilterlib.utils.Orientation
 
+/**
+ * SingleSelectionRadioGroup is a custom view that allows single selection from a list of options.
+ * The options are presented as RadioButtons within a RadioGroup.
+ * The orientation of the RadioGroup can be set to either vertical or horizontal.
+ * The view also supports custom attributes for text color, background, and list items.
+ *
+ * @property smartOrientation The orientation of the RadioGroup, can be either vertical or horizontal.
+ * @property viewTextSelector The ColorStateList for the text color of the RadioButtons.
+ * @property viewBgSelector The Drawable for the background of the RadioButtons.
+ * @property dataFromXml The resource ID of the string array containing the list items.
+ * @property singleCheckedChangeListener The listener for checked change events of the RadioButtons.
+ *
+ * @constructor Creates a new SingleSelectionRadioGroup with the given context, attrs, and defStyle.
+ */
 
 /**
  * created by Mala Ruparel ON 17/04/24
@@ -49,23 +63,20 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
 
     private fun populateDataFromAttributes() {
         if (dataFromXml != 0) {
-            val mData = resources.getStringArray(dataFromXml);
             setOrientation()
-            mData.forEach {
-                val data = Data(name = it)
-                addRadioButtonView(data)
+            resources.getStringArray(dataFromXml).forEach {
+                addRadioButtonView(Data(name = it))
             }
         }
     }
     override fun initializeView() {
-        containerScrollView = ScrollView(context)
-        containerHorizontalScrollView = HorizontalScrollView(context)
-
-        val layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        containerScrollView.layoutParams = layoutParams
-        containerHorizontalScrollView.layoutParams = layoutParams
+        containerScrollView = ScrollView(context).apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
+        containerHorizontalScrollView = HorizontalScrollView(context).apply {
+            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
         radioGroup = RadioGroup(context)
-
     }
 
     private fun setOrientation() {
@@ -122,14 +133,16 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
             applyTextAttributes(this)
             applyPaddingAttributes(this)
             applySelector(this)
+            generateViewWithId(radioButton, data)
         }
 
-        generateViewWithId(radioButton, data)
-        radioGroup.addView(radioButton)
-        radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val checkedRadioButton: RadioButton = findViewById(checkedId)
-            val checkedData = checkedRadioButton.tag as Data?
-            checkedData?.let { singleCheckedChangeListener?.invoke(it) }
+        radioGroup.apply {
+            addView(radioButton)
+            setOnCheckedChangeListener { _, checkedId ->
+                val checkedRadioButton: RadioButton = findViewById(checkedId)
+                val checkedData = checkedRadioButton.tag as Data?
+                checkedData?.let { singleCheckedChangeListener?.invoke(it) }
+            }
         }
     }
 
@@ -141,8 +154,11 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
 
 
     private fun generateViewWithId(radioButton: RadioButton, data: Data)  {
-        radioButton.id = View.generateViewId()
-        radioButton.tag = data
+        radioButton.apply {
+           id = View.generateViewId()
+            tag = data
+        }
+
     }
 
     private fun setDefaultDrawable() : Drawable?{

@@ -16,9 +16,9 @@ class MainActivity : ComponentActivity() {
         setContentView(binding.root)
 
 
-        SmartFilter.addRadioRawItemSingleSelection {
-            addRadioGroupRowItemVertical(binding.root) { radioGroupData ->
-                toast("name: ${radioGroupData.name} ")  } }
+        SmartFilter.addRadioGroupSingleSelection {
+            addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
+                toast("name: ${radioGroupData.name} ") }}
 
     }
 

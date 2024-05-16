@@ -20,7 +20,21 @@ import com.ss.smartfilterlib.utils.Constant.DEFAULT_SPACING
 import com.ss.smartfilterlib.utils.Constant.DEFAULT_SPAN_COUNT
 import com.ss.smartfilterlib.utils.GridSpacingItemDecoration
 import com.ss.smartfilterlib.utils.SingleChangeDiffUtil
-
+/**
+ * SingleSelectionMultiLineRadioButton is a custom view that allows single selection from a list of options.
+ * The options are presented as RadioButtons within a RecyclerView.
+ * The RecyclerView is arranged in a grid layout.
+ *
+ * @property spanCount The number of columns in the grid layout.
+ * @property spacing The spacing between items in the grid.
+ * @property includeEdge Whether to include edge spacing in the grid.
+ * @property viewTextSelector The ColorStateList for the text color of the RadioButtons.
+ * @property viewBgSelector The Drawable for the background of the RadioButtons.
+ * @property dataFromXml The resource ID of the string array containing the list items.
+ * @property onSingleSelectionClicked The listener for click events of the RadioButtons.
+ *
+ * @constructor Creates a new SingleSelectionMultiLineRadioButton with the given context, attrs, and defStyle.
+ */
 class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseRecycleView(context, attrs, defStyle){
 
 
@@ -32,7 +46,7 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     override fun initAttributes(attrs: AttributeSet?) {
         val typedArray =
             context.theme.obtainStyledAttributes(attrs, R.styleable.MultiLineRadioGroup, 0, 0)
-        with(typedArray) {
+             with(typedArray) {
             try {
                 setColumnCount(getInt(R.styleable.MultiLineRadioGroup_rg_ml_spancount,DEFAULT_SPAN_COUNT))
                 setSpace(getInt(R.styleable.MultiLineRadioGroup_rg_ml_spacing, DEFAULT_SPACING))
@@ -56,12 +70,10 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
         adapter = MultiLineRadioButtonAdapter(context,onSingleSelectionClicked).also { this.mAdapter = it }
 
     }
-    private fun populateDataFromAttributes(){
+    private fun populateDataFromAttributes() {
         if (dataFromXml != 0) {
-            val mData = resources.getStringArray(dataFromXml);
-            mData.forEach {
-                val data = Data(name = it)
-                mList.add(data)
+            resources.getStringArray(dataFromXml).forEach {
+                mList.add(Data(name = it))
             }
             mAdapter?.setData(mList)
         }
