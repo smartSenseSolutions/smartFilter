@@ -165,7 +165,7 @@ class SingleSelectionRadioGroup @JvmOverloads constructor(context: Context, attr
        return  ContextCompat.getDrawable(context,androidx.appcompat.R.drawable.abc_btn_radio_material,)
     }
     private fun setDefaultTextColor(): ColorStateList? {
-     return ContextCompat.getColorStateList(context, R.color.black)
+     return ContextCompat.getColorStateList(context, R.color.colorOnSecondary)
     }
 
     private fun applyTextAttributes(radioButton: RadioButton) {

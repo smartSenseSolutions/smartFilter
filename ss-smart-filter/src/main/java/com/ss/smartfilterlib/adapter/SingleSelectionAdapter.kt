@@ -1,6 +1,7 @@
 package com.ss.smartfilterlib.adapter
 
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckedTextView
@@ -12,7 +13,7 @@ import com.ss.smartfilterlib.databinding.RowItemCheckableBinding
  * created by Mala Ruparel ON 10/05/24
  */
 class SingleSelectionListAdapter(
-    private val checkSelector: Int,
+    private val checkSelector: Drawable?,
     private val viewTextColor: ColorStateList?,
     private val onItemSelectionChanged: ((Data) -> Unit)?
 ) : RecyclerView.Adapter<SingleSelectionListAdapter.SingleSelectionViewHolder>() {

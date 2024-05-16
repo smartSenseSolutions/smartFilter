@@ -25,7 +25,6 @@ abstract class BaseRecycleView : RecyclerView {
     protected var spacing: Int = 0
     protected var includeEdge: Boolean = false
     protected var smartOrientation: Int = SmartOrientation.VERTICAL
-    protected var checkSelector: Int = 0
     protected var paddingAttributes: PaddingAttributes = PaddingAttributes()
     protected var textAttributes: TextAttributes = TextAttributes()
     protected var onMultiSelectionClicked: ((List<Int>) -> Unit)? = null

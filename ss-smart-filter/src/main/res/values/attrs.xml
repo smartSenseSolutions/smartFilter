@@ -36,7 +36,7 @@
     <declare-styleable name="SingleSelectionView">
         <attr name="ss_text_selector" format="reference" />
         <attr name="ss_orientation" format="integer" />
-        <attr name="ss_checked_selector" format="integer" />
+        <attr name="ss_checked_selector" format="reference" />
         <attr name="ss_list_item" format="reference" />
     </declare-styleable>
     </resources>

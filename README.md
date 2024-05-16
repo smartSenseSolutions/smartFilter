@@ -52,7 +52,6 @@ The library depends on the following libraries:
                 addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
                       toast("name: ${radioGroupData.name} ") }}
 
-<img src="media/single_selection_vertical.png" width="250" />
 
 
 - **Horizontal**
@@ -63,8 +62,6 @@ The library depends on the following libraries:
                         toast("name: ${radioGroupData.name} ") } }
 
 
-<img src="media/single_selection_horizontal.png" width="250" />
-
 
 ### SingleSelectionMultiLine(MultiRaw)
 
@@ -73,7 +70,6 @@ The library depends on the following libraries:
                     toast("name: ${radioGroupData.name} ")  } }
 
 
-<img src="media/single_selection_multiline.png" width="250" />
 
 
 ### SingleSelectionRowItem(Verticle/Horizontal)
@@ -85,7 +81,6 @@ The library depends on the following libraries:
                 toast("name: ${radioGroupData.name} ")  } }
 
 
-   <img src="media/single_selection_row_item_vertical.png" width="250" />
 
 - **Horizontal**
 
@@ -94,7 +89,7 @@ The library depends on the following libraries:
              toast("name: ${radioGroupData.name} ")  } }
 
 
-  <img src="media/single_selection_row_item_horizontal.png" width="250" /> 
+
 
 ### SingleSelectionChipGroup((Verticle/Horizontal))
 
@@ -108,7 +103,7 @@ The library depends on the following libraries:
                     addSingleSelectionChipGroupHorizontal(binding.root) { radioGroupData ->
                         toast("name: ${radioGroupData.name} ") } }
                  
-  <img src="media/single_selection_chip.png" width="250" />       
+   
 
 ### MultiSelectionChipGroup(MultiRaw - (Verticle/Horizontal))
 
@@ -123,7 +118,7 @@ The library depends on the following libraries:
                     addMultiSelectionChipGroupHorizontal(binding.root) { radioGroupData ->
                         toast("Checked IDs: ${radioGroupData.joinToString(", ")}")}}
         
-   <img src="media/multiselect_chip.png" width="250" />
+
 
 
 ### SingleSelectionListView((Verticle/Horizontal))
@@ -134,14 +129,13 @@ The library depends on the following libraries:
                 addSingleSelectionListVertical(binding.root) { radioGroupData ->
                 toast("name:  " + radioGroupData.name)  } }
 
-    <img src="media/single_selection_vertical.png.png" width="250" />   
 - **Horizontal**
 
                 SmartFilter.addListViewSingleSelection {
                    addSingleSelectionListHorizontal(binding.root) { radioGroupData ->
                         toast("name:  " + radioGroupData.name)  } }
 
-<img src="media/single_selection_horizental.png.png.png" width="250" />   
+
 
 
 ### MultiSelectionListView((Verticle/Horizontal))
@@ -152,7 +146,7 @@ The library depends on the following libraries:
                   addMultiSelectionListVertical(binding.root) { radioGroupData ->
                       toast("name:  " + radioGroupData)  } }
 
-    <img src="media/multi_selection_vertical.png" width="250" />   
+
   
   - **Horizontal**
 
@@ -160,33 +154,13 @@ The library depends on the following libraries:
              addMultiSelectionListHorizontal(binding.root) { radioGroupData ->
                     toast("name:  " + radioGroupData)  } }
 
-  <img src="media/multi_selection_horizontal.png" width="250" />   
 
 
+<img src="media/test1.png" width="250" />   <img src="media/test2.png" width="250" />   <img src="media/test3.png" width="250" />   <img src="media/test4.png" width="250" />   
 
-### Default Drawable for SingleSelectionRadioGroup
-
-        @DrawableRes val bgSelector: Int = androidx.appcompat.R.drawable.abc_btn_radio_material,
-        @ColorRes val textSelector: Int = android.R.color.black
-
-##Selector
-
-         bgSelector = R.drawable.singleline_rb_selector,
-        textSelector = R.color.single_text_color_selector
-
-###  Drawable for SingleSelectionMultiRaw
-
-##Default
-       
-         ```kotlin
-        @DrawableRes val bgSelector: Int = R.drawable.multiline_default,
-        @ColorRes val textSelector: Int = android.R.color.black
-
-##Selector  
-
-            ```kotlin    
-            bgSelector = R.drawable.multiline_selector,
-            textSelector = R.color.multiline_text_selector
+<video width="320" height="240" controls>
+  <source src="test.mp4" type="video/mp4">
+</video>
 
 
 ### Dependency

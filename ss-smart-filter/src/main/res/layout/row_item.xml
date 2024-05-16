@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:includeFontPadding="false"
             android:maxLines="1"
-            android:textColor="@color/black"
+            android:textColor="@color/colorOnSecondary"
             android:textSize="14sp"
             tools:text="Title" />
 
@@ -52,7 +52,7 @@
             android:ellipsize="end"
             android:gravity="start"
             android:maxLines="2"
-            android:textColor="@color/black"
+            android:textColor="@color/colorOnSecondary"
             android:textSize="@dimen/_11ssp"
             tools:text="Description" />
 

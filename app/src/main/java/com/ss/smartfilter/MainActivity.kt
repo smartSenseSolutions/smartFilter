@@ -2,24 +2,18 @@ package com.ss.smartfilter
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import com.ss.smartfilter.databinding.ActivityMainBinding
-import com.ss.smartfilterlib.SmartFilter
-import com.ss.smartfilterlib.utils.toast
+import androidx.activity.compose.setContent
+import com.ss.smartfilter.screens.FilterScreen
 
 
 class MainActivity : ComponentActivity() {
-    private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-
-        SmartFilter.addRadioGroupSingleSelection {
-            addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
-                toast("name: ${radioGroupData.name} ") }}
-
+        setContent {
+            FilterScreen()
+        }
     }
 
 }

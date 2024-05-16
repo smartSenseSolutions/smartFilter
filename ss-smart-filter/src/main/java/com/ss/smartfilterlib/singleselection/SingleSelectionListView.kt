@@ -2,6 +2,7 @@ package com.ss.smartfilterlib.singleselection
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,7 +49,7 @@ class SingleSelectionListView @JvmOverloads constructor( context: Context,attrs:
             try {
                 viewTextSelector =getColorStateList(R.styleable.SingleSelectionView_ss_text_selector) ?: setDefaultTextColor()
                 smartOrientation = getInt(R.styleable.SingleSelectionView_ss_orientation, RecyclerView.VERTICAL)
-                checkSelector = getResourceId(R.styleable.SingleSelectionView_ss_checked_selector,R.drawable.ic_check_selector)
+                viewBgSelector = getDrawable(R.styleable.SingleSelectionView_ss_checked_selector) ?: setDefaultDrawable()
                 dataFromXml = typedArray.getResourceId(R.styleable.SingleSelectionView_ss_list_item, 0)
             } finally {
                 typedArray.recycle()
@@ -73,16 +74,18 @@ class SingleSelectionListView @JvmOverloads constructor( context: Context,attrs:
     private fun updateValue(orientation: Int,checkSelector: Int,textSelector: Int,checkedChangedListener: ((Data) -> Unit)?) {
         this.onSingleSelectionClicked = checkedChangedListener
         this.smartOrientation = orientation
-        this.checkSelector = checkSelector
+        this.viewBgSelector = checkSelector.let { ContextCompat.getDrawable(context, it) }
         this.viewTextSelector =textSelector.let { ContextCompat.getColorStateList(context, it) }
     }
 
     private fun setItems(items: List<Data>) {
-        adapter = SingleSelectionListAdapter(checkSelector,viewTextSelector,onSingleSelectionClicked).apply { data = items }
+        adapter = SingleSelectionListAdapter(viewBgSelector,viewTextSelector,onSingleSelectionClicked).apply { data = items }
     }
-
+    private fun setDefaultDrawable() : Drawable?{
+        return  ContextCompat.getDrawable(context, R.drawable.multiline_default,)
+    }
     private fun setDefaultTextColor(): ColorStateList? {
-        return ContextCompat.getColorStateList(context, R.color.black)
+        return ContextCompat.getColorStateList(context, R.color.colorOnSecondary)
     }
     fun setOnSingleSelection(onItemSelected: (Data) -> Unit) {
         onSingleSelectionClicked = onItemSelected
