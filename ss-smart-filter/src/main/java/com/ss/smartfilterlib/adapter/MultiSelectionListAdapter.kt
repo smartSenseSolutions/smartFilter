@@ -1,7 +1,7 @@
 package com.ss.smartfilterlib.adapter
 
 import android.content.res.ColorStateList
-import android.view.Gravity
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckedTextView
@@ -13,7 +13,7 @@ import com.ss.smartfilterlib.databinding.RowItemCheckableBinding
  * created by Mala Ruparel ON 10/05/24
  */
 class MultiSelectionListAdapter(
-    private val checkSelector: Int,
+    private val checkSelector: Drawable?,
     private val primaryTextColor: ColorStateList?,
     private val selectedItemsPositions: MutableList<Int>,
     private val onMultiSelectionClicked: ((List<Int>) -> Unit)?
@@ -53,20 +53,13 @@ class MultiSelectionListAdapter(
                 isChecked = selectedItemsPositions.contains(adapterPosition)
                 text = data.name
                 applySelector(this)
-                extracted()
+                setCompoundDrawablesWithIntrinsicBounds(0, data.image, 0, 0)
+                setPaddingRelative(0, 30,0, 30  )
+
             }
         }
 
-        private fun CheckedTextView.extracted() {
-            checkMarkDrawable?.setBounds(
-                0,
-                0,
-                checkMarkDrawable.intrinsicWidth,
-                checkMarkDrawable.intrinsicHeight
-            )
-            gravity = Gravity.CENTER_VERTICAL
-            setPadding(10, 10, 10, 10)
-        }
+
     }
 
     private fun toggleItemSelection(position: Int) {
@@ -84,6 +77,8 @@ class MultiSelectionListAdapter(
 
     private fun applySelector(textView: CheckedTextView) {
         textView.setTextColor(primaryTextColor)
-        textView.setCheckMarkDrawable(checkSelector)
+        textView.background=(checkSelector?.constantState?.newDrawable()?.mutate())
+        textView.compoundDrawableTintList=primaryTextColor
     }
+
 }

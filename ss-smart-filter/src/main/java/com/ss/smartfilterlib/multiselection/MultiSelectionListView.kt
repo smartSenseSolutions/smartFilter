@@ -2,6 +2,7 @@ package com.ss.smartfilterlib.multiselection
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +47,7 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
             try {
                 viewTextSelector = getColorStateList(R.styleable.SingleSelectionView_ss_text_selector) ?: setDefaultTextColor()
                 smartOrientation = getInt(R.styleable.SingleSelectionView_ss_orientation, VERTICAL)
-                checkSelector = getResourceId(R.styleable.SingleSelectionView_ss_checked_selector,R.drawable.ic_check_selector)
+                viewBgSelector = getDrawable(R.styleable.SingleSelectionView_ss_checked_selector) ?: setDefaultDrawable()
                 dataFromXml =  getResourceId(R.styleable.SingleSelectionView_ss_list_item, 0)
             } finally {
                 typedArray.recycle()
@@ -72,16 +73,18 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
     private fun updateValue(orientation: Int,checkSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((List<Int>) -> Unit)?) {
         this.onMultiSelectionClicked = onCheckedChangeListener
         this.smartOrientation = orientation
-        this.checkSelector = checkSelector
+        this.viewBgSelector =  checkSelector.let { ContextCompat.getDrawable(context, it) }
         this.viewTextSelector = primaryTextColor.let { ContextCompat.getColorStateList(context, it) }
     }
     private fun setItems(items: List<Data>) {
-        adapter = MultiSelectionListAdapter(checkSelector,viewTextSelector,selectedItemsPositions,onMultiSelectionClicked).apply { data = items }
+        adapter = MultiSelectionListAdapter(viewBgSelector,viewTextSelector,selectedItemsPositions,onMultiSelectionClicked).apply { data = items }
+    }
+    private fun setDefaultDrawable() : Drawable?{
+        return  ContextCompat.getDrawable(context,R.drawable.multiline_bg_selector,)
     }
 
-
     private fun setDefaultTextColor(): ColorStateList? {
-        return ContextCompat.getColorStateList(context, R.color.black)
+        return ContextCompat.getColorStateList(context, R.color.colorOnSecondary)
     }
     fun setOnMultiSelection(callback: (List<Int>) -> Unit) {
         onMultiSelectionClicked = callback

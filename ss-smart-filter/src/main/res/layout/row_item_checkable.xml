@@ -6,17 +6,16 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_4sdp"
     android:background="?attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/_4sdp"
+    app:cardCornerRadius="@dimen/_8sdp"
     app:cardElevation="@dimen/_4sdp"
-    app:contentPadding="@dimen/_4sdp">
+    app:contentPadding="@dimen/_1sdp">
 
     <CheckedTextView
         android:id="@+id/ctv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:checked="false"
-        android:drawablePadding="@dimen/_4sdp"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault"
-        />
+        style="@style/itemTitleStyle"
+        android:layout_width="@dimen/_64sdp"
+        android:layout_height="@dimen/_64sdp"
+        android:gravity="center_horizontal|center_vertical"
+       />
 
 </com.google.android.material.card.MaterialCardView>

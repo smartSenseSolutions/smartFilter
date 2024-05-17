@@ -132,13 +132,13 @@ class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null
     }
 
     private fun applySelector(rtl: RelativeLayout) {
-        rtl.background = viewBgSelector
+        rtl.background = ContextCompat.getDrawable(context, R.drawable.row_item_selector)
     }
     private fun setDefaultDrawable() : Drawable?{
         return  ContextCompat.getDrawable(context,R.drawable.row_item_selector,)
     }
     private fun setDefaultTextColor(): ColorStateList? {
-        return ContextCompat.getColorStateList(context, R.color.black)
+        return ContextCompat.getColorStateList(context, R.color.colorOnSecondary)
     }
 
 }

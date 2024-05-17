@@ -80,17 +80,30 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     }
 
 
-    fun configureRadioButton(mData: ArrayList<Data>, bgSelector: Int, textSelector: Int,  checkedChangedListener: (Data) -> Unit) {
-       updateValue(bgSelector, textSelector, checkedChangedListener)
+    fun configureRadioButton(
+        mData: ArrayList<Data>,
+        bgSelector: Int,
+        textSelector: Int,
+        checkedChangedListener: (Data) -> Unit,
+        spanCount: Int = 2
+    ) {
+        updateValue(bgSelector, textSelector, checkedChangedListener)
+        setColumnCount(spanCount)
         mAdapter?.setData(mData)
     }
-    private fun updateValue(checkSelector: Int, textSelector: Int,onCheckedChangeListener: ((Data) -> Unit)?) {
+
+    private fun updateValue(
+        checkSelector: Int,
+        textSelector: Int,
+        onCheckedChangeListener: ((Data) -> Unit)?
+    ) {
         this.viewBgSelector = checkSelector.let { ContextCompat.getDrawable(context, it) }
         this.viewTextSelector = textSelector.let { ContextCompat.getColorStateList(context, it) }
         this.onSingleSelectionClicked = onCheckedChangeListener
 
     }
-    private fun setColumnCount(spanCount: Int) {
+
+    fun setColumnCount(spanCount: Int) {
         require(spanCount >= 2) { "spanCount minimum is 2, current: $spanCount" }
         this.spanCount = spanCount
         initializeView()
@@ -121,14 +134,17 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
         var currentSelected: Int? = null
 
 
-        internal inner class GridRadioHolder(itemView: RowItemMultiLineBinding) : ViewHolder(itemView.root) {
+        internal inner class GridRadioHolder(itemView: RowItemMultiLineBinding) :
+            ViewHolder(itemView.root) {
             private val binding = itemView
 
             fun setData(data: Data, selected: Boolean, function: (Int) -> Unit, position: Int) {
-                binding.multiLineRadioGroupDefaultRadioButton.apply {
+                binding.mlrb.apply {
                     text = setData(data)
                     applySelector(this)
                     isChecked = selected
+                    setCompoundDrawablesWithIntrinsicBounds(0, data.image, 0, 0)
+                    setPaddingRelative(0, 30, 0, 30)
                     setOnClickListener {
                         onSingleSelectionClicked?.invoke(data)
                         function(position)
@@ -157,7 +173,7 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
             return mList.size
         }
 
-        fun setData(newList: ArrayList<Data>){
+        fun setData(newList: ArrayList<Data>) {
             val diffUtil = SingleChangeDiffUtil(mList, newList)
             val diffResult = DiffUtil.calculateDiff(diffUtil)
             mList = newList
@@ -175,15 +191,18 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     private fun applySelector(radioButton: RadioButton) {
         radioButton.setTextColor(viewTextSelector)
         radioButton.buttonDrawable = viewBgSelector?.constantState?.newDrawable()?.mutate()
-        radioButton.background = viewBgSelector?.constantState?.newDrawable()?.mutate()
-    }
-    private fun setDefaultDrawable() : Drawable?{
-        return  ContextCompat.getDrawable(context, R.drawable.multiline_default,)
-    }
-    private fun setDefaultTextColor(): ColorStateList? {
-        return ContextCompat.getColorStateList(context, R.color.black)
+        radioButton.background = (viewBgSelector?.constantState?.newDrawable()?.mutate())
+        radioButton.compoundDrawableTintList = viewTextSelector
+
     }
 
+    private fun setDefaultDrawable(): Drawable? {
+        return ContextCompat.getDrawable(context, R.drawable.multiline_default)
+    }
+
+    private fun setDefaultTextColor(): ColorStateList? {
+        return ContextCompat.getColorStateList(context, R.color.colorOnSecondary)
+    }
 
 
     fun onCheckedChangeListener(onCheckedChangeListener: (Data) -> Unit) {
