@@ -3,6 +3,7 @@ package com.ss.smartfilterlib.singleselection
 
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.View
 import android.widget.HorizontalScrollView
@@ -35,8 +36,8 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
         with(typedArray) {
             try {
                 smartOrientation = getInt(R.styleable.SingleLineChipGroup_cg_sl_orientation,Orientation.VERTICAL)
-                chipBgSelector = getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_background)
-                viewTextSelector =getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_text_selector)
+                chipBgSelector = getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_background) ?: setDefaultDrawable()
+                viewTextSelector =getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_text_selector) ?: setDefaultTextColor()
                 dataFromXml = getResourceId(R.styleable.SingleLineChipGroup_cg_sl_list_item, 0)
             } finally {
                 typedArray.recycle()
@@ -67,9 +68,7 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
         setItems(chipData,chipType)
     }
     private fun updateValue(orientation: Int,bgSelector: Int, primaryTextColor: Int,onCheckedChangeListener: ((Data) -> Unit)?) {
-        chipGroup.isSingleSelection = true
-        chipGroup.isSelectionRequired=true
-        chipGroup.isSingleLine = orientation == Orientation.HORIZONTAL
+        this.smartOrientation= orientation
         this.chipBgSelector = ContextCompat.getColorStateList(context, bgSelector)
         this.viewTextSelector = primaryTextColor.let { ContextCompat.getColorStateList(context, it) }
         this.singleCheckedChangeListener = onCheckedChangeListener
@@ -173,6 +172,13 @@ class SingleSelectionChipGroup @JvmOverloads constructor(context: Context, attrs
             chipGroup.removeView(chip)
             singleCheckedChangeListener?.invoke(chip.tag as Data)
         }
+    }
+    private fun setDefaultDrawable(): ColorStateList? {
+        return ContextCompat.getColorStateList(context, R.color.chip_bg_selector)
+    }
+
+    private fun setDefaultTextColor(): ColorStateList? {
+        return ContextCompat.getColorStateList(context, R.color.chip_text_selector)
     }
     private fun generateViewWithId(radioButton: Chip, data: Data)  {
         radioButton.id = View.generateViewId()

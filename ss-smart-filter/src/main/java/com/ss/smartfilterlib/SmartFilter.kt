@@ -11,28 +11,30 @@ import com.ss.smartfilterlib.utils.Params
 
 
 object SmartFilter {
-  
+
     fun addRadioGroupSingleSelection(singleSelectionParams: () -> Params.SingleSelection) {
         val param = singleSelectionParams().data
         val singleLineRadioGroup = SingleSelectionRadioGroup(param.rootView.context)
         singleLineRadioGroup.configureRadioButton(
-            param.mData,
-            param.orientation,
-            param.bgSelector,
-            param.textSelector,
-            param.onItemSelected
+            mData = param.mData,
+            orientation = param.orientation,
+            bgSelector = param.bgSelector,
+            textSelector = param.textSelector,
+            checkedChangedListener = param.onItemSelected
         )
         param.rootView.addView(singleLineRadioGroup)
 
     }
+
     fun addRadioMultiRawSingleSelection(singleSelectionParams: () -> Params.SingleSelection) {
         val param = singleSelectionParams().data
         val multiLineRadioGroup = SingleSelectionMultiLineRadioButton(param.rootView.context)
-         multiLineRadioGroup.configureRadioButton(
-            param.mData,
-            param.bgSelector,
-            param.textSelector,
-            param.onItemSelected
+        multiLineRadioGroup.configureRadioButton(
+            mData = param.mData,
+            spanCount = 2,
+            bgSelector = param.bgSelector,
+            textSelector = param.textSelector,
+            checkedChangedListener = param.onItemSelected
         )
         param.rootView.addView(multiLineRadioGroup)
 
@@ -66,6 +68,7 @@ object SmartFilter {
         param.rootView.addView(singleSelectionChipGroup)
 
     }
+
     fun addChipGroupMultiSelection(multiselection: () -> Params.MultiSelection) {
         val param = multiselection().data
         val multiSelectionChipGroup = MultiselectionChipGroup(param.rootView.context)
@@ -80,7 +83,22 @@ object SmartFilter {
         param.rootView.addView(multiSelectionChipGroup)
 
     }
+
     fun addListViewSingleSelection(singleSelectionListView: () -> Params.SingleSelection) {
+        val param = singleSelectionListView().data
+        val singleSelectionListView = SingleSelectionListView(param.rootView.context)
+        singleSelectionListView.configureView(
+            param.mData,
+            param.orientation,
+            param.bgSelector,
+            param.textSelector,
+            param.onItemSelected
+        )
+        param.rootView.addView(singleSelectionListView)
+
+    }
+
+    fun addListViewSingleSelectionSeat(singleSelectionListView: () -> Params.SingleSelection) {
         val param = singleSelectionListView().data
         val singleSelectionListView = SingleSelectionListView(param.rootView.context)
         singleSelectionListView.configureView(

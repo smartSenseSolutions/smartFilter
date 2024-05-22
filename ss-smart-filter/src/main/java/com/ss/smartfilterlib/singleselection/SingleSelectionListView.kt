@@ -82,10 +82,10 @@ class SingleSelectionListView @JvmOverloads constructor( context: Context,attrs:
         adapter = SingleSelectionListAdapter(viewBgSelector,viewTextSelector,onSingleSelectionClicked).apply { data = items }
     }
     private fun setDefaultDrawable() : Drawable?{
-        return  ContextCompat.getDrawable(context, R.drawable.multiline_default,)
+        return  ContextCompat.getDrawable(context,R.drawable.multiline_bg_selector,)
     }
     private fun setDefaultTextColor(): ColorStateList? {
-        return ContextCompat.getColorStateList(context, R.color.colorOnSecondary)
+        return ContextCompat.getColorStateList(context, R.color.multiline_text_selector)
     }
     fun setOnSingleSelection(onItemSelected: (Data) -> Unit) {
         onSingleSelectionClicked = onItemSelected

@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.data.UiToolingDataApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.ss.smartfilter.addMultiSelectionListSeat
+import com.ss.smartfilter.addSingleSelectionListSeat
 import com.ss.smartfilterlib.SmartFilter
 
 /**
@@ -75,8 +75,8 @@ fun ExpandableSeatType(title: String) {
                 }
             }) { view ->
 
-                SmartFilter.addListViewMultiSelection {
-                    addMultiSelectionListSeat(view) { }
+                SmartFilter.addListViewSingleSelectionSeat {
+                    addSingleSelectionListSeat(view) { }
                 }
             }
         }

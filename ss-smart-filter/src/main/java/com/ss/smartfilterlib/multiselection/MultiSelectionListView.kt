@@ -84,7 +84,7 @@ class MultiSelectionListView @JvmOverloads constructor( context: Context,attrs: 
     }
 
     private fun setDefaultTextColor(): ColorStateList? {
-        return ContextCompat.getColorStateList(context, R.color.colorOnSecondary)
+        return ContextCompat.getColorStateList(context, R.color.multiline_text_selector)
     }
     fun setOnMultiSelection(callback: (List<Int>) -> Unit) {
         onMultiSelectionClicked = callback
