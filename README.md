@@ -1,6 +1,6 @@
 # Smart Filter Library
 
-<img src="media/test.gif" width="250" />
+<img src="media/Smartfilter.gif.gif" width="250" />
 
 This library provides a set of customizable filter components for Android applications. It supports both single and multi-selection filters in various formats such as radio groups, chip groups, and list views. The filters can be displayed either vertically or horizontally.
 
@@ -265,8 +265,8 @@ The library depends on the following libraries:
               app:ss_text_selector="@color/chip_text_selector" />
 
 
-<img src="media/test1.png" width="250" />   <img src="media/test2.png" width="250" />  
-<img src="media/test3.png" width="250" />   <img src="media/test4.png" width="250" />   
+<img src="media/Screenshot1.png" width="250" />   <img src="media/Screenshot2.png" width="250" />  
+<img src="media/Screenshot3.png" width="250" />   <img src="media/Screenshot4.png" width="250" />   
 
 
 
