@@ -45,21 +45,21 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     }
     override fun initAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.MultiLineRadioGroup, 0, 0)
-             with(typedArray) {
+
             try {
-                setColumnCount(getInt(R.styleable.MultiLineRadioGroup_rg_ml_spancount,DEFAULT_SPAN_COUNT))
-                setSpace(getInt(R.styleable.MultiLineRadioGroup_rg_ml_spacing, DEFAULT_SPACING))
-                setEdge(getBoolean(R.styleable.MultiLineRadioGroup_rg_ml_includeedge, false))
+                setColumnCount(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_spancount,DEFAULT_SPAN_COUNT))
+                setSpace(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_spacing, DEFAULT_SPACING))
+                setEdge(typedArray.getBoolean(R.styleable.MultiLineRadioGroup_rg_ml_includeedge, false))
 
-                viewTextSelector =getColorStateList(R.styleable.MultiLineRadioGroup_rg_ml_text_selector) ?: setDefaultTextColor()
-                viewBgSelector = getDrawable(R.styleable.MultiLineRadioGroup_rg_ml_background) ?: setDefaultDrawable()
+                viewTextSelector =typedArray.getColorStateList(R.styleable.MultiLineRadioGroup_rg_ml_text_selector) ?: setDefaultTextColor()
+                viewBgSelector = typedArray.getDrawable(R.styleable.MultiLineRadioGroup_rg_ml_background) ?: setDefaultDrawable()
 
-                dataFromXml = getResourceId(R.styleable.MultiLineRadioGroup_rg_ml_list_item, 0)
+                dataFromXml = typedArray.getResourceId(R.styleable.MultiLineRadioGroup_rg_ml_list_item, 0)
 
             } finally {
                 typedArray.recycle()
             }
-        }
+
 
     }
     @SuppressLint("NotifyDataSetChanged")
