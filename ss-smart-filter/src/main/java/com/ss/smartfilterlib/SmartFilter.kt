@@ -86,15 +86,15 @@ object SmartFilter {
 
     fun addListViewSingleSelection(singleSelectionListView: () -> Params.SingleSelection) {
         val param = singleSelectionListView().data
-        val singleSelectionListView = SingleSelectionListView(param.rootView.context)
-        singleSelectionListView.configureView(
+        val singleSelection = SingleSelectionListView(param.rootView.context)
+        singleSelection.configureView(
             param.mData,
             param.orientation,
             param.bgSelector,
             param.textSelector,
             param.onItemSelected
         )
-        param.rootView.addView(singleSelectionListView)
+        param.rootView.addView(singleSelection)
 
     }
 
