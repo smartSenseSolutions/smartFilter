@@ -45,7 +45,6 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     }
     override fun initAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.MultiLineRadioGroup, 0, 0)
-
             try {
                 setColumnCount(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_spancount,DEFAULT_SPAN_COUNT))
                 setSpace(typedArray.getInt(R.styleable.MultiLineRadioGroup_rg_ml_spacing, DEFAULT_SPACING))
