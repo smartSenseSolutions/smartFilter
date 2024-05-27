@@ -52,13 +52,16 @@ class SingleSelectionListAdapter(
                     isChecked = isSelected
                     text = data.name
                     applySelector(this)
+                    setCompoundDrawablesWithIntrinsicBounds(0, data.image, 0, 0)
+                    setPaddingRelative(0, 30,0, 30  )
                 }
             }
         }
 
         private fun applySelector(textView: CheckedTextView) {
             textView.setTextColor(viewTextColor)
-            textView.setCheckMarkDrawable(checkSelector)
+            textView.background=(checkSelector?.constantState?.newDrawable()?.mutate())
+            textView.compoundDrawableTintList=viewTextColor
         }
     }
 

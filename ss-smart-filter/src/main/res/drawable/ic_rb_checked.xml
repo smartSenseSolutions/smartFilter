@@ -2,6 +2,6 @@
     android:viewportWidth="60" android:width="20dp" xmlns:android="http://schemas.android.com/apk/res/android">
     <path android:fillColor="#00000000"
         android:pathData="M30,30m-29,0a29,29 0,1 1,58 0a29,29 0,1 1,-58 0"
-        android:strokeColor="#FFBB86FC" android:strokeWidth="2"/>
-    <path android:fillColor="#FFBB86FC" android:pathData="M30,30m-18,0a18,18 0,1 1,36 0a18,18 0,1 1,-36 0"/>
+        android:strokeColor="@color/colorPrimary" android:strokeWidth="2"/>
+    <path android:fillColor="@color/colorPrimary" android:pathData="M30,30m-18,0a18,18 0,1 1,36 0a18,18 0,1 1,-36 0"/>
 </vector>

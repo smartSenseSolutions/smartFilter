@@ -44,15 +44,14 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
         populateDataFromAttributes()
     }
     override fun initAttributes(attrs: AttributeSet?) {
-        val typedArray =
-            context.theme.obtainStyledAttributes(attrs, R.styleable.MultiLineRadioGroup, 0, 0)
-             with(typedArray) {
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SingleSelectionView)
+        with(typedArray) {
             try {
                 setColumnCount(getInt(R.styleable.MultiLineRadioGroup_rg_ml_spancount,DEFAULT_SPAN_COUNT))
                 setSpace(getInt(R.styleable.MultiLineRadioGroup_rg_ml_spacing, DEFAULT_SPACING))
                 setEdge(getBoolean(R.styleable.MultiLineRadioGroup_rg_ml_includeedge, false))
 
-                viewTextSelector =getColorStateList(R.styleable.MultiLineRadioGroup_rg_ml_text_selector) ?: setDefaultTextColor()
+                viewTextSelector = getColorStateList(R.styleable.MultiLineRadioGroup_rg_ml_text_selector)  ?: setDefaultTextColor()
                 viewBgSelector = getDrawable(R.styleable.MultiLineRadioGroup_rg_ml_background) ?: setDefaultDrawable()
 
                 dataFromXml = getResourceId(R.styleable.MultiLineRadioGroup_rg_ml_list_item, 0)
@@ -60,8 +59,8 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
             } finally {
                 typedArray.recycle()
             }
-        }
 
+        }
     }
     @SuppressLint("NotifyDataSetChanged")
     override fun initializeView() {
@@ -80,23 +79,13 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     }
 
 
-    fun configureRadioButton(
-        mData: ArrayList<Data>,
-        bgSelector: Int,
-        textSelector: Int,
-        checkedChangedListener: (Data) -> Unit,
-        spanCount: Int = 2
-    ) {
+    fun configureRadioButton(mData: ArrayList<Data>,bgSelector: Int, textSelector: Int,checkedChangedListener: (Data) -> Unit,spanCount: Int = 2    ) {
         updateValue(bgSelector, textSelector, checkedChangedListener)
         setColumnCount(spanCount)
         mAdapter?.setData(mData)
     }
 
-    private fun updateValue(
-        checkSelector: Int,
-        textSelector: Int,
-        onCheckedChangeListener: ((Data) -> Unit)?
-    ) {
+    private fun updateValue(checkSelector: Int,textSelector: Int, onCheckedChangeListener: ((Data) -> Unit)?) {
         this.viewBgSelector = checkSelector.let { ContextCompat.getDrawable(context, it) }
         this.viewTextSelector = textSelector.let { ContextCompat.getColorStateList(context, it) }
         this.onSingleSelectionClicked = onCheckedChangeListener
@@ -197,11 +186,11 @@ class SingleSelectionMultiLineRadioButton @JvmOverloads constructor(context: Con
     }
 
     private fun setDefaultDrawable(): Drawable? {
-        return ContextCompat.getDrawable(context, R.drawable.multiline_default)
+        return ContextCompat.getDrawable(context, R.drawable.multiline_bg_selector)
     }
 
     private fun setDefaultTextColor(): ColorStateList? {
-        return ContextCompat.getColorStateList(context, R.color.colorOnSecondary)
+        return ContextCompat.getColorStateList(context, R.color.multiline_text_selector)
     }
 
 

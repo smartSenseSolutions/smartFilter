@@ -5,13 +5,6 @@ package com.ss.smartfilterlib.utils
  */
 
 
-enum class SingleGroupSubType {
-    SINGLE_LINE,
-    MULTI_LINE,
-    ROW_ITEM,
-    CHIP_GROUP,
-    NONE
-}
 
 object Orientation {
     const val VERTICAL = 1

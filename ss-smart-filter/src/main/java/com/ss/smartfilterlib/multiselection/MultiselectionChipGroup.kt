@@ -1,6 +1,7 @@
 package com.ss.smartfilterlib.multiselection
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.View
 import android.widget.HorizontalScrollView
@@ -30,8 +31,8 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         with(typedArray) {
             try {
                 smartOrientation = getInt(R.styleable.SingleLineChipGroup_cg_sl_orientation,Orientation.VERTICAL)
-                chipBgSelector = getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_background)
-                viewTextSelector = getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_text_selector)
+                chipBgSelector = getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_background) ?: setDefaultDrawable()
+                viewTextSelector = getColorStateList(R.styleable.SingleLineChipGroup_cg_sl_text_selector) ?: setDefaultTextColor()
                 dataFromXml = getResourceId(R.styleable.SingleLineChipGroup_cg_sl_list_item, 0)
             } finally {
                 typedArray.recycle()
@@ -67,9 +68,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
      this.multiCheckedChangeListener = onCheckedChangeListener
      this.chipBgSelector = ContextCompat.getColorStateList(context, bgSelector)
      this.viewTextSelector = ContextCompat.getColorStateList(context, textSelector)
-       // chipGroup.isSingleLine = orientation == smartOrientation
-        chipGroup.isSingleSelection = false
-        chipGroup.isSelectionRequired = true
+
 
     }
     private fun setItems(mData: List<Data>, chipType: MultiChipType) {
@@ -151,7 +150,13 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
             chipStrokeWidth = 2f
         }
     }
+    private fun setDefaultDrawable(): ColorStateList? {
+        return ContextCompat.getColorStateList(context, R.color.chip_bg_selector)
+    }
 
+    private fun setDefaultTextColor(): ColorStateList? {
+        return ContextCompat.getColorStateList(context, R.color.chip_text_selector)
+    }
     private fun applyChipAttributes(chip: Chip) {
         chip.apply {
             chipBackgroundColor = chipBgSelector

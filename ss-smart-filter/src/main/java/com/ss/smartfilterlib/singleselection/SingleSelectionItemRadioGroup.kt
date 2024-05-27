@@ -29,7 +29,7 @@ import com.ss.smartfilterlib.utils.BaseLinearLayout
  *
  * @constructor Creates a new SingleSelectionItemRadioGroup with the given context, attrs, and defStyle.
  */
-class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null,defStyle: Int = 0) :  BaseLinearLayout(context, attrs, defStyle) {
+class SingleSelectionItemRadioGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? =null,defStyle: Int = 0) :  BaseLinearLayout(context, attrs, defStyle) {
 
 
     init {       
@@ -44,7 +44,7 @@ class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null
             try {
                 viewTextSelector =getColorStateList(R.styleable.RowItemRadioGroup_rg_ri_text_selector) ?: setDefaultTextColor()
                 viewBgSelector = getDrawable(R.styleable.RowItemRadioGroup_rg_ri_background) ?: setDefaultDrawable()
-                smartOrientation = getInt(R.styleable.RowItemRadioGroup_rg_ri_orientation, HORIZONTAL)
+                smartOrientation = getInt(R.styleable.RowItemRadioGroup_rg_ri_orientation, VERTICAL)
                 dataFromXml = getResourceId(R.styleable.RowItemRadioGroup_rg_ri_list_item, 0)
             } finally {
                 typedArray.recycle()
@@ -138,7 +138,7 @@ class SingleSelectionItemRadioGroup(context: Context, attrs: AttributeSet? =null
         return  ContextCompat.getDrawable(context,R.drawable.row_item_selector,)
     }
     private fun setDefaultTextColor(): ColorStateList? {
-        return ContextCompat.getColorStateList(context, R.color.colorOnSecondary)
+        return ContextCompat.getColorStateList(context, R.color.black)
     }
 
 }
