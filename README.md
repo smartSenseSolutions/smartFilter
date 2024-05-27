@@ -68,134 +68,133 @@ The library depends on the following libraries:
 
 
                  SmartFilter.addRadioGroupSingleSelection {
-                  addRadioGroupSingleLineHorizontal(binding.root) { radioGroupData ->			
-                  toast("name: ${radioGroupData.name} ") } }
+                 addRadioGroupSingleLineHorizontal(binding.root) { radioGroupData ->			
+                 toast("name: ${radioGroupData.name} ") } }
 
                                       Or
 
-                  <com.ss.smartfilterlib.singleselection.SingleSelectionRadioGroup                   
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  app:rg_sl_list_item="@array/array_android_version"
-                  app:rg_sl_background="@drawable/rb_selector"
-                  app:rg_sl_text_color="@color/text_selector"
-                  app:rg_sl_orientation="0"/>
+                 <com.ss.smartfilterlib.singleselection.SingleSelectionRadioGroup                   
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:rg_sl_list_item="@array/array_android_version"
+                 app:rg_sl_background="@drawable/rb_selector"
+                 app:rg_sl_text_color="@color/text_selector"
+                 app:rg_sl_orientation="0"/>
 
 
 
 ### SingleSelectionMultiLine(MultiRaw)
 
-                     SmartFilter.addRadioMultiRawSingleSelection {
-                     addRadioButtonMultiRow(binding.root) { radioGroupData ->
-                     toast("name: ${radioGroupData.name} ")  } }
+                  SmartFilter.addRadioMultiRawSingleSelection {
+                  addRadioButtonMultiRow(binding.root) { radioGroupData ->
+                  toast("name: ${radioGroupData.name} ")  } }
 
                                      OR
 
-                     <com.ss.smartfilterlib.singleselection.SingleSelectionMultiLineRadioButton                  
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     app:rg_ml_list_item="@array/array_android_version"
-                     app:rg_ml_background="@drawable/multiline_bg_selector"
-                     app:rg_ml_text_selector="@color/multiline_text_selector"/>
+                  <com.ss.smartfilterlib.singleselection.SingleSelectionMultiLineRadioButton                  
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  app:rg_ml_list_item="@array/array_android_version"
+                  app:rg_ml_background="@drawable/multiline_bg_selector"
+                  app:rg_ml_text_selector="@color/multiline_text_selector"/>
 
 ### SingleSelectionRowItem(Verticle/Horizontal)
 
 - **Verticle**
 
-                      SmartFilter.addRadioRawItemSingleSelection {
-                      addRadioGroupRowItemVertical(binding.root) { radioGroupData ->
-                      toast("name: ${radioGroupData.name} ")  } }
+                  SmartFilter.addRadioRawItemSingleSelection {
+                  addRadioGroupRowItemVertical(binding.root) { radioGroupData ->
+                  toast("name: ${radioGroupData.name} ")  } }
 
+                                       OR
 
-                                            OR
-
-                      <com.ss.smartfilterlib.singleselection.SingleSelectionItemRadioGroup              
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      app:rg_ri_list_item="@array/array_android_version"
-                      app:rg_ri_orientation="1"
-                      app:rg_ri_text_selector="@color/text_selector"/>
+                  <com.ss.smartfilterlib.singleselection.SingleSelectionItemRadioGroup              
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  app:rg_ri_list_item="@array/array_android_version"
+                  app:rg_ri_orientation="1"
+                  app:rg_ri_text_selector="@color/text_selector"/>
 
     - **Horizontal**
 
-                       SmartFilter.addRadioRawItemSingleSelection {
-                       addRadioGroupRowItemHorizontal(binding.root) { radioGroupData ->
-                       toast("name: ${radioGroupData.name} ")  } }
+                   SmartFilter.addRadioRawItemSingleSelection {
+                   addRadioGroupRowItemHorizontal(binding.root) { radioGroupData ->
+                   toast("name: ${radioGroupData.name} ")  } }
 
                                             Or
   
-                       <com.ss.smartfilterlib.singleselection.SingleSelectionItemRadioGroup             
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       app:rg_ri_list_item="@array/array_android_version"
-                       app:rg_ri_orientation="1"
-                       app:rg_ri_text_selector="@color/text_selector"/>
+                   <com.ss.smartfilterlib.singleselection.SingleSelectionItemRadioGroup             
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   app:rg_ri_list_item="@array/array_android_version"
+                   app:rg_ri_orientation="1"
+                   app:rg_ri_text_selector="@color/text_selector"/>
 
 ### SingleSelectionChipGroup((Verticle/Horizontal))
 
-                        SmartFilter.addChipGroupSingleSelection {
-                        addSingleSelectionChipGroupVertical(binding.root) { radioGroupData ->
-                        toast("name: ${radioGroupData.name} ") } }
+                     SmartFilter.addChipGroupSingleSelection {
+                     addSingleSelectionChipGroupVertical(binding.root) { radioGroupData ->
+                     toast("name: ${radioGroupData.name} ") } }
                                       
                                         OR
   
-                        <com.ss.smartfilterlib.singleselection.SingleSelectionChipGroup                
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:cg_sl_orientation="1"
-                        app:cg_sl_background="@color/chip_bg_selector"
-                        app:cg_sl_list_item="@array/array_android_version"
-                        app:cg_sl_text_selector="@color/chip_text_selector" />
+                     <com.ss.smartfilterlib.singleselection.SingleSelectionChipGroup                
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     app:cg_sl_orientation="1"
+                     app:cg_sl_background="@color/chip_bg_selector"
+                     app:cg_sl_list_item="@array/array_android_version"
+                     app:cg_sl_text_selector="@color/chip_text_selector" />
 
 - **Horizontal**
  
-                        SmartFilter.addChipGroupSingleSelection {
-                        addSingleSelectionChipGroupHorizontal(binding.root) { radioGroupData ->
-                        toast("name: ${radioGroupData.name} ") } }
+                      SmartFilter.addChipGroupSingleSelection {
+                      addSingleSelectionChipGroupHorizontal(binding.root) { radioGroupData ->
+                      toast("name: ${radioGroupData.name} ") } }
                                               
                                             OR
                       
-                        <com.ss.smartfilterlib.singleselection.SingleSelectionChipGroup                
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:cg_sl_orientation="0"
-                        app:cg_sl_background="@color/chip_bg_selector"
-                        app:cg_sl_list_item="@array/array_android_version"
-                        app:cg_sl_text_selector="@color/chip_text_selector" />
+                      <com.ss.smartfilterlib.singleselection.SingleSelectionChipGroup                
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      app:cg_sl_orientation="0"
+                      app:cg_sl_background="@color/chip_bg_selector"
+                      app:cg_sl_list_item="@array/array_android_version"
+                      app:cg_sl_text_selector="@color/chip_text_selector" />
 
 ### MultiSelectionChipGroup(MultiRaw - (Verticle/Horizontal))
 
 - **Verticle**
               
-                        SmartFilter.addChipGroupMultiSelection {
-                        addMultiSelectionChipGroupVertical(binding.root) { radioGroupData ->
-                        toast("Checked IDs: ${radioGroupData.joinToString(", ")}")  } }
+                       SmartFilter.addChipGroupMultiSelection {
+                       addMultiSelectionChipGroupVertical(binding.root) { radioGroupData ->
+                       toast("Checked IDs: ${radioGroupData.joinToString(", ")}")  } }
                                              
                                                  OR     
   
-                        <com.ss.smartfilterlib.multiselection.MultiselectionChipGroup                          
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:cg_sl_orientation="1"
-                        app:cg_sl_background="@color/chip_bg_selector"
-                        app:cg_sl_list_item="@array/array_android_version"
-                        app:cg_sl_text_selector="@color/chip_text_selector" />
+                       <com.ss.smartfilterlib.multiselection.MultiselectionChipGroup                          
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       app:cg_sl_orientation="1"
+                       app:cg_sl_background="@color/chip_bg_selector"
+                       app:cg_sl_list_item="@array/array_android_version"
+                       app:cg_sl_text_selector="@color/chip_text_selector" />
 
 - **Horizontal**
 
-                         SmartFilter.addChipGroupMultiSelection {
-                         addMultiSelectionChipGroupHorizontal(binding.root) { radioGroupData ->
-                         toast("Checked IDs: ${radioGroupData.joinToString(", ")}")}}
+                       SmartFilter.addChipGroupMultiSelection {
+                       addMultiSelectionChipGroupHorizontal(binding.root) { radioGroupData ->
+                       toast("Checked IDs: ${radioGroupData.joinToString(", ")}")}}
 
                                                   OR
     
-                         <com.ss.smartfilterlib.multiselection.MultiselectionChipGroup                          
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         app:cg_sl_orientation="1"
-                         app:cg_sl_background="@color/chip_bg_selector"
-                         app:cg_sl_list_item="@array/array_android_version"
-                         app:cg_sl_text_selector="@color/chip_text_selector" />
+                       <com.ss.smartfilterlib.multiselection.MultiselectionChipGroup                          
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       app:cg_sl_orientation="1"
+                       app:cg_sl_background="@color/chip_bg_selector"
+                       app:cg_sl_list_item="@array/array_android_version"
+                       app:cg_sl_text_selector="@color/chip_text_selector" />
 
 ### SingleSelectionListView((Verticle/Horizontal))
 
@@ -268,8 +267,6 @@ The library depends on the following libraries:
 
 <img src="media/Screenshot1.png" width="250" />   <img src="media/Screenshot2.png" width="250" />  
 <img src="media/Screenshot3.png" width="250" />   <img src="media/Screenshot4.png" width="250" />   
-
-
 
 
 ### Dependency
