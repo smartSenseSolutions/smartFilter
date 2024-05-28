@@ -1,10 +1,10 @@
-# SmartFilterLibrary
+# SmartFilter
 
 [![](https://jitpack.io/v/smartSenseSolutions/smart-filter-library.svg)](https://jitpack.io/#smartSenseSolutions/smart-filter-library)
 
 It is an Android Filter Component developed in Kotlin, available for Jetpack Compose as well. It offers multiple customization attributes to create a smart filter based on your requirements.
 
-<img src="preview/Smartfilter.gif" />
+<img src="preview/Smartfilter.gif" width="250" />
 
 ![First](https://github.com/smartSenseSolutions/SegmentedVerticalSeekBarDemo/blob/main/preview/1.png)
 ![Second](https://github.com/smartSenseSolutions/SegmentedVerticalSeekBarDemo/blob/main/preview/2.png)
