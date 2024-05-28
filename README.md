@@ -32,7 +32,6 @@ implementation 'io.github.smartsensesolutions:smartFilter:1.0.0'
 
 The library provides a set of classes and methods for creating and managing filter components. Each filter type has its own class and configuration methods. The filters can be added to any ViewGroup in your layout.
 
-The library also provides a set of method where you can se your data.
 
 ## Features
 
