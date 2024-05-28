@@ -44,7 +44,7 @@ The library also provides a set of method where you can se your data.
 - Checked Single Selection (Vertical/Horizontal)
 - Checked Multi Selection (Vertical/Horizontal)
 
-Use the view in your Activity and Layout by declaring:
+## Use the view in your Activity and Layout by declaring:
 
 ## SingleSelection
 
@@ -180,7 +180,7 @@ Use the view in your Activity and Layout by declaring:
 ### MultiSelectionChipGroup(MultiRaw - (Verticle/Horizontal))
 
 - **Vertical**
-- 
+
 ```activity              
                     SmartFilter.addChipGroupMultiSelection {
                     addMultiSelectionChipGroupVertical(binding.root) { radioGroupData ->
@@ -295,46 +295,67 @@ Use the view in your Activity and Layout by declaring:
 
 ## Attributes
 
-Following are the various attributes available to customize the look and feel of the Seekbar.
+Following are the various attributes available to customize the look and feel of the smartFilter.
 
 ## SingleLineRadioGroup:
 
 **rg_sl_orientation:** Orientation of the radio group, specified as an integer.
+
 **rg_sl_background:** Background reference for the radio group.
+
 **rg_sl_text_color:** Text color for the radio group.
+
 **rg_sl_list_item:** List item for the radio group, specified as a string.
+
 
 ## MultiLineRadioGroup:
 
 **rg_ml_spancount:**  Number of columns in the multi-line radio group, specified as an integer.
+
 **rg_ml_spacing:** Spacing between items in the multi-line radio group, specified as an integer.
+
 **rg_ml_background:** Background reference for the multi-line radio group.
+
 **rg_ml_text_selector:** Text color selector for the multi-line radio group.
+
 **rg_ml_includeedge:** Whether the spacing includes the edges, specified as a boolean.
+
 **rg_ml_list_item:** List item for the multi-line radio group, specified as a reference.
+
 
 ## RowItemRadioGroup:
 
 **rg_ri_background:** Background reference for the row item radio group.
+
 **rg_ri_text_selector:** Text color selector for the row item radio group.
+
 **rg_ri_orientation:** Orientation of the row item radio group, specified as an integer.
+
 **rg_ri_list_item:** List item for the row item radio group, specified as a reference.
+
 
 ## SingleLineChipGroup:
 
 **cg_sl_background:** Background reference for the single line chip group.
+
 **cg_sl_text_selector:** Text color selector for the single line chip group.
+
 **cg_sl_orientation:** Orientation of the single line chip group, specified as an integer.
+
 **cg_sl_list_item:** List item for the single line chip group, specified as a reference.
+
 
 ## SingleSelectionView:
 
 **ss_text_selector:** Text color selector for the single selection view.
+
 **ss_orientation:** Orientation of the single selection view, specified as an integer.
+
 **ss_checked_selector:** Checked state background reference for the single selection view.
+
 **ss_list_item:** List item for the single selection view, specified as a reference.
+
 
 ## MAD (Modern Android Development) Scorecard
 
-![Mad Score](https://github.com/smartSenseSolutions/SmartFilter/blob/main/preview/mad_score.png)
-
+<img src="preview/mad_score.png" width="250" /> 
