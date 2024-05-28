@@ -1,6 +1,7 @@
 # SmartFilter
 
-[![](https://jitpack.io/v/smartSenseSolutions/smart-filter-library.svg)](https://jitpack.io/#smartSenseSolutions/smart-filter-library)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-SegmentedVerticalSeekBarDemo-blue.svg?style=flat)](https://android-arsenal.com/details/3/8270) [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen)](https://developer.android.com/index.html) [![Licence](https://img.shields.io/badge/Licence-Apache--2.0-brightgreen)](https://opensource.org/licenses/Apache-2.0)
+
 
 It is an Android Filter Component developed in Kotlin, available for Jetpack Compose as well. It offers multiple customization attributes to create a smart filter based on your requirements.
 
@@ -10,7 +11,6 @@ It is an Android Filter Component developed in Kotlin, available for Jetpack Com
 
 <img src="preview/1.png" width="250" />   <img src="preview/2.png" width="250" />  
 <img src="preview/3.png" width="250" />   <img src="preview/4.png" width="250" />  
-
 
 ## Setup
 
@@ -27,6 +27,7 @@ Add the dependency in your app ```build.gradle``` file:
 ``` gradle
 implementation 'io.github.smartsensesolutions:smartFilter:1.0.0'
 ```
+
 ## Usage
 
 The library provides a set of classes and methods for creating and managing filter components. Each filter type has its own class and configuration methods. The filters can be added to any ViewGroup in your layout.
