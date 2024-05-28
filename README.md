@@ -25,7 +25,7 @@ allprojects {
 
 Add the dependency in your app ```build.gradle``` file:
 ``` gradle
-implementation 'io.github.smartsensesolutions:smartFilter:1.0.0'
+implementation 'io.github.smartsensesolutions:SmartFilter:1.0.0'
 ```
 
 ## Usage
