@@ -44,22 +44,21 @@ The library also provides a set of method where you can se your data.
 - Checked Single Selection (Vertical/Horizontal)
 - Checked Multi Selection (Vertical/Horizontal)
 
-## Use the view in your Activity and Layout by declaring:
-
+## Use the view in your Activity and Layout by declaring
 ## SingleSelection
 
 ### SingleSelectionRadioGroup(Verticle/Horizontal)
 
 - **Vertical**
 
-```activity
+``` #### activity
 
                  SmartFilter.addRadioGroupSingleSelection {
                  addRadioGroupSingleLineVertical(binding.root) { radioGroupData ->
                  toast("name: ${radioGroupData.name} ") }}
 ```
                                       
-```layout.xml
+``` ### layout.xml
                  <com.ss.smartfilterlib.singleselection.SingleSelectionRadioGroup              
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
@@ -358,4 +357,4 @@ Following are the various attributes available to customize the look and feel of
 
 ## MAD (Modern Android Development) Scorecard
 
-<img src="preview/mad_score.png" width="250" /> 
+<img src="preview/mad_score.png" /> 
