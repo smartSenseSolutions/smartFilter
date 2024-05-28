@@ -9,7 +9,7 @@ It is an Android Filter Component developed in Kotlin, available for Jetpack Com
 
 <img src="preview/Smartfilter.gif" width="250" />
 
-<img src="preview/1.png" width="250" />   <img src="preview/2.png" width="250" />  
+<img src="preview/1.png" width="250" />   <img src="preview/2.png" width="250"/>  
 <img src="preview/3.png" width="250" />   <img src="preview/4.png" width="250" />  
 
 ## Setup
@@ -32,12 +32,12 @@ implementation 'io.github.smartsensesolutions:smartFilter:1.0.0'
 
 The library provides a set of classes and methods for creating and managing filter components. Each filter type has its own class and configuration methods. The filters can be added to any ViewGroup in your layout.
 
-The library also provides a set of default styles for the filters. You can customize these styles by providing your own drawable and color resources.
+The library also provides a set of method where you can se your data.
 
 ## Features
 
 - Single Line Radio Group (Vertical/Horizontal)
-- Multi Line Radio Group
+- Multi Line Radio Group (Multi Raw - Horizontal)
 - Row Item Radio Group (Vertical/Horizontal)
 - Chip Group Single Selection (Vertical/Horizontal)
 - Chip Group Multi Selection (Vertical/Horizontal)
