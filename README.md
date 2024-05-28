@@ -3,7 +3,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-SmartFilterDemo-blue.svg?style=flat)](https://android-arsenal.com/details/3/8270) [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen)](https://developer.android.com/index.html) [![Licence](https://img.shields.io/badge/Licence-Apache--2.0-brightgreen)](https://opensource.org/licenses/Apache-2.0)
 
 
-It is an Android Filter Component developed in Kotlin, available for Jetpack Compose as well. It offers multiple customization attributes to create a smart filter based on your requirements.
+It is an Android Filter Component developed in Kotlin, available in Jetpack Compose as well. It offers multiple customization attributes to create a smart filter based on your requirements.
 
 ## Demo
 
