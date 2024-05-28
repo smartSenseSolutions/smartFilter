@@ -43,7 +43,6 @@ The library provides a set of classes and methods for creating and managing filt
 - Checked Single Selection (Vertical/Horizontal)
 - Checked Multi Selection (Vertical/Horizontal)
 
-## Use the view in your Activity and Layout by declaring
 ## SingleSelection
 
 ### SingleSelectionRadioGroup(Verticle/Horizontal)
