@@ -4,12 +4,12 @@
 
 It is an Android Filter Component developed in Kotlin, available for Jetpack Compose as well. It offers multiple customization attributes to create a smart filter based on your requirements.
 
+## Demo
+
 <img src="preview/Smartfilter.gif" width="250" />
 
-![First](https://github.com/smartSenseSolutions/SegmentedVerticalSeekBarDemo/blob/main/preview/1.png)
-![Second](https://github.com/smartSenseSolutions/SegmentedVerticalSeekBarDemo/blob/main/preview/2.png)
-![Third](https://github.com/smartSenseSolutions/SegmentedVerticalSeekBarDemo/blob/main/preview/3.png)
-![Forth](https://github.com/smartSenseSolutions/SegmentedVerticalSeekBarDemo/blob/main/preview/4.png)
+<img src="preview/1.png" width="250" />   <img src="preview/2.png" width="250" />  
+<img src="preview/3.png" width="250" />   <img src="preview/4.png" width="250" />  
 
 
 ## Setup
