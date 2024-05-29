@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="SingleLineRadioGroup">
+        <attr name="rg_sl_orientation" format="integer" />
+        <attr name="rg_sl_background" format="reference" />
+        <attr name="rg_sl_text_color" format="color" />
+        <attr name="rg_sl_list_item" format="string" />
+    </declare-styleable>
+
+
+    <declare-styleable name="MultiLineRadioGroup">
+        <attr name="rg_ml_spancount" format="integer" />
+        <attr name="rg_ml_spacing" format="integer" />
+        <attr name="rg_ml_background" format="reference" />
+        <attr name="rg_ml_text_selector" format="color" />
+        <attr name="rg_ml_includeedge" format="boolean" />
+        <attr name="rg_ml_list_item" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="RowItemRadioGroup">
+        <attr name="rg_ri_background" format="reference" />
+        <attr name="rg_ri_text_selector" format="color" />
+        <attr name="rg_ri_orientation" format="integer" />
+        <attr name="rg_ri_list_item" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SingleLineChipGroup">
+        <attr name="cg_sl_background" format="reference" />
+        <attr name="cg_sl_text_selector" format="color" />
+        <attr name="cg_sl_orientation" format="integer" />
+        <attr name="cg_sl_list_item" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SingleSelectionView">
+        <attr name="ss_text_selector" format="reference" />
+        <attr name="ss_orientation" format="integer" />
+        <attr name="ss_checked_selector" format="reference" />
+        <attr name="ss_list_item" format="reference" />
+    </declare-styleable>
+    </resources>

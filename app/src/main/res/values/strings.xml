@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SmartFilter</string>
+    <string name="title">Filter By</string>
+    <string name="expand">expand\n</string>
+    <string name="collapse">collapse\n</string>
+    <string name="filter_bus_type">Bus Type</string>
+    <string name="filter_seat_type">Single Window Seater/Sleeper</string>
+    <string name="filter_departure_time">Departure From Ahmedabad</string>
+    <string name="filter_operator">Operator Rating</string>
+    <string name="filter_bus_operator">Bus Operator</string>
+    <string name="filter_amentiest">Amentiest</string>
+    <string name="filter_Deals">Deals</string>
 </resources>

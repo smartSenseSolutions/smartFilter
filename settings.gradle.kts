@@ -12,6 +12,7 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
+    @Suppress("UnstableApiUsage")
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
@@ -19,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SmartFilter"
+rootProject.name = "smartFilter"
 include(":app")
 include(":ss-smart-filter")
