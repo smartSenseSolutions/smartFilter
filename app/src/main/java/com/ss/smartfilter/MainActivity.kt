@@ -1,21 +1,23 @@
 package com.ss.smartfilter
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.ss.smartfilter.databinding.ActivityMainBinding
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.Surface
 import com.ss.smartfilter.screens.FilterScreen
-import com.ss.smartfilterlib.SmartFilter
-import com.ss.smartfilterlib.utils.toast
+import com.ss.smartfilter.theme.smartFilterTheme
 
 
-class MainActivity : ComponentActivity() {
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FilterScreen()
+            smartFilterTheme() {
+                Surface {
+                    FilterScreen()
+                }
+            }
         }
     }
 
