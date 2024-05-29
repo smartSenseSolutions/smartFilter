@@ -1,4 +1,4 @@
-package com.ss.smartfilter.theme
+package com.ss.smartfilterdemo.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

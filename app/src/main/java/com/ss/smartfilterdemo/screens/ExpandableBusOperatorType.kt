@@ -1,4 +1,4 @@
-package com.ss.smartfilter.screens
+package com.ss.smartfilterdemo.screens
 
 import android.widget.LinearLayout
 import androidx.compose.foundation.layout.Column
@@ -21,19 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.data.UiToolingDataApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.ss.smartfilter.addRadioGroupSingleLineHorizontalDeal
+import com.ss.smartfilterdemo.addRadioGroupSingleBusOperator
 import com.ss.smartfilterlib.SmartFilter
 
 /**
  * created by Mala Ruparel ON 16/05/24
  */
-@OptIn(UiToolingDataApi::class)
 @Composable
-fun ExpandableDealType(title: String) {
+fun ExpandableBusOperatorType(title: String) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(
@@ -49,8 +47,7 @@ fun ExpandableDealType(title: String) {
 
             Text(
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(16.dp),
+                    .weight(1f).padding(16.dp),
                 text = title,
                 fontSize = 18.sp,
                 style = TextStyle(fontWeight = FontWeight.Bold)
@@ -77,9 +74,11 @@ fun ExpandableDealType(title: String) {
             }) { view ->
 
                 SmartFilter.addRadioGroupSingleSelection {
-                    addRadioGroupSingleLineHorizontalDeal(view) { }
+                    addRadioGroupSingleBusOperator(view) { }
                 }
             }
+
+
         }
     }
 }

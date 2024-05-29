@@ -1,4 +1,4 @@
-package com.ss.smartfilter.screens
+package com.ss.smartfilterdemo.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +8,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.ss.smartfilter.R
+import com.ss.smartfilterdemo.R
 
 /**
  * created by Mala Ruparel ON 16/05/24

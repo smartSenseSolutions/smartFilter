@@ -1,4 +1,4 @@
-package com.ss.smartfilter.screens
+package com.ss.smartfilterdemo.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -1,6 +1,6 @@
-package com.ss.smartfilter.data
+package com.ss.smartfilterdemo.data
 
-import com.ss.smartfilter.R
+import com.ss.smartfilterdemo.R
 import com.ss.smartfilterlib.data.Data
 
 

@@ -1,4 +1,4 @@
-package com.ss.smartfilter.screens
+package com.ss.smartfilterdemo.screens
 
 import android.widget.LinearLayout
 import androidx.compose.foundation.layout.Column
@@ -24,14 +24,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.ss.smartfilter.addRadioGroupSingleBusOperator
+import com.ss.smartfilterdemo.addRadioGroupSingleOperator
 import com.ss.smartfilterlib.SmartFilter
 
 /**
  * created by Mala Ruparel ON 16/05/24
  */
 @Composable
-fun ExpandableBusOperatorType(title: String) {
+fun ExpandableOperatorType(title: String) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(
@@ -47,7 +47,8 @@ fun ExpandableBusOperatorType(title: String) {
 
             Text(
                 modifier = Modifier
-                    .weight(1f).padding(16.dp),
+                    .weight(1f)
+                    .padding(16.dp),
                 text = title,
                 fontSize = 18.sp,
                 style = TextStyle(fontWeight = FontWeight.Bold)
@@ -74,7 +75,7 @@ fun ExpandableBusOperatorType(title: String) {
             }) { view ->
 
                 SmartFilter.addRadioGroupSingleSelection {
-                    addRadioGroupSingleBusOperator(view) { }
+                    addRadioGroupSingleOperator(view) { }
                 }
             }
 

@@ -1,4 +1,4 @@
-package com.ss.smartfilter.theme
+package com.ss.smartfilterdemo.theme
 
 import android.os.Build
 import androidx.compose.material3.MaterialTheme

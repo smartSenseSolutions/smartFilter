@@ -1,4 +1,4 @@
-package com.ss.smartfilter.screens
+package com.ss.smartfilterdemo.screens
 
 import android.widget.LinearLayout
 import androidx.compose.foundation.layout.Column
@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.data.UiToolingDataApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.ss.smartfilter.addMultiSelectionListBus
+import com.ss.smartfilterdemo.addRadioMultiRowDeparture
 import com.ss.smartfilterlib.SmartFilter
 
 /**
@@ -33,14 +33,13 @@ import com.ss.smartfilterlib.SmartFilter
  */
 @OptIn(UiToolingDataApi::class)
 @Composable
-fun ExpandableBusType(title: String) {
+fun ExpandableDepartureType(title: String) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -76,12 +75,12 @@ fun ExpandableBusType(title: String) {
                 }
             }) { view ->
 
-                SmartFilter.addListViewMultiSelection {
-                    addMultiSelectionListBus(view) { }
+                SmartFilter.addRadioMultiRawSingleSelection {
+                    addRadioMultiRowDeparture(view) { }
                 }
             }
         }
 
-
     }
+
 }

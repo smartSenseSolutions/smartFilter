@@ -1,4 +1,4 @@
-package com.ss.smartfilter.screens
+package com.ss.smartfilterdemo.screens
 
 import android.widget.LinearLayout
 import androidx.compose.foundation.layout.Column
@@ -21,17 +21,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.data.UiToolingDataApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.ss.smartfilter.addRadioGroupSingleOperator
+import com.ss.smartfilterdemo.addMultiSelectionListBus
 import com.ss.smartfilterlib.SmartFilter
 
 /**
  * created by Mala Ruparel ON 16/05/24
  */
+@OptIn(UiToolingDataApi::class)
 @Composable
-fun ExpandableOperatorType(title: String) {
+fun ExpandableBusType(title: String) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(
@@ -74,12 +76,12 @@ fun ExpandableOperatorType(title: String) {
                 }
             }) { view ->
 
-                SmartFilter.addRadioGroupSingleSelection {
-                    addRadioGroupSingleOperator(view) { }
+                SmartFilter.addListViewMultiSelection {
+                    addMultiSelectionListBus(view) { }
                 }
             }
-
-
         }
+
+
     }
 }

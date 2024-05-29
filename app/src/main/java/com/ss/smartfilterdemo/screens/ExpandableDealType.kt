@@ -1,7 +1,6 @@
-package com.ss.smartfilter.screens
+package com.ss.smartfilterdemo.screens
 
 import android.widget.LinearLayout
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,31 +19,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.data.UiToolingDataApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.ss.smartfilter.addMultiSelectionListVertical
-import com.ss.smartfilter.addRadioButtonMultiRow
-import com.ss.smartfilter.addRadioMultiRowDeparture
+import com.ss.smartfilterdemo.addRadioGroupSingleLineHorizontalDeal
 import com.ss.smartfilterlib.SmartFilter
-import com.ss.smartfilterlib.utils.toast
 
 /**
  * created by Mala Ruparel ON 16/05/24
  */
 @OptIn(UiToolingDataApi::class)
 @Composable
-fun ExpandableDepartureType(title: String) {
+fun ExpandableDealType(title: String) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -80,12 +76,10 @@ fun ExpandableDepartureType(title: String) {
                 }
             }) { view ->
 
-                SmartFilter.addRadioMultiRawSingleSelection {
-                    addRadioMultiRowDeparture(view) { }
+                SmartFilter.addRadioGroupSingleSelection {
+                    addRadioGroupSingleLineHorizontalDeal(view) { }
                 }
             }
         }
-
     }
-
 }

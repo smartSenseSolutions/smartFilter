@@ -1,14 +1,14 @@
-package com.ss.smartfilter
+package com.ss.smartfilterdemo
 
 import android.view.ViewGroup
-import com.ss.smartfilter.data.mAmenties
-import com.ss.smartfilter.data.mBusOperatorType
-import com.ss.smartfilter.data.mBusType
-import com.ss.smartfilter.data.mData
-import com.ss.smartfilter.data.mDeal
-import com.ss.smartfilter.data.mOperatorType
-import com.ss.smartfilter.data.mSeatType
-import com.ss.smartfilter.data.mTime
+import com.ss.smartfilterdemo.data.mAmenties
+import com.ss.smartfilterdemo.data.mBusOperatorType
+import com.ss.smartfilterdemo.data.mBusType
+import com.ss.smartfilterdemo.data.mData
+import com.ss.smartfilterdemo.data.mDeal
+import com.ss.smartfilterdemo.data.mOperatorType
+import com.ss.smartfilterdemo.data.mSeatType
+import com.ss.smartfilterdemo.data.mTime
 import com.ss.smartfilterlib.R
 import com.ss.smartfilterlib.data.Data
 import com.ss.smartfilterlib.data.MultiSelectionParams

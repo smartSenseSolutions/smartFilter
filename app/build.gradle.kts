@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.ss.smartfilter"
+    namespace = "com.ss.smartfilterdemo"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.ss.smartfilter"
+        applicationId = "com.ss.smartfilterdemo"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

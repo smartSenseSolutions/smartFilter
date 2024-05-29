@@ -1,4 +1,4 @@
-package com.ss.smartfilter
+package com.ss.smartfilterdemo
 
 import org.junit.Test
 
