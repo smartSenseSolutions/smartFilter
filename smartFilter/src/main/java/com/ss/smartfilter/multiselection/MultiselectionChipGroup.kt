@@ -21,7 +21,7 @@ import com.ss.smartfilter.R
 class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : BaseLinearLayout(context, attrs, defStyle) {
 
     init {
-        initAttributes(attrs=attrs)
+        initAttributes(attrs = attrs)
         initializeView()
         populateDataFromAttributes()
     }
@@ -68,7 +68,6 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
      this.multiCheckedChangeListener = onCheckedChangeListener
      this.chipBgSelector = ContextCompat.getColorStateList(context, bgSelector)
      this.viewTextSelector = ContextCompat.getColorStateList(context, textSelector)
-
 
     }
     private fun setItems(mData: List<Data>, chipType: MultiChipType) {
@@ -141,7 +140,6 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
     }
 
 
-
     private fun createActionChip(): Chip {
         return Chip(context).apply {
             isChipIconVisible = true
@@ -166,7 +164,7 @@ class MultiselectionChipGroup @JvmOverloads constructor(context: Context, attrs:
         }
     }
 
-    private fun setChipEvents(chip: Chip,data: Data) {
+    private fun setChipEvents(chip: Chip, data: Data) {
         chip.setOnCheckedChangeListener { _, isChecked ->
             data.isSelected = isChecked
             if (isChecked) {

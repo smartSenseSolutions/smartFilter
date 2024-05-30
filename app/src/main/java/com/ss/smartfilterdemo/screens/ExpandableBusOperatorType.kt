@@ -47,7 +47,8 @@ fun ExpandableBusOperatorType(title: String) {
 
             Text(
                 modifier = Modifier
-                    .weight(1f).padding(16.dp),
+                    .weight(1f)
+                    .padding(16.dp),
                 text = title,
                 fontSize = 18.sp,
                 style = TextStyle(fontWeight = FontWeight.Bold)
@@ -77,7 +78,6 @@ fun ExpandableBusOperatorType(title: String) {
                     addRadioGroupSingleBusOperator(view) { }
                 }
             }
-
 
         }
     }

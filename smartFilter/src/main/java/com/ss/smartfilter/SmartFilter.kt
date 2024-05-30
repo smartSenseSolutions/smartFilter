@@ -111,6 +111,7 @@ object SmartFilter {
         param.rootView.addView(singleSelectionListView)
 
     }
+
     fun addListViewMultiSelection(singleSelectionParams: () -> Params.MultiSelection) {
         val param = singleSelectionParams().data
         val multiSelectionListView = MultiSelectionListView(param.rootView.context)

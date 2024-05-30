@@ -4,11 +4,6 @@ import com.ss.smartfilterdemo.R
 import com.ss.smartfilter.data.Data
 
 
-fun getNamesFromDataList(): ArrayList<Data> {
-    return mData().map { it.name } as ArrayList<Data>
-}
-
-
 fun mData(): ArrayList<Data> {
     return arrayListOf(
         Data(
@@ -113,14 +108,16 @@ fun mTime(): ArrayList<Data> {
         Data(id = 4, name = "Evening", image = R.drawable.ic_cyclone)
     )
 }
+
 fun mAmenties(): ArrayList<Data> {
     return arrayListOf(
         Data(id = 1, name = "Live Tracking"),
         Data(id = 2, name = "Wifi"),
         Data(id = 3, name = "Water Bottle"),
-        Data(id = 4, name = "Blanket",)
+        Data(id = 4, name = "Blanket")
     )
 }
+
 fun mDeal(): ArrayList<Data> {
     return arrayListOf(
         Data(id = 1, name = "Extra 10% Discount"),

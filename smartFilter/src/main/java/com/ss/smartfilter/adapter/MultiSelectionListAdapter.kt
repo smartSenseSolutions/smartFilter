@@ -34,7 +34,7 @@ class MultiSelectionListAdapter(
     }
 
     override fun onBindViewHolder(holder: MultiselectionViewHolder, position: Int) {
-        holder.bind(data[position], position == selectedItemPosition)
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int = data.size
@@ -49,17 +49,16 @@ class MultiSelectionListAdapter(
             }
         }
 
-        fun bind(data: Data, isSelected: Boolean) {
+        fun bind(data: Data) {
             binding.ctv.apply {
                 isChecked = selectedItemsPositions.contains(adapterPosition)
                 text = data.name
                 applySelector(this)
                 setCompoundDrawablesWithIntrinsicBounds(0, data.image, 0, 0)
-                setPaddingRelative(0, 30,0, 30  )
+                setPaddingRelative(0, 30, 0, 30)
 
             }
         }
-
 
     }
 

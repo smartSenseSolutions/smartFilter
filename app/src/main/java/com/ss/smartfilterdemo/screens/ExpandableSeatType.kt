@@ -81,6 +81,5 @@ fun ExpandableSeatType(title: String) {
             }
         }
 
-
     }
 }

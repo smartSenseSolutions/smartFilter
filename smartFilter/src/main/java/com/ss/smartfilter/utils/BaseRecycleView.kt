@@ -31,9 +31,14 @@ abstract class BaseRecycleView : RecyclerView {
     protected var onSingleSelectionClicked: ((Data) -> Unit)? = null
     protected var dataFromXml: Int = 0
     protected val selectedItemsPositions = mutableListOf<Int>()
+
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     // Common methods
     protected abstract fun initAttributes(attrs: AttributeSet?)
@@ -47,6 +52,7 @@ abstract class BaseRecycleView : RecyclerView {
             }
         }
     }
+
     protected fun applyPaddingAttributes(textView: CheckedTextView) {
         paddingAttributes.let { attributes ->
             textView.setPadding(
@@ -57,5 +63,6 @@ abstract class BaseRecycleView : RecyclerView {
             )
         }
     }
+
     protected fun setData(data: Data) = data.name
 }
