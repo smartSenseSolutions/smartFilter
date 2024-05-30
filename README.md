@@ -57,7 +57,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```
                                       
 ``` ### layout.xml
-                 <com.ss.smartfilterlib.singleselection.SingleSelectionRadioGroup              
+                 <com.ss.smartfilter.singleselection.SingleSelectionRadioGroup              
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  app:rg_sl_list_item="@array/array_android_version"
@@ -76,7 +76,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```
 
 ```layout.xml
-                 <com.ss.smartfilterlib.singleselection.SingleSelectionRadioGroup                   
+                 <com.ss.smartfilter.singleselection.SingleSelectionRadioGroup                   
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  app:rg_sl_list_item="@array/array_android_version"
@@ -94,7 +94,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```
                                         
 ```layout.xml
-                 <com.ss.smartfilterlib.singleselection.SingleSelectionMultiLineRadioButton                  
+                 <com.ss.smartfilter.singleselection.SingleSelectionMultiLineRadioButton                  
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  app:rg_ml_list_item="@array/array_android_version"
@@ -113,7 +113,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```
 
 ```layout.xml
-                 <com.ss.smartfilterlib.singleselection.SingleSelectionItemRadioGroup              
+                 <com.ss.smartfilter.singleselection.SingleSelectionItemRadioGroup              
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  app:rg_ri_list_item="@array/array_android_version"
@@ -130,7 +130,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```
 
 ```layout.xml  
-                  <com.ss.smartfilterlib.singleselection.SingleSelectionItemRadioGroup             
+                  <com.ss.smartfilter.singleselection.SingleSelectionItemRadioGroup             
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   app:rg_ri_list_item="@array/array_android_version"
@@ -147,7 +147,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```                                      
 
 ```layout.xml   
-                   <com.ss.smartfilterlib.singleselection.SingleSelectionChipGroup                
+                   <com.ss.smartfilter.singleselection.SingleSelectionChipGroup                
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
                    app:cg_sl_orientation="1"
@@ -165,7 +165,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```                                              
 
 ```layout.xml                       
-                    <com.ss.smartfilterlib.singleselection.SingleSelectionChipGroup                
+                    <com.ss.smartfilter.singleselection.SingleSelectionChipGroup                
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cg_sl_orientation="0"
@@ -185,7 +185,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```                                             
 
 ```layout.xml    
-                    <com.ss.smartfilterlib.multiselection.MultiselectionChipGroup                          
+                    <com.ss.smartfilter.multiselection.MultiselectionChipGroup                          
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cg_sl_orientation="1"
@@ -203,7 +203,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```
 
 ```layout.xml      
-                     <com.ss.smartfilterlib.multiselection.MultiselectionChipGroup                          
+                     <com.ss.smartfilter.multiselection.MultiselectionChipGroup                          
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
                      app:cg_sl_orientation="1"
@@ -225,7 +225,7 @@ The library provides a set of classes and methods for creating and managing filt
 
 ```layout.xml                                        
                        
-                       <com.ss.smartfilterlib.singleselection.SingleSelectionListView
+                       <com.ss.smartfilter.singleselection.SingleSelectionListView
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
                        app:ss_orientation="1"
@@ -243,7 +243,7 @@ The library provides a set of classes and methods for creating and managing filt
 ```
 
 ```layout.xml   
-                      <com.ss.smartfilterlib.singleselection.SingleSelectionListView
+                      <com.ss.smartfilter.singleselection.SingleSelectionListView
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       app:ss_orientation="0"
@@ -263,7 +263,7 @@ The library provides a set of classes and methods for creating and managing filt
  ```                       
 
 ```layout.xml  
-                        <com.ss.smartfilterlib.multiselection.MultiSelectionListView
+                        <com.ss.smartfilter.multiselection.MultiSelectionListView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:ss_orientation="1"
@@ -281,7 +281,7 @@ The library provides a set of classes and methods for creating and managing filt
  ```
 
 ```layout.xml    
-                        <com.ss.smartfilterlib.multiselection.MultiSelectionListView
+                        <com.ss.smartfilter.multiselection.MultiSelectionListView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:ss_orientation="1"
