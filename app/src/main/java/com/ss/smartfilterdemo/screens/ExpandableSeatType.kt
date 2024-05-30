@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.ss.smartfilterdemo.addSingleSelectionListSeat
-import com.ss.smartfilterlib.SmartFilter
+import com.ss.smartfilter.SmartFilter
 
 /**
  * created by Mala Ruparel ON 16/05/24

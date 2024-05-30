@@ -9,14 +9,14 @@ import com.ss.smartfilterdemo.data.mDeal
 import com.ss.smartfilterdemo.data.mOperatorType
 import com.ss.smartfilterdemo.data.mSeatType
 import com.ss.smartfilterdemo.data.mTime
-import com.ss.smartfilterlib.R
-import com.ss.smartfilterlib.data.Data
-import com.ss.smartfilterlib.data.MultiSelectionParams
-import com.ss.smartfilterlib.data.SingleSelectionParams
-import com.ss.smartfilterlib.utils.MultiChipType
-import com.ss.smartfilterlib.utils.Orientation
-import com.ss.smartfilterlib.utils.Params
-import com.ss.smartfilterlib.utils.SingleChipType
+import com.ss.smartfilter.data.Data
+import com.ss.smartfilter.data.MultiSelectionParams
+import com.ss.smartfilter.data.SingleSelectionParams
+import com.ss.smartfilter.utils.MultiChipType
+import com.ss.smartfilter.utils.Orientation
+import com.ss.smartfilter.utils.Params
+import com.ss.smartfilter.utils.SingleChipType
+import com.ss.smartfilter.R
 
 
 /**

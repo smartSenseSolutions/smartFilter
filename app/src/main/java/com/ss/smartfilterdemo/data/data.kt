@@ -1,7 +1,7 @@
 package com.ss.smartfilterdemo.data
 
 import com.ss.smartfilterdemo.R
-import com.ss.smartfilterlib.data.Data
+import com.ss.smartfilter.data.Data
 
 
 fun getNamesFromDataList(): ArrayList<Data> {
