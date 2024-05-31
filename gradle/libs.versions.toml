@@ -15,7 +15,7 @@ sdpAndroid = "1.0.6"
 sspAndroid = "1.0.6"
 navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
-
+nexus = "1.1.0"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -42,3 +42,5 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+nexusPublishingPlugin = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexus" }
+
